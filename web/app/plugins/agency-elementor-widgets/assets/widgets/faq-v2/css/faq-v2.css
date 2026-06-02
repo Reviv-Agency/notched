@@ -344,20 +344,23 @@ button.aew-faqv2__share-btn {
   padding: 0 !important;
   margin: 0;
   cursor: pointer;
-  color: var(--notched-misc-accent);
+  color: var(--notched-misc-accent) !important;  /* beat kit button color */
   opacity: .75;
   transition: opacity .15s ease, color .15s ease;
 }
 
-.aew-faqv2__share-btn:hover {
+/* Wrapper-prefixed + !important so neither the base rule above nor the kit's
+   `button:hover` (which flips it white) wins — hover goes brand-CTA gold. */
+.aew-faqv2 .aew-faqv2__share-btn:hover,
+.aew-faqv2 .aew-faqv2__share-btn:focus {
   opacity: 1;
-  color: var(--notched-cta);
+  color: var(--notched-cta) !important;
 }
 
-.aew-faqv2__share-btn svg { width: 20px; height: 20px; }
+.aew-faqv2 .aew-faqv2__share-btn svg { width: 20px; height: 20px; }
 
-.aew-faqv2__share-btn.is-copied {
-  color: var(--notched-secondary-bg);
+.aew-faqv2 .aew-faqv2__share-btn.is-copied {
+  color: var(--notched-secondary-bg) !important;
   opacity: 1;
 }
 

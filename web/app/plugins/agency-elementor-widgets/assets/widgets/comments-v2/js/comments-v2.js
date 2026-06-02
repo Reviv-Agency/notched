@@ -158,7 +158,13 @@
 			if (typeof elementorFrontend === 'undefined') { return; }
 			elementorFrontend.hooks.addAction('frontend/element_ready/agency-comments-v2.default', function ($scope) {
 				var node = $scope[0] && $scope[0].querySelector('[data-aew-comments-v2]');
-				if (node) { node.dataset.aewCmv2Init = ''; initWidget(node); }
+				// Do NOT reset aewCmv2Init here. boot() on DOMContentLoaded already
+				// binds the submit handler on the live frontend; clearing the guard
+				// and re-initing would bind a SECOND submit listener, causing every
+				// comment to POST twice (duplicate rows, identical timestamp).
+				// initWidget()'s own guard makes this a no-op when already inited,
+				// while still covering the editor case where boot() never ran.
+				if (node) { initWidget(node); }
 			});
 		});
 	}

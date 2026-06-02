@@ -16,6 +16,15 @@
         if (firstCat) activeCat = firstCat.getAttribute('data-aew-faqv2-cat') || '';
 
         // ── Accordion toggle ──────────────────────────────────────────────
+        function openItem(item) {
+            var trigger = item.querySelector('.aew-faqv2__trigger');
+            var panel   = item.querySelector('.aew-faqv2__panel');
+            if (!trigger || !panel) return;
+            item.classList.add('is-open');
+            trigger.setAttribute('aria-expanded', 'true');
+            panel.removeAttribute('hidden');
+        }
+
         items.forEach(function (item) {
             var trigger = item.querySelector('.aew-faqv2__trigger');
             var panel   = item.querySelector('.aew-faqv2__panel');
@@ -112,6 +121,57 @@
         });
 
         applyFilter();
+
+        // ── Deep link: ?questionId=q-<wid>-<i> opens & scrolls to that question ─
+        function activateCategory(slug) {
+            if (!slug) return;
+            var match = cats.find(function (c) {
+                return (c.getAttribute('data-aew-faqv2-cat') || '') === slug;
+            });
+            if (!match) return;
+            activeCat = slug;
+            cats.forEach(function (c) {
+                var on = c === match;
+                c.classList.toggle('is-active', on);
+                c.setAttribute('aria-selected', on ? 'true' : 'false');
+                c.setAttribute('tabindex', on ? '0' : '-1');
+            });
+            if (search) search.value = '';
+            applyFilter();
+        }
+
+        function openFromQuestionId() {
+            var qid = '';
+            try { qid = new URLSearchParams(window.location.search).get('questionId') || ''; }
+            catch (e) { return; }
+            if (!qid) return;
+
+            var bar = el.querySelector('[data-aew-faqv2-share][data-qid="' + qid + '"]');
+            if (!bar) return;
+            var item = bar.closest('[data-aew-faqv2-item]');
+            if (!item) return;
+
+            // The target may be filtered out by the active category — switch to
+            // the first category the item belongs to so it's visible.
+            var cat = (item.getAttribute('data-cat') || '').split('|').filter(Boolean)[0];
+            if (cat) activateCategory(cat);
+
+            openItem(item);
+
+            // Scroll once layout settles, then re-scroll after lazy sections /
+            // images above may have shifted the page (a single early scroll can
+            // miss because the target's position keeps changing during load).
+            function scrollToItem() {
+                item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            setTimeout(scrollToItem, 300);
+            setTimeout(scrollToItem, 900);
+            window.addEventListener('load', function () {
+                setTimeout(scrollToItem, 100);
+            });
+        }
+
+        openFromQuestionId();
     }
 
     function norm(v) {

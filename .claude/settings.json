@@ -57,7 +57,15 @@
       "Bash(sed -i '' \"s/define\\( 'AEW_VERSION', '1.12.13' \\);/define\\( 'AEW_VERSION', '1.12.14' \\);/\" app/plugins/agency-elementor-widgets/agency-elementor-widgets.php)",
       "Bash(php -l app/plugins/agency-elementor-widgets/widgets/class-widget-recent-posts-v2.php)",
       "Bash(node --check app/plugins/agency-elementor-widgets/assets/widgets/recent-posts-v2/js/recent-posts-v2.js)",
-      "Bash(curl -skL \"https://notched.test/what-makes-notched-different/\" -o /tmp/r.html)"
+      "Bash(curl -skL \"https://notched.test/what-makes-notched-different/\" -o /tmp/r.html)",
+      "Bash(echo \"page_for_posts: $\\(wp option get page_for_posts --path=web/wp 2>/dev/null\\)\")",
+      "Bash(node -e \"require\\('fs'\\).readFileSync\\('assets/widgets/faq-v2/js/faq-v2.js','utf8'\\); new Function\\(require\\('fs'\\).readFileSync\\('assets/widgets/faq-v2/js/faq-v2.js','utf8'\\)\\); console.log\\('js syntax ok'\\)\")",
+      "mcp__playwright__browser_close",
+      "Bash(pkill -f 'mcp-chrome-21fe8d2')",
+      "Bash(rm -f /Users/nikolacucukovski/Library/Caches/ms-playwright/mcp-chrome-21fe8d2/SingletonLock)",
+      "Bash(node -e \"new Function\\(require\\('fs'\\).readFileSync\\('assets/widgets/faq-v2/js/faq-v2.js','utf8'\\)\\); console.log\\('js ok'\\)\")",
+      "Bash(curl -sS -L --max-time 25 https://notched2.5.78.76.145.nip.io/what-makes-notched-different/?cb=__TRACKED_VAR__)",
+      "Bash(grep -n 'render\\\\|comment_form\\\\|render_native\\\\|render_static\\\\|is_admin\\\\|Plugin::$instance->editor' widgets/class-widget-comments-v2.php)"
     ]
   }
 }
