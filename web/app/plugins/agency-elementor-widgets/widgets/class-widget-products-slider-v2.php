@@ -258,6 +258,17 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 			'mobile_default' => [ 'unit' => 'px', 'size' => 220 ],
 			'selectors'  => [ '{{WRAPPER}} .aew-prsv2__slide' => 'flex-basis: {{SIZE}}{{UNIT}};' ],
 		] );
+		$this->add_responsive_control( 'card_height', [
+			'label'       => 'Image height',
+			'type'        => Controls_Manager::SLIDER,
+			'size_units'  => [ 'px' ],
+			'range'       => [ 'px' => [ 'min' => 200, 'max' => 700 ] ],
+			'default'        => [ 'unit' => 'px', 'size' => '' ],
+			'tablet_default' => [ 'unit' => 'px', 'size' => '' ],
+			'mobile_default' => [ 'unit' => 'px', 'size' => '' ],
+			'description' => 'Leave empty to keep the default square (1:1) image. Set a value to use a fixed image height instead.',
+			'selectors'   => [ '{{WRAPPER}} .aew-prsv2__media' => 'height: {{SIZE}}{{UNIT}}; aspect-ratio: auto;' ],
+		] );
 		$this->add_control( 'card_radius', [
 			'label'      => 'Image radius',
 			'type'       => Controls_Manager::SLIDER,

@@ -1,4 +1,4 @@
-/* Gallery V2 (Notched) — responsive image grid with Load More. */
+/* Gallery V2 (Notched) — responsive infinite-scroll image grid. */
 
 /* Strip Elementor column / container padding so the band is full-bleed. */
 .elementor-column > .elementor-element-populated:has(.elementor-widget-agency-gallery-v2),
@@ -62,14 +62,15 @@
 
 .aew-galv2 .aew-galv2__heading {
 	margin: 0;
-	font-family: 'Teko', sans-serif;
+	font-family: var(--aew-teko);
 	font-weight: 600;
 	font-size: 64px;
 	line-height: 85%;
+	text-transform: uppercase;
 	color: var(--notched-text);
 }
 
-/* ── Grid ───────────────────────────────────────────────────────────────── */
+/* ── Grid (uniform) ───────────────────────────────────────────────────────── */
 .aew-galv2__grid {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -99,44 +100,35 @@
 	border-radius: 16px;
 }
 
-/* ── Load More ──────────────────────────────────────────────────────────── */
-.aew-galv2__actions {
-	display: flex;
-	justify-content: center;
-	margin-top: 40px;
+/* ── Masonry (CSS multi-column) ───────────────────────────────────────────── */
+.aew-galv2__grid--masonry {
+	display: block;
+	column-count: 3;
+	column-gap: 16px;
 }
 
-.aew-galv2__more {
-	/* Button reset. */
-	border: 0;
-	background: transparent;
-	-webkit-appearance: none;
-	appearance: none;
-	cursor: pointer;
-
-	/* Brand CTA. */
-	display: inline-block;
-	font-family: 'Teko', sans-serif;
-	font-weight: 600;
-	font-size: 20px;
-	line-height: 85%;
-	text-transform: uppercase;
-	color: var(--aew-galv2-btn-text, #FFFFFF);
-	background-color: var(--aew-galv2-btn-bg, var(--notched-cta));
-	padding: 20px 24px 16px;
-	border-radius: 8px;
-	transition: background-color 0.2s ease, color 0.2s ease;
+.aew-galv2__grid--masonry .aew-galv2__item {
+	display: block;
+	width: 100%;
+	margin-bottom: 16px;
+	break-inside: avoid;
+	-webkit-column-break-inside: avoid;
 }
 
-.aew-galv2__more:hover,
-.aew-galv2__more:focus-visible {
-	color: var(--aew-galv2-btn-text-hover, #FFFFFF);
-	background-color: var(--aew-galv2-btn-bg-hover, var(--notched-cta-hover));
-}
-
-.aew-galv2__more[hidden],
-.aew-galv2__more[disabled] {
+.aew-galv2__grid--masonry .aew-galv2__item--hidden {
 	display: none;
+}
+
+.aew-galv2__grid--masonry .aew-galv2__img {
+	height: auto;
+}
+
+/* ── Sentinel (IntersectionObserver target) ───────────────────────────────── */
+.aew-galv2__sentinel {
+	width: 100%;
+	height: 1px;
+	margin-top: 1px;
+	pointer-events: none;
 }
 
 /* ── Responsive ─────────────────────────────────────────────────────────── */
@@ -170,11 +162,5 @@
 
 	.aew-galv2__eyebrow {
 		font-size: 16px;
-	}
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.aew-galv2__more {
-		transition: none;
 	}
 }

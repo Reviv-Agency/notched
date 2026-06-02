@@ -277,15 +277,17 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'panel_min_height',
 			[
-				'label'      => esc_html__( 'Panel min height (desktop)', 'agency-elementor-widgets' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range'      => [ 'px' => [ 'min' => 320, 'max' => 900 ] ],
-				'default'    => [ 'unit' => 'px', 'size' => 600 ],
-				'selectors'  => [
+				'label'          => esc_html__( 'Panel height', 'agency-elementor-widgets' ),
+				'type'           => Controls_Manager::SLIDER,
+				'size_units'     => [ 'px' ],
+				'range'          => [ 'px' => [ 'min' => 320, 'max' => 900 ] ],
+				'default'        => [ 'unit' => 'px', 'size' => 600 ],
+				'tablet_default' => [ 'unit' => 'px', 'size' => 520 ],
+				'description'    => esc_html__( 'Minimum height of each image panel on desktop and tablet. On mobile the dedicated mobile image-height control takes over.', 'agency-elementor-widgets' ),
+				'selectors'      => [
 					'{{WRAPPER}} .aew-rgcv2__panel' => 'min-height: {{SIZE}}{{UNIT}};',
 				],
 			]
@@ -414,6 +416,24 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 				'mobile_default' => [ 'top' => '16', 'right' => '16', 'bottom' => '16', 'left' => '16', 'unit' => 'px', 'isLinked' => true ],
 				'selectors'      => [
 					'{{WRAPPER}} .aew-rgcv2__card' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'card_width',
+			[
+				'label'       => esc_html__( 'Card width', 'agency-elementor-widgets' ),
+				'type'        => Controls_Manager::SLIDER,
+				'size_units'  => [ 'px', '%' ],
+				'range'       => [
+					'px' => [ 'min' => 120, 'max' => 700 ],
+					'%'  => [ 'min' => 20, 'max' => 100 ],
+				],
+				'default'     => [ 'unit' => '%', 'size' => 100 ],
+				'description' => esc_html__( 'Sets the card width on desktop/tablet. The card stays centered over the image and may exceed the old inset-limited size (capped only by the panel).', 'agency-elementor-widgets' ),
+				'selectors'   => [
+					'{{WRAPPER}} .aew-rgcv2__card' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);

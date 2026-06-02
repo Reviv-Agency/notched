@@ -1,0 +1,202 @@
+/**
+ * Info Columns V2 — Notched
+ * Dark banded section: centered section heading, a 3-up grid of columns
+ * (rounded image + Teko title + paragraph) and a single centered CTA below.
+ * Desktop = 3-up; tablet = 2-up; mobile = 1-up.
+ */
+
+/* Strip Elementor container padding + force full-bleed so the section band
+   spans edge-to-edge (the inner wrapper re-applies the max-width). */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-info-columns-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-info-columns-v2),
+.e-con:has(.elementor-widget-agency-info-columns-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+.elementor-section:has(.elementor-widget-agency-info-columns-v2),
+.elementor-section:has(.elementor-widget-agency-info-columns-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-info-columns-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-infc so they don't leak into other widgets. Source of truth
+   is design-system.md. Update there first; copy here second. */
+.aew-infc {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Outer block (full-bleed dark band) ──────────────────────────────────── */
+.aew-infc {
+  width: 100%;
+  background-color: var(--aew-infc-bg, var(--notched-secondary-bg));
+}
+
+.aew-infc *,
+.aew-infc *::before,
+.aew-infc *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper (max-width + X padding + banded Y padding) ─────────────── */
+.aew-infc__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 4rem 5rem;          /* desktop Y 64px / X 5rem */
+}
+
+/* ── Section heading ─────────────────────────────────────────────────────── */
+/* Wrapper-class prefix raises specificity to (0,2,0) so the colour beats the
+   Elementor kit's `.elementor-kit-N h1..h6 { color }` rule (0,1,1). */
+.aew-infc .aew-infc__heading {
+  margin: 0 0 48px;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 85%;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: var(--aew-infc-heading, var(--notched-background));
+}
+
+/* ── Grid ────────────────────────────────────────────────────────────────── */
+.aew-infc__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+/* ── Column ──────────────────────────────────────────────────────────────── */
+.aew-infc__col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Media (rounded image) ───────────────────────────────────────────────── */
+.aew-infc__media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.aew-infc__media--empty {
+  background-color: var(--notched-secondary-cards);
+}
+
+/* ── Column title ────────────────────────────────────────────────────────── */
+.aew-infc .aew-infc__col-title {
+  margin: 0 0 12px;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--aew-infc-title, var(--notched-cta));
+}
+
+/* ── Column text ─────────────────────────────────────────────────────────── */
+.aew-infc__col-text {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  color: var(--aew-infc-text, var(--notched-background));
+}
+
+/* ── CTA ─────────────────────────────────────────────────────────────────── */
+.aew-infc__cta-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.aew-infc__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 24px 16px;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 85%;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--aew-infc-btn-text, #FFFFFF);
+  background-color: var(--aew-infc-btn-bg, var(--notched-cta));
+  border: 1px solid var(--aew-infc-btn-bg, var(--notched-cta));
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.aew-infc__cta:hover,
+.aew-infc__cta:focus-visible {
+  background-color: var(--aew-infc-btn-bg-hover, var(--notched-cta-hover));
+  border-color: var(--aew-infc-btn-bg-hover, var(--notched-cta-hover));
+  color: var(--aew-infc-btn-text-hover, var(--aew-infc-btn-text, #FFFFFF));
+}
+
+.aew-infc__cta:focus-visible {
+  outline: 2px solid var(--notched-background);
+  outline-offset: 2px;
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-infc__inner {
+    padding: 4rem 2.5rem;      /* tablet Y 64px / X 2.5rem */
+  }
+  .aew-infc__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-infc__inner {
+    padding: 2rem 2.5rem;      /* mobile Y 32px / X 2.5rem */
+  }
+  .aew-infc__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .aew-infc .aew-infc__heading {
+    font-size: 40px;
+    margin-bottom: 32px;
+  }
+  .aew-infc .aew-infc__col-title {
+    font-size: 28px;
+  }
+  .aew-infc__col-text {
+    font-size: 14px;
+  }
+  .aew-infc__cta {
+    font-size: 16px;
+    padding: 18px 24px 16px;
+  }
+  .aew-infc__cta-wrap {
+    margin-top: 32px;
+  }
+}

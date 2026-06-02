@@ -322,6 +322,22 @@ final class Widget_Assets {
 				'style_deps' => [ 'aew-tokens' ],
 			]
 		);
+
+		self::register_widget(
+			'banner-hero-v2',
+			[
+				'style'      => 'css/banner-hero-v2.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
+
+		self::register_widget(
+			'info-columns-v2',
+			[
+				'style'      => 'css/info-columns-v2.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
 	}
 
 	/**

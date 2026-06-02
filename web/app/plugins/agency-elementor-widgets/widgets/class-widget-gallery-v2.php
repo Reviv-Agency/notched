@@ -1,12 +1,13 @@
 <?php
 /**
- * Gallery V2 Elementor widget — responsive image grid with "Load More".
+ * Gallery V2 Elementor widget — responsive infinite-scroll image grid.
  *
- * A project-photo gallery: an optional eyebrow + heading, a responsive image
- * grid (2/3/4 columns), and a "Load More" button that reveals the remaining
- * rows. Images beyond the initial count are hidden via CSS until revealed by
- * the front-end script. Button colours and the body background are editable
- * per-instance from the Elementor Style tab.
+ * A project-photo gallery: an optional eyebrow + heading and a responsive image
+ * grid (2/3/4 columns). An initial batch of images is shown; further batches are
+ * auto-revealed as the visitor scrolls near the bottom of the grid (no button),
+ * driven by an IntersectionObserver watching a sentinel after the grid. Images
+ * beyond the initial count are hidden via CSS until revealed by the front-end
+ * script. The body background is editable per-instance from the Style tab.
  *
  * @package Agency_Elementor_Widgets
  */
@@ -20,7 +21,7 @@ use Elementor\Repeater;
 use Elementor\Widget_Base;
 
 /**
- * Image grid with a reveal-more control.
+ * Infinite-scroll image grid.
  */
 class Widget_Gallery_V2 extends Widget_Base {
 
@@ -58,7 +59,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 	 * @return array<int, string>
 	 */
 	public function get_keywords(): array {
-		return [ 'gallery', 'grid', 'images', 'load more', 'notched' ];
+		return [ 'gallery', 'grid', 'images', 'infinite scroll', 'notched' ];
 	}
 
 	/**
@@ -101,8 +102,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 		$this->controls_header();
 		$this->controls_images();
 		$this->controls_layout();
-		$this->controls_load_more();
-		$this->style_button();
+		$this->controls_loading();
 		$this->style_section();
 	}
 
@@ -201,7 +201,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 					'4' => '4',
 				],
 				'selectors'      => [
-					'{{WRAPPER}} .aew-galv2__grid' => 'grid-template-columns: repeat({{VALUE}}, minmax(0, 1fr));',
+					'{{WRAPPER}} .aew-galv2__grid' => 'grid-template-columns: repeat({{VALUE}}, minmax(0, 1fr)); column-count: {{VALUE}};',
 				],
 			]
 		);
@@ -215,7 +215,8 @@ class Widget_Gallery_V2 extends Widget_Base {
 				'range'      => [ 'px' => [ 'min' => 0, 'max' => 80 ] ],
 				'default'    => [ 'unit' => 'px', 'size' => 16 ],
 				'selectors'  => [
-					'{{WRAPPER}} .aew-galv2__grid' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .aew-galv2__grid'                  => 'gap: {{SIZE}}{{UNIT}}; column-gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .aew-galv2__grid--masonry .aew-galv2__item' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -234,18 +235,30 @@ class Widget_Gallery_V2 extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'masonry',
+			[
+				'label'        => esc_html__( 'Masonry layout', 'agency-elementor-widgets' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'agency-elementor-widgets' ),
+				'label_off'    => esc_html__( 'No', 'agency-elementor-widgets' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
 	/**
-	 * CONTENT tab — initial count + the Load More button.
+	 * CONTENT tab — infinite-scroll loading knobs.
 	 *
 	 * @return void
 	 */
-	private function controls_load_more(): void {
+	private function controls_loading(): void {
 		$this->start_controls_section(
-			's_load_more',
-			[ 'label' => esc_html__( 'Load More', 'agency-elementor-widgets' ) ]
+			's_loading',
+			[ 'label' => esc_html__( 'Loading', 'agency-elementor-widgets' ) ]
 		);
 
 		$this->add_control(
@@ -254,94 +267,17 @@ class Widget_Gallery_V2 extends Widget_Base {
 				'label'   => esc_html__( 'Images shown initially', 'agency-elementor-widgets' ),
 				'type'    => Controls_Manager::NUMBER,
 				'min'     => 1,
+				'default' => 9,
+			]
+		);
+
+		$this->add_control(
+			'batch_size',
+			[
+				'label'   => esc_html__( 'Images revealed per scroll', 'agency-elementor-widgets' ),
+				'type'    => Controls_Manager::NUMBER,
+				'min'     => 1,
 				'default' => 6,
-			]
-		);
-
-		$this->add_control(
-			'show_load_more',
-			[
-				'label'        => esc_html__( 'Show Load More button', 'agency-elementor-widgets' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'agency-elementor-widgets' ),
-				'label_off'    => esc_html__( 'No', 'agency-elementor-widgets' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
-			]
-		);
-
-		$this->add_control(
-			'load_more_label',
-			[
-				'label'     => esc_html__( 'Button label', 'agency-elementor-widgets' ),
-				'type'      => Controls_Manager::TEXT,
-				'default'   => esc_html__( 'Load More', 'agency-elementor-widgets' ),
-				'condition' => [ 'show_load_more' => 'yes' ],
-			]
-		);
-
-		$this->end_controls_section();
-	}
-
-	/**
-	 * STYLE tab — Load More button colours.
-	 *
-	 * @return void
-	 */
-	private function style_button(): void {
-		$this->start_controls_section(
-			's_style_button',
-			[
-				'label' => esc_html__( 'Button', 'agency-elementor-widgets' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'btn_bg',
-			[
-				'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#AA7D44',
-				'selectors' => [
-					'{{WRAPPER}}' => '--aew-galv2-btn-bg: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'btn_text',
-			[
-				'label'     => esc_html__( 'Text color', 'agency-elementor-widgets' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#FFFFFF',
-				'selectors' => [
-					'{{WRAPPER}}' => '--aew-galv2-btn-text: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'btn_bg_hover',
-			[
-				'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#876137',
-				'selectors' => [
-					'{{WRAPPER}}' => '--aew-galv2-btn-bg-hover: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'btn_text_hover',
-			[
-				'label'     => esc_html__( 'Text color (hover)', 'agency-elementor-widgets' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#FFFFFF',
-				'selectors' => [
-					'{{WRAPPER}}' => '--aew-galv2-btn-text-hover: {{VALUE}};',
-				],
 			]
 		);
 
@@ -363,7 +299,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 		);
 
 		$this->add_control(
-			'section_bg',
+			'bg_color',
 			[
 				'label'     => esc_html__( 'Background color', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
@@ -406,22 +342,27 @@ class Widget_Gallery_V2 extends Widget_Base {
 		}
 
 		$total   = count( $valid );
-		$initial = isset( $s['initial_count'] ) ? (int) $s['initial_count'] : 6;
+		$initial = isset( $s['initial_count'] ) ? (int) $s['initial_count'] : 9;
 		if ( $initial < 1 ) {
 			$initial = 1;
 		}
-
-		$eyebrow = (string) ( $s['eyebrow'] ?? '' );
-		$heading = (string) ( $s['heading'] ?? '' );
-
-		$show_more = ( 'yes' === ( $s['show_load_more'] ?? '' ) ) && ( $total > $initial );
-		$btn_label = (string) ( $s['load_more_label'] ?? '' );
-		if ( '' === trim( $btn_label ) ) {
-			$btn_label = esc_html__( 'Load More', 'agency-elementor-widgets' );
+		$batch = isset( $s['batch_size'] ) ? (int) $s['batch_size'] : 6;
+		if ( $batch < 1 ) {
+			$batch = 1;
 		}
+
+		$eyebrow  = (string) ( $s['eyebrow'] ?? '' );
+		$heading  = (string) ( $s['heading'] ?? '' );
+		$masonry  = 'yes' === ( $s['masonry'] ?? '' );
+		$has_more = $total > $initial;
 
 		$this->add_render_attribute( 'wrapper', 'class', 'aew-galv2' );
 		$this->add_render_attribute( 'wrapper', 'data-aew-gallery-v2', '' );
+
+		$grid_classes = 'aew-galv2__grid';
+		if ( $masonry ) {
+			$grid_classes .= ' aew-galv2__grid--masonry';
+		}
 
 		/*
 		 * Emit resolved colours as inline CSS vars on the wrapper. Globals are
@@ -433,11 +374,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 			$this,
 			$s,
 			[
-				'section_bg'     => '--aew-galv2-bg',
-				'btn_bg'         => '--aew-galv2-btn-bg',
-				'btn_text'       => '--aew-galv2-btn-text',
-				'btn_bg_hover'   => '--aew-galv2-btn-bg-hover',
-				'btn_text_hover' => '--aew-galv2-btn-text-hover',
+				'bg_color' => '--aew-galv2-bg',
 			]
 		);
 		if ( '' !== $color_vars ) {
@@ -457,7 +394,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 					</div>
 				<?php endif; ?>
 
-				<ul class="aew-galv2__grid" data-initial="<?php echo esc_attr( (string) $initial ); ?>">
+				<ul class="<?php echo esc_attr( $grid_classes ); ?>" data-initial="<?php echo esc_attr( (string) $initial ); ?>" data-batch="<?php echo esc_attr( (string) $batch ); ?>">
 					<?php foreach ( $valid as $index => $img ) : ?>
 						<?php
 						$item_classes = 'aew-galv2__item';
@@ -477,10 +414,8 @@ class Widget_Gallery_V2 extends Widget_Base {
 					<?php endforeach; ?>
 				</ul>
 
-				<?php if ( $show_more ) : ?>
-					<div class="aew-galv2__actions">
-						<button type="button" class="aew-galv2__more"><?php echo esc_html( $btn_label ); ?></button>
-					</div>
+				<?php if ( $has_more ) : ?>
+					<div class="aew-galv2__sentinel" aria-hidden="true"></div>
 				<?php endif; ?>
 			</div>
 		</section>

@@ -1,0 +1,214 @@
+/**
+ * Banner Hero V2 — Notched
+ * A boxed page-top banner: a large rounded banner image inside a padded inner
+ * wrapper, with a centered floating card (eyebrow/subtext + Teko heading +
+ * sub-line + two buttons) overlaying it.
+ */
+
+/* Strip Elementor column padding so the banner band fills the column. The
+   widget's own inner wrapper re-applies the max-width + responsive X padding. */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-banner-hero-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-banner-hero-v2),
+.e-con:has(.elementor-widget-agency-banner-hero-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-bhero so they don't leak into other widgets. Source of truth
+   is design-system.md. Update there first; copy here second. */
+.aew-bhero {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Outer block (boxed light page band) ─────────────────────────────────── */
+.aew-bhero {
+  position: relative;
+  width: 100%;
+  background: var(--aew-bhero-page-bg, var(--notched-background));
+}
+
+.aew-bhero *,
+.aew-bhero *::before,
+.aew-bhero *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper — max-width + responsive X padding (§6.5) + top Y pad ──── */
+.aew-bhero__inner {
+  max-width: 1440px;   /* standardized stack-wide */
+  margin: 0 auto;
+  padding: 40px 80px 0;
+}
+
+/* ── Frame (rounded banner that holds the image + floating card) ──────────── */
+.aew-bhero__frame {
+  position: relative;
+  width: 100%;
+  min-height: 640px;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  isolation: isolate;
+}
+
+/* ── Banner image (fills the frame behind the card) ───────────────────────── */
+.aew-bhero__image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Floating card ────────────────────────────────────────────────────────── */
+.aew-bhero__card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  background: var(--aew-bhero-card-bg, var(--notched-background));
+  border-radius: 20px;
+  padding: 48px 64px;
+}
+
+.aew-bhero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px; /* design-system stacking gap */
+}
+
+/* ── Subtext / eyebrow line (Paragraph — Lato Regular 18px / 140%) ────────── */
+.aew-bhero__subtext {
+  margin: 0;
+  color: var(--aew-bhero-subtext, var(--notched-text));
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+/* ── Heading (Teko SemiBold 64px / 85%) ──────────────────────────────────── */
+/* Prefixed with .aew-bhero so the colour beats the kit's .elementor-kit-N
+   h1..h6 rule (0,1,1); a bare class would be (0,1,0) and lose (gotcha #20). */
+.aew-bhero .aew-bhero__heading {
+  margin: 0;
+  color: var(--aew-bhero-heading, var(--notched-secondary-bg));
+  font-family: var(--aew-teko);
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+/* ── Buttons row ─────────────────────────────────────────────────────────── */
+.aew-bhero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+/* Button base — design-system: Teko SemiBold 20px / 85%, pad 20/24/16, radius 8. */
+.aew-bhero__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  text-align: center;
+  font-family: var(--aew-teko);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 0.85;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 20px 24px 16px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+/* Primary (solid). The --aew-bhero-pri-* vars are set inline by render() from
+   the resolved editor values (hex or global colour); the design-system token is
+   the fallback when a slot is not overridden (§6.8). */
+.aew-bhero__btn--primary {
+  background-color: var(--aew-bhero-pri-bg, var(--notched-cta));
+  color: var(--aew-bhero-pri-text, #FFFFFF);
+  border-color: var(--aew-bhero-pri-bg, var(--notched-cta));
+}
+
+.aew-bhero__btn--primary:hover,
+.aew-bhero__btn--primary:focus-visible {
+  background-color: var(--aew-bhero-pri-bg-hover, var(--notched-cta-hover));
+  color: var(--aew-bhero-pri-text-hover, #FFFFFF);
+  border-color: var(--aew-bhero-pri-bg-hover, var(--notched-cta-hover));
+}
+
+/* Secondary (outline) — transparent bg, CTA-colour border + text; fills on hover. */
+.aew-bhero__btn--secondary {
+  background-color: transparent;
+  color: var(--aew-bhero-sec-color, var(--notched-cta));
+  border-color: var(--aew-bhero-sec-color, var(--notched-cta));
+}
+
+.aew-bhero__btn--secondary:hover,
+.aew-bhero__btn--secondary:focus-visible {
+  background-color: var(--aew-bhero-sec-bg-hover, var(--notched-cta));
+  color: var(--aew-bhero-sec-text-hover, #FFFFFF);
+  border-color: var(--aew-bhero-sec-bg-hover, var(--notched-cta));
+}
+
+.aew-bhero__btn-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+/* ── Responsive: tablet / small desktop (≤1024px) ────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-bhero__inner { padding: 40px 40px 0; }
+  .aew-bhero__frame { padding: 32px; }
+  .aew-bhero__card  { padding: 40px 48px; }
+  .aew-bhero .aew-bhero__heading { font-size: 52px; }
+}
+
+/* ── Responsive: mobile (≤768px) ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-bhero__inner { padding: 32px 16px 0; }
+  .aew-bhero__frame { padding: 16px; }
+  .aew-bhero__card  {
+    max-width: none;
+    margin: 0 8px;
+    padding: 32px 24px;
+    border-radius: 16px;
+  }
+  .aew-bhero__subtext { font-size: 14px; }
+  .aew-bhero .aew-bhero__heading { font-size: 40px; }
+  .aew-bhero__buttons { flex-direction: column; align-items: stretch; }
+  .aew-bhero__btn { width: 100%; font-size: 18px; padding: 18px 24px 16px; }
+}

@@ -193,6 +193,9 @@
 .aew-prsv2__media {
   display: block;
   width: 100%;
+  /* Default to a square image. The optional "Image height" control overrides
+     this with a fixed `height` + `aspect-ratio: auto` via Elementor selectors,
+     swapping the square for a fixed-height image when a value is set. */
   aspect-ratio: 1 / 1;
   border-radius: 24px;
   background-color: var(--notched-lines);

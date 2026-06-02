@@ -1,4 +1,4 @@
-/* Gallery V2 (Notched) — reveal hidden grid items on Load More. */
+/* Gallery V2 (Notched) — auto-reveal hidden grid items on scroll (infinite scroll). */
 (function () {
 	'use strict';
 
@@ -8,29 +8,60 @@
 		}
 		el.dataset.aewGalv2Init = '1';
 
-		var button = el.querySelector('.aew-galv2__more');
-		if (!button) {
+		var grid = el.querySelector('.aew-galv2__grid');
+		var sentinel = el.querySelector('.aew-galv2__sentinel');
+		if (!grid) {
 			return;
 		}
 
-		function syncButton() {
-			var hidden = el.querySelectorAll('.aew-galv2__item--hidden');
-			if (hidden.length === 0) {
-				button.setAttribute('hidden', '');
-				button.setAttribute('disabled', 'disabled');
-			}
+		var batch = parseInt(grid.getAttribute('data-batch'), 10);
+		if (isNaN(batch) || batch < 1) {
+			batch = 6;
 		}
 
-		button.addEventListener('click', function () {
-			var hidden = el.querySelectorAll('.aew-galv2__item--hidden');
+		function hiddenItems() {
+			return el.querySelectorAll('.aew-galv2__item--hidden');
+		}
+
+		function revealAll() {
+			var hidden = hiddenItems();
 			for (var i = 0; i < hidden.length; i++) {
 				hidden[i].classList.remove('aew-galv2__item--hidden');
 			}
-			syncButton();
-		});
+		}
 
-		// In case markup already shows everything (e.g. editor re-render).
-		syncButton();
+		function revealNextBatch() {
+			var hidden = hiddenItems();
+			var count = Math.min(batch, hidden.length);
+			for (var i = 0; i < count; i++) {
+				hidden[i].classList.remove('aew-galv2__item--hidden');
+			}
+			return hiddenItems().length;
+		}
+
+		// Nothing to reveal.
+		if (hiddenItems().length === 0) {
+			return;
+		}
+
+		// No sentinel or no observer support: reveal everything up front.
+		if (!sentinel || typeof window.IntersectionObserver === 'undefined') {
+			revealAll();
+			return;
+		}
+
+		var observer = new IntersectionObserver(function (entries) {
+			for (var k = 0; k < entries.length; k++) {
+				if (entries[k].isIntersecting) {
+					var remaining = revealNextBatch();
+					if (remaining === 0) {
+						observer.disconnect();
+					}
+				}
+			}
+		}, { root: null, rootMargin: '200px 0px', threshold: 0 });
+
+		observer.observe(sentinel);
 	}
 
 	function boot() {
