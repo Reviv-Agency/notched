@@ -83,7 +83,7 @@
   margin: 0 0 48px;
   text-align: center;
   color: var(--aew-tsv2-title, var(--notched-secondary-bg));
-  font-family: 'Teko', sans-serif;
+  font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 64px;
   line-height: 85%;
@@ -154,7 +154,7 @@
   display: block;
 }
 .aew-tsv2__avatar-initial {
-  font-family: 'Teko', sans-serif;
+  font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 24px;
   line-height: 1;
@@ -172,7 +172,7 @@
 .aew-tsv2 .aew-tsv2__name {
   margin: 0 0 12px;
   color: var(--aew-tsv2-name, var(--notched-secondary-bg));
-  font-family: 'Teko', sans-serif;
+  font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 24px;
   line-height: 100%;

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php -l widgets/class-widget-faq-v2.php)",
+      "Bash(grep -v 'version_compare\\\\|trace\\\\|shutdown\\\\|^#0\\\\|^\\)\\\\|array \\($')",
+      "mcp__elementor__download_page_to_file",
+      "mcp__elementor__update_page_from_file",
+      "Bash(curl -s -k https://notched.test/?nocache=__TRACKED_VAR__)",
+      "Bash(curl -sI -k https://notched.test/)",
+      "Bash(curl -s -k -o /dev/null -w \"sw.js -> %{http_code}\\\\n\" https://notched.test/sw.js)",
+      "Bash(curl -s -k https://notched.test/?v=__TRACKED_VAR__)"
+    ]
+  }
+}

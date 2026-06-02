@@ -81,7 +81,7 @@
    Elementor kit's `.elementor-kit-N h1..h6 { color }` rule (0,1,1). */
 .aew-prsv2 .aew-prsv2__heading {
   margin: 0;
-  font-family: 'Teko', sans-serif;
+  font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 64px;
   line-height: 85%;
@@ -96,7 +96,7 @@
   gap: 10px;
   flex-shrink: 0;
   text-decoration: none;
-  font-family: 'Teko', sans-serif;
+  font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 20px;
   line-height: 85%;
@@ -178,7 +178,7 @@
 }
 
 .aew-prsv2__title {
-  font-family: 'Teko', sans-serif;
+  font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 22px;
   line-height: 100%;

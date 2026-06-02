@@ -108,7 +108,7 @@
   margin: 0;
   max-width: 100%;
   color: var(--notched-background);
-  font-family: 'Teko', sans-serif;
+  font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 40px;
   line-height: 0.85;

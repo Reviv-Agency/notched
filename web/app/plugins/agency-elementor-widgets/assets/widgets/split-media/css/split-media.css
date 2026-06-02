@@ -145,7 +145,7 @@
 	gap: 10px;
 	text-decoration: none;
 	text-align: center;
-	font-family: 'Teko', sans-serif;
+	font-family: var(--aew-teko);
 	font-weight: 600;
 	font-size: 20px;
 	line-height: 0.85;

@@ -3,6 +3,52 @@
  * Color variables are injected inline from PHP (:root).
  */
 
+/* ── Metric-matched fallback for Teko (site-wide) ─────────────────────────── */
+/* Teko is enqueued with font-display:swap, so before it downloads the browser
+   paints a WIDER/TALLER generic sans-serif, then snaps narrower when Teko
+   arrives — the "loads bigger, then shrinks" reflow seen on the hero and every
+   heading. This re-shapes Arial to match Teko's metrics so text is the same
+   size before and after the swap. font-weight 400 700 covers the 600/700 the
+   brand uses without the browser synthesizing faux-bold for the fallback. */
+@font-face {
+  font-family: 'Teko Fallback';
+  src: local('Arial');
+  font-weight: 400 700;
+  size-adjust: 66%;
+  ascent-override: 125%;
+  descent-override: 26%;
+  line-gap-override: 0%;
+}
+
+/* Shared font stack — every AEW widget uses var(--aew-teko) instead of a bare
+   'Teko' so the metric-matched fallback applies during the swap window. Hosted
+   here in aew-tokens (loaded on every page) so all widgets stay in sync. */
+:root {
+  --aew-teko: 'Teko', 'Teko Fallback', sans-serif;
+}
+
+/* The Elementor kit sets `font-family: Teko, sans-serif` on every heading
+   (`.elementor-kit-N h1..h6`) at specificity (0,1,1) — that bare `sans-serif`
+   fallback is what causes the hero/headings to load wide then snap to Teko.
+   Re-state the SAME selectors here (kit-number-agnostic) so headings that use
+   Teko pick up the metric-matched fallback. Matches specificity (0,1,1); this
+   sheet loads after the kit on the front end, so source order wins the tie.
+   Only applies the swap to Teko headings — headings the kit sets to another
+   family aren't matched by these Teko-targeting rules in practice. */
+/* The kit class sits on <body> (e.g. <body class="elementor-kit-7">), so the
+   kit rule is `.elementor-kit-7 h1`. We repeat the attribute selector twice
+   ([class*=…][class*=…]) → specificity (0,2,0)+element = (0,2,1), beating the
+   kit's (0,1,1) no matter the stylesheet order, while still matching the SAME
+   elements (the class as an ancestor, including <body> itself). */
+[class*="elementor-kit-"][class*="elementor-kit-"] h1,
+[class*="elementor-kit-"][class*="elementor-kit-"] h2,
+[class*="elementor-kit-"][class*="elementor-kit-"] h3,
+[class*="elementor-kit-"][class*="elementor-kit-"] h4,
+[class*="elementor-kit-"][class*="elementor-kit-"] h5,
+[class*="elementor-kit-"][class*="elementor-kit-"] h6 {
+  font-family: 'Teko', 'Teko Fallback', sans-serif;
+}
+
 .aew-font-heading {
 	font-family: var(--aew-font-heading);
 }

@@ -1,0 +1,393 @@
+/**
+ * FAQ V2 — Notched
+ * Title + search + vertical category rail + searchable accordion with
+ * per-answer social share bar. Matches the Wix "Questions Customers Ask".
+ */
+
+/* Teko metric-matched fallback (@font-face + --aew-teko) lives in aew-tokens,
+   loaded on every page as this widget's style dependency. */
+.aew-faqv2 {
+  --aew-faqv2-teko: var(--aew-teko, 'Teko', sans-serif);
+}
+
+/* Strip Elementor container padding + force full-bleed so the band spans the
+   viewport. The widget's own .aew-faqv2__inner re-applies the 1440px cap. */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-faq-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-faq-v2),
+.e-con:has(.elementor-widget-agency-faq-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+.elementor-section:has(.elementor-widget-agency-faq-v2),
+.elementor-section:has(.elementor-widget-agency-faq-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-faq-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-faqv2 so they don't leak. Source of truth is design-system.md.
+   Update there first; copy here second. */
+.aew-faqv2 {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Outer block ─────────────────────────────────────────────────────────── */
+.aew-faqv2 {
+  background: var(--aew-faqv2-body-bg, var(--notched-background));
+  width: 100%;
+  position: relative;
+}
+
+.aew-faqv2 *,
+.aew-faqv2 *::before,
+.aew-faqv2 *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper (max-width + responsive X/Y padding) ──────────────────── */
+.aew-faqv2__inner {
+  max-width: 1440px;          /* standardized stack-wide */
+  margin: 0 auto;
+  padding: 64px 80px;         /* banded widget: section Y + desktop X */
+}
+
+@media (max-width: 1024px) {
+  .aew-faqv2__inner { padding: 64px 40px; }
+}
+@media (max-width: 768px) {
+  .aew-faqv2__inner { padding: 32px 40px; }
+}
+
+/* ── Header (title + search) ─────────────────────────────────────────────── */
+.aew-faqv2__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+/* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) — gotcha #20 */
+.aew-faqv2 .aew-faqv2__title {
+  margin: 0;
+  color: var(--aew-faqv2-title, var(--notched-secondary-bg));
+  font-family: var(--aew-faqv2-teko);
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 85%;
+  text-transform: uppercase;
+}
+
+/* ── Search ──────────────────────────────────────────────────────────────── */
+.aew-faqv2__search {
+  position: relative;
+  min-width: 260px;
+  max-width: 320px;
+  flex: 0 1 auto;
+}
+
+/* Wrapper-prefixed + explicit border sides so Elementor's kit input styles
+   (which set a grey all-around border) don't win. */
+.aew-faqv2 input.aew-faqv2__search-input {
+  width: 100%;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 1px solid var(--aew-faqv2-search-border, var(--notched-lines)) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 8px 28px 8px 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  color: var(--aew-faqv2-search-text, var(--notched-text));
+  outline: none;
+  box-shadow: none !important;
+}
+
+.aew-faqv2__search-input::placeholder {
+  color: var(--aew-faqv2-search-text, var(--notched-text));
+  opacity: .6;
+}
+
+.aew-faqv2__search-input:focus {
+  border-bottom-color: var(--notched-cta);
+}
+
+.aew-faqv2__search-icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  pointer-events: none;
+  color: var(--aew-faqv2-search-text, var(--notched-text));
+  opacity: .7;
+}
+
+/* ── Layout: rail + main ─────────────────────────────────────────────────── */
+.aew-faqv2__layout {
+  display: block;
+}
+
+.aew-faqv2--has-sidebar .aew-faqv2__layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ── Category rail ───────────────────────────────────────────────────────── */
+.aew-faqv2__rail {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 4px;
+}
+
+/* Reset Elementor button bleed (gotcha #2) */
+button.aew-faqv2__cat,
+button.aew-faqv2__trigger,
+button.aew-faqv2__share-btn {
+  border: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Wrapper-prefixed for specificity — Elementor's kit sets a color on <button>
+   that otherwise beats a single-class rule (same trap as the heading gotcha). */
+.aew-faqv2 button.aew-faqv2__cat {
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  font-family: var(--aew-faqv2-teko);
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: var(--aew-faqv2-cat, var(--notched-secondary-bg));
+  line-height: 1.2;
+  transition: color .15s ease;
+}
+
+.aew-faqv2 button.aew-faqv2__cat:hover {
+  color: var(--aew-faqv2-cat-active, var(--notched-cta));
+}
+
+.aew-faqv2 button.aew-faqv2__cat.is-active {
+  color: var(--aew-faqv2-cat-active, var(--notched-cta));
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ── Main column ─────────────────────────────────────────────────────────── */
+.aew-faqv2__main {
+  min-width: 0;
+}
+
+.aew-faqv2__noresults {
+  margin: 0 0 12px;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  color: var(--notched-text);
+  opacity: .8;
+}
+
+.aew-faqv2__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Question card ───────────────────────────────────────────────────────── */
+.aew-faqv2__item {
+  background: var(--aew-faqv2-card-bg, var(--notched-background));
+  border: 1px solid var(--aew-faqv2-card-border, var(--notched-lines));
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.aew-faqv2__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  text-align: left;
+  padding: 24px 32px;
+  margin: 0;
+}
+
+.aew-faqv2__question {
+  margin: 0;
+  font-family: var(--aew-faqv2-teko);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--aew-faqv2-question, var(--notched-text));
+}
+
+.aew-faqv2__icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  color: var(--aew-faqv2-icon, var(--notched-text));
+}
+
+.aew-faqv2__icon-minus { display: none; }
+.aew-faqv2__item.is-open .aew-faqv2__icon-plus  { display: none; }
+.aew-faqv2__item.is-open .aew-faqv2__icon-minus { display: inline; }
+
+/* ── Answer panel ────────────────────────────────────────────────────────── */
+.aew-faqv2__panel {
+  padding: 0 32px 24px;
+}
+
+.aew-faqv2__panel[hidden] { display: none; }
+
+.aew-faqv2__answer {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--aew-faqv2-answer, var(--notched-text));
+}
+
+.aew-faqv2__answer p { margin: 0 0 1em; }
+.aew-faqv2__answer p:last-child { margin-bottom: 0; }
+
+.aew-faqv2__answer h3,
+.aew-faqv2__answer h4 {
+  font-family: var(--aew-faqv2-teko);
+  font-weight: 600;
+  margin: 1em 0 .35em;
+  color: var(--notched-text);
+}
+
+.aew-faqv2__answer ul,
+.aew-faqv2__answer ol {
+  margin: 0 0 1em;
+  padding-left: 1.4em;
+}
+
+.aew-faqv2__answer li { margin: 0 0 .25em; }
+.aew-faqv2__answer a { color: var(--notched-cta); }
+.aew-faqv2__answer a:hover { color: var(--notched-cta-hover); }
+
+/* Inline CTA button inside an answer (e.g. "FREE CONSULTATION") */
+.aew-faqv2__answer a.aew-faqv2__answer-btn {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 20px 24px 16px;
+  background: var(--notched-cta);
+  color: #FFFFFF;
+  font-family: var(--aew-faqv2-teko);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 85%;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color .15s ease;
+}
+.aew-faqv2__answer a.aew-faqv2__answer-btn:hover {
+  background: var(--notched-cta-hover);
+  color: #FFFFFF;
+}
+
+/* ── Share bar ───────────────────────────────────────────────────────────── */
+.aew-faqv2__share {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+/* Wrapper-prefixed so the kit's `.elementor-kit-N button` padding (0,1,1)
+   doesn't add space around the share icons. */
+.aew-faqv2 .aew-faqv2__share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  padding: 0 !important;
+  margin: 0;
+  cursor: pointer;
+  color: var(--notched-misc-accent);
+  opacity: .75;
+  transition: opacity .15s ease, color .15s ease;
+}
+
+.aew-faqv2__share-btn:hover {
+  opacity: 1;
+  color: var(--notched-cta);
+}
+
+.aew-faqv2__share-btn svg { width: 20px; height: 20px; }
+
+.aew-faqv2__share-btn.is-copied {
+  color: var(--notched-secondary-bg);
+  opacity: 1;
+}
+
+/* ── Search-hidden items ─────────────────────────────────────────────────── */
+.aew-faqv2__item[hidden] { display: none; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-faqv2--has-sidebar .aew-faqv2__layout {
+    grid-template-columns: 210px 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aew-faqv2--has-sidebar .aew-faqv2__layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  /* Rail becomes a horizontal scroller above the questions on mobile. */
+  .aew-faqv2__rail {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 18px;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .aew-faqv2__rail::-webkit-scrollbar { display: none; }
+  .aew-faqv2__cat { white-space: nowrap; }
+
+  .aew-faqv2__header { margin-bottom: 24px; }
+  .aew-faqv2__search { min-width: 100%; max-width: 100%; }
+  .aew-faqv2 .aew-faqv2__title { font-size: 24px; }
+  .aew-faqv2__trigger { padding: 20px; }
+  .aew-faqv2__panel { padding: 0 20px 20px; }
+  .aew-faqv2__answer { font-size: 14px; }
+}

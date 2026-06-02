@@ -62,7 +62,7 @@
   margin: 0 0 48px;
   text-align: center;
   color: var(--aew-bnv2-title, var(--notched-cta));
-  font-family: 'Teko', sans-serif;
+  font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 64px;
   line-height: 85%;
@@ -114,7 +114,7 @@
 .aew-bnv2 .aew-bnv2__heading {
   margin: 0 0 16px;
   color: var(--aew-bnv2-heading, var(--notched-cta));
-  font-family: 'Teko', sans-serif;
+  font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 40px;        /* design-system H3 desktop */
   line-height: 85%;

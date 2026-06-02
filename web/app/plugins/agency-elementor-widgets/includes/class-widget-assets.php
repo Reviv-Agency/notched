@@ -267,6 +267,15 @@ final class Widget_Assets {
 				'style_deps' => [ 'aew-tokens' ],
 			]
 		);
+
+		self::register_widget(
+			'faq-v2',
+			[
+				'style'      => 'css/faq-v2.css',
+				'script'     => 'js/faq-v2.js',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
 	}
 
 	/**

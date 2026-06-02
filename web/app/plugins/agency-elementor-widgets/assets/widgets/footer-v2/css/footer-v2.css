@@ -178,7 +178,7 @@
   display: inline-block;
   color: var(--aew-fov2-link, var(--notched-cta-hover));
   text-decoration: none;
-  font-family: 'Teko', sans-serif;
+  font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 18px;
   line-height: 1;
