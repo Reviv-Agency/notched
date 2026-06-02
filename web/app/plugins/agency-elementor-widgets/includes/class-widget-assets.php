@@ -313,6 +313,15 @@ final class Widget_Assets {
 				'script_deps' => [ 'comment-reply' ],
 			]
 		);
+
+		self::register_widget(
+			'gallery-v2',
+			[
+				'style'      => 'css/gallery-v2.css',
+				'script'     => 'js/gallery-v2.js',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
 	}
 
 	/**

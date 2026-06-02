@@ -68,13 +68,22 @@
   flex-direction: column;
 }
 
-/* ── Header row: heading + Shop-all CTA ────────────────────────────────────── */
+/* ── Header row: heading + (difficulty + Shop-all CTA) ─────────────────────── */
 .aew-prsv2__head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
   margin-bottom: 32px;
+}
+
+/* Right-hand group: difficulty label above/alongside the Shop-all CTA. */
+.aew-prsv2__head-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  flex-shrink: 0;
 }
 
 /* Wrapper-class prefix raises specificity to (0,2,0) so the colour beats the
@@ -87,6 +96,22 @@
   line-height: 85%;
   text-transform: uppercase;
   color: var(--aew-prsv2-heading, var(--notched-secondary-bg));
+}
+
+/* ── Assembly difficulty label ─────────────────────────────────────────────── */
+.aew-prsv2__difficulty {
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--aew-prsv2-difficulty, var(--notched-misc-accent));
+  text-align: right;
+}
+
+.aew-prsv2__difficulty-value {
+  opacity: 0.9;
 }
 
 /* ── Shop-all CTA button ───────────────────────────────────────────────────── */
@@ -157,7 +182,7 @@
   min-width: 0;
 }
 
-/* ── Card: image + title, whole card links to product ─────────────────────── */
+/* ── Card: image + title + price, whole card links to product ─────────────── */
 .aew-prsv2__card {
   display: flex;
   flex-direction: column;
@@ -185,6 +210,16 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--aew-prsv2-title, var(--notched-text));
+}
+
+/* ── Price on card ─────────────────────────────────────────────────────────── */
+.aew-prsv2__price {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--aew-prsv2-price, var(--notched-cta));
+  margin-top: 4px;
+  display: block;
 }
 
 .aew-prsv2__card:hover .aew-prsv2__media { opacity: 0.92; }
@@ -294,17 +329,23 @@ button.aew-prsv2__dot {
   .aew-prsv2__arrow,
   button.aew-prsv2__arrow { display: none; }
 
-  /* CTA drops below the cards. Dissolve __head so heading + CTA become flex
-     children of __inner, then order the CTA last (after viewport + dots). */
+  /* CTA drops below the cards. Dissolve __head so heading + aside become flex
+     children of __inner, then order the aside last (after viewport + dots). */
   .aew-prsv2__head { display: contents; }
   .aew-prsv2__heading { order: 0; margin-bottom: 24px; }
+  .aew-prsv2__head-aside {
+    order: 3;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .aew-prsv2__difficulty { order: 0; text-align: left; }
   .aew-prsv2__viewport { order: 1; }
   .aew-prsv2__dots { order: 2; }
   .aew-prsv2__empty { order: 1; }
   .aew-prsv2__cta {
-    order: 3;
     align-self: flex-start;
-    margin-top: 28px;
   }
 }
 
@@ -312,7 +353,9 @@ button.aew-prsv2__dot {
 @media (max-width: 768px) {
   .aew-prsv2__inner { padding: 2rem 2.5rem; }
   .aew-prsv2__heading { font-size: 40px; margin-bottom: 20px; }
-  .aew-prsv2__cta { width: 100%; justify-content: center; font-size: 20px; padding: 18px 24px 16px; margin-top: 24px; }
+  .aew-prsv2__head-aside { width: 100%; margin-top: 24px; }
+  .aew-prsv2__cta { width: 100%; justify-content: center; font-size: 20px; padding: 18px 24px 16px; }
+  .aew-prsv2__price { font-size: 14px; }
   .aew-prsv2__slide { flex-basis: 220px; }
   .aew-prsv2__track { gap: 16px; }
   .aew-prsv2__media { border-radius: 16px; }

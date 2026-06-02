@@ -239,6 +239,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 					'1' => '1',
 					'2' => '2',
 					'3' => '3',
+					'4' => '4',
 				],
 				'selectors'      => [
 					'{{WRAPPER}} .aew-rgcv2__grid' => 'grid-template-columns: repeat({{VALUE}}, minmax(0, 1fr));',

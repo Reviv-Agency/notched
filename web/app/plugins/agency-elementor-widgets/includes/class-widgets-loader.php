@@ -77,6 +77,7 @@ final class Widgets_Loader {
 		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-single-post-v2.php';
 		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-recent-posts-v2.php';
 		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-comments-v2.php';
+		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-gallery-v2.php';
 		$widgets_manager->register( new Widget_Header() );
 		$widgets_manager->register( new Widget_Header_V2() );
 		$widgets_manager->register( new Widget_Hero() );
@@ -110,5 +111,6 @@ final class Widgets_Loader {
 		$widgets_manager->register( new Widget_Single_Post_V2() );
 		$widgets_manager->register( new Widget_Recent_Posts_V2() );
 		$widgets_manager->register( new Widget_Comments_V2() );
+		$widgets_manager->register( new Widget_Gallery_V2() );
 	}
 }

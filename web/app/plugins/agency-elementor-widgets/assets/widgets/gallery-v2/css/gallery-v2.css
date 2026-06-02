@@ -1,0 +1,180 @@
+/* Gallery V2 (Notched) — responsive image grid with Load More. */
+
+/* Strip Elementor column / container padding so the band is full-bleed. */
+.elementor-column > .elementor-element-populated:has(.elementor-widget-agency-gallery-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-gallery-v2),
+.e-con:has(.elementor-widget-agency-gallery-v2) {
+	--padding-top: 0px;
+	--padding-right: 0px;
+	--padding-bottom: 0px;
+	--padding-left: 0px;
+	padding: 0 !important;
+}
+
+.aew-galv2 {
+	/* Brand tokens (scoped to the block). */
+	--notched-cards: #FFFFFF;
+	--notched-background: #F6F0EC;
+	--notched-lines: #BFC0BF;
+	--notched-misc-accent: #3B413F;
+	--notched-secondary-cards: #7D958D;
+	--notched-secondary-bg: #2A4F41;
+	--notched-secondary-accent: #093328;
+	--notched-text: #141C19;
+	--notched-cta: #AA7D44;
+	--notched-cta-hover: #876137;
+
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	background-color: var(--aew-galv2-bg, var(--notched-background));
+	padding-top: 64px;
+	padding-bottom: 64px;
+}
+
+.aew-galv2 *,
+.aew-galv2 *::before,
+.aew-galv2 *::after {
+	box-sizing: border-box;
+}
+
+.aew-galv2__inner {
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 0 80px;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.aew-galv2__header {
+	margin-bottom: 40px;
+}
+
+.aew-galv2__eyebrow {
+	margin: 0 0 12px;
+	font-family: 'Playfair Display', serif;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 140%;
+	text-transform: uppercase;
+	color: var(--notched-cta);
+}
+
+.aew-galv2 .aew-galv2__heading {
+	margin: 0;
+	font-family: 'Teko', sans-serif;
+	font-weight: 600;
+	font-size: 64px;
+	line-height: 85%;
+	color: var(--notched-text);
+}
+
+/* ── Grid ───────────────────────────────────────────────────────────────── */
+.aew-galv2__grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 16px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.aew-galv2__item {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	border-radius: 16px;
+}
+
+.aew-galv2__item--hidden {
+	display: none;
+}
+
+.aew-galv2__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 16px;
+}
+
+/* ── Load More ──────────────────────────────────────────────────────────── */
+.aew-galv2__actions {
+	display: flex;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+.aew-galv2__more {
+	/* Button reset. */
+	border: 0;
+	background: transparent;
+	-webkit-appearance: none;
+	appearance: none;
+	cursor: pointer;
+
+	/* Brand CTA. */
+	display: inline-block;
+	font-family: 'Teko', sans-serif;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 85%;
+	text-transform: uppercase;
+	color: var(--aew-galv2-btn-text, #FFFFFF);
+	background-color: var(--aew-galv2-btn-bg, var(--notched-cta));
+	padding: 20px 24px 16px;
+	border-radius: 8px;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.aew-galv2__more:hover,
+.aew-galv2__more:focus-visible {
+	color: var(--aew-galv2-btn-text-hover, #FFFFFF);
+	background-color: var(--aew-galv2-btn-bg-hover, var(--notched-cta-hover));
+}
+
+.aew-galv2__more[hidden],
+.aew-galv2__more[disabled] {
+	display: none;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+	.aew-galv2__inner {
+		padding: 0 40px;
+	}
+
+	.aew-galv2 .aew-galv2__heading {
+		font-size: 48px;
+	}
+}
+
+@media (max-width: 768px) {
+	.aew-galv2 {
+		padding-top: 32px;
+		padding-bottom: 32px;
+	}
+
+	.aew-galv2__inner {
+		padding: 0 40px;
+	}
+
+	.aew-galv2__header {
+		margin-bottom: 24px;
+	}
+
+	.aew-galv2 .aew-galv2__heading {
+		font-size: 40px;
+	}
+
+	.aew-galv2__eyebrow {
+		font-size: 16px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.aew-galv2__more {
+		transition: none;
+	}
+}

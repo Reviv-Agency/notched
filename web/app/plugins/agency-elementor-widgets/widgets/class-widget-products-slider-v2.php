@@ -76,6 +76,19 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 			'default' => 'h2',
 			'options' => [ 'h2' => 'H2', 'h3' => 'H3', 'div' => 'div' ],
 		] );
+		$this->add_control( 'difficulty', [
+			'label'       => 'Assembly difficulty',
+			'type'        => Controls_Manager::TEXT,
+			'default'     => '',
+			'placeholder' => 'e.g. Beginner, Intermediate',
+			'description' => 'Shown top-right above the slider. Leave empty to hide.',
+		] );
+		$this->add_control( 'difficulty_prefix', [
+			'label'     => 'Difficulty label prefix',
+			'type'      => Controls_Manager::TEXT,
+			'default'   => 'Assembly Difficulty:',
+			'condition' => [ 'difficulty!' => '' ],
+		] );
 		$this->end_controls_section();
 	}
 
@@ -224,6 +237,12 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 				'text_transform' => [ 'default' => 'uppercase' ],
 			],
 		] );
+		$this->add_control( 'difficulty_color', [
+			'label'     => 'Assembly difficulty color',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#3B413F',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-difficulty: {{VALUE}};' ],
+		] );
 		$this->end_controls_section();
 	}
 
@@ -264,6 +283,24 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 				'letter_spacing' => [ 'default' => [ 'unit' => 'px', 'size' => 0.5 ] ],
 				'text_transform' => [ 'default' => 'uppercase' ],
 			],
+		] );
+		$this->add_control( 'show_price', [
+			'label'   => 'Show price',
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => 'yes',
+		] );
+		$this->add_control( 'price_prefix', [
+			'label'     => 'Price prefix',
+			'type'      => Controls_Manager::TEXT,
+			'default'   => 'From ',
+			'condition' => [ 'show_price' => 'yes' ],
+		] );
+		$this->add_control( 'price_color', [
+			'label'     => 'Price color',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#AA7D44',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-price: {{VALUE}};' ],
+			'condition' => [ 'show_price' => 'yes' ],
 		] );
 		$this->end_controls_section();
 	}
@@ -352,6 +389,12 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$cta      = $this->parse_link( $s['cta_link'] ?? [] );
 		$show_cta = 'yes' === ( $s['show_cta'] ?? '' ) && $cta['url'];
 
+		$show_price   = 'yes' === ( $s['show_price'] ?? 'yes' );
+		$price_prefix = (string) ( $s['price_prefix'] ?? '' );
+
+		$difficulty        = trim( (string) ( $s['difficulty'] ?? '' ) );
+		$difficulty_prefix = (string) ( $s['difficulty_prefix'] ?? '' );
+
 		/*
 		 * Resolved colours as inline CSS vars on the wrapper. get_settings_for_display()
 		 * resolves global colours → hex so global-bound picks render on the front end
@@ -363,17 +406,19 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 			$this,
 			$s,
 			[
-				'body_bg'        => '--aew-prsv2-body-bg',
-				'heading_color'  => '--aew-prsv2-heading',
-				'title_color'    => '--aew-prsv2-title',
-				'arrow_bg'       => '--aew-prsv2-arrow-bg',
-				'arrow_color'    => '--aew-prsv2-arrow-color',
-				'dot_color'      => '--aew-prsv2-dot-active',
-				'dot_color_idle' => '--aew-prsv2-dot-idle',
-				'cta_bg'         => '--aew-prsv2-cta-bg',
-				'cta_bg_hover'   => '--aew-prsv2-cta-bg-hover',
-				'cta_text'       => '--aew-prsv2-cta-text',
-				'cta_text_hover' => '--aew-prsv2-cta-text-hover',
+				'body_bg'          => '--aew-prsv2-body-bg',
+				'heading_color'    => '--aew-prsv2-heading',
+				'difficulty_color' => '--aew-prsv2-difficulty',
+				'title_color'      => '--aew-prsv2-title',
+				'price_color'      => '--aew-prsv2-price',
+				'arrow_bg'         => '--aew-prsv2-arrow-bg',
+				'arrow_color'      => '--aew-prsv2-arrow-color',
+				'dot_color'        => '--aew-prsv2-dot-active',
+				'dot_color_idle'   => '--aew-prsv2-dot-idle',
+				'cta_bg'           => '--aew-prsv2-cta-bg',
+				'cta_bg_hover'     => '--aew-prsv2-cta-bg-hover',
+				'cta_text'         => '--aew-prsv2-cta-text',
+				'cta_text_hover'   => '--aew-prsv2-cta-text-hover',
 			]
 		);
 		$style_attr = '' !== $color_vars ? ' style="' . esc_attr( $color_vars ) . '"' : '';
@@ -386,16 +431,29 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 						<<?php echo esc_attr( $tag ); ?> class="aew-prsv2__heading"><?php echo esc_html( $heading ); ?></<?php echo esc_attr( $tag ); ?>>
 					<?php endif; ?>
 
-					<?php if ( $show_cta ) : ?>
-						<a class="aew-prsv2__cta"
-							href="<?php echo esc_url( $cta['url'] ); ?>"
-							<?php echo $cta['target'] ? 'target="' . esc_attr( $cta['target'] ) . '"' : ''; ?>
-							<?php echo $cta['rel'] ? 'rel="' . esc_attr( $cta['rel'] ) . '"' : ''; ?>>
-							<span class="aew-prsv2__cta-label"><?php echo esc_html( $s['cta_label'] ?? '' ); ?></span>
-							<?php if ( 'yes' === ( $s['cta_arrow'] ?? '' ) ) : ?>
-								<?php echo $this->arrow_svg( 'right' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php if ( '' !== $difficulty || $show_cta ) : ?>
+						<div class="aew-prsv2__head-aside">
+							<?php if ( '' !== $difficulty ) : ?>
+								<span class="aew-prsv2__difficulty">
+									<?php if ( '' !== $difficulty_prefix ) : ?>
+										<span class="aew-prsv2__difficulty-label"><?php echo esc_html( $difficulty_prefix ); ?></span>
+									<?php endif; ?>
+									<span class="aew-prsv2__difficulty-value"><?php echo esc_html( $difficulty ); ?></span>
+								</span>
 							<?php endif; ?>
-						</a>
+
+							<?php if ( $show_cta ) : ?>
+								<a class="aew-prsv2__cta"
+									href="<?php echo esc_url( $cta['url'] ); ?>"
+									<?php echo $cta['target'] ? 'target="' . esc_attr( $cta['target'] ) . '"' : ''; ?>
+									<?php echo $cta['rel'] ? 'rel="' . esc_attr( $cta['rel'] ) . '"' : ''; ?>>
+									<span class="aew-prsv2__cta-label"><?php echo esc_html( $s['cta_label'] ?? '' ); ?></span>
+									<?php if ( 'yes' === ( $s['cta_arrow'] ?? '' ) ) : ?>
+										<?php echo $this->arrow_svg( 'right' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+									<?php endif; ?>
+								</a>
+							<?php endif; ?>
+						</div>
 					<?php endif; ?>
 				</div>
 
@@ -424,6 +482,9 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 											aria-label="<?php echo esc_attr( $p['title'] ); ?>">
 										</span>
 										<span class="aew-prsv2__title"><?php echo esc_html( $p['title'] ); ?></span>
+										<?php if ( $show_price && '' !== $p['price'] ) : ?>
+											<span class="aew-prsv2__price"><?php echo esc_html( $price_prefix . $p['price'] ); ?></span>
+										<?php endif; ?>
 									</a>
 								</li>
 							<?php endforeach; ?>
@@ -454,7 +515,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 	 * Build the normalized product list for render.
 	 *
 	 * @param array<string,mixed> $s Settings.
-	 * @return array<int, array{title:string,url:string,img:string}>
+	 * @return array<int, array{title:string,url:string,img:string,price:string}>
 	 */
 	private function query_products( array $s ): array {
 		if ( ! self::woo_active() ) {
@@ -526,9 +587,29 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 				'title' => $product->get_name(),
 				'url'   => get_permalink( $id ),
 				'img'   => $img ? $img : '',
+				'price' => $this->format_price( $product->get_price() ),
 			];
 		}
 		return $out;
+	}
+
+	/**
+	 * Turn a WooCommerce price value into a plain "$4,290" style string.
+	 * Empty / zero / non-numeric prices return '' (render nothing).
+	 *
+	 * @param mixed $price Raw product price.
+	 */
+	private function format_price( $price ): string {
+		if ( '' === $price || null === $price || ! is_numeric( $price ) ) {
+			return '';
+		}
+		$amount = (float) $price;
+		if ( $amount <= 0 ) {
+			return '';
+		}
+		$symbol   = function_exists( 'get_woocommerce_currency_symbol' ) ? html_entity_decode( get_woocommerce_currency_symbol() ) : '$';
+		$decimals = ( floor( $amount ) === $amount ) ? 0 : 2;
+		return $symbol . number_format( $amount, $decimals );
 	}
 
 	/**
