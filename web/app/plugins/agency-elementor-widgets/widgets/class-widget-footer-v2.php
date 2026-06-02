@@ -431,7 +431,7 @@ class Widget_Footer_V2 extends Widget_Base {
 									<img class="aew-fov2__logo-img"
 										src="<?php echo esc_url( $logo_url ); ?>"
 										alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>"
-										decoding="async" />
+										decoding="async" loading="lazy" />
 								</a>
 							<?php endif; ?>
 						</div>

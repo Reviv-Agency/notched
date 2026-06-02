@@ -187,7 +187,7 @@ class Widget_Header_V2 extends Widget_Base {
 							<a class="aew-hv2__logo-link" href="<?php echo esc_url( $logo_link['url'] ?: home_url( '/' ) ); ?>"
 								<?php echo $logo_link['target'] ? 'target="' . esc_attr( $logo_link['target'] ) . '"' : ''; ?>>
 								<img class="aew-hv2__logo-img" src="<?php echo esc_url( $logo_url ); ?>"
-									alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" height="50" decoding="async" />
+									alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" height="50" decoding="async" loading="eager" fetchpriority="high" />
 							</a>
 						<?php endif; ?>
 					</div>

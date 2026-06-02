@@ -766,10 +766,10 @@ class Widget_Header extends Widget_Base {
 								<?php echo $logo_link['target'] ? ' target="' . esc_attr( $logo_link['target'] ) . '"' : ''; ?>
 								<?php echo $logo_link['rel'] ? ' rel="' . esc_attr( $logo_link['rel'] ) . '"' : ''; ?>>
 								<?php if ( $logo_url ) : ?>
-									<img class="aew-header__logo-img aew-header__logo-img--desktop" src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="341" height="56" decoding="async" />
+									<img class="aew-header__logo-img aew-header__logo-img--desktop" src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="341" height="56" decoding="async" loading="eager" fetchpriority="high" />
 								<?php endif; ?>
 								<?php if ( $logo_mobile_url ) : ?>
-									<img class="aew-header__logo-img aew-header__logo-img--mobile" src="<?php echo esc_url( $logo_mobile_url ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="64" height="44" decoding="async" />
+									<img class="aew-header__logo-img aew-header__logo-img--mobile" src="<?php echo esc_url( $logo_mobile_url ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="64" height="44" decoding="async" loading="eager" fetchpriority="high" />
 								<?php endif; ?>
 							</a>
 						<?php endif; ?>

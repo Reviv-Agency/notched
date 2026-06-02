@@ -609,7 +609,7 @@ class Widget_Hero_V2 extends Widget_Base {
 					$url    = is_array( $avatar ) ? ( $avatar['url'] ?? '' ) : '';
 					if ( $url ) {
 						printf(
-							'<span class="aew-hev2__avatar-frame"><img class="aew-hev2__avatar" src="%s" alt="" decoding="async" /></span>',
+							'<span class="aew-hev2__avatar-frame"><img class="aew-hev2__avatar" src="%s" alt="" decoding="async" loading="eager" width="48" height="48" /></span>',
 							esc_url( $url )
 						);
 					}

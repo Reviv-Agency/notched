@@ -278,7 +278,7 @@ class Widget_Icon_Cards extends Widget_Base {
 						<article class="aew-iccr__card">
 							<span class="aew-iccr__icon">
 								<?php if ( $icon_url ) : ?>
-									<img src="<?php echo esc_url( $icon_url ); ?>" alt="" decoding="async" />
+									<img src="<?php echo esc_url( $icon_url ); ?>" alt="" decoding="async" loading="lazy" width="48" height="48" />
 								<?php else : ?>
 									<?php $this->render_check_icon(); ?>
 								<?php endif; ?>
