@@ -317,6 +317,12 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 			'default'   => '#FFFFFF',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-cta-text: {{VALUE}};' ],
 		] );
+		$this->add_control( 'cta_text_hover', [
+			'label'     => 'Text color (hover)',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#FFFFFF',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-cta-text-hover: {{VALUE}};' ],
+		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => 'cta_typo',
 			'selector' => '{{WRAPPER}} .aew-prsv2__cta',
@@ -367,6 +373,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 				'cta_bg'         => '--aew-prsv2-cta-bg',
 				'cta_bg_hover'   => '--aew-prsv2-cta-bg-hover',
 				'cta_text'       => '--aew-prsv2-cta-text',
+				'cta_text_hover' => '--aew-prsv2-cta-text-hover',
 			]
 		);
 		$style_attr = '' !== $color_vars ? ' style="' . esc_attr( $color_vars ) . '"' : '';

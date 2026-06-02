@@ -194,7 +194,7 @@
 .aew-split-media__btn--primary:focus-visible {
 	background-color: var(--aew-spm-btnp-bg-hover, #876137);
 	border-color: var(--aew-spm-btnp-bg-hover, #876137);
-	color: var(--aew-spm-btnp-text, #FFFFFF);
+	color: var(--aew-spm-btnp-text-hover, var(--aew-spm-btnp-text, #FFFFFF));
 }
 
 .aew-split-media__btn--secondary {

@@ -114,7 +114,7 @@
 	line-height: 1.2;
 	text-decoration: none;
 	cursor: pointer;
-	transition: opacity 0.2s ease;
+	transition: background-color 0.18s ease, color 0.18s ease, opacity 0.2s ease;
 }
 
 .aew-heading-band__button:hover,

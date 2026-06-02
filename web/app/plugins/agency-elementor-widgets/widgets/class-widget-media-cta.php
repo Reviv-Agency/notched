@@ -721,6 +721,30 @@ class Widget_Media_Cta extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'button_background_hover',
+			[
+				'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#876137',
+				'selectors' => [
+					'{{WRAPPER}}' => '--aew-media-cta-btn-bg-hover: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'button_color_hover',
+			[
+				'label'     => esc_html__( 'Text color (hover)', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FFFFFF',
+				'selectors' => [
+					'{{WRAPPER}}' => '--aew-media-cta-btn-text-hover: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'button_padding',
 			[
@@ -892,6 +916,8 @@ class Widget_Media_Cta extends Widget_Base {
 				'description_color'  => '--aew-media-cta-text',
 				'button_background'  => '--aew-media-cta-btn-bg',
 				'button_color'       => '--aew-media-cta-btn-text',
+				'button_background_hover' => '--aew-media-cta-btn-bg-hover',
+				'button_color_hover'      => '--aew-media-cta-btn-text-hover',
 			]
 		);
 		$style_attr = '' !== $color_vars ? ' style="' . esc_attr( $color_vars ) . '"' : '';

@@ -308,6 +308,13 @@ class Widget_Consultation_Form_V2 extends Widget_Base {
 			'selectors' => [ '{{WRAPPER}}' => '--aew-cfv2-btn-text: {{VALUE}};' ],
 		] );
 
+		$this->add_control( 'btn_text_hover', [
+			'label'     => 'Button text color (hover)',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#FFFFFF',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-cfv2-btn-text-hover: {{VALUE}};' ],
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -354,6 +361,7 @@ class Widget_Consultation_Form_V2 extends Widget_Base {
 				'btn_bg'            => '--aew-cfv2-btn-bg',
 				'btn_bg_hover'      => '--aew-cfv2-btn-bg-hover',
 				'btn_text'          => '--aew-cfv2-btn-text',
+				'btn_text_hover'    => '--aew-cfv2-btn-text-hover',
 			]
 		);
 		$style_attr = '' !== $color_vars ? ' style="' . esc_attr( $color_vars ) . '"' : '';

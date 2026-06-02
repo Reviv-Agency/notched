@@ -960,6 +960,18 @@ class Widget_Split_Media extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'btn_primary_text_color_hover',
+			[
+				'label'     => esc_html__( 'Primary text (hover)', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FFFFFF',
+				'selectors' => [
+					'{{WRAPPER}}' => '--aew-spm-btnp-text-hover: {{VALUE}};',
+				],
+			]
+		);
+
 		// Secondary colors.
 		$this->add_control(
 			'btn_secondary_color',
@@ -1097,6 +1109,7 @@ class Widget_Split_Media extends Widget_Base {
 				'btn_primary_bg'           => '--aew-spm-btnp-bg',
 				'btn_primary_bg_hover'     => '--aew-spm-btnp-bg-hover',
 				'btn_primary_text_color'   => '--aew-spm-btnp-text',
+				'btn_primary_text_color_hover' => '--aew-spm-btnp-text-hover',
 				'btn_secondary_color'      => '--aew-spm-btns',
 				'btn_secondary_hover_bg'   => '--aew-spm-btns-bg-hover',
 				'btn_secondary_hover_text' => '--aew-spm-btns-text-hover',

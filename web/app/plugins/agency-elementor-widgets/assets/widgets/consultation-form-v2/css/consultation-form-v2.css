@@ -242,6 +242,7 @@ button.aew-cfv2__btn {
     --aew-cfv2-btn-bg-hover,
     var(--notched-cta-hover)
   ) !important;
+  color: var(--aew-cfv2-btn-text-hover, var(--aew-cfv2-btn-text, #ffffff));
 }
 
 .aew-cfv2__btn[disabled] {

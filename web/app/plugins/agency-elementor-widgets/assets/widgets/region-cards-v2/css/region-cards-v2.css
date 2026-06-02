@@ -157,6 +157,7 @@
 .aew-rgcv2__btn:focus-visible {
   background-color: var(--aew-rgcv2-btn-bg-hover, var(--notched-cta-hover));
   border-color: var(--aew-rgcv2-btn-bg-hover, var(--notched-cta-hover));
+  color: var(--aew-rgcv2-btn-text-hover, var(--aew-rgcv2-btn-text, #FFFFFF));
 }
 
 .aew-rgcv2__btn:focus-visible {

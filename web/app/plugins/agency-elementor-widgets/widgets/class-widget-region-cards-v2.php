@@ -632,6 +632,18 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'btn_text_color_hover',
+			[
+				'label'     => esc_html__( 'Text color (hover)', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FFFFFF',
+				'selectors' => [
+					'{{WRAPPER}}' => '--aew-rgcv2-btn-text-hover: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -715,6 +727,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 				'btn_bg'          => '--aew-rgcv2-btn-bg',
 				'btn_bg_hover'    => '--aew-rgcv2-btn-bg-hover',
 				'btn_text_color'  => '--aew-rgcv2-btn-text',
+				'btn_text_color_hover' => '--aew-rgcv2-btn-text-hover',
 			]
 		);
 		if ( '' !== $color_vars ) {

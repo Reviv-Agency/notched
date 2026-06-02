@@ -788,6 +788,32 @@ class Widget_Hero extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'cta_background_hover',
+			[
+				'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#876137',
+				'selectors' => [
+					'{{WRAPPER}} .aew-hero__cta:hover'         => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .aew-hero__cta:focus-visible' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'cta_color_hover',
+			[
+				'label'     => esc_html__( 'Text color (hover)', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FFFFFF',
+				'selectors' => [
+					'{{WRAPPER}} .aew-hero__cta:hover'         => 'color: {{VALUE}};',
+					'{{WRAPPER}} .aew-hero__cta:focus-visible' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'cta_padding',
 			[

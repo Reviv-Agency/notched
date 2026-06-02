@@ -109,7 +109,7 @@
   transition: background-color 0.18s ease;
 }
 
-.aew-prsv2__cta:hover { background-color: var(--aew-prsv2-cta-bg-hover, var(--notched-cta-hover)); }
+.aew-prsv2__cta:hover { background-color: var(--aew-prsv2-cta-bg-hover, var(--notched-cta-hover)); color: var(--aew-prsv2-cta-text-hover, var(--aew-prsv2-cta-text, #fff)); }
 
 .aew-prsv2__cta svg {
   width: 18px;

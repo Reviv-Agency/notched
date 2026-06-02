@@ -695,6 +695,32 @@ class Widget_Heading_Band extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'button_background_hover',
+			[
+				'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#876137',
+				'selectors' => [
+					'{{WRAPPER}} .aew-heading-band__button:hover'         => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .aew-heading-band__button:focus-visible' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'button_color_hover',
+			[
+				'label'     => esc_html__( 'Text color (hover)', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FFFFFF',
+				'selectors' => [
+					'{{WRAPPER}} .aew-heading-band__button:hover'         => 'color: {{VALUE}};',
+					'{{WRAPPER}} .aew-heading-band__button:focus-visible' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'button_radius',
 			[

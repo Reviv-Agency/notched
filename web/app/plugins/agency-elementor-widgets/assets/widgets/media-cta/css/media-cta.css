@@ -133,12 +133,13 @@
 	line-height: 1.2;
 	text-decoration: none;
 	cursor: pointer;
-	transition: opacity 0.2s ease;
+	transition: background-color 0.18s ease, color 0.18s ease;
 }
 
 .aew-media-cta__button:hover,
 .aew-media-cta__button:focus-visible {
-	opacity: 0.9;
+	background-color: var(--aew-media-cta-btn-bg-hover, #876137);
+	color: var(--aew-media-cta-btn-text-hover, #ffffff);
 	text-decoration: none;
 }
 
