@@ -1,0 +1,219 @@
+/**
+ * Media CTA — Frame 18
+ */
+
+.elementor-column > .elementor-element-populated:has(.elementor-widget-agency-media-cta) {
+	padding: 0 !important;
+}
+
+.e-con:has(.elementor-widget-agency-media-cta) {
+	--padding-top: 0px;
+	--padding-right: 0px;
+	--padding-bottom: 0px;
+	--padding-left: 0px;
+}
+
+.aew-media-cta {
+	--aew-media-cta-bg: var(--aew-color-blue, #305b83);
+	--aew-media-cta-panel-bg: var(--aew-color-blue-light, #5796bb);
+	--aew-media-cta-image-height: 240px;
+	position: relative;
+	isolation: isolate;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.aew-media-cta::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	width: 100vw;
+	max-width: 100vw;
+	transform: translateX(-50%);
+	background-color: var(--aew-media-cta-bg);
+	z-index: -1;
+	pointer-events: none;
+}
+
+.aew-media-cta__inner {
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 56px 2.5rem !important;   /* X 2.5rem mobile/tablet */
+	box-sizing: border-box;
+}
+
+.aew-media-cta__row {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 20px;
+	width: 100%;
+}
+
+.aew-media-cta__panel {
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+.aew-media-cta__media {
+	flex: 0 0 auto;
+	width: 100%;
+	height: var(--aew-media-cta-image-height);
+	border-radius: 40px;
+	overflow: hidden;
+	line-height: 0;
+}
+
+.aew-media-cta__media img,
+.aew-media-cta__video {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.aew-media-cta__panel {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 24px;
+	width: 100%;
+	min-width: 0;
+	padding: 24px !important;
+	background-color: var(--aew-media-cta-panel-bg);
+	box-sizing: border-box;
+}
+
+.aew-media-cta__title {
+	margin: 0;
+	width: 100%;
+	font-family: var(--aew-font-heading, 'DM Serif Display', serif);
+	font-size: 32px !important;
+	font-weight: 400;
+	line-height: 1.15;
+	color: var(--aew-media-cta-title, var(--aew-color-white, #fff));
+}
+
+.aew-media-cta__body {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 100%;
+}
+
+.aew-media-cta__text {
+	margin: 0;
+	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-size: 14px !important;
+	font-weight: 400;
+	line-height: 1.5;
+	color: var(--aew-media-cta-text, var(--aew-color-white, #fff));
+}
+
+.aew-media-cta__button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	margin: 0;
+	padding: 16px 24px !important;
+	border: 0;
+	border-radius: 18px;
+	background-color: var(--aew-media-cta-btn-bg, var(--aew-color-yellow, #ebc543));
+	color: var(--aew-media-cta-btn-text, var(--aew-color-blue-dark, #252f37));
+	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-size: 18px !important;
+	font-weight: 700;
+	line-height: 1.2;
+	text-decoration: none;
+	cursor: pointer;
+	transition: opacity 0.2s ease;
+}
+
+.aew-media-cta__button:hover,
+.aew-media-cta__button:focus-visible {
+	opacity: 0.9;
+	text-decoration: none;
+}
+
+/* Optional arrow icon — inherits button text color. Base SVG points left, so
+   flip it so the default "after" arrow points right. */
+.aew-media-cta__btn-arrow {
+	flex: 0 0 auto;
+	width: 1.4em;
+	height: 1.4em;
+	margin-top: -2px;
+	transform: scaleX(-1);
+	transition: transform 0.18s ease;
+}
+
+.aew-media-cta__btn-arrow--before {
+	transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.aew-media-cta__button:hover .aew-media-cta__btn-arrow {
+		transform: scaleX(-1) translateX(3px);
+	}
+	.aew-media-cta__button:hover .aew-media-cta__btn-arrow--before {
+		transform: scaleX(1) translateX(-3px);
+	}
+}
+
+@media (min-width: 768px) {
+	.aew-media-cta {
+		--aew-media-cta-image-height: 500px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.aew-media-cta__inner {
+		padding: 120px 5rem !important;   /* X 5rem desktop */
+	}
+
+	.aew-media-cta__row {
+		flex-direction: row;
+		align-items: stretch;
+	}
+
+	.aew-media-cta__row--image-right {
+		flex-direction: row-reverse;
+	}
+
+	.aew-media-cta__media {
+		flex: 1 1 50%;
+		width: 50%;
+		max-width: 50%;
+		height: auto;
+		min-height: 100%;
+	}
+
+	.aew-media-cta__panel {
+		flex: 1 1 50%;
+		width: 50%;
+		max-width: 50%;
+		padding: 80px !important;
+	}
+
+	.aew-media-cta__title {
+		font-size: 48px !important;
+	}
+
+	.aew-media-cta__text {
+		font-size: 18px !important;
+	}
+
+	.aew-media-cta__media {
+		border-radius: 40px !important;
+	}
+
+	.aew-media-cta__panel {
+		border-radius: 40px !important;
+	}
+}

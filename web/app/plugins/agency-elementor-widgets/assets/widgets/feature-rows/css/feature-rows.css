@@ -1,0 +1,219 @@
+/**
+ * Feature Rows — Frame 25 (desktop zigzag), Frame 25 (1) (mobile stack)
+ */
+
+.elementor-column > .elementor-element-populated:has(.elementor-widget-agency-feature-rows) {
+	padding: 0 !important;
+}
+
+.e-con:has(.elementor-widget-agency-feature-rows) {
+	--padding-top: 0px;
+	--padding-right: 0px;
+	--padding-bottom: 0px;
+	--padding-left: 0px;
+}
+
+.aew-feature-rows {
+	--aew-feature-rows-bp: 768;
+	--aew-feature-rows-bg: transparent;
+	position: relative;
+	isolation: isolate;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.aew-feature-rows::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	width: 100vw;
+	max-width: 100vw;
+	transform: translateX(-50%);
+	background-color: var(--aew-feature-rows-bg);
+	z-index: -1;
+	pointer-events: none;
+}
+
+.aew-feature-rows__inner {
+	width: 100%;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.aew-feature-rows__list {
+	display: flex;
+	flex-direction: column;
+}
+
+.aew-feature-rows__item {
+	display: flex;
+	align-items: stretch;
+	box-sizing: border-box;
+}
+
+.aew-feature-rows__media {
+	flex: 1 1 50%;
+	min-width: 0;
+	line-height: 0;
+	display: flex;
+	align-self: stretch;
+}
+
+.aew-feature-rows__media img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	object-fit: cover;
+}
+
+.aew-feature-rows__body {
+	flex: 1 1 50%;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	align-self: stretch;
+	box-sizing: border-box;
+}
+
+.aew-feature-rows h3.aew-feature-rows__title {
+	margin: 0 0 1rem;
+	font-family: var(--aew-font-heading, 'DM Serif Display', serif);
+	font-size: 48px;
+	font-weight: 400;
+	line-height: 1.15;
+}
+
+.aew-feature-rows__text {
+	margin: 0 0 32px;
+}
+
+.aew-feature-rows__cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-weight: 700;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: opacity 0.2s ease;
+}
+
+.aew-feature-rows__cta:hover {
+	opacity: 0.92;
+}
+
+/* Desktop zigzag — image and copy block share row height */
+.aew-feature-rows:not(.aew-feature-rows--compact) .aew-feature-rows__item {
+	flex-direction: row;
+	align-items: stretch;
+}
+
+.aew-feature-rows:not(.aew-feature-rows--compact) .aew-feature-rows__media {
+	height: auto;
+}
+
+.aew-feature-rows:not(.aew-feature-rows--compact) .aew-feature-rows__media img {
+	flex: 1 1 auto;
+	min-height: 100%;
+}
+
+.aew-feature-rows:not(.aew-feature-rows--compact) .aew-feature-rows__item--image-right {
+	flex-direction: row;
+}
+
+.aew-feature-rows:not(.aew-feature-rows--compact) .aew-feature-rows__item--image-right .aew-feature-rows__body {
+	order: 1;
+}
+
+.aew-feature-rows:not(.aew-feature-rows--compact) .aew-feature-rows__item--image-right .aew-feature-rows__media {
+	order: 2;
+}
+
+.aew-feature-rows:not(.aew-feature-rows--compact) .aew-feature-rows__item--image-left {
+	flex-direction: row;
+}
+
+.aew-feature-rows:not(.aew-feature-rows--compact) .aew-feature-rows__item--image-left .aew-feature-rows__media {
+	order: 1;
+}
+
+.aew-feature-rows:not(.aew-feature-rows--compact) .aew-feature-rows__item--image-left .aew-feature-rows__body {
+	order: 2;
+}
+
+/* Mobile / compact stack */
+.aew-feature-rows--compact .aew-feature-rows__item {
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.aew-feature-rows--compact .aew-feature-rows__media,
+.aew-feature-rows--compact .aew-feature-rows__body {
+	flex: none;
+	width: 100%;
+	order: unset;
+}
+
+.aew-feature-rows--compact .aew-feature-rows__media {
+	display: block;
+}
+
+.aew-feature-rows--compact .aew-feature-rows__media img {
+	height: auto;
+	min-height: 0;
+}
+
+.aew-feature-rows--compact .aew-feature-rows__body {
+	align-items: stretch;
+}
+
+.aew-feature-rows--compact .aew-feature-rows__title {
+	margin-bottom: 0.75rem;
+}
+
+.aew-feature-rows--compact .aew-feature-rows__text {
+	margin-bottom: 32px;
+}
+
+.aew-feature-rows--compact.aew-feature-rows--cta-full-width .aew-feature-rows__cta {
+	width: 100%;
+	max-width: 100%;
+	white-space: normal;
+	text-align: center;
+}
+
+/* Elementor editor device preview */
+body.elementor-device-mobile .aew-feature-rows .aew-feature-rows__item,
+body[data-elementor-device-mode="mobile"] .aew-feature-rows .aew-feature-rows__item,
+body[data-elementor-device-mode="mobile_extra"] .aew-feature-rows .aew-feature-rows__item {
+	flex-direction: column;
+	align-items: stretch;
+}
+
+body.elementor-device-mobile .aew-feature-rows .aew-feature-rows__media,
+body[data-elementor-device-mode="mobile"] .aew-feature-rows .aew-feature-rows__media,
+body[data-elementor-device-mode="mobile_extra"] .aew-feature-rows .aew-feature-rows__media,
+body.elementor-device-mobile .aew-feature-rows .aew-feature-rows__body,
+body[data-elementor-device-mode="mobile"] .aew-feature-rows .aew-feature-rows__body,
+body[data-elementor-device-mode="mobile_extra"] .aew-feature-rows .aew-feature-rows__body {
+	flex: none;
+	width: 100%;
+	order: unset;
+}
+
+body.elementor-device-mobile .aew-feature-rows .aew-feature-rows__body,
+body[data-elementor-device-mode="mobile"] .aew-feature-rows .aew-feature-rows__body,
+body[data-elementor-device-mode="mobile_extra"] .aew-feature-rows .aew-feature-rows__body {
+	align-items: stretch;
+}
+
+@media (max-width: 768px) {
+	.aew-feature-rows h3.aew-feature-rows__title {
+		font-size: 24px;
+	}
+}

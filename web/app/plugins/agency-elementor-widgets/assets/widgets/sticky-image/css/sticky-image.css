@@ -1,0 +1,148 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   Sticky Image (Notched) — agency-sticky-image
+   A single image pinned to the page: sticky / fixed / absolute, anchored to a
+   corner with X/Y offsets. Position is driven by CSS custom properties emitted
+   by the widget's render() method; this file just consumes them.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Brand tokens ──────────────────────────────────────────────────────────────
+   Scoped to .aew-stim so they don't leak. Source of truth is design-system.md.
+   Update there first; copy here second. */
+.aew-stim {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #876137;
+  --notched-cta-hover:         #AA7D44;
+}
+
+/* ── Strip Elementor's column padding so the widget can float freely ─────────── */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-sticky-image),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-sticky-image),
+.e-con:has(.elementor-widget-agency-sticky-image) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+/* The badge is pinned (position: fixed) and floats over the page, so when the
+   sticky-image is the ONLY thing in its host section that section must take
+   ZERO space in normal flow. Otherwise the empty host renders a ~1px strip
+   that shows the page background as a thin seam (e.g. a white line between the
+   header and the hero below it). Scoped to :only-child so a section that mixes
+   the badge with real content is left alone. */
+.elementor-section:has(> .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-agency-sticky-image:only-child),
+.elementor-section:has(> .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-agency-sticky-image:only-child) > .elementor-container,
+.elementor-section:has(> .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-agency-sticky-image:only-child) .elementor-column,
+.elementor-section:has(> .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-agency-sticky-image:only-child) .elementor-widget-wrap,
+.e-con:has(> .e-con-inner > .elementor-widget-agency-sticky-image:only-child) {
+  height: 0 !important;
+  min-height: 0 !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  overflow: visible !important; /* keep the fixed badge visible */
+}
+
+/* The Elementor widget chain (element → container) must not render a box of its
+   own. For fixed/absolute modes the badge is taken out of flow, so the widget
+   should occupy zero space; for sticky the badge lives inside the container but
+   the container itself stays transparent and unpadded. */
+.elementor-widget-agency-sticky-image,
+.elementor-widget-agency-sticky-image > .elementor-widget-container {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+  line-height: 0;
+}
+
+/* The badge positions itself (fixed); the Elementor widget element must not
+   reserve any layout space or render a box. Collapse it to zero size and let
+   the badge overflow. */
+.elementor-widget-agency-sticky-image {
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+/* ── The badge ────────────────────────────────────────────────────────────────
+   FIXED to the viewport: it stays pinned and does NOT scroll away. Pinned to
+   the BOTTOM-LEFT on desktop. Offsets (--aew-stim-offx/offy) are written live
+   by the controls so dragging a slider moves it in the editor in real time. */
+.aew-stim {
+  --aew-stim-offx: 24px;     /* distance from the left edge (desktop)  */
+  --aew-stim-offy: 24px;     /* distance from the bottom edge (desktop) */
+  --aew-stim-m-offx: 16px;   /* distance from the right edge (mobile)   */
+  --aew-stim-m-offy: 16px;   /* distance from the bottom edge (mobile)  */
+
+  position: fixed;
+  display: inline-block;
+  z-index: 100;
+  pointer-events: none; /* clicks pass through the wrapper; the link/img re-enable */
+
+  /* Desktop: bottom-left. */
+  left:   var(--aew-stim-offx);
+  bottom: var(--aew-stim-offy);
+  right:  auto;
+  top:    auto;
+}
+
+.aew-stim__link,
+.aew-stim__img {
+  pointer-events: auto;
+}
+
+.aew-stim__img {
+  display: block;
+  width: 220px;          /* overridden by the Width control selector */
+  height: auto;
+  /* `.elementor img { max-width:100% }` (frontend.css) has higher specificity
+     and would otherwise resolve 100% against the zero-width collapsed wrapper,
+     hiding the badge. Force max-width off so the image keeps its set width. */
+  max-width: none !important;
+}
+
+.aew-stim__link {
+  display: inline-block;
+  line-height: 0;
+}
+
+/* ── Tablet & mobile (≤1024px): pin to the BOTTOM-RIGHT ──────────────────────── */
+@media (max-width: 1024px) {
+  .aew-stim {
+    right:  var(--aew-stim-m-offx);
+    bottom: var(--aew-stim-m-offy);
+    left:   auto;
+    top:    auto;
+  }
+
+  /* Hide entirely if the user turned it off for tablet/mobile. */
+  .aew-stim--m-hidden {
+    display: none !important;
+  }
+}
+
+/* ── Mobile (≤768px): shrink to the mobile width ─────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-stim__img {
+    width: var(--aew-stim-w-mobile, 130px) !important;
+  }
+}
+
+/* ── Focus visibility (don't strip outlines globally) ────────────────────────── */
+.aew-stim__link:focus-visible {
+  outline: 2px solid var(--notched-cta);
+  outline-offset: 3px;
+}

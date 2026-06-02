@@ -1,0 +1,479 @@
+/**
+ * Consultation Form V2 — Notched
+ * Left photo + overlapping white card holding a self-contained lead form
+ * (Name, Email, intl-tel Phone, Zip, Project, consent, brown CTA).
+ */
+
+/* Strip Elementor container padding + force full-bleed. */
+.elementor-column
+  > .elementor-element-populated:has(
+    .elementor-widget-agency-consultation-form-v2
+  ),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-consultation-form-v2),
+.e-con:has(.elementor-widget-agency-consultation-form-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+/* Reset section/container max-width so the band goes full-bleed; the widget's
+   own .aew-cfv2__inner re-applies the 1440px cap on the content. */
+.elementor-section:has(.elementor-widget-agency-consultation-form-v2),
+.elementor-section:has(.elementor-widget-agency-consultation-form-v2)
+  > .elementor-container,
+.e-con:has(.elementor-widget-agency-consultation-form-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-cfv2 so they don't leak. Source of truth is design-system.md.
+   Update there first; copy here second. */
+.aew-cfv2 {
+  --notched-cards: #ffffff;
+  --notched-background: #f6f0ec;
+  --notched-lines: #bfc0bf;
+  --notched-misc-accent: #3b413f;
+  --notched-secondary-cards: #7d958d;
+  --notched-secondary-bg: #2a4f41;
+  --notched-secondary-accent: #093328;
+  --notched-text: #141c19;
+  --notched-cta: #aa7d44;
+  --notched-cta-hover: #876137;
+}
+
+/* ── Outer block ─────────────────────────────────────────────────────────── */
+.aew-cfv2 {
+  background: var(--aew-cfv2-body-bg, var(--notched-background));
+  width: 100%;
+  position: relative;
+}
+
+.aew-cfv2 *,
+.aew-cfv2 *::before,
+.aew-cfv2 *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper: max-width + responsive X/Y padding (build guide §6.5) ──── */
+.aew-cfv2__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 64px 80px; /* banded widget: 64px Y / 80px X desktop */
+  position: relative;
+  display: grid;
+  /* Photo column is wider so the image reaches into the middle of the card. */
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.95fr);
+  /* The card defines the row height; the photo is then stretched to fill that
+     row and extended below it via a larger min-height + negative margins. */
+  align-items: stretch;
+}
+
+/* ── Left photo ──────────────────────────────────────────────────────────── */
+/* The photo extends 20px above the card and well below it. It stretches to the
+   grid row (= card height) and the negative margins pull it past the card's
+   top and bottom edges so the image visibly runs taller than the card. */
+.aew-cfv2__photo {
+  position: relative;
+  z-index: 1;
+  align-self: stretch;
+  height: auto; /* fill the stretched grid row (card height) */
+  margin-top: -40px;
+  margin-right: -35%;
+  margin-bottom: -40px; /* run the image below the bottom of the card */
+  min-height: 280px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 18px 48px rgba(20, 28, 25, 0.14);
+  /* Flex so the image grows to the box height without relying on a percentage
+     height resolving against an `auto`-sized (grid-stretched) parent. */
+  display: flex;
+}
+
+/* Flex child of the photo box: grow to fill its height (set by the grid
+   stretch) without a percentage height that would need a definite parent. */
+.aew-cfv2__photo-img {
+  display: block;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* ── Overlapping card ────────────────────────────────────────────────────── */
+.aew-cfv2__card {
+  position: relative;
+  z-index: 2;
+  background: var(--aew-cfv2-card-bg, var(--notched-cards));
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: 0 24px 60px rgba(20, 28, 25, 0.16);
+}
+
+/* ── Heading (specificity bump beats the kit's h1..h6 colour, gotcha #20) ─── */
+.aew-cfv2 .aew-cfv2__heading {
+  margin: 0 0 12px;
+  color: var(--aew-cfv2-heading, var(--notched-secondary-bg));
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 85%;
+  text-transform: uppercase;
+}
+
+.aew-cfv2__subtext {
+  margin: 0 0 28px;
+  color: var(--aew-cfv2-subtext, var(--notched-text));
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+}
+
+/* ── Form ────────────────────────────────────────────────────────────────── */
+.aew-cfv2__form {
+  margin: 0;
+}
+
+.aew-cfv2__hp {
+  position: absolute !important;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.aew-cfv2__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 20px;
+}
+
+.aew-cfv2__field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.aew-cfv2__field--half {
+  grid-column: span 1;
+}
+.aew-cfv2__field--full {
+  grid-column: 1 / -1;
+}
+.aew-cfv2__field--submit {
+  margin-top: 4px;
+}
+
+.aew-cfv2__label {
+  color: var(--aew-cfv2-form-label, var(--notched-text));
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.aew-cfv2__req {
+  color: var(--notched-cta);
+}
+
+/* Inputs + textarea */
+.aew-cfv2__input {
+  width: 100%;
+  background: var(--aew-cfv2-form-field-bg, var(--notched-cards));
+  border: 1px solid var(--aew-cfv2-form-field-border, var(--notched-lines));
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  color: var(--notched-text);
+  min-height: 46px;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.aew-cfv2__textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.aew-cfv2__input:focus {
+  outline: none;
+  border-color: var(--notched-cta);
+  box-shadow: 0 0 0 3px rgba(170, 125, 68, 0.18);
+}
+
+.aew-cfv2__input[aria-invalid="true"] {
+  border-color: #c0392b;
+}
+
+/* ── Submit button (Notched CTA) ─────────────────────────────────────────── */
+.aew-cfv2__btn,
+button.aew-cfv2__btn {
+  width: 100%;
+  border: 0 !important;
+  background: var(--aew-cfv2-btn-bg, var(--notched-cta)) !important;
+  background-color: var(--aew-cfv2-btn-bg, var(--notched-cta)) !important;
+  color: var(--aew-cfv2-btn-text, #ffffff);
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 85%;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 20px 24px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  appearance: none;
+  transition:
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.aew-cfv2__btn:hover,
+.aew-cfv2__btn:focus-visible {
+  background: var(--aew-cfv2-btn-bg-hover, var(--notched-cta-hover)) !important;
+  background-color: var(
+    --aew-cfv2-btn-bg-hover,
+    var(--notched-cta-hover)
+  ) !important;
+}
+
+.aew-cfv2__btn[disabled] {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+/* ── Consent checkbox ────────────────────────────────────────────────────── */
+.aew-cfv2__consent {
+  margin-top: 4px;
+}
+
+.aew-cfv2__consent-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Lato", sans-serif;
+  font-size: 13px;
+  color: var(--notched-text);
+  cursor: pointer;
+}
+
+.aew-cfv2__checkbox {
+  accent-color: var(--notched-cta);
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+/* ── Status message ──────────────────────────────────────────────────────── */
+.aew-cfv2__status {
+  margin: 16px 0 0;
+  font-family: "Lato", sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.aew-cfv2__status[hidden] {
+  display: none;
+}
+.aew-cfv2__status--ok {
+  color: var(--notched-secondary-bg);
+}
+.aew-cfv2__status--error {
+  color: #c0392b;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * INTL-TEL phone field (flag dropdown), injected by the widget JS.
+ * ───────────────────────────────────────────────────────────────────────── */
+.aew-cfv2-tel {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Reset Elementor's <button> styling (gotcha #2) — it paints the brown CTA
+   background + box-shadow on every <button>, including this flag toggle. */
+.aew-cfv2-tel__flag-btn,
+button.aew-cfv2-tel__flag-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  height: 46px; /* match .aew-cfv2__input min-height exactly */
+  /* Match the inputs' actual rendered border. Elementor's form styling repaints
+     the inputs' border #666 (overriding the brand token), so hardcode the same
+     colour here — using the token alone leaves the flag button visibly lighter. */
+  border: 1px solid #666 !important;
+  border-right: 0 !important;
+  border-radius: 8px 0 0 8px;
+  background: var(--aew-cfv2-form-field-bg, #ffffff) !important;
+  background-color: var(--aew-cfv2-form-field-bg, #ffffff) !important;
+  padding: 0 10px;
+  cursor: pointer;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--notched-text) !important;
+  text-transform: none;
+  letter-spacing: normal;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.aew-cfv2-tel__flag-emoji {
+  font-size: 18px;
+  line-height: 1;
+}
+.aew-cfv2-tel__caret {
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+/* When upgraded, the tel input loses its left radius to butt the flag. */
+.aew-cfv2-tel .aew-cfv2__input {
+  border-radius: 0 8px 8px 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.aew-cfv2-tel__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 30;
+  width: 280px;
+  background: #ffffff;
+  border: 1px solid var(--notched-lines);
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(20, 28, 25, 0.18);
+  padding: 4px;
+  margin: 0;
+}
+
+.aew-cfv2-tel__menu[hidden] {
+  display: none;
+}
+
+/* Pinned search box at the top of the dropdown. */
+.aew-cfv2-tel__search {
+  width: 100%;
+  border: 1px solid #666;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 4px;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  color: var(--notched-text);
+  background: #ffffff;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.aew-cfv2-tel__search:focus {
+  outline: none;
+  border-color: var(--notched-cta);
+  box-shadow: 0 0 0 3px rgba(170, 125, 68, 0.18);
+}
+
+/* Scrollable option list (the menu itself stays put so search is pinned). */
+.aew-cfv2-tel__list {
+  max-height: 220px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aew-cfv2-tel__empty {
+  padding: 10px;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  color: var(--notched-text);
+  opacity: 0.6;
+  text-align: center;
+}
+
+.aew-cfv2-tel__option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  color: var(--notched-text);
+}
+
+.aew-cfv2-tel__option:hover,
+.aew-cfv2-tel__option--active {
+  background: var(--notched-background);
+}
+.aew-cfv2-tel__option-dial {
+  margin-left: auto;
+  opacity: 0.6;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * RESPONSIVE — desktop-first; step down at 1024 (tablet) and 768 (mobile).
+ * Mobile stacks the photo on top, then the card/form below it (no overlap).
+ * ───────────────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-cfv2__inner {
+    padding: 64px 40px;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  /* Stacked: reset the desktop offsets back to a normal photo. margin-right
+     must be reset too, else the -35% desktop bleed overflows to the right.
+     width:100% + min-width:0 keep the flex box from being widened by the
+     image's intrinsic width once it's no longer constrained by a grid track. */
+  .aew-cfv2__photo {
+    height: auto;
+    width: 100%;
+    min-width: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    aspect-ratio: 16 / 7;
+  }
+  /* Don't let the image's intrinsic size push the flex container wider. */
+  .aew-cfv2__photo-img {
+    max-width: 100%;
+  }
+  .aew-cfv2__card {
+    margin-left: 0; /* no overlap once stacked */
+    padding: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aew-cfv2__inner {
+    padding: 32px 40px;
+  }
+  .aew-cfv2 .aew-cfv2__heading {
+    font-size: 32px;
+  }
+  .aew-cfv2__subtext {
+    font-size: 14px;
+  }
+  .aew-cfv2__card {
+    padding: 28px 24px;
+  }
+  .aew-cfv2__fields {
+    grid-template-columns: 1fr;
+  }
+  .aew-cfv2__field--half {
+    grid-column: 1 / -1;
+  }
+  .aew-cfv2__btn {
+    font-size: 16px;
+    padding: 18px 24px 16px;
+  } /* mobile pt 18px */
+}

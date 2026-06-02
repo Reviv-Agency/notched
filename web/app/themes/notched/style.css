@@ -1,0 +1,32 @@
+/*
+Theme Name: Notched
+Theme URI: https://notched.com
+Description: Child theme of Hello Elementor for notched.com. Layout and components live in Elementor and the Agency Elementor Widgets plugin; this theme stays intentionally minimal.
+Author: Notched
+Version: 1.0.0
+Template: hello-elementor
+Text Domain: notched
+*/
+
+/* ── Notched global overrides ──────────────────────────────────────────────
+   Brand source of truth: design-system.md. Keep these minimal — layout and
+   components live in Elementor + the Agency Elementor Widgets plugin. */
+
+/* Boxed sections: widen Elementor's default content width 1360 → 1440 to match
+   the V2 widget stack (all V2 widgets use a 1440px inner wrapper).
+   Elementor's global kit (post-7.css) emits the identical selector at 1360 and
+   loads AFTER this file, so we raise specificity (html prefix) to win, and also
+   override the flex-container variable used by .e-con boxed containers. */
+html .elementor-section.elementor-section-boxed > .elementor-container {
+	max-width: 1440px;
+}
+
+html body.elementor-page {
+	--container-max-width: 1440px;
+}
+
+/* Page body background = design-system "Background" (#F6F0EC). */
+body {
+	background-color: #F6F0EC;
+}
+

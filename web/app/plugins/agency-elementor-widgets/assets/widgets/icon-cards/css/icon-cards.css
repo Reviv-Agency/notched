@@ -1,0 +1,157 @@
+/**
+ * Icon Cards — Notched
+ * Row of dark-green cards (check icon + bold Teko statement).
+ * Desktop = equal-width row; mobile = stacked.
+ */
+
+/* Strip Elementor container padding + force full-bleed so the section band
+   spans edge-to-edge (the inner wrapper re-applies the max-width). */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-icon-cards),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-icon-cards),
+.e-con:has(.elementor-widget-agency-icon-cards) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+.elementor-section:has(.elementor-widget-agency-icon-cards),
+.elementor-section:has(.elementor-widget-agency-icon-cards) > .elementor-container,
+.e-con:has(.elementor-widget-agency-icon-cards) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-iccr so they don't leak into other widgets. Source of truth
+   is design-system.md. Update there first; copy here second. */
+.aew-iccr {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Outer block ─────────────────────────────────────────────────────────── */
+.aew-iccr {
+  width: 100%;
+  background-color: var(--notched-background);
+}
+
+.aew-iccr *,
+.aew-iccr *::before,
+.aew-iccr *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper (max-width + X padding via _padding control) ──────────── */
+.aew-iccr__inner {
+  max-width: 1440px;          /* desktop max width */
+  margin: 0 auto;
+  padding: 64px 80px;         /* desktop Y 64 / X 5rem */
+}
+
+/* ── Grid (equal-width row) ──────────────────────────────────────────────── */
+.aew-iccr__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.aew-iccr__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 28px;
+  min-height: 320px;
+  padding: 40px 32px;
+  background-color: var(--notched-secondary-bg);
+  border-radius: 24px;        /* design-system card radius */
+}
+
+/* ── Icon ────────────────────────────────────────────────────────────────── */
+.aew-iccr__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  flex: none;
+}
+
+.aew-iccr__icon svg,
+.aew-iccr__icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.aew-iccr__icon svg {
+  fill: var(--notched-secondary-cards);
+}
+
+/* ── Text (Teko SemiBold — design-system H3 scale) ──────────────────────── */
+.aew-iccr__text {
+  margin: 0;
+  max-width: 100%;
+  color: var(--notched-background);
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 0.85;
+  text-transform: uppercase;
+  /* Allow long statements to wrap inside the card instead of clipping. */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* ── Responsive: tablet ──────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-iccr__inner {
+    padding-left: 40px;  /* tablet X: 2.5rem */
+    padding-right: 40px;
+  }
+
+  .aew-iccr__card {
+    min-height: 260px;
+  }
+
+  .aew-iccr__text {
+    font-size: 32px;          /* design-system H3 desktop-down */
+  }
+}
+
+/* ── Responsive: mobile (stack) ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-iccr__inner {
+    padding: 32px 40px;       /* mobile Y 32 / X 2.5rem */
+  }
+
+  .aew-iccr__grid {
+    grid-template-columns: 1fr;   /* stack */
+    gap: 16px;                    /* design-system stacking gap */
+  }
+
+  .aew-iccr__card {
+    min-height: 220px;
+    border-radius: 20px;          /* design-system mobile card radius */
+  }
+
+  .aew-iccr__text {
+    font-size: 28px;
+  }
+}

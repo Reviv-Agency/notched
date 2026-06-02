@@ -1,0 +1,410 @@
+/**
+ * Split Media — full-bleed background + copy overlay (desktop & mobile)
+ */
+
+.elementor-column > .elementor-element-populated:has(.elementor-widget-agency-split-media) {
+	padding: 0 !important;
+}
+
+.e-con:has(.elementor-widget-agency-split-media) {
+	--padding-top: 0px;
+	--padding-right: 0px;
+	--padding-bottom: 0px;
+	--padding-left: 0px;
+}
+
+.aew-split-media {
+	--aew-split-media-bp: 1024;
+	--aew-split-media-bg: transparent;
+	position: relative;
+	isolation: isolate;
+	width: 100%;
+	overflow: visible;
+	box-sizing: border-box;
+}
+
+.elementor-widget-agency-split-media .elementor-widget-container {
+	overflow: visible;
+}
+
+.aew-split-media::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	width: 100vw;
+	max-width: 100vw;
+	transform: translateX(-50%);
+	background-color: var(--aew-split-media-bg);
+	z-index: -1;
+	pointer-events: none;
+}
+
+.aew-split-media__inner {
+	width: 100%;
+	max-width: none !important;
+	margin: 0 auto;
+	overflow: visible;
+	box-sizing: border-box;
+}
+
+.aew-split-media__row {
+	position: relative;
+	display: flex;
+	align-items: stretch;
+	width: 100%;
+	max-width: 1440px;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: visible;
+	box-sizing: border-box;
+	min-height: 320px;
+}
+
+/* Background image layer — viewport-wide behind copy */
+.aew-split-media__bg {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	z-index: 0;
+	width: 100vw;
+	max-width: 100vw;
+	height: 100%;
+	transform: translateX(-50%);
+	box-sizing: border-box;
+	padding: 0;
+	pointer-events: none;
+	background-image: var(--aew-split-media-image-url, none);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.aew-split-media__bg img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+/* Copy panel over background */
+.aew-split-media__body {
+	position: relative;
+	z-index: 1;
+	flex: 0 0 50%;
+	width: 50%;
+	max-width: 50%;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	box-sizing: border-box;
+	background-color: var(--aew-spm-card-bg, #F8F5F1);
+}
+
+.aew-split-media h2.aew-split-media__title {
+	margin: 0 0 24px;
+	font-family: var(--aew-font-heading, 'DM Serif Display', serif);
+	font-size: 64px;
+	font-weight: 400;
+	line-height: 1.15;
+	color: var(--aew-spm-title, #252F37);
+}
+
+.aew-split-media__paragraphs {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 100%;
+}
+
+.aew-split-media__text {
+	margin: 0;
+	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-size: 18px;
+	line-height: 1.5;
+	color: var(--aew-spm-text, #252F37);
+}
+
+/* ── Buttons (design-system: Teko SemiBold 20px/85%, pad 20/24/16, radius 8) ─ */
+.aew-split-media__buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin-top: 32px;
+	width: 100%;
+}
+
+.aew-split-media__btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	text-decoration: none;
+	text-align: center;
+	font-family: 'Teko', sans-serif;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 0.85;
+	text-transform: uppercase;
+	padding: 20px 24px 16px;
+	border-radius: 8px;
+	border: 2px solid transparent;
+	cursor: pointer;
+	transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+/* Optional arrow icon — inherits button text color, nudged to optically
+   center with the cap height of the Teko label. */
+.aew-split-media__btn-arrow {
+	flex: 0 0 auto;
+	width: 1.4em;
+	height: 1.4em;
+	margin-top: -2px;
+	transition: transform 0.18s ease;
+	/* Base SVG points left; flip so the default "after" arrow points right. */
+	transform: scaleX(-1);
+}
+
+/* Arrow placed before the label points left (back toward the label). */
+.aew-split-media__btn-arrow--before {
+	transform: scaleX(1);
+}
+
+/* Subtle slide on hover (suppressed for reduced-motion users). */
+@media (prefers-reduced-motion: no-preference) {
+	.aew-split-media__btn:hover .aew-split-media__btn-arrow {
+		transform: scaleX(-1) translateX(3px);
+	}
+	.aew-split-media__btn:hover .aew-split-media__btn-arrow--before {
+		transform: scaleX(1) translateX(-3px);
+	}
+}
+
+.aew-split-media__btn--primary {
+	background-color: var(--aew-spm-btnp-bg, #AA7D44);
+	border-color: var(--aew-spm-btnp-bg, #AA7D44);
+	color: var(--aew-spm-btnp-text, #FFFFFF);
+}
+
+.aew-split-media__btn--primary:hover,
+.aew-split-media__btn--primary:focus-visible {
+	background-color: var(--aew-spm-btnp-bg-hover, #876137);
+	border-color: var(--aew-spm-btnp-bg-hover, #876137);
+	color: var(--aew-spm-btnp-text, #FFFFFF);
+}
+
+.aew-split-media__btn--secondary {
+	background-color: transparent;
+	border-color: var(--aew-spm-btns, #252F37);
+	color: var(--aew-spm-btns, #252F37);
+}
+
+.aew-split-media__btn--secondary:hover,
+.aew-split-media__btn--secondary:focus-visible {
+	background-color: var(--aew-spm-btns-bg-hover, #252F37);
+	border-color: var(--aew-spm-btns-bg-hover, #252F37);
+	color: var(--aew-spm-btns-text-hover, #FFFFFF);
+}
+
+/* Mobile: buttons go full-width stacked for easier tapping. */
+@media (max-width: 768px) {
+	.aew-split-media__buttons {
+		flex-direction: column;
+		align-items: stretch;
+	}
+}
+
+/* Desktop — bg is out of flow; row only has .__body, so justify-content pins copy left/right */
+.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-left {
+	justify-content: flex-start;
+}
+
+.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-right {
+	justify-content: flex-end;
+}
+
+.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-left .aew-split-media__body {
+	margin: 40px 0 40px 40px;
+}
+
+.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-right .aew-split-media__body {
+	margin: 40px 40px 40px 0;
+}
+
+/* Mobile / compact — same overlay as desktop; copy card centered on the image */
+.aew-split-media--compact .aew-split-media__row {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: min(85vh, 720px);
+	padding: 24px 16px;
+	box-sizing: border-box;
+}
+
+.aew-split-media--compact .aew-split-media__row--copy-left,
+.aew-split-media--compact .aew-split-media__row--copy-right {
+	justify-content: center;
+	align-items: center;
+}
+
+.aew-split-media--compact .aew-split-media__body {
+	position: relative;
+	z-index: 1;
+	flex: 0 0 auto;
+	width: 100%;
+	max-width: 100%;
+	margin: 0 auto;
+	align-self: center;
+	align-items: flex-start;
+	text-align: left;
+}
+
+.aew-split-media--compact .aew-split-media__row--copy-left .aew-split-media__body,
+.aew-split-media--compact .aew-split-media__row--copy-right .aew-split-media__body {
+	margin: 0 auto;
+}
+
+.aew-split-media--compact .aew-split-media__paragraphs {
+	align-items: flex-start;
+	width: 100%;
+}
+
+.aew-split-media--compact h2.aew-split-media__title,
+.aew-split-media--compact .aew-split-media__text {
+	text-align: left;
+}
+
+/* Elementor editor device preview — centered overlay on tablet/mobile */
+body.elementor-device-tablet .aew-split-media .aew-split-media__row,
+body.elementor-device-mobile .aew-split-media .aew-split-media__row,
+body[data-elementor-device-mode="tablet"] .aew-split-media .aew-split-media__row,
+body[data-elementor-device-mode="tablet_extra"] .aew-split-media .aew-split-media__row,
+body[data-elementor-device-mode="mobile"] .aew-split-media .aew-split-media__row,
+body[data-elementor-device-mode="mobile_extra"] .aew-split-media .aew-split-media__row {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: min(85vh, 720px);
+	padding: 40px 40px 80px 40px;
+}
+
+body.elementor-device-mobile .aew-split-media .aew-split-media__row {
+	padding: 40px 40px 80px 40px;
+}
+
+body.elementor-device-tablet .aew-split-media .aew-split-media__body,
+body.elementor-device-mobile .aew-split-media .aew-split-media__body,
+body[data-elementor-device-mode="tablet"] .aew-split-media .aew-split-media__body,
+body[data-elementor-device-mode="tablet_extra"] .aew-split-media .aew-split-media__body,
+body[data-elementor-device-mode="mobile"] .aew-split-media .aew-split-media__body,
+body[data-elementor-device-mode="mobile_extra"] .aew-split-media .aew-split-media__body {
+	flex: 0 0 auto;
+	width: 100%;
+	max-width: 100%;
+	margin: 0 auto;
+	align-self: center;
+}
+
+body.elementor-device-tablet .aew-split-media h2.aew-split-media__title,
+body.elementor-device-mobile .aew-split-media h2.aew-split-media__title,
+body[data-elementor-device-mode="tablet"] .aew-split-media h2.aew-split-media__title,
+body[data-elementor-device-mode="tablet_extra"] .aew-split-media h2.aew-split-media__title,
+body[data-elementor-device-mode="mobile"] .aew-split-media h2.aew-split-media__title,
+body[data-elementor-device-mode="mobile_extra"] .aew-split-media h2.aew-split-media__title,
+body.elementor-device-tablet .aew-split-media .aew-split-media__text,
+body.elementor-device-mobile .aew-split-media .aew-split-media__text,
+body[data-elementor-device-mode="tablet"] .aew-split-media .aew-split-media__text,
+body[data-elementor-device-mode="tablet_extra"] .aew-split-media .aew-split-media__text,
+body[data-elementor-device-mode="mobile"] .aew-split-media .aew-split-media__text,
+body[data-elementor-device-mode="mobile_extra"] .aew-split-media .aew-split-media__text {
+	text-align: left;
+}
+
+.aew-split-media__inner {
+	padding: 0 !important;
+}
+
+/* Mobile/tablet — overlay + centered copy card (matches desktop pattern) */
+@media (max-width: 1024px) {
+	.aew-split-media__row {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		min-height: min(85vh, 720px);
+		padding: 24px 16px;
+		box-sizing: border-box;
+	}
+
+	.aew-split-media__row--copy-left,
+	.aew-split-media__row--copy-right {
+		justify-content: center;
+		align-items: center;
+	}
+
+	.aew-split-media__body {
+		flex: 0 0 auto;
+		width: 100%;
+		max-width: 100%;
+		margin: 0 auto;
+		align-self: center;
+		align-items: flex-start;
+		text-align: left;
+	}
+
+	.aew-split-media__row--copy-left .aew-split-media__body,
+	.aew-split-media__row--copy-right .aew-split-media__body {
+		margin: 0 auto;
+	}
+
+	.aew-split-media__paragraphs {
+		align-items: flex-start;
+		width: 100%;
+	}
+
+	.aew-split-media h2.aew-split-media__title,
+	.aew-split-media__text {
+		font-size: inherit;
+		text-align: left;
+	}
+
+	.aew-split-media h2.aew-split-media__title {
+		font-size: 32px;
+	}
+
+	.aew-split-media__text {
+		font-size: 14px;
+	}
+
+	.aew-split-media__inner {
+		padding: 0 !important;
+	}
+}
+
+/* Tablet — title 32px (768px–1024px; overrides Elementor 64px post CSS) */
+@media (min-width: 768px) and (max-width: 1024px) {
+	.aew-split-media h2.aew-split-media__title {
+		font-size: 32px !important;
+	}
+}
+
+@media (max-width: 767px) {
+	.aew-split-media__inner {
+		padding: 0 !important;
+	}
+
+	.aew-split-media__row,
+	.aew-split-media--compact .aew-split-media__row {
+		padding: 40px 40px 80px 40px;
+	}
+
+	.aew-split-media__body {
+		padding: 24px !important;
+	}
+}

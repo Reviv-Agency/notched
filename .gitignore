@@ -1,0 +1,46 @@
+# Application
+# Third-party / Composer-managed plugins are ignored; our custom plugin is tracked.
+web/app/plugins/*
+!web/app/plugins/.gitkeep
+!web/app/plugins/agency-elementor-widgets/
+# Third-party themes are ignored; our custom child theme is tracked.
+web/app/themes/twentytwentyfive/
+web/app/themes/hello-elementor/
+# Ignore Composer-installed mu-plugin directories; single-file mu-plugins are tracked intentionally
+web/app/mu-plugins/*/
+web/app/upgrade
+web/app/uploads/*
+!web/app/uploads/.gitkeep
+web/app/cache/*
+
+# WordPress
+web/wp
+web/.htaccess
+
+# Logs
+*.log
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Composer
+/vendor
+auth.json
+
+# PHPUnit/Pest
+phpunit.xml
+.phpunit.result.cache
+.phpunit.cache
+
+# WP-CLI
+wp-cli.local.yml
+
+# Migration export (large, one-off reference — kept out of the repo)
+wix-export/
+
+# Tooling scratch / screenshots
+.playwright-mcp/
+*.png
+.DS_Store

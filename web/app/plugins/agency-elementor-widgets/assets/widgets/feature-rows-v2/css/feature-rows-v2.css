@@ -1,0 +1,299 @@
+/**
+ * Feature Rows V2 — Notched
+ * A flat list of items (Image or Text Box) grouped into rows of 2 or 3 (PHP
+ * builds the row markup from a "Start new row" toggle). Images stretch to the
+ * tallest item in their row; text boxes are configurable per item. Full-bleed
+ * background owned by the widget.
+ */
+
+/* Strip Elementor container padding + force full-bleed, even inside a "Boxed"
+   section (which caps the inner .elementor-container). */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-feature-rows-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-feature-rows-v2),
+.e-con:has(.elementor-widget-agency-feature-rows-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+.elementor-section:has(.elementor-widget-agency-feature-rows-v2),
+.elementor-section:has(.elementor-widget-agency-feature-rows-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-feature-rows-v2),
+.e-con:has(.elementor-widget-agency-feature-rows-v2) > .e-con-inner {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-frv2 so they don't leak into other widgets. Source of truth
+   is design-system.md. Update there first; copy here second. */
+.aew-frv2 {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Outer block (full-bleed) ────────────────────────────────────────────── */
+.aew-frv2 {
+  background: var(--aew-frv2-bg, var(--notched-background));
+  width: 100%;
+  position: relative;
+}
+
+.aew-frv2 *,
+.aew-frv2 *::before,
+.aew-frv2 *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper — max-width + responsive X/Y padding ──────────────────── */
+.aew-frv2__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 64px 80px;        /* banded widget: Y 64 desktop, X 80 desktop */
+}
+
+/* ── Section header (heading left, pill button right) ────────────────────── */
+.aew-frv2__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+/* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) (gotcha #20). */
+.aew-frv2 .aew-frv2__heading {
+  margin: 0;
+  color: var(--aew-frv2-heading, var(--notched-cta));
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 85%;
+  text-transform: uppercase;
+}
+
+.aew-frv2__header-btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--aew-frv2-hbtn-border, var(--notched-background));
+  /* Empty bg control → transparent (outlined). Set it for a filled pill. */
+  background-color: var(--aew-frv2-hbtn-bg, transparent);
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 16px 24px 12px;
+  border-radius: 999px;
+  color: var(--aew-frv2-hbtn-text, var(--notched-background));
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 85%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.aew-frv2__header-btn:hover,
+.aew-frv2__header-btn:focus-visible {
+  background-color: var(--aew-frv2-hbtn-bg-hover, var(--notched-background));
+  color: var(--aew-frv2-hbtn-text-hover, var(--notched-secondary-accent));
+}
+
+.aew-frv2__header-btn-arrow {
+  flex: none;
+  width: 22px;
+  height: 14px;
+}
+
+/* ── Rows & items ────────────────────────────────────────────────────────── */
+.aew-frv2__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.aew-frv2__row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* base = 3-up; cols modifier overrides */
+  gap: 16px;
+  align-items: stretch;     /* images & boxes share the row's full height */
+}
+
+/* Desktop column counts (≥1025px owns these via the base + ≤1024 step-down). */
+.aew-frv2__row--cols-2 { grid-template-columns: repeat(2, 1fr); }
+.aew-frv2__row--cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+.aew-frv2__item {
+  display: flex;
+  min-width: 0;             /* let grid items shrink instead of overflowing */
+  min-height: 0;            /* don't let an image's intrinsic height grow the row */
+  align-self: stretch;      /* fill the row's full height (set by the tallest) */
+  /* The child (media/box) then stretches to fill this item. */
+}
+
+/* ── Image item ──────────────────────────────────────────────────────────── */
+/* The media cell takes its height from the row, so an image matches the height
+   of the text box sharing its row (and vice-versa). --aew-frv2-img-floor is a
+   FLOOR only — it keeps an image-only row (no text box to set the height) from
+   collapsing, but it must NOT exceed a sibling box's height, so it stays small
+   enough to lose to a real text box. */
+.aew-frv2__media {
+  width: 100%;
+  height: 100%;             /* fill the stretched item → equals the row height */
+  min-height: var(--aew-frv2-img-floor, 280px);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.aew-frv2__img {
+  display: block;
+  width: 100%;
+  height: 100%;             /* fill the media cell */
+  object-fit: cover;        /* cover to the matched height; crop overflow */
+  object-position: center center;
+}
+
+/* ── Text box item ───────────────────────────────────────────────────────── */
+/* Alignment is driven entirely by the --aew-frv2-box-align var that render()
+   inlines on the box (editor preview and live page set the SAME var, so they
+   never disagree — the earlier "centered in editor, left on live" bug came from
+   relying on text-align alone, which a kit `p { text-align }` rule could beat).
+   We map the var → both flex cross-axis alignment AND text-align on the actual
+   text elements, scoped under the widget for specificity. */
+.aew-frv2__box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* vertically center copy within a stretched box */
+  align-items: stretch;     /* base; overridden per alignment below */
+  background-color: var(--notched-secondary-accent);
+  border-radius: 24px;
+  padding: 120px 20px;      /* default; the Box padding control overrides */
+}
+
+/* Text alignment on the real text elements (wins over kit p/h rules). */
+.aew-frv2 .aew-frv2__box           { text-align: left; }
+.aew-frv2 .aew-frv2__box .aew-frv2__title,
+.aew-frv2 .aew-frv2__box .aew-frv2__body,
+.aew-frv2 .aew-frv2__box .aew-frv2__body * {
+  text-align: inherit;
+}
+
+/* center */
+.aew-frv2__box[style*="box-align:center"] { align-items: center; text-align: center; }
+/* right */
+.aew-frv2__box[style*="box-align:right"]  { align-items: flex-end; text-align: right; }
+/* left (explicit, in case a parent changed it) */
+.aew-frv2__box[style*="box-align:left"]   { align-items: flex-start; text-align: left; }
+
+/* Button follows the box alignment too (it's a shrink-wrapped flex item). */
+.aew-frv2__box[style*="box-align:center"] .aew-frv2__btn { align-self: center; }
+.aew-frv2__box[style*="box-align:right"]  .aew-frv2__btn { align-self: flex-end; }
+.aew-frv2__box[style*="box-align:left"]   .aew-frv2__btn { align-self: flex-start; }
+
+/* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) (gotcha #20). */
+.aew-frv2 .aew-frv2__title {
+  margin: 0 0 16px;
+  color: var(--aew-frv2-title, #FFFFFF);
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 85%;
+  text-transform: uppercase;
+}
+
+.aew-frv2__body {
+  margin: 0 0 24px;
+  color: var(--aew-frv2-text, #FFFFFF);
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+}
+
+.aew-frv2__body :last-child { margin-bottom: 0; }
+.aew-frv2__body p { margin: 0 0 1em; }
+.aew-frv2__body p:last-child { margin-bottom: 0; }
+
+/* ── Button (reset Elementor's bleed, then paint) ────────────────────────── */
+.aew-frv2__btn {
+  align-self: flex-start;   /* shrink-wrap; alignment handled above */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 20px 24px 16px;  /* design-system button padding (top/x/bottom) */
+  border-radius: 8px;
+  background-color: var(--aew-frv2-btn-bg, var(--notched-cta));
+  color: var(--aew-frv2-btn-text, #FFFFFF);
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 85%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.aew-frv2__btn:hover,
+.aew-frv2__btn:focus-visible {
+  background-color: var(--aew-frv2-btn-bg-hover, var(--notched-cta-hover));
+  color: var(--aew-frv2-btn-text-hover, #FFFFFF);
+}
+
+/* ── Responsive: 2-up on tablet, single column on mobile ─────────────────── */
+@media (max-width: 1024px) {
+  .aew-frv2__inner { padding: 64px 40px; }
+
+  /* All multi-column rows collapse to 2-up on tablet. */
+  .aew-frv2__row,
+  .aew-frv2__row--cols-2,
+  .aew-frv2__row--cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .aew-frv2 .aew-frv2__title { font-size: 32px; }
+}
+
+@media (max-width: 768px) {
+  .aew-frv2__inner { padding: 32px 40px; }
+
+  /* Single column — everything stacks in source order. */
+  .aew-frv2__row,
+  .aew-frv2__row--cols-2,
+  .aew-frv2__row--cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stacked single column: no sibling to match, so give images a sensible
+     standalone height (height:100% has no definite row to resolve against). */
+  .aew-frv2__media { height: auto; min-height: var(--aew-frv2-img-floor, 240px); }
+  .aew-frv2__img   { height: 100%; min-height: inherit; }
+  .aew-frv2__box   { border-radius: 20px; padding: 40px 20px; }
+
+  .aew-frv2 .aew-frv2__title { font-size: 24px; }
+  .aew-frv2__body { font-size: 14px; }
+  .aew-frv2__btn  { font-size: 16px; padding: 18px 24px 16px; }
+}

@@ -1,0 +1,371 @@
+/**
+ * Footer V2 — Notched
+ * Forest hero band + dark green body (logo + MENU + QUICK LINKS + ADDRESS/CONTACT)
+ * + bottom bar (copyright + legal links).
+ */
+
+/* Strip Elementor container padding + force full-bleed so the hero image
+   spans the entire viewport edge-to-edge (not the default 1140px container). */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-footer-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-footer-v2),
+.e-con:has(.elementor-widget-agency-footer-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+/* Reset Elementor's section/container max-width so the footer goes full-bleed.
+   The footer's own .aew-fov2__inner re-applies the 1440px cap on the content. */
+.elementor-section:has(.elementor-widget-agency-footer-v2),
+.elementor-section:has(.elementor-widget-agency-footer-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-footer-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-fov2 so they don't leak into other widgets. Source of truth
+   is design-system.md. Update there first; copy here second. */
+.aew-fov2 {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Outer block ─────────────────────────────────────────────────────────── */
+.aew-fov2 {
+  background: var(--aew-fov2-body-bg, var(--notched-secondary-bg));
+  width: 100%;
+  position: relative;
+  color: var(--notched-cta);
+}
+
+.aew-fov2 *,
+.aew-fov2 *::before,
+.aew-fov2 *::after {
+  box-sizing: border-box;
+}
+
+/* ── Hero (forest image) ─────────────────────────────────────────────────── */
+/* Hero fades into the dark body via a mask. The body is pulled up with a
+   negative margin so the faded portion overlaps the body's top region.
+   Image uses CSS background (not <img> + object-fit) because we need
+   guaranteed horizontal slack to pan into AND control over vertical crop.
+   background-size: cover always fills width × height; the visible vertical
+   window is shifted DOWN via background-position-y so the tree tops aren't
+   clipped on wide viewports. Height is tall enough to make room. */
+.aew-fov2__hero {
+  width: 100%;
+  height: 1200px;
+  overflow: hidden;
+  line-height: 0;
+  background-color: var(--notched-background);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: calc(var(--aew-fov2-pan, 0.5) * 100%) 75%;
+  position: relative;
+  z-index: 1;
+  transition: background-position 0.08s linear;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 40%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 0, #000 40%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aew-fov2__hero {
+    background-position: 50% center;
+    transition: none;
+  }
+}
+
+/* ── Body wrapper ────────────────────────────────────────────────────────── */
+.aew-fov2__body {
+  background: transparent;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  margin-top: -400px; /* overlap into the faded portion of the hero — pulls columns higher into the image */
+}
+
+.aew-fov2__body-inner {
+  padding-top: 10px;     /* columns start 10px below the visible hero edge */
+  padding-bottom: 64px;
+}
+
+.aew-fov2__inner {
+  max-width: 1440px;        /* match header v2 inner wrapper */
+  margin: 0 auto;
+  padding: 0 80px; /* desktop X: 5rem */
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1.2fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ── Brand / logo ────────────────────────────────────────────────────────── */
+.aew-fov2__brand {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.aew-fov2__logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.aew-fov2__logo-img {
+  display: block;
+  height: 110px;
+  width: auto;
+  max-width: 100%;
+}
+
+/* ── Columns ─────────────────────────────────────────────────────────────── */
+.aew-fov2__col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Column heading ──────────────────────────────────────────────────────── */
+/* Wrapper-class prefix raises specificity to (0,2,0) so the colour beats the
+   Elementor kit's `.elementor-kit-N h1..h6 { color }` rule (0,1,1). */
+.aew-fov2 .aew-fov2__heading {
+  margin: 0;
+  padding: 0;
+  color: var(--aew-fov2-heading, var(--notched-cta-hover));
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.aew-fov2__heading--gap {
+  margin-top: 28px;
+}
+
+/* ── Link lists ──────────────────────────────────────────────────────────── */
+.aew-fov2__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.aew-fov2__item {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.aew-fov2__link {
+  display: inline-block;
+  color: var(--aew-fov2-link, var(--notched-cta-hover));
+  text-decoration: none;
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.18s ease;
+}
+
+.aew-fov2__link:hover,
+.aew-fov2__link:focus-visible {
+  color: var(--aew-fov2-link-hover, var(--notched-cta));
+}
+
+/* ── Address + Contact text ──────────────────────────────────────────────── */
+.aew-fov2__address {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  color: var(--aew-fov2-address, var(--notched-cta-hover));
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.aew-fov2__phone,
+.aew-fov2__email {
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+}
+
+.aew-fov2__phone a,
+.aew-fov2__email a {
+  color: var(--aew-fov2-link, var(--notched-cta-hover));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  transition: color 0.18s ease;
+}
+
+.aew-fov2__phone a:hover,
+.aew-fov2__email a:hover,
+.aew-fov2__phone a:focus-visible,
+.aew-fov2__email a:focus-visible {
+  color: var(--aew-fov2-link-hover, var(--notched-cta));
+}
+
+/* ── Bottom bar ──────────────────────────────────────────────────────────── */
+.aew-fov2__bottom {
+  border-top: 1px solid var(--aew-fov2-divider, rgba(191, 192, 191, 0.2));
+  padding: 20px 0;
+}
+
+.aew-fov2__inner--bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  /* Keep grid override — bottom bar is flex, not 4-column grid */
+  grid-template-columns: none;
+}
+
+.aew-fov2__copyright {
+  margin: 0;
+  padding: 0;
+  color: var(--aew-fov2-bottom-text, var(--notched-cta-hover));
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.aew-fov2__legal {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.aew-fov2__legal a {
+  color: var(--aew-fov2-bottom-text, var(--notched-cta-hover));
+  text-decoration: none;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  transition: color 0.18s ease;
+}
+
+.aew-fov2__legal a:hover,
+.aew-fov2__legal a:focus-visible {
+  color: var(--notched-cta-hover);
+}
+
+/* ── Responsive: tablet / small desktop ──────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-fov2__hero {
+    height: 480px;
+  }
+
+  .aew-fov2__body {
+    margin-top: -150px;
+  }
+
+  .aew-fov2__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 32px;
+    padding: 0 40px; /* tablet X: 2.5rem */
+  }
+
+  .aew-fov2__brand {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
+  .aew-fov2__logo-img {
+    height: 90px;
+  }
+
+  .aew-fov2__inner--bottom {
+    grid-template-columns: none;
+    padding: 0 40px; /* tablet X: 2.5rem */
+  }
+}
+
+/* ── Responsive: mobile ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-fov2__hero {
+    height: 380px;
+  }
+
+  .aew-fov2__body {
+    margin-top: -120px;
+  }
+
+  .aew-fov2__body-inner {
+    padding-top: 10px;
+    padding-bottom: 32px;
+  }
+
+  .aew-fov2__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 0 40px; /* mobile X: 2.5rem */
+  }
+
+  .aew-fov2__brand {
+    grid-column: auto;
+    justify-content: start;
+    margin-bottom: 8px;
+  }
+
+  .aew-fov2__col {
+    align-items: flex-start;
+  }
+
+  .aew-fov2__logo-img {
+    height: 80px;
+  }
+
+  .aew-fov2__heading {
+    font-size: 18px;
+  }
+
+  .aew-fov2__link {
+    font-size: 16px;
+  }
+
+  .aew-fov2__bottom {
+    padding: 18px 0;
+  }
+
+  .aew-fov2__inner--bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 0 40px; /* mobile X: 2.5rem */
+  }
+
+  .aew-fov2__legal {
+    flex-wrap: wrap;
+    gap: 16px 20px;
+  }
+}

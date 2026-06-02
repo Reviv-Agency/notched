@@ -1,0 +1,150 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   Benefits V2 (Notched) — "Benefits of a Traditional Pergola"
+   Full-bleed dark-green band: section title over a row of feature columns,
+   each with a circular image, heading and paragraph. 4 → 2 → 1 columns.
+   Desktop-first: base rules = desktop, step DOWN at 1024 (tablet) / 768 (mobile).
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-bnv2 so they don't leak. Source of truth: design-system.md. */
+.aew-bnv2 {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Strip Elementor's column padding (full-bleed) ───────────────────────── */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-benefits-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-benefits-v2),
+.e-con:has(.elementor-widget-agency-benefits-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+/* ── Outer block: full-bleed background ──────────────────────────────────── */
+/* The site runs BOXED Elementor containers capped at 1440px (see theme
+   style.css). A plain width:100% would clamp the green band to that 1440px
+   box. Break out to the full viewport width so the background reaches both
+   edges regardless of the parent container's max-width. */
+.aew-bnv2 {
+  background: var(--aew-bnv2-body-bg, var(--notched-secondary-bg));
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* ── Inner wrapper: max-width + responsive X & Y padding (stylesheet-owned) ─ */
+.aew-bnv2__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 4rem 5rem;        /* banded widget: Y 64px / X 5rem desktop */
+  box-sizing: border-box;
+}
+
+/* ── Section title ───────────────────────────────────────────────────────── */
+/* Wrapper class prefix raises specificity to (0,2,0) so the colour beats the
+   Elementor kit's `.elementor-kit-N h1..h6 { color }` rule (0,1,1), which would
+   otherwise override the widget heading colour and break the colour control. */
+.aew-bnv2 .aew-bnv2__title {
+  margin: 0 0 48px;
+  text-align: center;
+  color: var(--aew-bnv2-title, var(--notched-cta));
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 85%;
+  text-transform: uppercase;
+}
+
+/* ── Grid of columns: 4 → 2 → 1 ──────────────────────────────────────────── */
+.aew-bnv2__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.aew-bnv2__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ── Circular image ──────────────────────────────────────────────────────── */
+.aew-bnv2__media {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: 0 0 auto;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  aspect-ratio: 1 / 1;          /* hold the circle even if width control changes */
+}
+
+/* Fill the circle. !important + max-width override Elementor's global
+   `img { max-width: 100%; height: auto }` which would otherwise force the
+   image back to its intrinsic aspect ratio and leave gaps in the circle. */
+.aew-bnv2 .aew-bnv2__img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ── Column heading ──────────────────────────────────────────────────────── */
+.aew-bnv2 .aew-bnv2__heading {
+  margin: 0 0 16px;
+  color: var(--aew-bnv2-heading, var(--notched-cta));
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 40px;        /* design-system H3 desktop */
+  line-height: 85%;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+/* ── Column paragraph ────────────────────────────────────────────────────── */
+.aew-bnv2__text {
+  margin: 0;
+  color: var(--aew-bnv2-text, var(--notched-background));
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  max-width: 32ch;
+}
+
+/* ── Tablet: 4 → 2 columns, X padding → 40px ─────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-bnv2__inner { padding: 4rem 2.5rem; }
+  .aew-bnv2__grid  { grid-template-columns: repeat(2, 1fr); gap: 48px 40px; }
+  .aew-bnv2__title { font-size: 56px; margin-bottom: 40px; }
+}
+
+/* ── Mobile: 2 → 1 column, Y padding → 32px ──────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-bnv2__inner { padding: 2rem 2.5rem; }
+  .aew-bnv2__grid  { grid-template-columns: 1fr; gap: 40px; }
+  .aew-bnv2__title   { font-size: 40px; margin-bottom: 32px; }
+  .aew-bnv2__heading { font-size: 24px; }   /* design-system H3 mobile */
+  .aew-bnv2__text    { font-size: 14px; }
+}

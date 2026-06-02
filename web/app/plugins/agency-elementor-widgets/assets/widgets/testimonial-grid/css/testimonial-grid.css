@@ -1,0 +1,183 @@
+/**
+ * Testimonial Grid — Frame 40
+ */
+
+.elementor-column > .elementor-element-populated:has(.elementor-widget-agency-testimonial-grid) {
+	padding: 0 !important;
+}
+
+.e-con:has(.elementor-widget-agency-testimonial-grid) {
+	--padding-top: 0px;
+	--padding-right: 0px;
+	--padding-bottom: 0px;
+	--padding-left: 0px;
+}
+
+.aew-testimonial-grid {
+	--aew-testimonial-grid-bg: var(--aew-color-blue-dark, #252f37);
+	position: relative;
+	isolation: isolate;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.aew-testimonial-grid::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	width: 100vw;
+	max-width: 100vw;
+	transform: translateX(-50%);
+	background-color: var(--aew-testimonial-grid-bg);
+	z-index: -1;
+	pointer-events: none;
+}
+
+.aew-testimonial-grid__inner {
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 40px 16px !important;
+	box-sizing: border-box;
+}
+
+.aew-testimonial-grid__grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 24px;
+	width: 100%;
+}
+
+.aew-testimonial-grid__card {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding: 16px !important;
+	background-color: #314654;
+	border-radius: 26px !important;
+	box-sizing: border-box;
+}
+
+.aew-testimonial-grid__project-image {
+	width: 100%;
+	line-height: 0;
+}
+
+.aew-testimonial-grid__project-image img {
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+	border-radius: 20px !important;
+}
+
+.aew-testimonial-grid__meta {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 12px;
+	width: 100%;
+}
+
+.aew-testimonial-grid__avatar {
+	flex-shrink: 0;
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.aew-testimonial-grid__avatar img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.aew-testimonial-grid__meta-content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 4px;
+	min-width: 0;
+	flex: 1;
+}
+
+.aew-testimonial-grid__stars {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	color: var(--aew-color-yellow, #ebc543);
+}
+
+.aew-testimonial-grid__star {
+	display: block;
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+}
+
+.aew-testimonial-grid__attribution {
+	margin: 0;
+	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-size: 14px !important;
+	font-weight: 400;
+	line-height: 1.4;
+	color: var(--aew-color-white, #fff);
+	text-align: left;
+}
+
+.aew-testimonial-grid__name {
+	font-weight: 700 !important;
+}
+
+.aew-testimonial-grid__title {
+	margin: 0;
+	font-family: var(--aew-font-heading, 'DM Serif Display', serif);
+	font-size: 24px !important;
+	font-weight: 400;
+	line-height: 1.15;
+	color: var(--aew-color-white, #fff);
+}
+
+.aew-testimonial-grid__body {
+	margin: 0;
+	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-size: 14px !important;
+	font-weight: 400;
+	line-height: 1.5;
+	color: var(--aew-color-white, #fff);
+}
+
+@media (min-width: 1024px) {
+	.aew-testimonial-grid__inner {
+		padding: 40px !important;
+	}
+
+	.aew-testimonial-grid__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.aew-testimonial-grid__card {
+		padding: 40px !important;
+		border-radius: 40px !important;
+	}
+
+	.aew-testimonial-grid__project-image img {
+		border-radius: 24px !important;
+	}
+
+	.aew-testimonial-grid__attribution {
+		font-size: 18px !important;
+	}
+
+	.aew-testimonial-grid__title {
+		font-size: 48px !important;
+	}
+
+	.aew-testimonial-grid__body {
+		font-size: 20px !important;
+	}
+}

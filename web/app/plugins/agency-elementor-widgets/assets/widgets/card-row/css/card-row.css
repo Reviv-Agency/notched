@@ -1,0 +1,113 @@
+/**
+ * Card Row — Frame 35
+ */
+
+.elementor-column > .elementor-element-populated:has(.elementor-widget-agency-card-row) {
+	padding: 0 !important;
+}
+
+.e-con:has(.elementor-widget-agency-card-row) {
+	--padding-top: 0px;
+	--padding-right: 0px;
+	--padding-bottom: 0px;
+	--padding-left: 0px;
+}
+
+.aew-card-row {
+	--aew-card-row-bg: var(--aew-color-cream, #f8f5f1);
+	position: relative;
+	isolation: isolate;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.aew-card-row::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	width: 100vw;
+	max-width: 100vw;
+	transform: translateX(-50%);
+	background-color: var(--aew-card-row-bg);
+	z-index: -1;
+	pointer-events: none;
+}
+
+.aew-card-row__inner {
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 20px 20px 56px;
+	box-sizing: border-box;
+}
+
+.aew-card-row__grid {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+	width: 100%;
+}
+
+.aew-card-row__card {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	flex: 1 1 0;
+	min-width: 0;
+	padding: 20px;
+	background-color: var(--aew-color-white, #fff);
+	border-radius: 40px;
+	box-sizing: border-box;
+}
+
+.aew-card-row__media {
+	width: 100%;
+	line-height: 0;
+}
+
+.aew-card-row__media img {
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+	border-radius: 24px;
+}
+
+.aew-card-row__title {
+	margin: 0;
+	font-family: var(--aew-font-heading, 'DM Serif Display', serif);
+	font-size: 24px !important;
+	font-weight: 400;
+	line-height: 1.15;
+	color: var(--aew-color-blue-dark, #252f37);
+}
+
+.aew-card-row__description {
+	margin: 0;
+	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-size: 14px !important;
+	font-weight: 400;
+	line-height: 1.5;
+	color: var(--aew-color-blue-dark, #252f37);
+}
+
+@media (min-width: 1024px) {
+	.aew-card-row__inner {
+		padding: 40px 40px 120px;
+	}
+
+	.aew-card-row__grid {
+		flex-direction: row;
+		gap: 24px;
+	}
+
+	.aew-card-row__title {
+		font-size: 48px !important;
+	}
+
+	.aew-card-row__description {
+		font-size: 18px !important;
+	}
+}

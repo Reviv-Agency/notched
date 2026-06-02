@@ -1,0 +1,102 @@
+/**
+ * Parallax Image V2 — Notched
+ * Standalone full-bleed image band that pans horizontally on scroll.
+ * Mirrors Footer V2's forest hero exactly (cover + horizontal pan), minus the
+ * fade mask. No max-width: the band spans the full viewport at any size.
+ */
+
+/* Strip Elementor container padding + force full-bleed so the band spans the
+   entire viewport edge-to-edge, even inside a "Boxed" section (which caps the
+   inner .elementor-container). Same approach as Footer V2. */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-parallax-image-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-parallax-image-v2),
+.e-con:has(.elementor-widget-agency-parallax-image-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+.elementor-section:has(.elementor-widget-agency-parallax-image-v2),
+.elementor-section:has(.elementor-widget-agency-parallax-image-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-parallax-image-v2),
+.e-con:has(.elementor-widget-agency-parallax-image-v2) > .e-con-inner {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-pimg so they don't leak into other widgets. Source of truth
+   is design-system.md. Update there first; copy here second. */
+.aew-pimg {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Outer block (full-bleed) ────────────────────────────────────────────── */
+.aew-pimg {
+  width: 100%;
+  position: relative;
+}
+
+.aew-pimg *,
+.aew-pimg *::before,
+.aew-pimg *::after {
+  box-sizing: border-box;
+}
+
+/* ── Band (the panning image) — mirrors .aew-fov2__hero ──────────────────── */
+/* Same technique as Footer V2's hero: CSS background + background-size: cover
+   on a tall band, so the wide image overflows horizontally and the JS can pan
+   it left↔right via --aew-pimg-pan. No mask fade (clean band). */
+.aew-pimg__band {
+  width: 100%;
+  height: 1200px;
+  overflow: hidden;
+  line-height: 0;
+  background-color: var(--aew-pimg-bg, var(--notched-background));
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: calc(var(--aew-pimg-pan, 0.5) * 100%) var(--aew-pimg-focus-y, 75%);
+  position: relative;
+  transition: background-position 0.08s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aew-pimg__band {
+    background-position: 50% var(--aew-pimg-focus-y, 75%);
+    transition: none;
+  }
+}
+
+/* ── Bottom trim ─────────────────────────────────────────────────────────── */
+/* The "Trim bottom" control applies a negative margin-bottom on the band
+   (inlined in render) so the next block slides up over the empty space below
+   the trees — closing the gap. The band keeps overflow:hidden so the image
+   itself isn't clipped oddly; only the layout box shrinks from the bottom. */
+
+/* ── Responsive: tablet / small desktop ──────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-pimg__band {
+    height: 480px;
+  }
+}
+
+/* ── Responsive: mobile ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-pimg__band {
+    height: 380px;
+  }
+}

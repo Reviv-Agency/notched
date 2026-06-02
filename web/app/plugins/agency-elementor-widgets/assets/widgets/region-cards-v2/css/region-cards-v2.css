@@ -1,0 +1,225 @@
+/**
+ * Region Cards V2 — Notched
+ * Row of image panels, each with a floating copy card (heading + paragraph +
+ * CTA) overlaid on the background image.
+ * Desktop = N-up grid, card centered over the image with an adjustable inset.
+ * Mobile  = stacked; fixed-height image with the card anchored to the bottom.
+ */
+
+/* Strip Elementor container padding + force full-bleed so the section band
+   spans edge-to-edge (the inner wrapper re-applies the max-width). */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-region-cards-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-region-cards-v2),
+.e-con:has(.elementor-widget-agency-region-cards-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+.elementor-section:has(.elementor-widget-agency-region-cards-v2),
+.elementor-section:has(.elementor-widget-agency-region-cards-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-region-cards-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-rgcv2 so they don't leak into other widgets. Source of truth
+   is design-system.md. Update there first; copy here second. */
+.aew-rgcv2 {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Outer block (full-bleed background) ─────────────────────────────────── */
+.aew-rgcv2 {
+  width: 100%;
+  background-color: var(--notched-background);
+}
+
+.aew-rgcv2 *,
+.aew-rgcv2 *::before,
+.aew-rgcv2 *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper (max-width + X padding) ───────────────────────────────── */
+.aew-rgcv2__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 4rem 5rem;          /* desktop Y 64px / X 5rem */
+}
+
+/* ── Grid ────────────────────────────────────────────────────────────────── */
+.aew-rgcv2__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+
+/* ── Panel = image + overlaid card ───────────────────────────────────────── */
+.aew-rgcv2__panel {
+  --aew-rgcv2-inset: 80px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 600px;
+  border-radius: 16px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Background image layer. background-image gives reliable focal panning. */
+.aew-rgcv2__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--aew-rgcv2-image);
+  background-size: cover;
+  background-position: var(--aew-rgcv2-focal, center center);
+  background-repeat: no-repeat;
+}
+
+/* ── Floating copy card ──────────────────────────────────────────────────── */
+.aew-rgcv2__card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: var(--aew-rgcv2-inset);
+  padding: 48px 40px;
+  text-align: center;
+  background-color: var(--aew-rgcv2-card-bg, var(--notched-background));
+  border-radius: 24px;
+}
+
+/* ── Heading ─────────────────────────────────────────────────────────────── */
+/* Wrapper-class prefix raises specificity to (0,2,0) so the colour beats the
+   Elementor kit's `.elementor-kit-N h1..h6 { color }` rule (0,1,1). */
+.aew-rgcv2 .aew-rgcv2__title {
+  margin: 0 0 16px;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 85%;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--aew-rgcv2-title, var(--notched-secondary-bg));
+}
+
+/* ── Paragraph ───────────────────────────────────────────────────────────── */
+.aew-rgcv2__text {
+  margin: 0 0 24px;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  color: var(--aew-rgcv2-text, var(--notched-text));
+}
+
+/* ── CTA button ──────────────────────────────────────────────────────────── */
+.aew-rgcv2__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  padding: 20px 24px 16px;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 85%;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--aew-rgcv2-btn-text, #FFFFFF);
+  background-color: var(--aew-rgcv2-btn-bg, var(--notched-cta));
+  border: 1px solid var(--aew-rgcv2-btn-bg, var(--notched-cta));
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.aew-rgcv2__btn:hover,
+.aew-rgcv2__btn:focus-visible {
+  background-color: var(--aew-rgcv2-btn-bg-hover, var(--notched-cta-hover));
+  border-color: var(--aew-rgcv2-btn-bg-hover, var(--notched-cta-hover));
+}
+
+.aew-rgcv2__btn:focus-visible {
+  outline: 2px solid var(--notched-secondary-bg);
+  outline-offset: 2px;
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-rgcv2__inner {
+    padding: 4rem 2.5rem;      /* tablet Y 64px / X 2.5rem */
+  }
+  .aew-rgcv2__panel {
+    --aew-rgcv2-inset: 40px;
+  }
+}
+
+/* ── Mobile (single column, image-height + bottom-anchored card) ─────────── */
+@media (max-width: 768px) {
+  .aew-rgcv2__inner {
+    padding: 2rem 2.5rem;      /* mobile Y 32px / X 2.5rem */
+  }
+
+  .aew-rgcv2__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .aew-rgcv2__panel {
+    --aew-rgcv2-mobile-h: 400px;
+    --aew-rgcv2-mobile-card-h: 50%;
+    --aew-rgcv2-mobile-gap: 10px;
+    min-height: 0;
+    height: var(--aew-rgcv2-mobile-h);
+    align-items: flex-end;       /* card anchored to the bottom */
+    justify-content: center;
+    border-radius: 12px;
+  }
+
+  /* Card pinned to the bottom: takes a share of the image height, inset by the
+     mobile gap on the bottom + both sides. */
+  .aew-rgcv2__card {
+    width: calc(100% - (var(--aew-rgcv2-mobile-gap) * 2));
+    height: var(--aew-rgcv2-mobile-card-h);
+    margin: 0 var(--aew-rgcv2-mobile-gap) var(--aew-rgcv2-mobile-gap);
+    padding: 16px;
+    border-radius: 20px;
+    justify-content: center;
+    overflow: auto;
+  }
+
+  .aew-rgcv2__title {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .aew-rgcv2__text {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .aew-rgcv2__btn {
+    font-size: 16px;
+    padding: 18px 24px 16px;
+  }
+}

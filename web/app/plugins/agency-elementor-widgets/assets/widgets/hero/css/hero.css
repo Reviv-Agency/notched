@@ -1,0 +1,664 @@
+/**
+ * Hero widget — Frame 3 (desktop), Frame 73 (mobile)
+ */
+
+.elementor-column > .elementor-element-populated:has(.elementor-widget-agency-hero) {
+	padding: 0 !important;
+}
+
+.e-con:has(.elementor-widget-agency-hero) {
+	--padding-top: 0px;
+	--padding-right: 0px;
+	--padding-bottom: 0px;
+	--padding-left: 0px;
+}
+
+.aew-hero {
+	--aew-hero-bp: 768;
+	--aew-hero-overlay-color: #000;
+	--aew-hero-overlay-opacity: 0.5;
+	--aew-hero-bg: transparent;
+	position: relative;
+	isolation: isolate;
+	width: 100%;
+}
+
+.aew-hero::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	width: 100vw;
+	max-width: 100vw;
+	transform: translateX(-50%);
+	background-color: var(--aew-hero-bg);
+	z-index: -1;
+	pointer-events: none;
+}
+
+.aew-hero__shell {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
+	border-radius: 24px;
+}
+
+.aew-hero__inner {
+	display: grid;
+	grid-template-areas: 'stack';
+	width: 100%;
+	max-width: 1440px;
+	padding: 40px;
+	box-sizing: border-box;
+}
+
+.aew-hero__stage {
+	position: relative;
+	grid-area: stack;
+	z-index: 1;
+	width: 100%;
+}
+
+/* --- Visual / background --- */
+.aew-hero__visual {
+	position: relative;
+	min-height: 1130px;
+	border-radius: 24px;
+	overflow: hidden;
+	background-color: var(--aew-color-blue-dark, #252f37);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.aew-hero__visual::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	background: var(--aew-hero-overlay-color, #000);
+	opacity: var(--aew-hero-overlay-opacity, 0.5);
+	pointer-events: none;
+}
+
+/* --- Copy (single block, responsive visibility) --- */
+.aew-hero__copy {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	/* max-width: 72rem; */
+	width: 100%;
+	gap: 1.25rem; /* overridden by Elementor "Spacing between copy items" */
+	color: var(--aew-color-white, #fff);
+}
+
+.aew-hero__eyebrow--mobile,
+.aew-hero__headline--mobile {
+	display: none;
+}
+
+.aew-hero__eyebrow {
+	margin: 0;
+	font-family: var(--aew-font-body);
+	font-weight: 700;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.aew-hero__headline {
+	margin: 0;
+	font-family: var(--aew-font-heading);
+	font-weight: 400;
+	line-height: 1.15;
+}
+
+.aew-hero__headline--mobile {
+	font-size: clamp(2rem, 4vw, 3rem);
+}
+
+/* Desktop headline size/stroke: Elementor Typography + Text Stroke controls */
+
+.aew-hero__headline em {
+	font-style: italic;
+}
+
+.aew-hero__description {
+	margin: 0;
+	font-family: var(--aew-font-body);
+	font-size: 1.125rem;
+	line-height: 1.5;
+	max-width: 40rem;
+}
+
+.aew-hero__cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	margin-top: 0.5rem;
+	font-family: var(--aew-font-body);
+	font-weight: 700;
+	font-size: 1rem;
+	line-height: 1.25;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: opacity 0.2s ease;
+}
+
+.aew-hero__cta:hover {
+	opacity: 0.92;
+}
+
+/* --- Social proof --- */
+.aew-hero__social {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem 1rem;
+	margin-top: 0.5rem;
+}
+
+.aew-hero__avatars {
+	display: flex;
+	align-items: center;
+}
+
+.aew-hero__avatar-frame {
+	display: inline-flex;
+	flex-shrink: 0;
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	overflow: hidden;
+	box-sizing: border-box;
+	line-height: 0;
+	background: var(--aew-color-blue-light, #5796bb);
+}
+
+.aew-hero__avatar-frame:first-child {
+	margin-left: 0;
+}
+
+.aew-hero__avatar-frame img.aew-hero__avatar {
+	display: block;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	object-fit: cover;
+	object-position: center;
+	aspect-ratio: 1 / 1;
+}
+
+.aew-hero__avatar-frame--placeholder {
+	background: var(--aew-color-blue-light, #5796bb);
+}
+
+.aew-hero__rating {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.25rem;
+}
+
+.aew-hero__stars {
+	display: flex;
+	gap: 2px;
+	color: var(--aew-color-yellow, #ebc543);
+}
+
+.aew-hero__social-text {
+	margin: 0;
+	font-family: var(--aew-font-body);
+	font-size: 0.875rem;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+/* --- Feature cards --- */
+.aew-hero__features {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: stretch;
+	justify-content: center;
+	grid-area: stack;
+	align-self: end;
+	z-index: 2;
+	width: 100%;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.aew-hero__feature {
+	position: relative;
+	display: flex;
+	flex: 1 1 0;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: 100%;
+	min-width: 0;
+	background: var(--aew-color-blue, #305b83);
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.aew-hero__feature-icon {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	line-height: 0;
+}
+
+.aew-hero__feature-icon-badge {
+	display: inline-flex;
+	border-radius: 50%;
+	border-style: solid;
+	box-sizing: border-box;
+	line-height: 0;
+}
+
+.aew-hero__feature-icon-badge img {
+	display: block;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.aew-hero__feature-title {
+	margin: 0.75rem 0 0.5rem;
+	font-family: var(--aew-font-heading);
+	font-size: 32px;
+	font-weight: 400;
+	line-height: 1.2;
+	color: var(--aew-color-white, #fff);
+}
+
+.aew-hero__feature-text {
+	margin: 0;
+	font-family: var(--aew-font-body);
+	font-size: 14px;
+	line-height: 1.5;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+/* ========== Desktop overlay layout ========== */
+@media (min-width: 769px) {
+	.aew-hero:not(.aew-hero--compact) .aew-hero__visual {
+		border-radius: 24px;
+	}
+
+	.aew-hero:not(.aew-hero--compact) .aew-hero__inner {
+		display: grid;
+		grid-template-areas: 'stack';
+	}
+
+	.aew-hero:not(.aew-hero--compact) .aew-hero__copy {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		margin: 0 auto;
+		justify-content: center;
+	}
+
+	.aew-hero:not(.aew-hero--compact) .aew-hero__eyebrow--mobile,
+	.aew-hero:not(.aew-hero--compact) .aew-hero__headline--mobile {
+		display: none !important;
+	}
+
+	.aew-hero:not(.aew-hero--compact) .aew-hero__headline--desktop,
+	.aew-hero:not(.aew-hero--compact) .aew-hero__headline--shared {
+		display: block;
+	}
+}
+
+/* ========== Mobile / tablet (Frame 73) ≤768px ========== */
+@media (max-width: 768px) {
+	.aew-hero__shell {
+		border-radius: 0;
+	}
+
+	.aew-hero__inner {
+		display: flex;
+		flex-direction: column;
+		max-width: 100%;
+		padding: 0 !important;
+	}
+
+	.aew-hero__stage {
+		grid-area: auto;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.aew-hero__visual {
+		border-radius: 0;
+	}
+
+	.aew-hero__visual::before {
+		display: none;
+	}
+
+	.aew-hero__copy {
+		position: relative;
+		z-index: 2;
+		align-items: center;
+		text-align: center;
+		max-width: none;
+		color: var(--aew-color-blue-dark, #252f37);
+	}
+
+	.aew-hero__eyebrow--desktop {
+		display: none;
+	}
+
+	.aew-hero__eyebrow--mobile {
+		display: block;
+	}
+
+	.aew-hero__headline--desktop:not(.aew-hero__headline--shared) {
+		display: none;
+	}
+
+	.aew-hero__headline--mobile,
+	.aew-hero__headline--shared {
+		display: block;
+	}
+
+	.aew-hero__headline--mobile em,
+	.aew-hero__headline--shared em {
+		font-style: italic;
+	}
+
+	.aew-hero__description {
+		max-width: none;
+	}
+
+	.aew-hero__cta {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.aew-hero__social {
+		justify-content: center;
+		width: 100%;
+	}
+
+	.aew-hero__rating {
+		align-items: center;
+	}
+
+	.aew-hero__features {
+		display: flex;
+		flex-direction: column;
+		grid-area: auto;
+		align-self: auto;
+		margin: 0;
+	}
+
+	.aew-hero__feature {
+		flex: none;
+		max-width: none;
+		text-align: center;
+	}
+
+	.aew-hero__feature-icon {
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+
+/* Small mobile — visual 300px (≤424px) */
+@media (max-width: 424px) {
+	.aew-hero__visual,
+	.aew-hero--compact .aew-hero__visual {
+		min-height: 300px !important;
+	}
+}
+
+/* Large mobile / compact tablet — visual 450px (425px–768px) */
+@media (min-width: 425px) and (max-width: 768px) {
+	.aew-hero__visual,
+	.aew-hero:not(.aew-hero--compact) .aew-hero__visual,
+	.aew-hero--compact .aew-hero__visual {
+		min-height: 450px !important;
+	}
+}
+
+/* Tablet — visual height 769px–1023px */
+@media (min-width: 769px) and (max-width: 1023px) {
+	.aew-hero__visual,
+	.aew-hero:not(.aew-hero--compact) .aew-hero__visual,
+	.aew-hero--compact .aew-hero__visual {
+		min-height: 550px !important;
+	}
+}
+
+/* Desktop narrow — features full width + 12px gap (1024px–1440px) */
+@media (min-width: 1024px) and (max-width: 1440px) {
+	.aew-hero:not(.aew-hero--compact) .aew-hero__features {
+		width: 1100px;
+		margin: 0 auto;
+		max-width: 100%;
+		gap: 12px !important;
+	}
+
+	.aew-hero:not(.aew-hero--compact) .aew-hero__feature {
+		flex: 1 1 0;
+		max-width: none;
+	}
+}
+
+/* JS + Elementor editor device preview */
+.aew-hero--compact .aew-hero__inner {
+	display: flex;
+	flex-direction: column;
+	max-width: 100%;
+	padding: 0 !important;
+}
+
+.aew-hero--compact .aew-hero__stage {
+	grid-area: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.aew-hero--compact .aew-hero__visual {
+	min-height: 300px;
+	border-radius: 0;
+}
+
+.aew-hero--compact .aew-hero__shell {
+	border-radius: 0;
+}
+
+.aew-hero--compact .aew-hero__visual::before {
+	display: none;
+}
+
+.aew-hero--compact .aew-hero__copy {
+	position: relative;
+	z-index: 2;
+	align-items: center;
+	text-align: center;
+	max-width: none;
+	color: var(--aew-color-blue-dark, #252f37);
+}
+
+.aew-hero--compact .aew-hero__headline--mobile em,
+.aew-hero--compact .aew-hero__headline--shared em {
+	font-style: italic;
+}
+
+.aew-hero--compact .aew-hero__cta {
+	width: 100%;
+	max-width: 100%;
+}
+
+.aew-hero--compact .aew-hero__eyebrow--desktop {
+	display: none;
+}
+
+.aew-hero--compact .aew-hero__eyebrow--mobile {
+	display: block;
+}
+
+.aew-hero--compact .aew-hero__headline--desktop:not(.aew-hero__headline--shared) {
+	display: none;
+}
+
+.aew-hero--compact .aew-hero__headline--mobile,
+.aew-hero--compact .aew-hero__headline--shared {
+	display: block;
+}
+
+.aew-hero--compact .aew-hero__social {
+	justify-content: center;
+	width: 100%;
+}
+
+.aew-hero--compact .aew-hero__rating {
+	align-items: center;
+}
+
+.aew-hero--compact .aew-hero__features {
+	display: flex;
+	flex-direction: column;
+	grid-area: auto;
+	align-self: auto;
+	margin: 0;
+}
+
+.aew-hero--compact .aew-hero__feature {
+	flex: none;
+	max-width: none;
+	text-align: center;
+}
+
+.aew-hero--compact .aew-hero__feature-icon {
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__visual::before,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__visual::before,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__visual::before {
+	display: none;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__inner,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__inner,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__inner {
+	display: flex;
+	flex-direction: column;
+	max-width: 100%;
+	padding: 0 !important;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__stage,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__stage,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__stage {
+	grid-area: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__copy,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__copy,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__copy {
+	position: relative;
+	z-index: 2;
+	align-items: center;
+	text-align: center;
+	color: var(--aew-color-blue-dark, #252f37);
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__headline--mobile em,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__headline--mobile em,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__headline--mobile em,
+body.elementor-device-mobile .aew-hero .aew-hero__headline--shared em,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__headline--shared em,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__headline--shared em {
+	font-style: italic;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__cta,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__cta,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__cta {
+	width: 100%;
+	max-width: 100%;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__social,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__social,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__social {
+	justify-content: center;
+	width: 100%;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__rating,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__rating,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__rating {
+	align-items: center;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__eyebrow--desktop,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__eyebrow--desktop,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__eyebrow--desktop {
+	display: none;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__eyebrow--mobile,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__eyebrow--mobile,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__eyebrow--mobile {
+	display: block;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__headline--desktop:not(.aew-hero__headline--shared),
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__headline--desktop:not(.aew-hero__headline--shared),
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__headline--desktop:not(.aew-hero__headline--shared) {
+	display: none;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__headline--mobile,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__headline--mobile,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__headline--mobile,
+body.elementor-device-mobile .aew-hero .aew-hero__headline--shared,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__headline--shared,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__headline--shared {
+	display: block;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__features,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__features,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__features {
+	display: flex;
+	flex-direction: column;
+	grid-area: auto;
+	align-self: auto;
+	margin: 0;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__feature,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__feature,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__feature {
+	text-align: center;
+}
+
+body.elementor-device-mobile .aew-hero .aew-hero__feature-icon,
+body[data-elementor-device-mode="mobile"] .aew-hero .aew-hero__feature-icon,
+body[data-elementor-device-mode="mobile_extra"] .aew-hero .aew-hero__feature-icon {
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

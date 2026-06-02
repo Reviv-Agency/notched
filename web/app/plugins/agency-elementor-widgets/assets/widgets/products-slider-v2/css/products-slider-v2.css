@@ -1,0 +1,327 @@
+/**
+ * Products Slider V2 — Notched brand.
+ * "Our most popular kit options" horizontal scroll-snap product slider.
+ *
+ * BEM block: aew-prsv2   |   widget: agency-products-slider-v2
+ * Desktop-first cascade: base = desktop, step DOWN at 1024 / 768.
+ */
+
+/* ── Strip Elementor's column padding (full-bleed) ─────────────────────────── */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-products-slider-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-products-slider-v2),
+.e-con:has(.elementor-widget-agency-products-slider-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+/* ── Force the host section/column to the design background ────────────────── */
+/* The widget paints its own cream bg on .aew-prsv2, but the Elementor section
+   and column it lives in can render a white box on top/around it. Neutralize
+   the host chain to the design "Background" (#F6F0EC) so no white band shows. */
+.elementor-section:has(.elementor-widget-agency-products-slider-v2),
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-products-slider-v2),
+.e-con:has(.elementor-widget-agency-products-slider-v2),
+.e-con:has(.elementor-widget-agency-products-slider-v2) > .e-con-inner {
+  background-color: #F6F0EC !important;
+}
+
+/* ── Brand tokens (scoped). Source of truth: design-system.md ──────────────── */
+.aew-prsv2 {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Outer block: full-bleed background ────────────────────────────────────── */
+.aew-prsv2 {
+  background-color: var(--aew-prsv2-body-bg, var(--notched-background));
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  --prsv2-gutter: 80px;   /* X inset; stepped down at tablet/mobile */
+}
+
+.aew-prsv2 *,
+.aew-prsv2 *::before,
+.aew-prsv2 *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper: max-width + responsive X/Y padding (stylesheet owns it) ── */
+.aew-prsv2__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 4rem 5rem;        /* Y 64px / X 5rem desktop */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header row: heading + Shop-all CTA ────────────────────────────────────── */
+.aew-prsv2__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+/* Wrapper-class prefix raises specificity to (0,2,0) so the colour beats the
+   Elementor kit's `.elementor-kit-N h1..h6 { color }` rule (0,1,1). */
+.aew-prsv2 .aew-prsv2__heading {
+  margin: 0;
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 85%;
+  text-transform: uppercase;
+  color: var(--aew-prsv2-heading, var(--notched-secondary-bg));
+}
+
+/* ── Shop-all CTA button ───────────────────────────────────────────────────── */
+.aew-prsv2__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  text-decoration: none;
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 85%;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--aew-prsv2-cta-text, #fff);
+  background-color: var(--aew-prsv2-cta-bg, var(--notched-cta));
+  padding: 20px 24px 16px;
+  border-radius: 8px;
+  transition: background-color 0.18s ease;
+}
+
+.aew-prsv2__cta:hover { background-color: var(--aew-prsv2-cta-bg-hover, var(--notched-cta-hover)); }
+
+.aew-prsv2__cta svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+/* ── Viewport: track + flanking arrows ─────────────────────────────────────── */
+.aew-prsv2__viewport {
+  position: relative;
+}
+
+.aew-prsv2__track {
+  list-style: none;
+  /* Bleed past the inner wrapper's X padding so the track is full-width, then
+     re-add the gutter as the track's OWN padding. The first card still aligns
+     under the heading (gutter in from the edge) and — crucially — the last card
+     has a trailing gutter of padding to scroll fully clear of the viewport,
+     instead of being cut at the inner-wrapper boundary. */
+  margin-left: calc(-1 * var(--prsv2-gutter));
+  margin-right: calc(-1 * var(--prsv2-gutter));
+  padding: 0 var(--prsv2-gutter);
+  scroll-padding: 0 var(--prsv2-gutter);
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  /* Explicitly clip the cross axis. With only overflow-x set, the browser
+     computes overflow-y: auto, and a few px of content overflow (image
+     aspect-ratio rounding + title) triggers a VERTICAL scrollbar gutter that
+     eats the right edge and clips the last card. overflow-y: hidden kills it. */
+  overflow-y: hidden;
+  /* proximity (not mandatory): the track may rest at the far end so the LAST
+     card is fully visible. mandatory snaps a slide's start to the track start,
+     which leaves the final card clipped at the right edge. */
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  scrollbar-width: none;          /* Firefox */
+  -webkit-overflow-scrolling: touch;
+}
+.aew-prsv2__track::-webkit-scrollbar { display: none; }
+
+.aew-prsv2__slide {
+  flex: 0 0 500px;
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+/* ── Card: image + title, whole card links to product ─────────────────────── */
+.aew-prsv2__card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-decoration: none;
+}
+
+.aew-prsv2__media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  background-color: var(--notched-lines);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.aew-prsv2__title {
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 100%;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--aew-prsv2-title, var(--notched-text));
+}
+
+.aew-prsv2__card:hover .aew-prsv2__media { opacity: 0.92; }
+.aew-prsv2__card:focus-visible { outline: 2px solid var(--notched-secondary-bg); outline-offset: 4px; border-radius: 4px; }
+
+/* ── Arrows ────────────────────────────────────────────────────────────────── */
+.aew-prsv2__arrow,
+button.aew-prsv2__arrow {
+  position: absolute;
+  top: calc(50% - 28px);          /* center on the image area, above the title */
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 0 !important;
+  border-radius: 14px;
+  background-color: var(--aew-prsv2-arrow-bg, #fff) !important;
+  box-shadow: 0 6px 20px rgba(20, 28, 25, 0.16) !important;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  padding: 0;
+  /* Hidden until the slider is hovered (or an arrow is keyboard-focused). */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
+}
+
+/* Reveal arrows on hover over the slider, or when an arrow takes focus. */
+.aew-prsv2__viewport:hover .aew-prsv2__arrow,
+.aew-prsv2__arrow:focus-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.aew-prsv2__arrow--prev { left: -8px; }
+.aew-prsv2__arrow--next { right: -8px; }
+
+.aew-prsv2__arrow svg {
+  width: 26px;
+  height: 26px;
+  color: var(--aew-prsv2-arrow-color, var(--notched-text));
+}
+
+.aew-prsv2__arrow:hover { transform: translateY(-50%) scale(1.04); }
+.aew-prsv2__arrow:focus-visible { outline: 2px solid var(--notched-secondary-bg); outline-offset: 2px; }
+
+/* Disabled (track at an edge) — stay invisible even while the slider is
+   hovered. Specificity is raised with __viewport so it beats the hover reveal. */
+.aew-prsv2__arrow[hidden],
+.aew-prsv2__arrow[disabled],
+.aew-prsv2__viewport:hover .aew-prsv2__arrow[disabled] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ── Dots ──────────────────────────────────────────────────────────────────── */
+.aew-prsv2__dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 28px;
+}
+.aew-prsv2__dots:empty { display: none; }
+
+.aew-prsv2__dot,
+button.aew-prsv2__dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0 !important;
+  border-radius: 50%;
+  background-color: var(--aew-prsv2-dot-idle, var(--notched-lines));
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+.aew-prsv2__dot[aria-current="true"] {
+  background-color: var(--aew-prsv2-dot-active, var(--notched-misc-accent));
+  transform: scale(1.25);
+}
+.aew-prsv2__dot:focus-visible { outline: 2px solid var(--notched-secondary-bg); outline-offset: 2px; }
+
+/* ── Empty state ───────────────────────────────────────────────────────────── */
+.aew-prsv2__empty {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  color: var(--notched-text);
+}
+
+/* ── Tablet ≤1024 ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-prsv2 { --prsv2-gutter: 40px; }   /* keep in sync with __inner padding (2.5rem) */
+  .aew-prsv2__inner { padding: 4rem 2.5rem; }
+  .aew-prsv2__heading { font-size: 52px; }
+  .aew-prsv2__slide { flex-basis: 440px; }
+
+  /* Hide prev/next arrows on tablet + mobile — touch/swipe drives the track,
+     dots remain for paging. Match the base rule's specificity (button.…) so
+     this override wins. */
+  .aew-prsv2__arrow,
+  button.aew-prsv2__arrow { display: none; }
+
+  /* CTA drops below the cards. Dissolve __head so heading + CTA become flex
+     children of __inner, then order the CTA last (after viewport + dots). */
+  .aew-prsv2__head { display: contents; }
+  .aew-prsv2__heading { order: 0; margin-bottom: 24px; }
+  .aew-prsv2__viewport { order: 1; }
+  .aew-prsv2__dots { order: 2; }
+  .aew-prsv2__empty { order: 1; }
+  .aew-prsv2__cta {
+    order: 3;
+    align-self: flex-start;
+    margin-top: 28px;
+  }
+}
+
+/* ── Mobile ≤768 ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-prsv2__inner { padding: 2rem 2.5rem; }
+  .aew-prsv2__heading { font-size: 40px; margin-bottom: 20px; }
+  .aew-prsv2__cta { width: 100%; justify-content: center; font-size: 20px; padding: 18px 24px 16px; margin-top: 24px; }
+  .aew-prsv2__slide { flex-basis: 220px; }
+  .aew-prsv2__track { gap: 16px; }
+  .aew-prsv2__media { border-radius: 16px; }
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .aew-prsv2__track { scroll-behavior: auto; }
+  .aew-prsv2__arrow,
+  .aew-prsv2__dot,
+  .aew-prsv2__cta { transition: none; }
+}

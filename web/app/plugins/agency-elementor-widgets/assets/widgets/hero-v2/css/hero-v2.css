@@ -1,0 +1,397 @@
+/**
+ * Hero V2 — Notched
+ * Full-bleed background video (edge to edge, no padding, no rounded corners)
+ * with a centered overlay: eyebrow + large Teko headline + description +
+ * two CTA buttons + social-proof row.
+ */
+
+/* Strip Elementor container padding + force full-bleed so the video spans the
+   entire viewport edge-to-edge (not the default 1140px container). */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-hero-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-hero-v2),
+.e-con:has(.elementor-widget-agency-hero-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+/* Reset Elementor's section/container max-width so the hero goes full-bleed.
+   The hero's own .aew-hev2__inner re-applies the content cap on the copy. */
+.elementor-section:has(.elementor-widget-agency-hero-v2),
+.elementor-section:has(.elementor-widget-agency-hero-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-hero-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-hev2 so they don't leak into other widgets. Source of truth
+   is design-system.md. Update there first; copy here second. */
+.aew-hev2 {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Outer block (full-bleed stage) ──────────────────────────────────────── */
+.aew-hev2 {
+  --aew-hev2-header-h: 64px; /* header bar height — keep in sync with header-v2 */
+  position: relative;
+  width: 100%;
+  /* Desktop / large screens: 80% of the viewport minus the header. */
+  min-height: calc(80vh - var(--aew-hev2-header-h));
+  min-height: calc(80dvh - var(--aew-hev2-header-h));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--notched-secondary-bg);
+}
+
+.aew-hev2 *,
+.aew-hev2 *::before,
+.aew-hev2 *::after {
+  box-sizing: border-box;
+}
+
+/* ── Media layer — video fills the whole stage ───────────────────────────── */
+.aew-hev2__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.aew-hev2__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border: 0;
+}
+
+.aew-hev2__video--poster {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Mobile / tablet still image — replaces the video at <= 1024px.
+   Hidden on desktop; the video covers the stage there. */
+.aew-hev2__mobile-image {
+  position: absolute;
+  inset: 0;
+  display: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.aew-hev2__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--aew-hev2-overlay-color, #0A0F0D);
+  opacity: var(--aew-hev2-overlay-opacity, 0.45);
+}
+
+/* ── Inner / content ─────────────────────────────────────────────────────── */
+.aew-hev2__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 0 80px; /* desktop X: 5rem */
+  display: flex;
+  justify-content: center;
+}
+
+.aew-hev2__content {
+  max-width: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px; /* design-system stacking gap */
+}
+
+/* ── Eyebrow (Subhead — Playfair Display Bold 20px / 100%) ───────────────── */
+.aew-hev2__eyebrow {
+  margin: 0;
+  color: #FFFFFF;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* ── Headline (H1 — Teko SemiBold 80px / 85%) ────────────────────────────── */
+/* Default color only — any Elementor pick (custom hex OR global swatch) is
+   emitted as `{{WRAPPER}} .aew-hev2__headline` (higher specificity) and wins. */
+.aew-hev2__headline {
+  margin: 0;
+  color: #FFFFFF;
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 80px;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+/* ── Description (Paragraph — Lato Regular 18px / 140%) ──────────────────── */
+.aew-hev2__description {
+  margin: 0;
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.aew-hev2__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+/* Buttons — design-system: Teko SemiBold 20px / 85%, pad 20/24/16/24, radius 8 */
+.aew-hev2__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  text-align: center;
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 0.85;
+  text-transform: uppercase;
+  padding: 20px 24px 16px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+/* Primary — design-system default BG #AA7D44, white text, hover #876137.
+   The --aew-hev2-pri-* vars are set inline by render() from the resolved
+   editor values (hex or global colour); the design-system token is the
+   fallback when the user hasn't overridden that slot. This keeps editor and
+   live in sync even for global-bound colours, which Elementor's front-end CSS
+   generator otherwise drops. */
+.aew-hev2__btn--primary {
+  background-color: var(--aew-hev2-pri-bg, var(--notched-cta));
+  color: var(--aew-hev2-pri-text, #FFFFFF);
+}
+
+.aew-hev2__btn--primary:hover,
+.aew-hev2__btn--primary:focus-visible {
+  background-color: var(--aew-hev2-pri-bg-hover, var(--notched-cta-hover));
+  color: var(--aew-hev2-pri-text-hover, #FFFFFF);
+}
+
+.aew-hev2__btn--secondary {
+  background-color: transparent;
+  color: var(--aew-hev2-sec-text, #FFFFFF);
+  border-color: var(--aew-hev2-sec-text, #FFFFFF);
+}
+
+.aew-hev2__btn--secondary:hover,
+.aew-hev2__btn--secondary:focus-visible {
+  background-color: var(--aew-hev2-sec-bg-hover, #FFFFFF);
+  color: var(--aew-hev2-sec-text-hover, var(--notched-text));
+}
+
+/* ── Social proof ────────────────────────────────────────────────────────── */
+.aew-hev2__social {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.aew-hev2__avatars {
+  display: flex;
+  align-items: center;
+}
+
+.aew-hev2__avatar-frame {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 0;
+  background: var(--notched-secondary-cards);
+  flex: none;
+}
+
+.aew-hev2__avatar-frame + .aew-hev2__avatar-frame {
+  margin-left: -24px;
+}
+
+.aew-hev2__avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aew-hev2__rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.aew-hev2__stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: #EBC543;
+  line-height: 0;
+}
+
+.aew-hev2__star {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.aew-hev2__social-text {
+  margin: 0;
+  color: #FFFFFF;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+/* ── Responsive: large desktop (scale content up >1440px) ────────────────── */
+/* Above 1440px the type was reading small on 1920/2560 monitors. Step the whole
+   content block up. font-size carries !important because the Elementor
+   Group_Control_Typography emits `{{WRAPPER}} .aew-hev2__headline { font-size }`
+   at (0,2,0) — higher than a bare class — which would otherwise win at every
+   width. The extra `.aew-hev2` prefix raises specificity for the rest. */
+@media (min-width: 1441px) {
+  .aew-hev2 .aew-hev2__content    { max-width: min(90%, 1100px); gap: 20px; }
+  .aew-hev2 .aew-hev2__eyebrow    { font-size: 24px !important; }
+  .aew-hev2 .aew-hev2__headline   { font-size: 104px !important; }
+  .aew-hev2 .aew-hev2__description{ font-size: 22px !important; max-width: 760px; }
+  .aew-hev2 .aew-hev2__btn        { font-size: 24px !important; padding: 22px 30px 18px; }
+  .aew-hev2 .aew-hev2__avatar-frame { width: 56px; height: 56px; }
+  .aew-hev2 .aew-hev2__avatar-frame + .aew-hev2__avatar-frame { margin-left: -28px; }
+  .aew-hev2 .aew-hev2__star       { width: 20px; height: 20px; }
+  .aew-hev2 .aew-hev2__social-text{ font-size: 17px !important; }
+}
+
+/* Ultra-wide (2560px-class) — push the headline further. */
+@media (min-width: 2000px) {
+  .aew-hev2 .aew-hev2__content    { max-width: min(90%, 1320px); gap: 24px; }
+  .aew-hev2 .aew-hev2__eyebrow    { font-size: 28px !important; }
+  .aew-hev2 .aew-hev2__headline   { font-size: 128px !important; }
+  .aew-hev2 .aew-hev2__description{ font-size: 26px !important; max-width: 880px; }
+  .aew-hev2 .aew-hev2__btn        { font-size: 28px !important; padding: 26px 36px 22px; }
+  .aew-hev2 .aew-hev2__avatar-frame { width: 64px; height: 64px; }
+  .aew-hev2 .aew-hev2__avatar-frame + .aew-hev2__avatar-frame { margin-left: -32px; }
+  .aew-hev2 .aew-hev2__star       { width: 24px; height: 24px; }
+  .aew-hev2 .aew-hev2__social-text{ font-size: 20px !important; }
+}
+
+/* ── Responsive: tablet / small desktop ──────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-hev2 {
+    min-height: 680px;
+  }
+
+  /* On tablet & mobile the social proof sits ABOVE the buttons. */
+  .aew-hev2__content {
+    justify-content: center;
+  }
+  .aew-hev2__social {
+    order: 4;
+  }
+  .aew-hev2__buttons {
+    order: 5;
+  }
+
+  /* Swap the video for the still image on tablet & mobile. */
+  .aew-hev2__video {
+    display: none;
+  }
+
+  .aew-hev2__mobile-image {
+    display: block;
+  }
+
+  .aew-hev2__inner {
+    padding: 64px 40px; /* tablet: 2.5rem X + extra Y room */
+  }
+
+  .aew-hev2__headline {
+    font-size: 64px;
+  }
+}
+
+/* ── Responsive: mobile ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-hev2 {
+    min-height: 680px;
+  }
+
+  .aew-hev2__inner {
+    padding: 56px 40px; /* mobile: 2.5rem X + extra Y room */
+  }
+
+  .aew-hev2__content {
+    gap: 16px; /* design-system stacking gap */
+  }
+
+  /* Eyebrow stays 20px on mobile per design-system (subhead 1.25rem both). */
+
+  .aew-hev2__headline {
+    font-size: 48px; /* design-system H1 mobile */
+  }
+
+  .aew-hev2__description {
+    font-size: 14px;
+  }
+
+  .aew-hev2__buttons {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .aew-hev2__btn {
+    font-size: 16px;
+    padding: 18px 24px 16px;
+  }
+
+  .aew-hev2__social {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .aew-hev2__rating {
+    align-items: center;
+  }
+}

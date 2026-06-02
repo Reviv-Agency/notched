@@ -1,0 +1,85 @@
+/**
+ * Agency Elementor Widgets — typography utilities.
+ * Color variables are injected inline from PHP (:root).
+ */
+
+.aew-font-heading {
+	font-family: var(--aew-font-heading);
+}
+
+.aew-font-body {
+	font-family: var(--aew-font-body);
+}
+
+.aew-text-h1 {
+	font-family: var(--aew-font-heading);
+	font-size: var(--aew-text-h1);
+	line-height: var(--aew-text-h1-lh);
+}
+
+.aew-text-h2 {
+	font-family: var(--aew-font-heading);
+	font-size: var(--aew-text-h2);
+	line-height: var(--aew-text-h2-lh);
+}
+
+.aew-text-h3 {
+	font-family: var(--aew-font-heading);
+	font-size: var(--aew-text-h3);
+	line-height: var(--aew-text-h3-lh);
+}
+
+.aew-text-h4 {
+	font-family: var(--aew-font-heading);
+	font-size: var(--aew-text-h4);
+	line-height: var(--aew-text-h4-lh);
+}
+
+.aew-text-h5 {
+	font-family: var(--aew-font-heading);
+	font-size: var(--aew-text-h5);
+	line-height: var(--aew-text-h5-lh);
+}
+
+.aew-text-subhead {
+	font-family: var(--aew-font-body);
+	font-size: var(--aew-text-subhead);
+	line-height: var(--aew-text-subhead-lh);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.aew-text-p {
+	font-family: var(--aew-font-body);
+	font-size: var(--aew-text-p);
+	line-height: var(--aew-text-p-lh);
+}
+
+.aew-text-p2 {
+	font-family: var(--aew-font-body);
+	font-size: var(--aew-text-p2);
+	line-height: var(--aew-text-p2-lh);
+}
+
+/* WYSIWYG rich text blocks inside AEW widgets */
+.aew-rich-text > *:first-child {
+	margin-top: 0;
+}
+
+.aew-rich-text > *:last-child {
+	margin-bottom: 0;
+}
+
+.aew-rich-text p {
+	margin: 0 0 1em;
+}
+
+.aew-rich-text p:last-child {
+	margin-bottom: 0;
+}
+
+.aew-rich-text strong,
+.aew-rich-text b {
+	font-weight: 700;
+}

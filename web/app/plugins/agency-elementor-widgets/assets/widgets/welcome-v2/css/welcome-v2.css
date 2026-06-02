@@ -1,0 +1,230 @@
+/**
+ * Welcome V2 — Notched
+ * Two-column intro band: eyebrow + Teko heading (left), body + signature +
+ * CTA buttons (right). Full-bleed dark-green background owned by the widget.
+ */
+
+/* Strip Elementor container padding + force full-bleed, even inside a "Boxed"
+   section (which caps the inner .elementor-container). */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-welcome-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-welcome-v2),
+.e-con:has(.elementor-widget-agency-welcome-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+.elementor-section:has(.elementor-widget-agency-welcome-v2),
+.elementor-section:has(.elementor-widget-agency-welcome-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-welcome-v2),
+.e-con:has(.elementor-widget-agency-welcome-v2) > .e-con-inner {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-welc so they don't leak into other widgets. Source of truth
+   is design-system.md. Update there first; copy here second. */
+.aew-welc {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Outer block (full-bleed) ────────────────────────────────────────────── */
+.aew-welc {
+  background: var(--aew-welc-bg, var(--notched-secondary-accent));
+  width: 100%;
+  position: relative;
+}
+
+.aew-welc *,
+.aew-welc *::before,
+.aew-welc *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper — max-width + responsive X/Y padding ──────────────────── */
+.aew-welc__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 100px 80px;   /* Y owned by body_pad_y control; X owned here */
+}
+
+/* ── Two-column grid ─────────────────────────────────────────────────────── */
+.aew-welc__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.aew-welc__col {
+  min-width: 0;
+}
+
+/* ── Eyebrow ─────────────────────────────────────────────────────────────── */
+.aew-welc__eyebrow {
+  margin: 0 0 8px;
+  padding: 0;
+  color: var(--aew-welc-eyebrow, var(--notched-cta));
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── Heading ─────────────────────────────────────────────────────────────── */
+/* Wrapper-class prefix raises specificity to (0,2,0) so the colour beats the
+   Elementor kit's `.elementor-kit-N h1..h6 { color }` rule (0,1,1). */
+.aew-welc .aew-welc__heading {
+  margin: 0;
+  padding: 0;
+  color: var(--aew-welc-heading, var(--notched-cta));
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 80px;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+/* ── Body text ───────────────────────────────────────────────────────────── */
+.aew-welc__body {
+  color: var(--aew-welc-text, #FFFFFF);
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.aew-welc__body p {
+  margin: 0 0 1.25em;
+}
+
+.aew-welc__body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Signature ───────────────────────────────────────────────────────────── */
+.aew-welc__signature {
+  margin: 28px 0 0;
+  padding: 0;
+  color: var(--aew-welc-signature, var(--notched-cta));
+  font-family: 'Dancing Script', 'Brush Script MT', cursive;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.aew-welc__sig-dash {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.aew-welc__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.aew-welc__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  background-color: var(--aew-welc-btn-bg, var(--notched-background));
+  color: var(--aew-welc-btn-text, var(--notched-cta-hover));
+  font-family: 'Teko', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 0.85;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 20px 24px 16px;
+  border: 0;
+  border-radius: 8px;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.aew-welc__btn:hover,
+.aew-welc__btn:focus-visible {
+  background-color: var(--aew-welc-btn-bg-hover, var(--notched-cta));
+  color: var(--aew-welc-btn-text-hover, #FFFFFF);
+}
+
+.aew-welc__btn-arrow {
+  flex: 0 0 auto;
+  transition: transform 0.18s ease;
+}
+
+.aew-welc__btn:hover .aew-welc__btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Responsive: tablet / small desktop ──────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-welc__inner {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .aew-welc__grid {
+    gap: 48px;
+  }
+
+  .aew-welc .aew-welc__heading {
+    font-size: 64px;
+  }
+}
+
+/* ── Responsive: mobile ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-welc__inner {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .aew-welc__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .aew-welc__eyebrow {
+    font-size: 22px;
+  }
+
+  .aew-welc .aew-welc__heading {
+    font-size: 48px;
+  }
+
+  .aew-welc__body {
+    font-size: 16px;
+  }
+
+  .aew-welc__buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .aew-welc__btn {
+    justify-content: center;
+  }
+}
