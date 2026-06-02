@@ -1,0 +1,110 @@
+/**
+ * Recent Posts V2 — Notched.
+ * "Recent Posts  ·  See All" header + a grid of compact vertical post cards
+ * (image on top, title + views/comments/likes beneath).
+ */
+
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-recent-posts-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-recent-posts-v2),
+.e-con:has(.elementor-widget-agency-recent-posts-v2) {
+  --padding-top: 0px; --padding-right: 0px; --padding-bottom: 0px; --padding-left: 0px;
+  padding: 0 !important;
+}
+.elementor-section:has(.elementor-widget-agency-recent-posts-v2),
+.elementor-section:has(.elementor-widget-agency-recent-posts-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-recent-posts-v2) {
+  max-width: 100% !important; width: 100% !important;
+}
+
+.aew-rpv2 {
+  --notched-cards: #FFFFFF; --notched-background: #F6F0EC; --notched-lines: #BFC0BF;
+  --notched-misc-accent: #3B413F; --notched-text: #141C19; --notched-cta: #AA7D44;
+  width: 100%;
+  background-color: var(--aew-rpv2-bg, var(--notched-background));
+}
+.aew-rpv2 *, .aew-rpv2 *::before, .aew-rpv2 *::after { box-sizing: border-box; }
+
+.aew-rpv2__inner {
+  max-width: 1440px; margin: 0 auto; padding: 0 5rem 4rem;
+}
+
+/* ── Head ────────────────────────────────────────────────────────────────── */
+.aew-rpv2__head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  margin-bottom: 1.5rem;
+}
+.aew-rpv2 .aew-rpv2__heading {
+  margin: 0;
+  font-family: "Teko", sans-serif; font-weight: 600; font-size: 28px; line-height: 100%;
+  color: var(--aew-rpv2-heading, var(--notched-text));
+}
+.aew-rpv2__see-all {
+  font-family: "Lato", sans-serif; font-size: 14px; font-weight: 700;
+  color: var(--aew-rpv2-see-all, var(--notched-cta)); text-decoration: none;
+  white-space: nowrap; transition: opacity 0.15s ease;
+}
+.aew-rpv2__see-all:hover { opacity: 0.75; }
+
+/* ── Grid ────────────────────────────────────────────────────────────────── */
+.aew-rpv2__grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.aew-rpv2__card {
+  display: flex; flex-direction: column;
+  background-color: var(--aew-rpv2-card-bg, var(--notched-cards));
+  border: 1px solid var(--aew-rpv2-card-border, var(--notched-lines));
+  border-radius: 20px; overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+.aew-rpv2__card:hover { box-shadow: 0 12px 32px rgba(20,28,25,0.10); }
+
+.aew-rpv2__media { display: block; line-height: 0; }
+.aew-rpv2__img {
+  display: block; width: 100%; height: 180px; object-fit: cover; background-color: #e7ded6;
+}
+.aew-rpv2__img--placeholder {
+  height: 180px; background: linear-gradient(135deg, #e7ded6 0%, #d9cec3 100%);
+}
+
+.aew-rpv2__body { display: flex; flex-direction: column; gap: 14px; padding: 18px 18px 16px; }
+
+.aew-rpv2 .aew-rpv2__title { margin: 0; font-family: "Teko", sans-serif; font-weight: 600; font-size: 20px; line-height: 105%; text-transform: uppercase; }
+.aew-rpv2__title a { color: var(--aew-rpv2-title, var(--notched-text)); text-decoration: none; }
+.aew-rpv2__title a:hover { color: var(--notched-cta); }
+
+.aew-rpv2__footer { display: flex; align-items: center; gap: 18px; margin-top: auto; }
+.aew-rpv2 .aew-rpv2__stat {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: "Lato", sans-serif; font-size: 13px; line-height: 1;
+  color: var(--aew-rpv2-stat, var(--notched-misc-accent)); text-decoration: none;
+}
+/* The like stat is a real <button> now — strip kit chrome, keep it bare. */
+.aew-rpv2 button.aew-rpv2__stat,
+.aew-rpv2 button.aew-rpv2__stat:hover,
+.aew-rpv2 button.aew-rpv2__stat:focus,
+.aew-rpv2 button.aew-rpv2__stat:focus-visible {
+  padding: 0; background: transparent; background-color: transparent;
+  border: 0; box-shadow: none; outline: none; cursor: pointer;
+  color: var(--aew-rpv2-stat, var(--notched-misc-accent));
+}
+.aew-rpv2__icon { width: 16px; height: 16px; }
+.aew-rpv2__views .aew-rpv2__icon, .aew-rpv2__comments .aew-rpv2__icon { fill: currentColor; }
+.aew-rpv2__heart { fill: none; stroke: currentColor; stroke-width: 1.6; transition: fill .15s ease, stroke .15s ease, transform .15s ease; }
+.aew-rpv2__like:hover .aew-rpv2__heart { transform: scale(1.12); }
+.aew-rpv2 button.aew-rpv2__like.is-liked { color: var(--aew-rpv2-like, #D2453F); }
+.aew-rpv2__like.is-liked .aew-rpv2__heart { fill: var(--aew-rpv2-like, #D2453F); stroke: var(--aew-rpv2-like, #D2453F); }
+.aew-rpv2__stat-num { font-variant-numeric: tabular-nums; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-rpv2__inner { padding: 0 2.5rem 4rem; }
+  .aew-rpv2__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+  .aew-rpv2__inner { padding: 0 1rem 2rem; }
+  .aew-rpv2__grid { grid-template-columns: minmax(0, 1fr); }
+  .aew-rpv2__img, .aew-rpv2__img--placeholder { height: 200px; }
+}

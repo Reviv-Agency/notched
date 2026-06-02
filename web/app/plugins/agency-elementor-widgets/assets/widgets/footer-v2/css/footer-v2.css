@@ -148,9 +148,9 @@
   color: var(--aew-fov2-heading, var(--notched-cta-hover));
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 30px;
   line-height: 1;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
@@ -180,7 +180,7 @@
   text-decoration: none;
   font-family: var(--aew-teko);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 22px;
   line-height: 1;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -346,11 +346,11 @@
   }
 
   .aew-fov2__heading {
-    font-size: 18px;
+    font-size: 24px;
   }
 
   .aew-fov2__link {
-    font-size: 16px;
+    font-size: 19px;
   }
 
   .aew-fov2__bottom {

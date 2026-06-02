@@ -1,0 +1,470 @@
+/**
+ * Post Archive V2 — Notched ("All Posts" blog index).
+ * Vertical list of cards: image on the left, copy on the right.
+ * Each card: date · read-time + 3-dot Share menu, title, excerpt, and a
+ * like / view / comment stat row. New cards stream in on scroll (infinite load).
+ */
+
+/* Strip Elementor container padding + force full-bleed so the section band
+   spans edge-to-edge (the inner wrapper re-applies the max-width). */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-post-archive-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-post-archive-v2),
+.e-con:has(.elementor-widget-agency-post-archive-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+.elementor-section:has(.elementor-widget-agency-post-archive-v2),
+.elementor-section:has(.elementor-widget-agency-post-archive-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-post-archive-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Brand tokens ────────────────────────────────────────────────────────── */
+/* Scoped to .aew-pav2 so they don't leak. Source of truth is design-system.md. */
+.aew-pav2 {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* ── Outer block (full-bleed background) ─────────────────────────────────── */
+.aew-pav2 {
+  width: 100%;
+  background-color: var(--aew-pav2-bg, var(--notched-background));
+}
+
+.aew-pav2 *,
+.aew-pav2 *::before,
+.aew-pav2 *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper (max-width + X padding) ───────────────────────────────── */
+.aew-pav2__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 4rem 5rem;            /* desktop Y 64px / X 5rem */
+}
+
+/* ── Heading ─────────────────────────────────────────────────────────────── */
+.aew-pav2 .aew-pav2__heading {
+  margin: 0 0 2rem;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 100%;
+  color: var(--aew-pav2-heading, var(--notched-text));
+}
+
+/* ── List ────────────────────────────────────────────────────────────────── */
+.aew-pav2__list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.aew-pav2__card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  background-color: var(--aew-pav2-card-bg, var(--notched-cards));
+  border: 1px solid var(--aew-pav2-card-border, var(--notched-lines));
+  border-radius: 24px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.aew-pav2__card:hover {
+  box-shadow: 0 12px 32px rgba(20, 28, 25, 0.10);
+}
+
+/* New cards fade up as they're appended. */
+.aew-pav2__card[data-aew-pav2-new] {
+  animation: aew-pav2-in 0.45s ease both;
+}
+
+@keyframes aew-pav2-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Media (image) ───────────────────────────────────────────────────────── */
+.aew-pav2__media {
+  position: relative;
+  display: block;
+  min-height: 100%;
+  background-color: #e7ded6;
+}
+
+.aew-pav2__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  object-fit: cover;
+}
+
+.aew-pav2__img--placeholder {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  background:
+    linear-gradient(135deg, #e7ded6 0%, #d9cec3 100%);
+}
+
+/* ── Body (copy column) ──────────────────────────────────────────────────── */
+/* Fill the full grid-cell height so `margin-top:auto` on the footer can pin the
+   stat row to the bottom no matter how short the title/excerpt is. */
+.aew-pav2__body {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  height: 100%;
+  padding: 28px 32px;
+}
+
+/* ── Top row: meta + share ───────────────────────────────────────────────── */
+.aew-pav2__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.aew-pav2__meta {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--aew-pav2-meta, var(--notched-misc-accent));
+}
+
+.aew-pav2__dot { margin: 0 0.4em; }
+
+/* Reset any inherited button chrome from the Elementor kit (background, border,
+   shadow) on our icon buttons — they must read as bare icons. Scoped with the
+   wrapper class to beat the kit's `.elementor-kit-N button` rule. */
+.aew-pav2 button.aew-pav2__share-btn,
+.aew-pav2 button.aew-pav2__like,
+.aew-pav2 button.aew-pav2__share-btn:hover,
+.aew-pav2 button.aew-pav2__like:hover,
+.aew-pav2 button.aew-pav2__share-btn:focus,
+.aew-pav2 button.aew-pav2__like:focus {
+  background: transparent;
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+/* Keep the like button's icon color even after the reset above: the kit's
+   `button { color }` rule would otherwise win and blank the outline heart. */
+.aew-pav2 button.aew-pav2__like {
+  color: var(--aew-pav2-stat, var(--notched-misc-accent));
+  padding-left: 0;
+}
+
+.aew-pav2 button.aew-pav2__like.is-liked {
+  color: var(--aew-pav2-like, #D2453F);
+}
+
+/* ── Share (3-dot menu) ──────────────────────────────────────────────────── */
+.aew-pav2__share {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.aew-pav2__share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.aew-pav2__share-btn:hover,
+.aew-pav2__share-btn[aria-expanded="true"] {
+  background-color: transparent;
+}
+
+.aew-pav2__share-btn:hover .aew-pav2__dots span {
+  background-color: var(--aew-pav2-title-hover, var(--notched-cta));
+}
+
+.aew-pav2__dots {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.aew-pav2__dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--aew-pav2-stat, var(--notched-misc-accent));
+}
+
+.aew-pav2__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 5;
+  min-width: 140px;
+  padding: 6px;
+  background-color: var(--notched-cards);
+  border: 1px solid var(--aew-pav2-divider, var(--notched-lines));
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(20, 28, 25, 0.14);
+}
+
+.aew-pav2__menu[hidden] { display: none; }
+
+.aew-pav2__menu-item {
+  display: block;
+  width: 100%;
+  padding: 9px 12px;
+  font-family: "Lato", sans-serif;
+  font-size: 15px;
+  text-align: left;
+  color: var(--notched-text);
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.aew-pav2__menu-item:hover,
+.aew-pav2__menu-item:focus-visible {
+  background-color: rgba(20, 28, 25, 0.06);
+  outline: none;
+}
+
+.aew-pav2__menu-item.is-copied {
+  color: var(--notched-secondary-bg);
+  font-weight: 700;
+}
+
+/* ── Title ───────────────────────────────────────────────────────────────── */
+.aew-pav2 .aew-pav2__title {
+  margin: 18px 0 0;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.aew-pav2__title a {
+  color: var(--aew-pav2-title, var(--notched-text));
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.aew-pav2__title a:hover,
+.aew-pav2__title a:focus-visible {
+  color: var(--aew-pav2-title-hover, var(--notched-cta));
+}
+
+/* ── Excerpt ─────────────────────────────────────────────────────────────── */
+.aew-pav2__excerpt {
+  margin: 14px 0 0;
+  padding-bottom: 20px;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  color: var(--aew-pav2-excerpt, var(--notched-text));
+}
+
+/* ── Footer stat row ─────────────────────────────────────────────────────── */
+/* `margin-top:auto` pins the stat row to the bottom of the full-height body so
+   it's always at the card's bottom edge regardless of title/excerpt length.
+   `margin-top` (not a competing fixed value) must stay `auto`; the 22px minimum
+   gap above the divider comes from the body content's own bottom spacing +
+   this padding-top, so short and tall cards both look right. */
+.aew-pav2__footer {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: auto;
+  padding-top: 22px;
+  border-top: 1px solid var(--aew-pav2-divider, var(--notched-lines));
+}
+
+.aew-pav2__stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--aew-pav2-stat, var(--notched-misc-accent));
+  background: transparent;
+  border: 0;
+  text-decoration: none;
+}
+
+a.aew-pav2__stat,
+button.aew-pav2__stat { cursor: pointer; }
+
+.aew-pav2__icon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+/* View + comment icons read better filled. Heart is outline until liked. */
+.aew-pav2__views .aew-pav2__icon,
+.aew-pav2__comments .aew-pav2__icon {
+  fill: currentColor;
+  stroke: none;
+}
+
+.aew-pav2__like .aew-pav2__icon {
+  fill: none;
+  stroke: currentColor;
+  transition: fill 0.15s ease, stroke 0.15s ease, transform 0.15s ease;
+}
+
+.aew-pav2__like:hover .aew-pav2__icon { transform: scale(1.12); }
+
+.aew-pav2__like.is-liked {
+  color: var(--aew-pav2-like, #D2453F);
+}
+
+.aew-pav2__like.is-liked .aew-pav2__icon {
+  fill: var(--aew-pav2-like, #D2453F);
+  stroke: var(--aew-pav2-like, #D2453F);
+}
+
+.aew-pav2__like:focus-visible,
+.aew-pav2__share-btn:focus-visible {
+  outline: 2px solid var(--notched-secondary-bg);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.aew-pav2__stat-num { font-variant-numeric: tabular-nums; }
+
+.aew-pav2__empty {
+  font-family: "Lato", sans-serif;
+  font-size: 18px;
+  color: var(--notched-text);
+}
+
+/* ── Load more / spinner ─────────────────────────────────────────────────── */
+.aew-pav2__more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 56px;
+  margin-top: 40px;
+}
+
+.aew-pav2__more-btn {
+  padding: 20px 24px 16px;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 85%;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  background-color: var(--notched-cta);
+  border: 1px solid var(--notched-cta);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.aew-pav2__more-btn:hover,
+.aew-pav2__more-btn:focus-visible {
+  background-color: var(--notched-cta-hover);
+  border-color: var(--notched-cta-hover);
+}
+
+.aew-pav2__more-btn[hidden] { display: none; }
+
+.aew-pav2__spinner {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.aew-pav2__spinner[hidden] { display: none; }
+
+.aew-pav2__spinner span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--notched-cta);
+  animation: aew-pav2-bounce 0.9s ease-in-out infinite;
+}
+
+.aew-pav2__spinner span:nth-child(2) { animation-delay: 0.15s; }
+.aew-pav2__spinner span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes aew-pav2-bounce {
+  0%, 80%, 100% { transform: scale(0.5); opacity: 0.4; }
+  40%           { transform: scale(1);   opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aew-pav2__card[data-aew-pav2-new],
+  .aew-pav2__spinner span,
+  .aew-pav2__like .aew-pav2__icon { animation: none; transition: none; }
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-pav2__inner { padding: 4rem 2.5rem; }
+  .aew-pav2__card { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr); }
+  .aew-pav2__body { padding: 24px 24px; }
+  .aew-pav2 .aew-pav2__title { font-size: 26px; }
+}
+
+/* ── Mobile (stacked: image on top, copy below) ──────────────────────────── */
+@media (max-width: 768px) {
+  .aew-pav2__inner { padding: 2rem 1rem; }
+
+  .aew-pav2 .aew-pav2__heading { font-size: 28px; margin-bottom: 1.5rem; }
+
+  .aew-pav2__list { gap: 24px; }
+
+  .aew-pav2__card { grid-template-columns: minmax(0, 1fr); }
+
+  .aew-pav2__img,
+  .aew-pav2__img--placeholder { min-height: 220px; max-height: 280px; }
+
+  .aew-pav2__body { padding: 18px 18px 20px; }
+
+  .aew-pav2 .aew-pav2__title { font-size: 22px; }
+
+  .aew-pav2__excerpt { font-size: 14px; }
+
+  .aew-pav2__footer { gap: 18px; }
+}

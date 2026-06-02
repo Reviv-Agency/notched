@@ -276,6 +276,43 @@ final class Widget_Assets {
 				'style_deps' => [ 'aew-tokens' ],
 			]
 		);
+
+		self::register_widget(
+			'post-archive-v2',
+			[
+				'style'      => 'css/post-archive-v2.css',
+				'script'     => 'js/post-archive-v2.js',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
+
+		self::register_widget(
+			'single-post-v2',
+			[
+				'style'      => 'css/single-post-v2.css',
+				'script'     => 'js/single-post-v2.js',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
+
+		self::register_widget(
+			'recent-posts-v2',
+			[
+				'style'      => 'css/recent-posts-v2.css',
+				'script'     => 'js/recent-posts-v2.js',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
+
+		self::register_widget(
+			'comments-v2',
+			[
+				'style'       => 'css/comments-v2.css',
+				'script'      => 'js/comments-v2.js',
+				'style_deps'  => [ 'aew-tokens' ],
+				'script_deps' => [ 'comment-reply' ],
+			]
+		);
 	}
 
 	/**

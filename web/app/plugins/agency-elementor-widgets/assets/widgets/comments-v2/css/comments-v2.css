@@ -1,0 +1,226 @@
+/**
+ * Comments V2 — Notched.
+ * Native WP comments (list + form) inside a brand card.
+ */
+
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-comments-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-comments-v2),
+.e-con:has(.elementor-widget-agency-comments-v2) {
+  --padding-top: 0px; --padding-right: 0px; --padding-bottom: 0px; --padding-left: 0px;
+  padding: 0 !important;
+}
+.elementor-section:has(.elementor-widget-agency-comments-v2),
+.elementor-section:has(.elementor-widget-agency-comments-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-comments-v2) {
+  max-width: 100% !important; width: 100% !important;
+}
+
+.aew-cmv2 {
+  --notched-cards: #FFFFFF; --notched-background: #F6F0EC; --notched-lines: #BFC0BF;
+  --notched-misc-accent: #3B413F; --notched-secondary-bg: #2A4F41;
+  --notched-text: #141C19; --notched-cta: #AA7D44; --notched-cta-hover: #876137;
+  width: 100%;
+  background-color: var(--aew-cmv2-bg, var(--notched-background));
+}
+.aew-cmv2 *, .aew-cmv2 *::before, .aew-cmv2 *::after { box-sizing: border-box; }
+
+.aew-cmv2__inner { max-width: 1440px; margin: 0 auto; padding: 0 5rem 4rem; }
+
+.aew-cmv2__card {
+  max-width: 760px; margin: 0 auto; padding: 36px 48px;
+  background-color: var(--aew-cmv2-card-bg, var(--notched-cards));
+  border: 1px solid var(--aew-cmv2-card-border, var(--notched-lines));
+  border-radius: 24px;
+}
+
+.aew-cmv2 .aew-cmv2__heading {
+  margin: 0 0 20px;
+  font-family: "Teko", sans-serif; font-weight: 600; font-size: 28px; line-height: 100%;
+  color: var(--aew-cmv2-heading, var(--notched-text));
+}
+
+/* ── Comment list (native) ───────────────────────────────────────────────── */
+/* Flat list: 25px between every comment (including threaded replies — they are
+   not visually indented). */
+.aew-cmv2__list { list-style: none; margin: 0 0 32px; padding: 0; }
+.aew-cmv2__list .children { list-style: none; margin: 25px 0 0; padding: 0; }
+.aew-cmv2__list li.comment { padding: 0; margin: 0 0 25px; }
+.aew-cmv2__list li.comment:last-child { margin-bottom: 0; }
+
+.aew-cmv2 .comment-body {
+  padding: 28px 36px;
+  background-color: var(--notched-background);
+  border: 1px solid var(--aew-cmv2-field-border, var(--notched-lines));
+  border-radius: 16px;
+}
+
+/* Meta header: avatar (left) + author name; date pushed to the right. */
+.aew-cmv2 .comment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 4px;
+  margin: 0 0 10px;
+}
+.aew-cmv2 .comment-author {
+  display: flex; align-items: center; gap: 6px;
+  font-family: "Lato", sans-serif;
+}
+.aew-cmv2 .comment-author .avatar {
+  width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+  margin-left: 55px;
+}
+.aew-cmv2 .comment-author .fn {
+  font-weight: 700; font-style: normal; font-size: 15px;
+  color: var(--aew-cmv2-text, var(--notched-text));
+}
+.aew-cmv2 .comment-author .fn a { color: inherit; text-decoration: none; }
+/* "says:" is redundant noise — hide it for a cleaner header. */
+.aew-cmv2 .comment-author .says { display: none; }
+
+.aew-cmv2 .comment-metadata {
+  margin-left: auto;
+  font-family: "Lato", sans-serif; font-size: 12px;
+  color: var(--notched-misc-accent);
+}
+.aew-cmv2 .comment-metadata a { color: var(--notched-misc-accent); text-decoration: none; }
+.aew-cmv2 .comment-metadata a:hover { color: var(--notched-cta); }
+.aew-cmv2 .comment-metadata .edit-link { margin-left: 10px; }
+.aew-cmv2 .comment-metadata .edit-link a { color: var(--notched-cta); }
+
+.aew-cmv2 .comment-content {
+  font-family: "Lato", sans-serif; font-size: 15px; line-height: 1.55;
+  color: var(--aew-cmv2-text, var(--notched-text));
+}
+.aew-cmv2 .comment-content p { margin: 0 0 0.6em; }
+.aew-cmv2 .comment-content p:last-child { margin-bottom: 0; }
+
+.aew-cmv2 .reply { margin-top: 12px; }
+.aew-cmv2 .reply a {
+  display: inline-flex; align-items: center;
+  font-family: "Teko", sans-serif; font-size: 16px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--notched-cta); text-decoration: none;
+  transition: color 0.15s ease;
+}
+.aew-cmv2 .reply a:hover { color: var(--notched-cta-hover); }
+
+/* ── Comment form ────────────────────────────────────────────────────────── */
+/* The form id is #commentform; its class is aew-cmv2__form (default
+   .comment-form class was overridden), so target both. */
+.aew-cmv2 .aew-cmv2__form,
+.aew-cmv2 #commentform { margin: 0; display: flex; flex-direction: column; gap: 14px; }
+
+.aew-cmv2__field { margin: 0; }
+
+.aew-cmv2 #commentform input[type="text"],
+.aew-cmv2 #commentform input[type="email"],
+.aew-cmv2 #commentform input[type="url"],
+.aew-cmv2 .aew-cmv2__textarea,
+.aew-cmv2 #commentform textarea {
+  width: 100%; padding: 14px 16px;
+  font-family: "Lato", sans-serif; font-size: 15px; color: var(--aew-cmv2-text, var(--notched-text));
+  background-color: var(--notched-cards);
+  border: 1px solid var(--aew-cmv2-field-border, var(--notched-lines));
+  border-radius: 12px; outline: none;
+  transition: border-color 0.15s ease;
+}
+.aew-cmv2 #commentform input:focus,
+.aew-cmv2 #commentform textarea:focus { border-color: var(--notched-cta); }
+.aew-cmv2 .aew-cmv2__textarea { resize: vertical; min-height: 100px; }
+
+/* Name/Email fields (shown to logged-out visitors). */
+.aew-cmv2 .comment-form-author label,
+.aew-cmv2 .comment-form-email label,
+.aew-cmv2 .comment-form-url label,
+.aew-cmv2 .comment-form-cookies-consent label,
+.aew-cmv2 .comment-notes,
+.aew-cmv2 .logged-in-as {
+  font-family: "Lato", sans-serif; font-size: 13px; color: var(--notched-misc-accent);
+  display: block; margin-bottom: 4px;
+}
+.aew-cmv2 .comment-form-cookies-consent { flex-direction: row; align-items: center; gap: 8px; }
+.aew-cmv2 .comment-form-cookies-consent label { margin-bottom: 0; }
+
+.aew-cmv2 .aew-cmv2__submit,
+.aew-cmv2 .form-submit .submit,
+.aew-cmv2 #commentform .submit {
+  align-self: flex-end;
+  padding: 16px 28px 13px;
+  font-family: "Teko", sans-serif; font-weight: 600; font-size: 18px; line-height: 85%;
+  text-transform: uppercase; letter-spacing: 0.02em;
+  color: #FFFFFF; background-color: var(--aew-cmv2-btn-bg, var(--notched-cta));
+  border: 0; border-radius: 8px; cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+.aew-cmv2 .aew-cmv2__submit:hover,
+.aew-cmv2 .form-submit .submit:hover,
+.aew-cmv2 #commentform .submit:hover { background-color: var(--aew-cmv2-btn-bg-hover, var(--notched-cta-hover)); }
+
+.aew-cmv2__note { margin: 12px 0 0; font-family: "Lato", sans-serif; font-size: 13px; font-style: italic; color: var(--notched-misc-accent); }
+
+/* AJAX submit status line. */
+.aew-cmv2 .aew-cmv2__status {
+  margin: 12px 0 0;
+  font-family: "Lato", sans-serif; font-size: 14px;
+  color: var(--notched-misc-accent);
+}
+.aew-cmv2 .aew-cmv2__status[hidden] { display: none; }
+.aew-cmv2 .aew-cmv2__status--ok { color: var(--notched-secondary-bg); font-weight: 700; }
+.aew-cmv2 .aew-cmv2__status--error { color: #B23B36; }
+
+/* Freshly-injected comment fades in. */
+.aew-cmv2 li.comment[data-aew-cmv2-new] { animation: aew-cmv2-in 0.4s ease both; }
+@keyframes aew-cmv2-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .aew-cmv2 li.comment[data-aew-cmv2-new] { animation: none; }
+}
+
+/* ── Override hello-elementor theme.css #comments rules ──────────────────────
+   The active theme styles `#comments .comment .comment-body` etc. at ID
+   specificity, which beats our class rules and removes the card look (it adds a
+   bottom border, zero side padding, absolute-positioned avatar). Our card uses
+   id="comments", so we re-assert our design at matching/higher specificity. */
+#comments.aew-cmv2__card .comment .comment-body,
+#comments.aew-cmv2__card .pingback .comment-body {
+  display: block;                       /* theme forces flex-column */
+  border-block-end: 0;                  /* drop the theme's divider line */
+  border: 1px solid var(--aew-cmv2-field-border, var(--notched-lines));
+  border-radius: 16px;
+  background-color: var(--notched-background);
+  padding: 50px 36px;                   /* 50px top/bottom as requested */
+}
+
+/* Avatar: theme makes it absolute/float — keep it inline in our flex header. */
+#comments.aew-cmv2__card .comment .avatar,
+#comments.aew-cmv2__card .pingback .avatar {
+  position: static;
+  float: none;
+  margin: 0;
+  left: auto; right: auto;
+}
+
+#comments.aew-cmv2__card .comment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;          /* theme uses space-between */
+  margin-block-end: 1.5rem;             /* 1.5rem as requested */
+}
+
+#comments.aew-cmv2__card .comment-metadata,
+#comments.aew-cmv2__card .reply { font-size: inherit; line-height: inherit; }
+
+/* 25px gap between comment boxes (theme relied on the divider border instead). */
+#comments.aew-cmv2__card .aew-cmv2__list li.comment { margin: 0 0 25px; }
+#comments.aew-cmv2__card .aew-cmv2__list li.comment:last-child { margin-bottom: 0; }
+#comments.aew-cmv2__card .aew-cmv2__list .children { margin: 25px 0 0; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) { .aew-cmv2__inner { padding: 0 2.5rem 4rem; } }
+@media (max-width: 768px) {
+  .aew-cmv2__inner { padding: 0 1rem 2rem; }
+  .aew-cmv2__card { padding: 24px 20px; border-radius: 20px; }
+}
