@@ -8,7 +8,14 @@
       "Bash(curl -s -k https://notched.test/?nocache=__TRACKED_VAR__)",
       "Bash(curl -sI -k https://notched.test/)",
       "Bash(curl -s -k -o /dev/null -w \"sw.js -> %{http_code}\\\\n\" https://notched.test/sw.js)",
-      "Bash(curl -s -k https://notched.test/?v=__TRACKED_VAR__)"
+      "Bash(curl -s -k https://notched.test/?v=__TRACKED_VAR__)",
+      "Bash(echo \"version: $\\(wp post meta get 259 _elementor_version --path=web/wp \\)\")",
+      "Bash(echo \"page_settings present: $\\(wp post meta get 259 _elementor_page_settings --path=web/wp)",
+      "Bash(head -1 home_elementor_data.json)",
+      "Bash(grep -v \"^PHP:.*deprecated\\\\|^Deprecated\\\\|^#[0-9]:\\\\|^  'trace'\\\\|^\\),\\\\$\\\\|^\\)\\\\$\\\\|^array \\(\" home_post_content.txt)",
+      "Bash(cp home_post_content.txt home_post_content.clean.txt)",
+      "Bash(scp -o StrictHostKeyChecking=accept-new home_elementor_data.clean.json root@5.78.76.145:/tmp/home_elementor_data.json)",
+      "Bash(ssh root@5.78.76.145 'wc -c /tmp/home_elementor_data.json; python3 -c \"import json; print\\(\\\\\"server JSON OK, sections:\\\\\", len\\(json.load\\(open\\(\\\\\"/tmp/home_elementor_data.json\\\\\"\\)\\)\\)\\)\" 2>&1')"
     ]
   }
 }

@@ -230,7 +230,7 @@ button.aew-faqv2__share-btn {
 .aew-faqv2__trigger {
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;       /* icon stays top-aligned when text wraps */
   justify-content: space-between;
   gap: 16px;
   cursor: pointer;
@@ -241,6 +241,10 @@ button.aew-faqv2__share-btn {
 
 .aew-faqv2__question {
   margin: 0;
+  flex: 1 1 auto;                 /* take remaining space and shrink to fit */
+  min-width: 0;                   /* allow the flex item to wrap instead of overflow */
+  white-space: normal;            /* override nowrap inherited from <button> */
+  overflow-wrap: anywhere;        /* break very long words if needed */
   font-family: var(--aew-faqv2-teko);
   font-weight: 600;
   font-size: 18px;
@@ -251,8 +255,9 @@ button.aew-faqv2__share-btn {
 }
 
 .aew-faqv2__icon {
-  flex: 0 0 auto;
+  flex: 0 0 auto;                 /* never shrink — the +/- always stays visible */
   display: inline-flex;
+  margin-top: 1px;               /* optical align with first line of text */
   color: var(--aew-faqv2-icon, var(--notched-text));
 }
 
