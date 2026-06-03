@@ -280,15 +280,16 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 		$this->add_responsive_control(
 			'panel_min_height',
 			[
-				'label'          => esc_html__( 'Panel height', 'agency-elementor-widgets' ),
+				'label'          => esc_html__( 'Image / panel height', 'agency-elementor-widgets' ),
 				'type'           => Controls_Manager::SLIDER,
 				'size_units'     => [ 'px' ],
-				'range'          => [ 'px' => [ 'min' => 320, 'max' => 900 ] ],
-				'default'        => [ 'unit' => 'px', 'size' => 600 ],
-				'tablet_default' => [ 'unit' => 'px', 'size' => 520 ],
-				'description'    => esc_html__( 'Minimum height of each image panel on desktop and tablet. On mobile the dedicated mobile image-height control takes over.', 'agency-elementor-widgets' ),
+				'range'          => [ 'px' => [ 'min' => 200, 'max' => 900 ] ],
+				'default'        => [ 'unit' => 'px', 'size' => 400 ],
+				'tablet_default' => [ 'unit' => 'px', 'size' => 400 ],
+				'mobile_default' => [ 'unit' => 'px', 'size' => 400 ],
+				'description'    => esc_html__( 'Exact height of each image panel (desktop, tablet and mobile).', 'agency-elementor-widgets' ),
 				'selectors'      => [
-					'{{WRAPPER}} .aew-rgcv2__panel' => 'min-height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .aew-rgcv2__panel' => 'height: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -296,68 +297,14 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 		$this->add_responsive_control(
 			'card_inset',
 			[
-				'label'          => esc_html__( 'Card inset from image edge', 'agency-elementor-widgets' ),
+				'label'          => esc_html__( 'Card gap from bottom of image', 'agency-elementor-widgets' ),
 				'type'           => Controls_Manager::SLIDER,
 				'size_units'     => [ 'px' ],
-				'description'    => esc_html__( 'How much image shows around the floating text card (desktop). On mobile the card is anchored to the bottom with the padding below.', 'agency-elementor-widgets' ),
+				'description'    => esc_html__( 'Distance between the text card and the bottom edge of the image (desktop, tablet and mobile). The card is anchored to the bottom.', 'agency-elementor-widgets' ),
 				'range'          => [ 'px' => [ 'min' => 0, 'max' => 160 ] ],
-				'default'        => [ 'unit' => 'px', 'size' => 80 ],
+				'default'        => [ 'unit' => 'px', 'size' => 40 ],
 				'selectors'      => [
 					'{{WRAPPER}} .aew-rgcv2__panel' => '--aew-rgcv2-inset: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		// ── Mobile sizing ───────────────────────────────────────────────────
-		$this->add_control(
-			'mobile_heading',
-			[
-				'label'     => esc_html__( 'Mobile', 'agency-elementor-widgets' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'mobile_image_height',
-			[
-				'label'      => esc_html__( 'Image height (mobile)', 'agency-elementor-widgets' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range'      => [ 'px' => [ 'min' => 240, 'max' => 640 ] ],
-				'default'    => [ 'unit' => 'px', 'size' => 400 ],
-				'selectors'  => [
-					'{{WRAPPER}} .aew-rgcv2__panel' => '--aew-rgcv2-mobile-h: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'mobile_card_height',
-			[
-				'label'       => esc_html__( 'Card height (mobile, % of image)', 'agency-elementor-widgets' ),
-				'type'        => Controls_Manager::SLIDER,
-				'size_units'  => [ '%' ],
-				'range'       => [ '%' => [ 'min' => 30, 'max' => 90 ] ],
-				'default'     => [ 'unit' => '%', 'size' => 50 ],
-				'description' => esc_html__( 'The text card sits at the bottom of the image and takes this share of its height.', 'agency-elementor-widgets' ),
-				'selectors'   => [
-					'{{WRAPPER}} .aew-rgcv2__panel' => '--aew-rgcv2-mobile-card-h: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'mobile_card_gap',
-			[
-				'label'       => esc_html__( 'Card padding from image edge (mobile)', 'agency-elementor-widgets' ),
-				'type'        => Controls_Manager::SLIDER,
-				'size_units'  => [ 'px' ],
-				'range'       => [ 'px' => [ 'min' => 0, 'max' => 40 ] ],
-				'default'     => [ 'unit' => 'px', 'size' => 10 ],
-				'description' => esc_html__( 'Bottom + horizontal gap between the card and the image edge on mobile.', 'agency-elementor-widgets' ),
-				'selectors'   => [
-					'{{WRAPPER}} .aew-rgcv2__panel' => '--aew-rgcv2-mobile-gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);

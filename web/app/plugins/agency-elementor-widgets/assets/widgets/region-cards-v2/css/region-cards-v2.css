@@ -70,12 +70,15 @@
 
 /* ── Panel = image + overlaid card ───────────────────────────────────────── */
 .aew-rgcv2__panel {
-  --aew-rgcv2-inset: 80px;
+  --aew-rgcv2-inset: 40px;
   position: relative;
   display: flex;
-  align-items: center;
+  /* Card is anchored to the BOTTOM of the image, centered horizontally, with a
+     gutter from the bottom edge driven by --aew-rgcv2-inset (the "Card inset"
+     control; default 40px). */
+  align-items: flex-end;
   justify-content: center;
-  min-height: 600px;
+  min-height: 400px;
   /* No hard padding here — that would cap the card's max size. The card's own
      `width` control is fully authoritative: 100% = full-bleed (card fills the
      panel edge to edge), smaller % or a px value shrinks it, and it stays
@@ -112,10 +115,11 @@
      The flex parent centers it horizontally — so we must NOT add horizontal
      margin (that would fight the width and force overflow/shrink). */
   width: 100%;
-  /* The "Card inset" control feeds --aew-rgcv2-inset as a VERTICAL gutter only
-     (breathing room above/below the card over the image). Horizontal stays 0 so
-     `card_width` is the sole horizontal authority and 100% reaches both edges. */
-  margin: var(--aew-rgcv2-inset, 0) 0;
+  /* Card is bottom-anchored by the panel (align-items:flex-end). The "Card
+     inset" control feeds --aew-rgcv2-inset as the BOTTOM gap from the image edge
+     (default 40px). Horizontal margin stays 0 so `card_width` is the sole
+     horizontal authority and 100% reaches both edges (full-bleed). */
+  margin: 0 0 var(--aew-rgcv2-inset, 40px);
   padding: 48px 40px;
   text-align: center;
   background-color: var(--aew-rgcv2-card-bg, var(--notched-background));
@@ -202,31 +206,20 @@
   }
 
   .aew-rgcv2__panel {
-    --aew-rgcv2-mobile-h: 400px;
-    --aew-rgcv2-mobile-card-h: 50%;
-    --aew-rgcv2-mobile-gap: 10px;
-    min-height: 0;
-    height: var(--aew-rgcv2-mobile-h);
-    /* Mobile uses the gap-based card margin below, not the desktop inset
-       safe-area padding. */
-    padding: 0;
+    /* Same as desktop: 400px image, card bottom-anchored. The panel_min_height
+       control sets the exact height (height + min-height) at all breakpoints. */
     align-items: flex-end;       /* card anchored to the bottom */
     justify-content: center;
     border-radius: 12px;
   }
 
-  /* Card pinned to the bottom: takes a share of the image height, inset by the
-     mobile gap on the bottom + both sides. The desktop width control is
-     overridden here so the bottom-anchored layout is preserved. */
+  /* Card sits at the bottom with the same inset gap as desktop (default 40px),
+     auto height (sizes to its content), centered horizontally. */
   .aew-rgcv2__card {
-    width: calc(100% - (var(--aew-rgcv2-mobile-gap) * 2));
-    max-width: none;
-    height: var(--aew-rgcv2-mobile-card-h);
-    margin: 0 var(--aew-rgcv2-mobile-gap) var(--aew-rgcv2-mobile-gap);
-    padding: 16px;
+    height: auto;
+    margin: 0 0 var(--aew-rgcv2-inset, 40px);
+    padding: 24px 20px;
     border-radius: 20px;
-    justify-content: center;
-    overflow: auto;
   }
 
   .aew-rgcv2__title {
