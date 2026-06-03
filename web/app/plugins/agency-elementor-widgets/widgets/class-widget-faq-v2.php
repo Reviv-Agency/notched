@@ -221,14 +221,14 @@ class Widget_Faq_V2 extends Widget_Base {
 			'size_units' => [ 'px' ],
 			'range'      => [ 'px' => [ 'min' => 0, 'max' => 64 ] ],
 			'default'    => [ 'unit' => 'px', 'size' => 0 ],
-			'selectors'  => [ '{{WRAPPER}} .aew-faqv2__panel' => 'border-radius: {{SIZE}}{{UNIT}};' ],
+			'selectors'  => [ '{{WRAPPER}} .aew-faqv2__shell' => 'border-radius: {{SIZE}}{{UNIT}};' ],
 		] );
 		$this->add_responsive_control( 'panel_padding', [
 			'label'      => 'Panel padding',
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [ 'px' ],
 			'default'        => [ 'top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0', 'unit' => 'px', 'isLinked' => false ],
-			'selectors'  => [ '{{WRAPPER}} .aew-faqv2__panel' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
+			'selectors'  => [ '{{WRAPPER}} .aew-faqv2__shell' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
 		] );
 
 		$this->end_controls_section();
@@ -460,7 +460,7 @@ class Widget_Faq_V2 extends Widget_Base {
 		<section class="aew-faqv2<?php echo $has_sidebar ? ' aew-faqv2--has-sidebar' : ''; ?>"
 			data-aew-faq-v2<?php echo $style_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped via esc_attr above ?>>
 			<div class="aew-faqv2__inner">
-			<div class="aew-faqv2__panel">
+			<div class="aew-faqv2__shell">
 
 				<!-- Header: title + search -->
 				<div class="aew-faqv2__header">
@@ -567,7 +567,7 @@ class Widget_Faq_V2 extends Widget_Base {
 						</div>
 					</div><!-- /.aew-faqv2__main -->
 				</div><!-- /.aew-faqv2__layout -->
-			</div><!-- /.aew-faqv2__panel -->
+			</div><!-- /.aew-faqv2__shell -->
 			</div><!-- /.aew-faqv2__inner -->
 		</section>
 		<?php

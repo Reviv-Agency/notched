@@ -66,11 +66,11 @@
   padding: 64px 80px;         /* banded widget: section Y + desktop X */
 }
 
-/* ── Inner panel ─────────────────────────────────────────────────────────── */
-/* Wraps the FAQ content so it can have its own background + rounded corners,
-   distinct from the outer full-bleed band. Default: transparent, no radius
-   (so existing instances are visually unchanged). */
-.aew-faqv2__panel {
+/* ── Inner shell ─────────────────────────────────────────────────────────── */
+/* Wraps the whole FAQ (header + layout) so it can have its own background +
+   rounded corners, distinct from the outer full-bleed band AND from the
+   per-answer .aew-faqv2__panel regions. Default: transparent, no radius. */
+.aew-faqv2__shell {
   background-color: var(--aew-faqv2-panel-bg, transparent);
 }
 
@@ -273,9 +273,9 @@ button.aew-faqv2__share-btn {
 .aew-faqv2__item.is-open .aew-faqv2__icon-plus  { display: none; }
 .aew-faqv2__item.is-open .aew-faqv2__icon-minus { display: inline; }
 
-/* ── Answer panel ────────────────────────────────────────────────────────── */
+/* ── Answer panel (the open question's answer + share bar) ───────────────── */
 .aew-faqv2__panel {
-  padding: 0 32px 24px;
+  padding: 15px 20px;
 }
 
 .aew-faqv2__panel[hidden] { display: none; }
@@ -406,6 +406,6 @@ button.aew-faqv2__share-btn {
   .aew-faqv2__search { min-width: 100%; max-width: 100%; }
   .aew-faqv2 .aew-faqv2__title { font-size: 24px; }
   .aew-faqv2__trigger { padding: 20px; }
-  .aew-faqv2__panel { padding: 0 20px 20px; }
+  .aew-faqv2__panel { padding: 15px 20px; }
   .aew-faqv2__answer { font-size: 14px; }
 }
