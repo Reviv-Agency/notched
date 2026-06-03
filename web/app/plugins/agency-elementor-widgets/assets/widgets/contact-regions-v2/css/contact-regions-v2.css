@@ -132,12 +132,12 @@
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 2px;
-  transition: opacity 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .aew-crgn__link:hover,
 .aew-crgn__link:focus-visible {
-  opacity: 0.8;
+  color: var(--aew-crgn-line-hover, var(--notched-cta-hover));
 }
 
 /* ── Tablet: header stacks (heading above intro, left-aligned) ───────────── */

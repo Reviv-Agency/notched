@@ -332,6 +332,12 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 			'selectors' => [ '{{WRAPPER}}' => '--aew-crgn-line: {{VALUE}};' ],
 		] );
 
+		$this->add_control( 'line_color_hover', [
+			'label'     => esc_html__( 'Contact line colour (hover)', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}}' => '--aew-crgn-line-hover: {{VALUE}};' ],
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -358,6 +364,7 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 			'intro_color'   => '--aew-crgn-intro',
 			'name_color'    => '--aew-crgn-name',
 			'line_color'    => '--aew-crgn-line',
+			'line_color_hover' => '--aew-crgn-line-hover',
 		] );
 		if ( '' !== $color_vars ) {
 			$this->add_render_attribute( 'wrapper', 'style', $color_vars );
