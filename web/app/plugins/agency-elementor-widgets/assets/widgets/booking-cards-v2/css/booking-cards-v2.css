@@ -55,21 +55,19 @@
 
 /* ── Card ────────────────────────────────────────────────────────────────── */
 .aew-bkcv2__card {
-  --aew-bkcv2-align: center;
+  --aew-bkcv2-align: center;          /* left | center | right (text-align driven) */
   background: var(--aew-bkcv2-card-bg, var(--notched-cards));
+  border: 1px solid var(--aew-bkcv2-border, var(--notched-lines));
   border-radius: 24px;
   padding: 40px 32px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;             /* pins footer to the bottom (equal-height) */
   text-align: var(--aew-bkcv2-align);
-  align-items: var(--aew-bkcv2-align, center);
 }
 
+/* Children are plain blocks so they inherit text-align; inline-level pieces
+   (icon, button) are positioned by that text-align. */
 .aew-bkcv2__body {
-  display: flex;
-  flex-direction: column;
-  align-items: var(--aew-bkcv2-align, center);
-  gap: 12px;
   flex: 1 1 auto;
 }
 
@@ -77,8 +75,13 @@
   width: 50px;
   height: 50px;
   object-fit: contain;
-  display: block;
-  margin-bottom: 4px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.aew-bkcv2__title + .aew-bkcv2__text,
+.aew-bkcv2__icon + .aew-bkcv2__title {
+  margin-top: 12px;
 }
 
 /* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) — gotcha #20. */
@@ -107,14 +110,10 @@
   padding-top: 20px;
   width: 100%;
   border-top: 1px solid var(--aew-bkcv2-divider, var(--notched-lines));
-  display: flex;
-  flex-direction: column;
-  align-items: var(--aew-bkcv2-align, center);
-  gap: 16px;
 }
 
 .aew-bkcv2__duration {
-  margin: 0;
+  margin: 0 0 16px;
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-size: 16px;

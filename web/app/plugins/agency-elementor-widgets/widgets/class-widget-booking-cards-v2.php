@@ -252,17 +252,18 @@ class Widget_Booking_Cards_V2 extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'align',
 			[
-				'label'     => esc_html__( 'Text alignment', 'agency-elementor-widgets' ),
-				'type'      => Controls_Manager::CHOOSE,
-				'default'   => 'center',
-				'options'   => [
+				'label'                => esc_html__( 'Alignment', 'agency-elementor-widgets' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'default'              => 'center',
+				'options'              => [
 					'left'   => [ 'title' => esc_html__( 'Left', 'agency-elementor-widgets' ), 'icon' => 'eicon-text-align-left' ],
 					'center' => [ 'title' => esc_html__( 'Center', 'agency-elementor-widgets' ), 'icon' => 'eicon-text-align-center' ],
+					'right'  => [ 'title' => esc_html__( 'Right', 'agency-elementor-widgets' ), 'icon' => 'eicon-text-align-right' ],
 				],
-				'selectors' => [
+				'selectors'            => [
 					'{{WRAPPER}} .aew-bkcv2__card' => '--aew-bkcv2-align: {{VALUE}};',
 				],
 			]
@@ -326,6 +327,37 @@ class Widget_Booking_Cards_V2 extends Widget_Base {
 				'label'     => esc_html__( 'Divider colour', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [ '{{WRAPPER}}' => '--aew-bkcv2-divider: {{VALUE}};' ],
+			]
+		);
+
+		$this->add_control(
+			'border_heading',
+			[
+				'label'     => esc_html__( 'Border', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'border_width',
+			[
+				'label'      => esc_html__( 'Border width', 'agency-elementor-widgets' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [ 'px' => [ 'min' => 0, 'max' => 12 ] ],
+				'default'    => [ 'unit' => 'px', 'size' => 1 ],
+				'selectors'  => [ '{{WRAPPER}} .aew-bkcv2__card' => 'border-width: {{SIZE}}{{UNIT}}; border-style: solid;' ],
+			]
+		);
+
+		$this->add_control(
+			'border_color',
+			[
+				'label'     => esc_html__( 'Border colour', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#BFC0BF',
+				'selectors' => [ '{{WRAPPER}}' => '--aew-bkcv2-border: {{VALUE}};' ],
 			]
 		);
 
@@ -458,6 +490,7 @@ class Widget_Booking_Cards_V2 extends Widget_Base {
 			[
 				'section_bg'     => '--aew-bkcv2-section-bg',
 				'card_bg'        => '--aew-bkcv2-card-bg',
+				'border_color'   => '--aew-bkcv2-border',
 				'divider_color'  => '--aew-bkcv2-divider',
 				'heading_color'  => '--aew-bkcv2-heading',
 				'text_color'     => '--aew-bkcv2-text',
