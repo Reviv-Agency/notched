@@ -18,6 +18,17 @@
   padding: 0 !important;
 }
 
+/* ── Force the host section/container to full width so the inner wrapper can
+   reach its (≥1440) max-width on wide screens instead of being capped by
+   Elementor's boxed content width. ──────────────────────────────────────── */
+.elementor-section:has(.elementor-widget-agency-banner-hero-v2),
+.elementor-section:has(.elementor-widget-agency-banner-hero-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-banner-hero-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+
 /* ── Brand tokens ────────────────────────────────────────────────────────── */
 /* Scoped to .aew-bhero so they don't leak into other widgets. Source of truth
    is design-system.md. Update there first; copy here second. */

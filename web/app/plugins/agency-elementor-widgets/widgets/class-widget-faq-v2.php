@@ -198,7 +198,7 @@ class Widget_Faq_V2 extends Widget_Base {
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px' ],
 			'range'      => [ 'px' => [ 'min' => 800, 'max' => 1920 ] ],
-			'default'    => [ 'unit' => 'px', 'size' => 1440 ],
+			'default'    => [ 'unit' => 'px', 'size' => 1600 ],
 			'selectors'  => [ '{{WRAPPER}} .aew-faqv2__inner' => 'max-width: {{SIZE}}{{UNIT}};' ],
 		] );
 

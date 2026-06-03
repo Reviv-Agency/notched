@@ -92,7 +92,7 @@ class Widget_Single_Post_V2 extends Widget_Base {
 		$this->add_responsive_control( 'max_width', [
 			'label' => esc_html__( 'Inner max width', 'agency-elementor-widgets' ), 'type' => Controls_Manager::SLIDER,
 			'size_units' => [ 'px' ], 'range' => [ 'px' => [ 'min' => 600, 'max' => 1440 ] ],
-			'default' => [ 'unit' => 'px', 'size' => 1440 ],
+			'default' => [ 'unit' => 'px', 'size' => 1600 ],
 			'selectors' => [ '{{WRAPPER}} .aew-spv2__inner' => 'max-width: {{SIZE}}{{UNIT}};' ],
 		] );
 

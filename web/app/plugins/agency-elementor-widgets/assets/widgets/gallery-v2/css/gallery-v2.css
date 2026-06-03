@@ -11,6 +11,17 @@
 	padding: 0 !important;
 }
 
+/* ── Force the host section/container to full width so the inner wrapper can
+   reach its (≥1440) max-width on wide screens instead of being capped by
+   Elementor's boxed content width. ──────────────────────────────────────── */
+.elementor-section:has(.elementor-widget-agency-gallery-v2),
+.elementor-section:has(.elementor-widget-agency-gallery-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-gallery-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+
 .aew-galv2 {
 	/* Brand tokens (scoped to the block). */
 	--notched-cards: #FFFFFF;

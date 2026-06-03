@@ -18,6 +18,17 @@
   padding: 0 !important;
 }
 
+/* ── Force the host section/container to full width so the inner wrapper can
+   reach its (≥1440) max-width on wide screens instead of being capped by
+   Elementor's boxed content width. ──────────────────────────────────────── */
+.elementor-section:has(.elementor-widget-agency-products-slider-v2),
+.elementor-section:has(.elementor-widget-agency-products-slider-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-products-slider-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+
 /* ── Force the host section/column to the design background ────────────────── */
 /* The widget paints its own cream bg on .aew-prsv2, but the Elementor section
    and column it lives in can render a white box on top/around it. Neutralize

@@ -32,6 +32,17 @@
   padding: 0 !important;
 }
 
+/* ── Force the host section/container to full width so the inner wrapper can
+   reach its (≥1440) max-width on wide screens instead of being capped by
+   Elementor's boxed content width. ──────────────────────────────────────── */
+.elementor-section:has(.elementor-widget-agency-benefits-v2),
+.elementor-section:has(.elementor-widget-agency-benefits-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-benefits-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+
 /* ── Outer block: full-bleed background ──────────────────────────────────── */
 /* The site runs BOXED Elementor containers capped at 1440px (see theme
    style.css). A plain width:100% would clamp the green band to that 1440px
