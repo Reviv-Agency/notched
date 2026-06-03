@@ -135,6 +135,47 @@ class Widget_Parallax_Image_V2 extends Widget_Base {
 		] );
 
 		$this->end_controls_section();
+
+		// ── Bottom blend: a gradient fade at the bottom of the image that blends
+		// it into the colour of the section below (so a trimmed image transitions
+		// smoothly instead of a hard edge). ──────────────────────────────────────
+		$this->start_controls_section( 'ss_blend', [ 'label' => 'Bottom blend', 'tab' => Controls_Manager::TAB_STYLE ] );
+
+		$this->add_control( 'blend_enable', [
+			'label'        => 'Enable bottom blend',
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => 'Yes',
+			'label_off'    => 'No',
+			'return_value' => 'yes',
+			'default'      => '',
+			'description'  => 'Fades the bottom of the image into a colour so it blends into the section below.',
+		] );
+
+		// Colour the image fades INTO at the bottom. Assigns to a wrapper CSS var
+		// (§6.8) so global-bound picks survive on the live page; render() also
+		// inlines the resolved value via Color_Vars::build().
+		$this->add_control( 'blend_color', [
+			'label'     => 'Blend color',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#F6F0EC',
+			'condition' => [ 'blend_enable' => 'yes' ],
+			'selectors' => [ '{{WRAPPER}}' => '--aew-pimg-blend: {{VALUE}};' ],
+			'description' => 'Match this to the background of the section directly below.',
+		] );
+
+		$this->add_responsive_control( 'blend_height', [
+			'label'      => 'Blend height',
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px', '%' ],
+			'range'      => [ 'px' => [ 'min' => 20, 'max' => 600 ], '%' => [ 'min' => 5, 'max' => 80 ] ],
+			'default'        => [ 'unit' => 'px', 'size' => 160 ],
+			'tablet_default' => [ 'unit' => 'px', 'size' => 120 ],
+			'mobile_default' => [ 'unit' => 'px', 'size' => 100 ],
+			'condition'  => [ 'blend_enable' => 'yes' ],
+			'selectors'  => [ '{{WRAPPER}} .aew-pimg__blend' => 'height: {{SIZE}}{{UNIT}};' ],
+		] );
+
+		$this->end_controls_section();
 	}
 
 	// ─────────────────────────────────────────────────────────────────────────
@@ -153,9 +194,15 @@ class Widget_Parallax_Image_V2 extends Widget_Base {
 			$url = Widget_Assets::url( self::ASSET_SLUG, 'images/hero-forest.avif' );
 		}
 
-		// Resolved backdrop colour as an inline CSS var on the wrapper (§6.8).
-		$color_vars = Color_Vars::build( $this, $s, [ 'band_bg' => '--aew-pimg-bg' ] );
+		// Resolved colours as inline CSS vars on the wrapper (§6.8) — backdrop +
+		// the bottom-blend colour, so global-bound picks survive on the live page.
+		$color_vars = Color_Vars::build( $this, $s, [
+			'band_bg'     => '--aew-pimg-bg',
+			'blend_color' => '--aew-pimg-blend',
+		] );
 		$style_attr = '' !== $color_vars ? ' style="' . esc_attr( $color_vars ) . '"' : '';
+
+		$blend_on = 'yes' === ( $s['blend_enable'] ?? '' );
 
 		// Bottom trim → negative margin-bottom on the band, pulling the next block
 		// up over the empty space below the trees. Inlined on the band (not just
@@ -176,6 +223,9 @@ class Widget_Parallax_Image_V2 extends Widget_Base {
 				role="img"
 				aria-label="<?php echo esc_attr( $alt ); ?>"
 				style="<?php echo esc_attr( $band_style ); ?>">
+				<?php if ( $blend_on ) : ?>
+					<div class="aew-pimg__blend" aria-hidden="true"></div>
+				<?php endif; ?>
 			</div>
 		</div>
 		<?php

@@ -81,6 +81,27 @@
   }
 }
 
+/* ── Bottom blend ────────────────────────────────────────────────────────── */
+/* A gradient fade pinned to the bottom of the band: transparent at the top of
+   the blend → solid --aew-pimg-blend at the very bottom, so a trimmed image
+   transitions smoothly into the section below (the user matches the colour to
+   that section). Height is set by the "Blend height" control. Sits above the
+   image (within the band's overflow:hidden) and below any future content. */
+.aew-pimg__blend {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+  pointer-events: none;
+  z-index: 1;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    var(--aew-pimg-blend, var(--notched-background)) 100%
+  );
+}
+
 /* ── Bottom trim ─────────────────────────────────────────────────────────── */
 /* The "Trim bottom" control applies a negative margin-bottom on the band
    (inlined in render) so the next block slides up over the empty space below
