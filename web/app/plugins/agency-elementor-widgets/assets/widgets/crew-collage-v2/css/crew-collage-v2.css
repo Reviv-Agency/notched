@@ -56,44 +56,49 @@
 .aew-crew--media-right .aew-crew__copy  { order: 1; }
 
 /* ── Collage ─────────────────────────────────────────────────────────────── */
-/* Two equal-height columns: a tall LEAD image beside a STACK of two images.
-   A fixed aspect ratio gives every cell real height so object-fit: cover works
-   (without it the intrinsic image heights blow the layout out). */
+/* Two columns:
+ *   LEFT  = two stacked images — top 240 tall, bottom 160 tall (+ gap)
+ *   RIGHT = one tall image, 360 tall
+ * Mirrors the live notched.com "Our Crew" arrangement. */
 .aew-crew__media {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   gap: 16px;
-  aspect-ratio: 5 / 6;
 }
 
 .aew-crew__img {
   display: block;
-  width: 100%;
-  height: 100%;
   object-fit: cover;
   border-radius: 16px;
-  min-height: 0;            /* allow the image to shrink inside the grid cell */
+  flex: 0 0 auto;       /* keep the fixed pixel sizes; don't let flex shrink them */
 }
 
-/* Lead image fills its whole column. */
-.aew-crew__img--lead {
-  grid-column: 1;
-  height: 100%;
-}
-
-/* Stack: two images sharing the second column, equal heights. */
+/* LEFT column — two stacked images. */
 .aew-crew__stack {
-  grid-column: 2;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  min-height: 0;
+  flex: 0 0 auto;
+  order: 1;             /* stacked pair sits on the left */
 }
+.aew-crew__img--lead { order: 2; }   /* tall image on the right */
 
-/* When media is on the right, swap the columns (stack first, lead second). */
-.aew-crew--media-right .aew-crew__media   { grid-template-columns: 1fr 1.1fr; }
-.aew-crew--media-right .aew-crew__img--lead { grid-column: 2; }
-.aew-crew--media-right .aew-crew__stack     { grid-column: 1; }
+/* media_side = right → mirror the columns. */
+.aew-crew--media-right .aew-crew__stack     { order: 2; }
+.aew-crew--media-right .aew-crew__img--lead { order: 1; }
+
+/* Extra-specific so Hello Elementor's `img { height: auto }` can't win and
+   collapse the fixed heights back to the intrinsic aspect ratio. */
+.aew-crew .aew-crew__media .aew-crew__stack .aew-crew__img { width: 240px; }
+.aew-crew .aew-crew__media .aew-crew__img--top    { height: 240px; }
+.aew-crew .aew-crew__media .aew-crew__img--bottom { height: 160px; }
+
+/* RIGHT column — one tall lead image, 360 tall. */
+.aew-crew .aew-crew__media .aew-crew__img--lead {
+  width: 240px;
+  height: 360px;
+}
 
 /* ── Copy ────────────────────────────────────────────────────────────────── */
 .aew-crew__copy {
