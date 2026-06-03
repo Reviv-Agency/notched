@@ -429,7 +429,7 @@ class Widget_Heading_Band extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#305B83',
+				'default'   => '#2A4F41',
 				'selectors' => [
 					'{{WRAPPER}} .aew-heading-band__title' => 'color: {{VALUE}};',
 				],
