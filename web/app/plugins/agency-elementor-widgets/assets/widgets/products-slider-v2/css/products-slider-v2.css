@@ -77,6 +77,12 @@
   margin-bottom: 32px;
 }
 
+/* Left group: heading + optional subtext, stacked. */
+.aew-prsv2__head-main {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
 /* Right-hand group: difficulty label above/alongside the Shop-all CTA. */
 .aew-prsv2__head-aside {
   display: flex;
@@ -98,20 +104,56 @@
   color: var(--aew-prsv2-heading, var(--notched-secondary-bg));
 }
 
-/* ── Assembly difficulty label ─────────────────────────────────────────────── */
-.aew-prsv2__difficulty {
-  font-family: 'Teko', sans-serif;
-  font-weight: 600;
+/* ── Subtext (paragraph under the heading) ─────────────────────────────────── */
+.aew-prsv2__subtext {
+  margin: 12px 0 0;
+  max-width: 620px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
   font-size: 18px;
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--aew-prsv2-difficulty, var(--notched-misc-accent));
+  line-height: 1.4;
+  color: var(--aew-prsv2-subtext, var(--notched-text));
+}
+
+/* ── Assembly difficulty ───────────────────────────────────────────────────── */
+/* Label ("ASSEMBLY DIFFICULTY:") above, value ("BEGINNER") below with a dot —
+   each independently styled via its own colour + typography controls. */
+.aew-prsv2__difficulty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
   text-align: right;
 }
 
+.aew-prsv2__difficulty-label {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--aew-prsv2-difficulty, var(--notched-text));
+}
+
 .aew-prsv2__difficulty-value {
-  opacity: 0.9;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--aew-prsv2-difficulty-value, var(--notched-text));
+}
+
+.aew-prsv2__difficulty-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--aew-prsv2-difficulty-dot, var(--notched-secondary-bg));
+  flex: none;
 }
 
 /* ── Shop-all CTA button ───────────────────────────────────────────────────── */
@@ -332,10 +374,13 @@ button.aew-prsv2__dot {
   .aew-prsv2__arrow,
   button.aew-prsv2__arrow { display: none; }
 
-  /* CTA drops below the cards. Dissolve __head so heading + aside become flex
-     children of __inner, then order the aside last (after viewport + dots). */
+  /* CTA drops below the cards. Dissolve __head + __head-main so heading,
+     subtext + aside become flex children of __inner, then order the aside last
+     (after viewport + dots). */
   .aew-prsv2__head { display: contents; }
-  .aew-prsv2__heading { order: 0; margin-bottom: 24px; }
+  .aew-prsv2__head-main { display: contents; }
+  .aew-prsv2__heading { order: 0; margin-bottom: 16px; }
+  .aew-prsv2__subtext { order: 0; margin-bottom: 24px; max-width: none; }
   .aew-prsv2__head-aside {
     order: 3;
     flex-direction: column;

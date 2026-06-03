@@ -76,6 +76,13 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 			'default' => 'h2',
 			'options' => [ 'h2' => 'H2', 'h3' => 'H3', 'div' => 'div' ],
 		] );
+		$this->add_control( 'subtext', [
+			'label'       => 'Subtext (under heading)',
+			'type'        => Controls_Manager::TEXTAREA,
+			'rows'        => 3,
+			'default'     => '',
+			'description' => 'Optional paragraph shown beneath the heading. Leave empty to hide.',
+		] );
 		$this->add_control( 'difficulty', [
 			'label'       => 'Assembly difficulty',
 			'type'        => Controls_Manager::TEXT,
@@ -237,12 +244,89 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 				'text_transform' => [ 'default' => 'uppercase' ],
 			],
 		] );
-		$this->add_control( 'difficulty_color', [
-			'label'     => 'Assembly difficulty color',
+
+		// Subtext (paragraph under the heading).
+		$this->add_control( 'subtext_color', [
+			'label'     => 'Subtext color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#3B413F',
+			'default'   => '#141C19',
+			'separator' => 'before',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-subtext: {{VALUE}};' ],
+		] );
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'subtext_typo',
+			'selector' => '{{WRAPPER}} .aew-prsv2__subtext',
+			'fields_options' => [
+				'font_family' => [ 'default' => 'Lato' ],
+				'font_weight' => [ 'default' => '400' ],
+				'font_size'   => [ 'default' => [ 'unit' => 'px', 'size' => 18 ] ],
+				'line_height' => [ 'default' => [ 'unit' => 'em', 'size' => 1.4 ] ],
+			],
+		] );
+
+		// ── Assembly difficulty — fully customizable ─────────────────────────
+		// The label ("ASSEMBLY DIFFICULTY:") and the value ("BEGINNER") each get
+		// their own colour + typography. A small dot precedes the value.
+		$this->add_control( 'h_difficulty', [
+			'label'     => 'Assembly difficulty',
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		// Label.
+		$this->add_control( 'difficulty_color', [
+			'label'     => 'Label color',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#141C19',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-difficulty: {{VALUE}};' ],
 		] );
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'difficulty_label_typo',
+			'label'    => 'Label typography',
+			'selector' => '{{WRAPPER}} .aew-prsv2__difficulty-label',
+			'fields_options' => [
+				'font_family'    => [ 'default' => 'Playfair Display' ],
+				'font_weight'    => [ 'default' => '700' ],
+				'font_size'      => [ 'default' => [ 'unit' => 'px', 'size' => 20 ] ],
+				'text_transform' => [ 'default' => 'uppercase' ],
+			],
+		] );
+
+		// Value (the "Beginner" / "Intermediate" part).
+		$this->add_control( 'difficulty_value_color', [
+			'label'     => 'Value color',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#141C19',
+			'separator' => 'before',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-difficulty-value: {{VALUE}};' ],
+		] );
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => 'difficulty_value_typo',
+			'label'    => 'Value typography',
+			'selector' => '{{WRAPPER}} .aew-prsv2__difficulty-value',
+			'fields_options' => [
+				'font_family'    => [ 'default' => 'Lato' ],
+				'font_weight'    => [ 'default' => '400' ],
+				'font_size'      => [ 'default' => [ 'unit' => 'px', 'size' => 20 ] ],
+				'text_transform' => [ 'default' => 'uppercase' ],
+			],
+		] );
+
+		// Dot before the value.
+		$this->add_control( 'difficulty_dot', [
+			'label'        => 'Show dot before value',
+			'type'         => Controls_Manager::SWITCHER,
+			'default'      => 'yes',
+			'separator'    => 'before',
+		] );
+		$this->add_control( 'difficulty_dot_color', [
+			'label'     => 'Dot color',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#2A4F41',
+			'condition' => [ 'difficulty_dot' => 'yes' ],
+			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-difficulty-dot: {{VALUE}};' ],
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -403,8 +487,10 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$show_price   = 'yes' === ( $s['show_price'] ?? 'yes' );
 		$price_prefix = (string) ( $s['price_prefix'] ?? '' );
 
+		$subtext           = (string) ( $s['subtext'] ?? '' );
 		$difficulty        = trim( (string) ( $s['difficulty'] ?? '' ) );
 		$difficulty_prefix = (string) ( $s['difficulty_prefix'] ?? '' );
+		$difficulty_dot    = 'yes' === ( $s['difficulty_dot'] ?? 'yes' );
 
 		/*
 		 * Resolved colours as inline CSS vars on the wrapper. get_settings_for_display()
@@ -417,10 +503,13 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 			$this,
 			$s,
 			[
-				'body_bg'          => '--aew-prsv2-body-bg',
-				'heading_color'    => '--aew-prsv2-heading',
-				'difficulty_color' => '--aew-prsv2-difficulty',
-				'title_color'      => '--aew-prsv2-title',
+				'body_bg'                => '--aew-prsv2-body-bg',
+				'heading_color'          => '--aew-prsv2-heading',
+				'subtext_color'          => '--aew-prsv2-subtext',
+				'difficulty_color'       => '--aew-prsv2-difficulty',
+				'difficulty_value_color' => '--aew-prsv2-difficulty-value',
+				'difficulty_dot_color'   => '--aew-prsv2-difficulty-dot',
+				'title_color'            => '--aew-prsv2-title',
 				'price_color'      => '--aew-prsv2-price',
 				'arrow_bg'         => '--aew-prsv2-arrow-bg',
 				'arrow_color'      => '--aew-prsv2-arrow-color',
@@ -438,9 +527,14 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 			<div class="aew-prsv2__inner">
 
 				<div class="aew-prsv2__head">
-					<?php if ( $heading ) : ?>
-						<<?php echo esc_attr( $tag ); ?> class="aew-prsv2__heading"><?php echo esc_html( $heading ); ?></<?php echo esc_attr( $tag ); ?>>
-					<?php endif; ?>
+					<div class="aew-prsv2__head-main">
+						<?php if ( $heading ) : ?>
+							<<?php echo esc_attr( $tag ); ?> class="aew-prsv2__heading"><?php echo esc_html( $heading ); ?></<?php echo esc_attr( $tag ); ?>>
+						<?php endif; ?>
+						<?php if ( '' !== $subtext ) : ?>
+							<p class="aew-prsv2__subtext"><?php echo esc_html( $subtext ); ?></p>
+						<?php endif; ?>
+					</div>
 
 					<?php if ( '' !== $difficulty || $show_cta ) : ?>
 						<div class="aew-prsv2__head-aside">
@@ -449,7 +543,10 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 									<?php if ( '' !== $difficulty_prefix ) : ?>
 										<span class="aew-prsv2__difficulty-label"><?php echo esc_html( $difficulty_prefix ); ?></span>
 									<?php endif; ?>
-									<span class="aew-prsv2__difficulty-value"><?php echo esc_html( $difficulty ); ?></span>
+									<span class="aew-prsv2__difficulty-value">
+										<?php if ( $difficulty_dot ) : ?><span class="aew-prsv2__difficulty-dot" aria-hidden="true"></span><?php endif; ?>
+										<?php echo esc_html( $difficulty ); ?>
+									</span>
 								</span>
 							<?php endif; ?>
 
