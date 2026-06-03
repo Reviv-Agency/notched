@@ -131,7 +131,12 @@ class Widget_Parallax_Image_V2 extends Widget_Base {
 			'tablet_default' => [ 'unit' => 'px', 'size' => 0 ],
 			'mobile_default' => [ 'unit' => 'px', 'size' => 0 ],
 			'description' => 'Pulls the next block up over the empty space below the trees. The image shifts down to keep the trees in view.',
-			'selectors'  => [ '{{WRAPPER}} .aew-pimg__band' => 'margin-bottom: calc(-1 * {{SIZE}}{{UNIT}});' ],
+			// Negative margin pulls the next block up over the bottom of the band
+			// (the image itself stays full-height/quality). We ALSO record the trim
+			// as a CSS var so the bottom-blend overlay can offset itself to sit at
+			// the VISIBLE bottom edge (band bottom − trim) instead of being hidden
+			// under the overlapping next section.
+			'selectors'  => [ '{{WRAPPER}} .aew-pimg__band' => 'margin-bottom: calc(-1 * {{SIZE}}{{UNIT}}); --aew-pimg-trim: {{SIZE}}{{UNIT}};' ],
 		] );
 
 		$this->end_controls_section();
@@ -211,7 +216,9 @@ class Widget_Parallax_Image_V2 extends Widget_Base {
 		$trim = $s['bottom_trim']['size'] ?? '';
 		$band_style = "background-image: url('" . esc_url( $url ) . "');";
 		if ( '' !== (string) $trim && (float) $trim > 0 ) {
-			$band_style .= ' margin-bottom: -' . (float) $trim . 'px;';
+			// Negative margin pulls the next block up; the trim var lets the blend
+			// overlay offset itself to the VISIBLE bottom edge (gotcha #17 inline).
+			$band_style .= ' margin-bottom: -' . (float) $trim . 'px; --aew-pimg-trim: ' . (float) $trim . 'px;';
 		}
 
 		if ( '' === $url ) {

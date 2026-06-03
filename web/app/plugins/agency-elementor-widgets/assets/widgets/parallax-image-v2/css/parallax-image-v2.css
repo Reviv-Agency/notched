@@ -91,7 +91,10 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  /* Sit at the VISIBLE bottom edge: when the band is trimmed, the next section
+     overlaps the bottom --aew-pimg-trim px of the band, so offset the blend up
+     by that amount. With no trim, --aew-pimg-trim is 0 → flush to the bottom. */
+  bottom: var(--aew-pimg-trim, 0px);
   height: 160px;
   pointer-events: none;
   z-index: 1;
