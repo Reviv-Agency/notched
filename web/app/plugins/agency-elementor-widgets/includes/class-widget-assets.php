@@ -235,6 +235,14 @@ final class Widget_Assets {
 		);
 
 		self::register_widget(
+			'contact-regions-v2',
+			[
+				'style'      => 'css/contact-regions-v2.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
+
+		self::register_widget(
 			'testimonials-v2',
 			[
 				'style'      => 'css/testimonials-v2.css',

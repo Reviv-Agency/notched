@@ -1,0 +1,137 @@
+/* ============================================================================
+ * Contact Regions V2 — dark band with full-width region boxes; each box holds
+ * the region name + contact lines INSIDE it. Desktop-first; step 1024 / 768.
+ * ========================================================================== */
+
+/* ── Brand tokens (scoped) — source of truth: design-system.md ───────────── */
+.aew-crgn {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* Strip Elementor's column / container padding so the section is full-bleed. */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-contact-regions-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-contact-regions-v2),
+.e-con:has(.elementor-widget-agency-contact-regions-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+/* ── Outer block ─────────────────────────────────────────────────────────── */
+.aew-crgn {
+  background: var(--aew-crgn-section-bg, var(--notched-secondary-bg));
+  width: 100%;
+  position: relative;
+}
+
+/* 1600 = 1440 content + 2×80px desktop side padding (§6.5). */
+.aew-crgn__inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 64px 80px;
+}
+
+/* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) — gotcha #20. */
+.aew-crgn .aew-crgn__heading {
+  margin: 0;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 85%;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--aew-crgn-heading, var(--notched-cards));
+}
+
+.aew-crgn__intro {
+  margin: 16px auto 0;
+  max-width: 760px;
+  text-align: center;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  color: var(--aew-crgn-intro, var(--notched-cards));
+}
+
+/* ── Grid of full-width boxes ────────────────────────────────────────────── */
+.aew-crgn__grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(var(--aew-crgn-cols, 2), 1fr);
+  gap: 24px;
+}
+
+/* ── Box — text lives INSIDE here ────────────────────────────────────────── */
+.aew-crgn__box {
+  background: var(--aew-crgn-box-bg, var(--notched-secondary-cards));
+  border-radius: 24px;
+  min-height: 220px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  text-align: left;
+}
+
+.aew-crgn__name {
+  margin: 0 0 8px;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 85%;
+  text-transform: uppercase;
+  color: var(--aew-crgn-name, var(--notched-cards));
+}
+
+.aew-crgn__line {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  color: var(--aew-crgn-line, var(--notched-cards));
+}
+
+.aew-crgn__link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.aew-crgn__link:hover,
+.aew-crgn__link:focus-visible {
+  opacity: 0.8;
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-crgn__inner { padding: 64px 40px; }
+  .aew-crgn .aew-crgn__heading { font-size: 48px; }
+  .aew-crgn__name { font-size: 32px; }
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-crgn__inner { padding: 32px 40px; }
+  .aew-crgn__grid  { grid-template-columns: 1fr; }
+  .aew-crgn__box   { min-height: 0; padding: 32px; }
+  .aew-crgn .aew-crgn__heading { font-size: 40px; }
+  .aew-crgn__intro { font-size: 14px; }
+  .aew-crgn__name  { font-size: 28px; }
+  .aew-crgn__line  { font-size: 16px; }
+}
