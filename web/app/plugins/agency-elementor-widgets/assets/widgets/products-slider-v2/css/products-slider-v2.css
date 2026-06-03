@@ -107,7 +107,7 @@
 /* ── Subtext (paragraph under the heading) ─────────────────────────────────── */
 .aew-prsv2__subtext {
   margin: 12px 0 0;
-  max-width: 620px;
+  max-width: 820px;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 18px;
@@ -374,34 +374,29 @@ button.aew-prsv2__dot {
   .aew-prsv2__arrow,
   button.aew-prsv2__arrow { display: none; }
 
-  /* CTA drops below the cards. Dissolve __head + __head-main so heading,
-     subtext + aside become flex children of __inner, then order the aside last
-     (after viewport + dots). */
+  /* Mobile/tablet stacking order (top → bottom):
+       heading → subtext → difficulty → slider → dots → CTA button.
+     Dissolve __head, __head-main AND __head-aside (display:contents) so the
+     heading, subtext, difficulty and CTA all become direct flex children of
+     __inner and can be individually ordered. The difficulty stays ABOVE the
+     slider (under the text); the CTA drops to the very bottom. */
   .aew-prsv2__head { display: contents; }
   .aew-prsv2__head-main { display: contents; }
-  .aew-prsv2__heading { order: 0; margin-bottom: 16px; }
-  .aew-prsv2__subtext { order: 0; margin-bottom: 24px; max-width: none; }
-  .aew-prsv2__head-aside {
-    order: 3;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    margin-top: 28px;
-  }
-  .aew-prsv2__difficulty { order: 0; text-align: left; }
-  .aew-prsv2__viewport { order: 1; }
-  .aew-prsv2__dots { order: 2; }
-  .aew-prsv2__empty { order: 1; }
-  .aew-prsv2__cta {
-    align-self: flex-start;
-  }
+  .aew-prsv2__head-aside { display: contents; }
+
+  .aew-prsv2__heading    { order: 0; margin-bottom: 16px; }
+  .aew-prsv2__subtext    { order: 1; margin-bottom: 24px; max-width: none; }
+  .aew-prsv2__difficulty { order: 2; align-items: flex-start; text-align: left; margin-bottom: 24px; }
+  .aew-prsv2__viewport   { order: 3; }
+  .aew-prsv2__empty      { order: 3; }
+  .aew-prsv2__dots       { order: 4; }
+  .aew-prsv2__cta        { order: 5; align-self: flex-start; margin-top: 28px; }
 }
 
 /* ── Mobile ≤768 ───────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .aew-prsv2__inner { padding: 2rem 2.5rem; }
   .aew-prsv2__heading { font-size: 40px; margin-bottom: 20px; }
-  .aew-prsv2__head-aside { width: 100%; margin-top: 24px; }
   .aew-prsv2__cta { width: 100%; justify-content: center; font-size: 20px; padding: 18px 24px 16px; }
   .aew-prsv2__price { font-size: 14px; }
   .aew-prsv2__slide { flex-basis: 220px; }
