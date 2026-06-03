@@ -76,9 +76,12 @@
   align-items: center;
   justify-content: center;
   min-height: 600px;
-  /* Inset is now the panel's safe area (padding) so the card width control is
-     no longer hard-limited by a card margin. The card centers within it. */
-  padding: var(--aew-rgcv2-inset);
+  /* No hard padding here — that would cap the card's max size. The card's own
+     `width` control is fully authoritative: 100% = full-bleed (card fills the
+     panel edge to edge), smaller % or a px value shrinks it, and it stays
+     centered via this flex container. The optional "Card inset" control adds a
+     gutter only when the user wants one (it sets the card's margin, below). */
+  padding: 0;
   border-radius: 16px;
   overflow: hidden;
   isolation: isolate;
@@ -102,11 +105,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Width is driven by the `card_width` control; it stays centered and can
-     never overflow the panel's inset safe area. */
+  /* Width is driven by the `card_width` control ({{WRAPPER}} .aew-rgcv2__card
+     => width, specificity 0,2,0 — beats this base rule's 0,1,0). The control's
+     default is 100%. NO max-width cap: a cap of 100% would re-limit the card to
+     the panel's padded content box and make wider px values impossible. The
+     flex panel keeps the card centered; the panel's inset padding is the only
+     gutter, and a px width may grow up to (panel − inset). */
   width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
+  /* The "Card inset" control feeds --aew-rgcv2-inset; here it becomes the card's
+     gutter (margin) from the panel edge. inset 0 => true full-bleed. The flex
+     parent centers the card; auto left/right keeps it centered while the inset
+     applies a symmetric vertical+horizontal gutter when > 0. */
+  margin: var(--aew-rgcv2-inset, 0);
   padding: 48px 40px;
   text-align: center;
   background-color: var(--aew-rgcv2-card-bg, var(--notched-background));
