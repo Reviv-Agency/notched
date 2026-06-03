@@ -354,6 +354,12 @@ class Widget_Faq_V2 extends Widget_Base {
 			'default'   => '#141C19',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-answer: {{VALUE}};' ],
 		] );
+		$this->add_control( 'share_color', [
+			'label'     => 'Share icon color',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#3B413F',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-share: {{VALUE}};' ],
+		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => 'question_typo',
 			'selector' => '{{WRAPPER}} .aew-faqv2__question',
@@ -445,6 +451,7 @@ class Widget_Faq_V2 extends Widget_Base {
 			'icon_color'          => '--aew-faqv2-icon',
 			'question_color'      => '--aew-faqv2-question',
 			'answer_color'        => '--aew-faqv2-answer',
+			'share_color'         => '--aew-faqv2-share',
 		] );
 		$style_attr = '' !== $color_vars ? ' style="' . esc_attr( $color_vars ) . '"' : '';
 

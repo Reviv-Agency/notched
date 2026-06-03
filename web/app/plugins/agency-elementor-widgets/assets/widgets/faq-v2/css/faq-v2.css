@@ -352,8 +352,10 @@ button.aew-faqv2__share-btn {
   padding: 0 !important;
   margin: 0;
   cursor: pointer;
-  color: var(--notched-misc-accent) !important;  /* beat kit button color */
-  opacity: .75;
+  /* Editable via the "Share icon color" control (--aew-faqv2-share); falls back
+     to the misc-accent token. !important beats the kit's button colour. */
+  color: var(--aew-faqv2-share, var(--notched-misc-accent)) !important;
+  opacity: .85;
   transition: opacity .15s ease, color .15s ease;
 }
 
