@@ -227,6 +227,14 @@ final class Widget_Assets {
 		);
 
 		self::register_widget(
+			'crew-collage-v2',
+			[
+				'style'      => 'css/crew-collage-v2.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
+
+		self::register_widget(
 			'testimonials-v2',
 			[
 				'style'      => 'css/testimonials-v2.css',
