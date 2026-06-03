@@ -1,0 +1,165 @@
+/* ============================================================================
+ * Booking Cards V2 — clean consultation cards (icon + copy + duration + CTA).
+ * No background image (unlike Region Cards V2). Flat cards on the section BG,
+ * matching notched.com/book-online. Desktop-first; step down at 1024 / 768.
+ * ========================================================================== */
+
+/* ── Brand tokens (scoped) — source of truth: design-system.md ───────────── */
+.aew-bkcv2 {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* Strip Elementor's column / container padding so the section is full-bleed. */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-booking-cards-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-booking-cards-v2),
+.e-con:has(.elementor-widget-agency-booking-cards-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+/* ── Outer block: full-bleed background ──────────────────────────────────── */
+.aew-bkcv2 {
+  background: var(--aew-bkcv2-section-bg, var(--notched-background));
+  width: 100%;
+  position: relative;
+}
+
+/* One inner wrapper owns max-width + responsive X padding (§6.5).
+   1600 = 1440 content + 2×80px desktop side padding. */
+.aew-bkcv2__inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 64px 80px;
+}
+
+/* ── Grid ────────────────────────────────────────────────────────────────── */
+.aew-bkcv2__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--aew-bkcv2-cols, 3), 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.aew-bkcv2__card {
+  --aew-bkcv2-align: center;
+  background: var(--aew-bkcv2-card-bg, var(--notched-cards));
+  border-radius: 24px;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  text-align: var(--aew-bkcv2-align);
+  align-items: var(--aew-bkcv2-align, center);
+}
+
+.aew-bkcv2__body {
+  display: flex;
+  flex-direction: column;
+  align-items: var(--aew-bkcv2-align, center);
+  gap: 12px;
+  flex: 1 1 auto;
+}
+
+.aew-bkcv2__icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) — gotcha #20. */
+.aew-bkcv2 .aew-bkcv2__title {
+  margin: 0;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 85%;
+  text-transform: uppercase;
+  color: var(--aew-bkcv2-heading, var(--notched-secondary-bg));
+}
+
+.aew-bkcv2__text {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  color: var(--aew-bkcv2-text, var(--notched-text));
+}
+
+/* ── Footer: divider + duration + button ─────────────────────────────────── */
+.aew-bkcv2__footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  width: 100%;
+  border-top: 1px solid var(--aew-bkcv2-divider, var(--notched-lines));
+  display: flex;
+  flex-direction: column;
+  align-items: var(--aew-bkcv2-align, center);
+  gap: 16px;
+}
+
+.aew-bkcv2__duration {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: var(--aew-bkcv2-duration, var(--notched-misc-accent));
+}
+
+/* ── Button — design-system button spec ──────────────────────────────────── */
+.aew-bkcv2__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 85%;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 20px 24px 16px;
+  border-radius: 8px;
+  background-color: var(--aew-bkcv2-btn-bg, var(--notched-cta));
+  color: var(--aew-bkcv2-btn-text, #FFFFFF);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.aew-bkcv2__btn:hover,
+.aew-bkcv2__btn:focus-visible {
+  background-color: var(--aew-bkcv2-btn-bg-hover, var(--notched-cta-hover));
+  color: var(--aew-bkcv2-btn-text-hover, var(--aew-bkcv2-btn-text, #FFFFFF));
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-bkcv2__inner { padding: 64px 40px; }
+  .aew-bkcv2__grid  { grid-template-columns: repeat(2, 1fr); }
+  .aew-bkcv2 .aew-bkcv2__title { font-size: 32px; }
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-bkcv2__inner { padding: 32px 40px; }
+  .aew-bkcv2__grid  { grid-template-columns: 1fr; }
+  .aew-bkcv2__card  { padding: 32px 24px; }
+  .aew-bkcv2 .aew-bkcv2__title { font-size: 24px; }
+  .aew-bkcv2__text { font-size: 14px; }
+  .aew-bkcv2__btn  { font-size: 16px; padding: 18px 24px 16px; }
+}

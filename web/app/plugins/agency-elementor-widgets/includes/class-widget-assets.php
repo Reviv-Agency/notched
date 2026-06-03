@@ -219,6 +219,14 @@ final class Widget_Assets {
 		);
 
 		self::register_widget(
+			'booking-cards-v2',
+			[
+				'style'      => 'css/booking-cards-v2.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
+
+		self::register_widget(
 			'testimonials-v2',
 			[
 				'style'      => 'css/testimonials-v2.css',
