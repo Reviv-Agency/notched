@@ -44,3 +44,6 @@ wix-export/
 .playwright-mcp/
 *.png
 .DS_Store
+
+# Internal build/deploy guide — contains SSH + DB credentials, keep out of the repo
+WIDGET-V2-BUILD-GUIDE.md
