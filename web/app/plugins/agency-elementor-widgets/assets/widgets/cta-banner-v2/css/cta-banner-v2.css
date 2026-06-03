@@ -48,7 +48,7 @@
 
 /* ── Inner wrapper — max-width + responsive X padding (§6.5) ──────────────── */
 .aew-ctab__inner {
-  max-width: 1440px;       /* standardized stack-wide */
+  max-width: 1600px /* 1440 content + side gutter */;       /* standardized stack-wide */
   margin: 0 auto;
   padding: 0 80px;         /* desktop X: 5rem */
 }

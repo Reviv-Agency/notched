@@ -54,7 +54,7 @@
 
 /* ── Inner wrapper (max-width + X padding via _padding control) ──────────── */
 .aew-iccr__inner {
-  max-width: 1440px;          /* desktop max width */
+  max-width: 1600px /* 1440 content + side gutter */;          /* desktop max width */
   margin: 0 auto;
   padding: 64px 80px;         /* desktop Y 64 / X 5rem */
 }

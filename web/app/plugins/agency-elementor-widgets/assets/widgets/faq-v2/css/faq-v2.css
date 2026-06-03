@@ -61,7 +61,7 @@
 
 /* ── Inner wrapper (max-width + responsive X/Y padding) ──────────────────── */
 .aew-faqv2__inner {
-  max-width: 1440px;          /* standardized stack-wide */
+  max-width: 1600px /* 1440 content + side gutter */;          /* standardized stack-wide */
   margin: 0 auto;
   padding: 64px 80px;         /* banded widget: section Y + desktop X */
 }

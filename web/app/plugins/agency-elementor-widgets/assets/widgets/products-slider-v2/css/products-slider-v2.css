@@ -61,7 +61,7 @@
 
 /* ── Inner wrapper: max-width + responsive X/Y padding (stylesheet owns it) ── */
 .aew-prsv2__inner {
-  max-width: 1440px;
+  max-width: 1600px /* 1440 content + side gutter */;
   margin: 0 auto;
   padding: 4rem 5rem;        /* Y 64px / X 5rem desktop */
   display: flex;

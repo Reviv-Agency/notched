@@ -38,7 +38,7 @@
 
 .aew-featured-image__inner {
 	width: 100%;
-	max-width: 1440px;
+	max-width: 1480px /* 1440 content + side gutter */;
 	margin: 0 auto;
 	padding: 20px !important;
 	box-sizing: border-box;

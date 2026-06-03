@@ -59,7 +59,7 @@
 
 /* ── Inner wrapper: max-width + responsive X/Y padding (build guide §6.5) ──── */
 .aew-cfv2__inner {
-  max-width: 1440px;
+  max-width: 1600px /* 1440 content + side gutter */;
   margin: 0 auto;
   padding: 64px 80px; /* banded widget: 64px Y / 80px X desktop */
   position: relative;

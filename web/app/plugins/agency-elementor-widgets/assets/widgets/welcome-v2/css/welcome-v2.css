@@ -58,7 +58,7 @@
 
 /* ── Inner wrapper — max-width + responsive X/Y padding ──────────────────── */
 .aew-welc__inner {
-  max-width: 1440px;
+  max-width: 1600px /* 1440 content + side gutter */;
   margin: 0 auto;
   padding: 100px 80px;   /* Y owned by body_pad_y control; X owned here */
 }

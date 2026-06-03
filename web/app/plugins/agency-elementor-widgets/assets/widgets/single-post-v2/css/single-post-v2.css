@@ -29,7 +29,7 @@
 .aew-spv2 *, .aew-spv2 *::before, .aew-spv2 *::after { box-sizing: border-box; }
 
 .aew-spv2__inner {
-  max-width: 1440px;
+  max-width: 1600px /* 1440 content + side gutter */;
   margin: 0 auto;
   padding: 4rem 5rem;
 }

@@ -25,7 +25,7 @@
 }
 .aew-cmv2 *, .aew-cmv2 *::before, .aew-cmv2 *::after { box-sizing: border-box; }
 
-.aew-cmv2__inner { max-width: 1440px; margin: 0 auto; padding: 0 5rem 4rem; }
+.aew-cmv2__inner { max-width: 1600px /* 1440 content + side gutter */; margin: 0 auto; padding: 0 5rem 4rem; }
 
 .aew-cmv2__card {
   max-width: 760px; margin: 0 auto; padding: 36px 48px;

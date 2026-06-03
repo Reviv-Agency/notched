@@ -26,7 +26,7 @@
 .aew-rpv2 *, .aew-rpv2 *::before, .aew-rpv2 *::after { box-sizing: border-box; }
 
 .aew-rpv2__inner {
-  max-width: 1440px; margin: 0 auto; padding: 0 5rem 4rem;
+  max-width: 1600px /* 1440 content + side gutter */; margin: 0 auto; padding: 0 5rem 4rem;
 }
 
 /* ── Head ────────────────────────────────────────────────────────────────── */
