@@ -181,10 +181,17 @@ class Widget_Faq_V2 extends Widget_Base {
 	private function style_body(): void {
 		$this->start_controls_section( 'ss_body', [ 'label' => 'Body', 'tab' => Controls_Manager::TAB_STYLE ] );
 		$this->add_control( 'body_bg', [
-			'label'     => 'Background',
+			'label'     => 'Outer background',
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#F6F0EC',
-			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-body-bg: {{VALUE}};' ],
+			'description' => 'The full-bleed band behind the FAQ panel.',
+			'selectors' => [
+				// Belt + suspenders: drive the CSS var (consumed in the stylesheet)
+				// AND paint the property directly so it shows even where the var
+				// fallback or host section would otherwise win.
+				'{{WRAPPER}}'              => '--aew-faqv2-body-bg: {{VALUE}};',
+				'{{WRAPPER}} .aew-faqv2'    => 'background-color: {{VALUE}};',
+			],
 		] );
 		$this->add_responsive_control( 'body_max_w', [
 			'label'      => 'Inner max width',
@@ -194,6 +201,36 @@ class Widget_Faq_V2 extends Widget_Base {
 			'default'    => [ 'unit' => 'px', 'size' => 1440 ],
 			'selectors'  => [ '{{WRAPPER}} .aew-faqv2__inner' => 'max-width: {{SIZE}}{{UNIT}};' ],
 		] );
+
+		// ── Inner panel: the rounded card holding the FAQ (its own bg + radius). ──
+		$this->add_control( 'h_panel', [
+			'label'     => 'Inner panel',
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_control( 'panel_bg', [
+			'label'     => 'Panel background',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '',
+			'description' => 'Background of the inner panel that wraps the FAQ. Leave empty for transparent (panel = same as outer).',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-panel-bg: {{VALUE}};' ],
+		] );
+		$this->add_responsive_control( 'panel_radius', [
+			'label'      => 'Panel border radius',
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [ 'px' => [ 'min' => 0, 'max' => 64 ] ],
+			'default'    => [ 'unit' => 'px', 'size' => 0 ],
+			'selectors'  => [ '{{WRAPPER}} .aew-faqv2__panel' => 'border-radius: {{SIZE}}{{UNIT}};' ],
+		] );
+		$this->add_responsive_control( 'panel_padding', [
+			'label'      => 'Panel padding',
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px' ],
+			'default'        => [ 'top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0', 'unit' => 'px', 'isLinked' => false ],
+			'selectors'  => [ '{{WRAPPER}} .aew-faqv2__panel' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ],
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -397,6 +434,7 @@ class Widget_Faq_V2 extends Widget_Base {
 
 		$color_vars = Color_Vars::build( $this, $s, [
 			'body_bg'             => '--aew-faqv2-body-bg',
+			'panel_bg'            => '--aew-faqv2-panel-bg',
 			'title_color'         => '--aew-faqv2-title',
 			'search_text_color'   => '--aew-faqv2-search-text',
 			'search_border_color' => '--aew-faqv2-search-border',
@@ -415,6 +453,7 @@ class Widget_Faq_V2 extends Widget_Base {
 		<section class="aew-faqv2<?php echo $has_sidebar ? ' aew-faqv2--has-sidebar' : ''; ?>"
 			data-aew-faq-v2<?php echo $style_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped via esc_attr above ?>>
 			<div class="aew-faqv2__inner">
+			<div class="aew-faqv2__panel">
 
 				<!-- Header: title + search -->
 				<div class="aew-faqv2__header">
@@ -521,6 +560,7 @@ class Widget_Faq_V2 extends Widget_Base {
 						</div>
 					</div><!-- /.aew-faqv2__main -->
 				</div><!-- /.aew-faqv2__layout -->
+			</div><!-- /.aew-faqv2__panel -->
 			</div><!-- /.aew-faqv2__inner -->
 		</section>
 		<?php

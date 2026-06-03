@@ -66,6 +66,14 @@
   padding: 64px 80px;         /* banded widget: section Y + desktop X */
 }
 
+/* ── Inner panel ─────────────────────────────────────────────────────────── */
+/* Wraps the FAQ content so it can have its own background + rounded corners,
+   distinct from the outer full-bleed band. Default: transparent, no radius
+   (so existing instances are visually unchanged). */
+.aew-faqv2__panel {
+  background-color: var(--aew-faqv2-panel-bg, transparent);
+}
+
 @media (max-width: 1024px) {
   .aew-faqv2__inner { padding: 64px 40px; }
 }
