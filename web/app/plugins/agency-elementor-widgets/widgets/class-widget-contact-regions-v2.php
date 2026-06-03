@@ -16,7 +16,6 @@ namespace AEW;
 defined( 'ABSPATH' ) || exit;
 
 use Elementor\Controls_Manager;
-use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Widget_Base;
 
@@ -133,7 +132,7 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 		$this->add_control( 'heading', [
 			'label'   => esc_html__( 'Heading', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::TEXT,
-			'default' => esc_html__( 'Reach Us Directly', 'agency-elementor-widgets' ),
+			'default' => esc_html__( 'We’d Love to Hear From You!', 'agency-elementor-widgets' ),
 		] );
 
 		$this->add_control( 'heading_tag', [
@@ -205,6 +204,17 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 	private function controls_layout(): void {
 		$this->start_controls_section( 's_layout', [ 'label' => esc_html__( 'Layout', 'agency-elementor-widgets' ) ] );
 
+		$this->add_control( 'header_layout', [
+			'label'       => esc_html__( 'Header layout', 'agency-elementor-widgets' ),
+			'type'        => Controls_Manager::SELECT,
+			'default'     => 'split',
+			'options'     => [
+				'split'   => esc_html__( 'Heading left / intro right', 'agency-elementor-widgets' ),
+				'stacked' => esc_html__( 'Stacked & centered', 'agency-elementor-widgets' ),
+			],
+			'description' => esc_html__( 'Split = heading and intro side by side. Stacked = both centered, one above the other.', 'agency-elementor-widgets' ),
+		] );
+
 		$this->add_control( 'columns', [
 			'label'     => esc_html__( 'Columns (desktop)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::SELECT,
@@ -231,7 +241,7 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 		] );
 
 		$this->add_control( 'align', [
-			'label'     => esc_html__( 'Text alignment', 'agency-elementor-widgets' ),
+			'label'     => esc_html__( 'Box text alignment', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::CHOOSE,
 			'default'   => 'left',
 			'options'   => [
@@ -319,7 +329,6 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 		$this->add_control( 'line_color', [
 			'label'     => esc_html__( 'Contact line colour', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#FFFFFF',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-crgn-line: {{VALUE}};' ],
 		] );
 
@@ -339,6 +348,9 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 		$this->add_render_attribute( 'wrapper', 'class', 'aew-crgn' );
 		$this->add_render_attribute( 'wrapper', 'data-aew-contact-regions-v2', '' );
 
+		$layout = ( 'stacked' === ( $s['header_layout'] ?? 'split' ) ) ? 'aew-crgn--header-stacked' : 'aew-crgn--header-split';
+		$this->add_render_attribute( 'wrapper', 'class', $layout );
+
 		$color_vars = Color_Vars::build( $this, $s, [
 			'section_bg'    => '--aew-crgn-section-bg',
 			'box_bg'        => '--aew-crgn-box-bg',
@@ -357,11 +369,15 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 		?>
 		<section <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
 			<div class="aew-crgn__inner">
-				<?php if ( '' !== trim( $heading ) ) : ?>
-					<<?php echo esc_html( $tag ); ?> class="aew-crgn__heading"><?php echo esc_html( $heading ); ?></<?php echo esc_html( $tag ); ?>>
-				<?php endif; ?>
-				<?php if ( '' !== trim( $intro ) ) : ?>
-					<p class="aew-crgn__intro"><?php echo esc_html( $intro ); ?></p>
+				<?php if ( '' !== trim( $heading ) || '' !== trim( $intro ) ) : ?>
+					<div class="aew-crgn__header">
+						<?php if ( '' !== trim( $heading ) ) : ?>
+							<<?php echo esc_html( $tag ); ?> class="aew-crgn__heading"><?php echo esc_html( $heading ); ?></<?php echo esc_html( $tag ); ?>>
+						<?php endif; ?>
+						<?php if ( '' !== trim( $intro ) ) : ?>
+							<p class="aew-crgn__intro"><?php echo esc_html( $intro ); ?></p>
+						<?php endif; ?>
+					</div>
 				<?php endif; ?>
 
 				<div class="aew-crgn__grid">
