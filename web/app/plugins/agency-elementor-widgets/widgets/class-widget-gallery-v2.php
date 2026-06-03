@@ -243,7 +243,8 @@ class Widget_Gallery_V2 extends Widget_Base {
 				'label_on'     => esc_html__( 'Yes', 'agency-elementor-widgets' ),
 				'label_off'    => esc_html__( 'No', 'agency-elementor-widgets' ),
 				'return_value' => 'yes',
-				'default'      => '',
+				'default'      => 'yes',
+				'description'  => esc_html__( 'Variable-height images packed into columns (like the source site). Off = uniform square grid.', 'agency-elementor-widgets' ),
 			]
 		);
 
