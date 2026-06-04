@@ -31,14 +31,8 @@
 }
 
 /* ── Outer block ─────────────────────────────────────────────────────────── */
-/* Background colour underneath, optional full-bleed image on top (e.g. paper
-   texture). The image var is unset unless a Section background image is chosen. */
 .aew-vals {
   background-color: var(--aew-vals-section-bg, var(--notched-background));
-  background-image: var(--aew-vals-bg-image, none);
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
   width: 100%;
   position: relative;
 }
@@ -62,9 +56,15 @@
   color: var(--aew-vals-heading, var(--notched-secondary-bg));
 }
 
-/* Optional panel behind the grid (paper-texture colour). Transparent unless set. */
+/* Panel behind the grid — sits inside the 1440 rail + side padding. Holds the
+   optional background image (paper texture) so it stays within the content
+   width like every other block, not full-bleed. */
 .aew-vals__panel {
-  background: var(--aew-vals-panel-bg, transparent);
+  background-color: var(--aew-vals-panel-bg, transparent);
+  background-image: var(--aew-vals-bg-image, none);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   border-radius: 24px;
   padding: var(--aew-vals-panel-pad, 48px);
 }

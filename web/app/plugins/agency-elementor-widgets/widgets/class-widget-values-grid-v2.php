@@ -337,11 +337,10 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 		?>
 		<section <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
 			<div class="aew-vals__inner">
-				<?php if ( '' !== trim( $heading ) ) : ?>
-					<<?php echo esc_html( $tag ); ?> class="aew-vals__heading"><?php echo esc_html( $heading ); ?></<?php echo esc_html( $tag ); ?>>
-				<?php endif; ?>
-
 				<div class="aew-vals__panel">
+					<?php if ( '' !== trim( $heading ) ) : ?>
+						<<?php echo esc_html( $tag ); ?> class="aew-vals__heading"><?php echo esc_html( $heading ); ?></<?php echo esc_html( $tag ); ?>>
+					<?php endif; ?>
 					<div class="aew-vals__grid">
 						<?php
 						foreach ( $values as $v ) :
