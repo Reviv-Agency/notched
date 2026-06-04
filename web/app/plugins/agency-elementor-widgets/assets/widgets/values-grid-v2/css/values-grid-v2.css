@@ -74,7 +74,7 @@
 /* Vertical stagger — the right column sits lower than the left (matches the
    live Our Story layout). Reset on mobile (single column) below. */
 .aew-vals__card:nth-child(even) {
-  margin-top: 80px;
+  margin-top: 200px;
 }
 
 /* ── Card ────────────────────────────────────────────────────────────────── */
@@ -84,6 +84,9 @@
   position: relative;
   text-align: left;
   padding-top: 96px;            /* room for the icon to rise above the title */
+  max-width: 400px;             /* cap the content width… */
+  margin-left: auto;            /* …and centre it within the grid cell */
+  margin-right: auto;
 }
 
 /* The icon is a brand-tinted mask of the wood-print PNG (so it fills with a
