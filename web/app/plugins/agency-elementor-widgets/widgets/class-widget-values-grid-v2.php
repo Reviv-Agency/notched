@@ -252,6 +252,14 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 			'selectors'  => [ '{{WRAPPER}} .aew-vals__panel' => 'border-radius: {{SIZE}}{{UNIT}};' ],
 		] );
 
+		$this->add_control( 'icon_color', [
+			'label'       => esc_html__( 'Icon tint', 'agency-elementor-widgets' ),
+			'type'        => Controls_Manager::COLOR,
+			'default'     => '#7D958D',
+			'selectors'   => [ '{{WRAPPER}}' => '--aew-vals-icon: {{VALUE}};' ],
+			'description' => esc_html__( 'Fills the wood-print icon with a flat brand colour.', 'agency-elementor-widgets' ),
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -300,6 +308,7 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 		$color_vars = Color_Vars::build( $this, $s, [
 			'section_bg'    => '--aew-vals-section-bg',
 			'panel_bg'      => '--aew-vals-panel-bg',
+			'icon_color'    => '--aew-vals-icon',
 			'heading_color' => '--aew-vals-heading',
 			'title_color'   => '--aew-vals-title',
 			'text_color'    => '--aew-vals-text',
@@ -337,7 +346,7 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 							?>
 							<article class="aew-vals__card">
 								<?php if ( '' !== $icon_url ) : ?>
-									<img class="aew-vals__icon" src="<?php echo esc_url( $icon_url ); ?>" alt="" decoding="async" loading="lazy" />
+									<span class="aew-vals__icon" role="presentation" style="--aew-vals-icon-url: url(<?php echo esc_url( $icon_url ); ?>);"></span>
 								<?php endif; ?>
 								<?php if ( '' !== trim( $title ) ) : ?>
 									<h3 class="aew-vals__title"><?php echo esc_html( $title ); ?></h3>
