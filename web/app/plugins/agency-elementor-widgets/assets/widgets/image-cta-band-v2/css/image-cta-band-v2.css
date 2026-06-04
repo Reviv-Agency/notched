@@ -30,6 +30,14 @@
   padding: 0 !important;
 }
 
+/* Defeat Elementor's boxed section width (.elementor-container { max-width:1440 })
+   so the background image goes truly edge-to-edge. The inner box keeps its own
+   max-width, so only the image becomes full-bleed. */
+.elementor-section:has(.elementor-widget-agency-image-cta-band-v2)
+  > .elementor-container {
+  max-width: 100% !important;
+}
+
 /* ── Full-bleed band ─────────────────────────────────────────────────────── */
 .aew-icb {
   position: relative;
