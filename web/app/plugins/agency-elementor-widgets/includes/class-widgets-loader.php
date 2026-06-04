@@ -83,6 +83,7 @@ final class Widgets_Loader {
 		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-booking-cards-v2.php';
 		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-crew-collage-v2.php';
 		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-contact-regions-v2.php';
+		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-team-grid-v2.php';
 		$widgets_manager->register( new Widget_Header() );
 		$widgets_manager->register( new Widget_Header_V2() );
 		$widgets_manager->register( new Widget_Hero() );
@@ -122,5 +123,6 @@ final class Widgets_Loader {
 		$widgets_manager->register( new Widget_Booking_Cards_V2() );
 		$widgets_manager->register( new Widget_Crew_Collage_V2() );
 		$widgets_manager->register( new Widget_Contact_Regions_V2() );
+		$widgets_manager->register( new Widget_Team_Grid_V2() );
 	}
 }
