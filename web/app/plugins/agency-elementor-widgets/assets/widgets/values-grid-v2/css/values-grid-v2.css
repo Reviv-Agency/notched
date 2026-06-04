@@ -31,8 +31,14 @@
 }
 
 /* ── Outer block ─────────────────────────────────────────────────────────── */
+/* Background colour underneath, optional full-bleed image on top (e.g. paper
+   texture). The image var is unset unless a Section background image is chosen. */
 .aew-vals {
-  background: var(--aew-vals-section-bg, var(--notched-background));
+  background-color: var(--aew-vals-section-bg, var(--notched-background));
+  background-image: var(--aew-vals-bg-image, none);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   width: 100%;
   position: relative;
 }
@@ -67,7 +73,7 @@
 .aew-vals__grid {
   display: grid;
   grid-template-columns: repeat(var(--aew-vals-cols, 2), 1fr);
-  gap: 48px 64px;
+  gap: 48px 0px;
   align-items: start;
 }
 

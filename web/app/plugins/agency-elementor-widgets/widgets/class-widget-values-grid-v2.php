@@ -236,6 +236,13 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 			'selectors' => [ '{{WRAPPER}}' => '--aew-vals-section-bg: {{VALUE}};' ],
 		] );
 
+		$this->add_control( 'section_image', [
+			'label'       => esc_html__( 'Section background image', 'agency-elementor-widgets' ),
+			'type'        => Controls_Manager::MEDIA,
+			'default'     => [ 'url' => '' ],
+			'description' => esc_html__( 'Full-bleed background image behind the whole section (e.g. paper texture).', 'agency-elementor-widgets' ),
+		] );
+
 		$this->add_control( 'panel_bg', [
 			'label'       => esc_html__( 'Panel background', 'agency-elementor-widgets' ),
 			'type'        => Controls_Manager::COLOR,
@@ -313,8 +320,14 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 			'title_color'   => '--aew-vals-title',
 			'text_color'    => '--aew-vals-text',
 		] );
-		if ( '' !== $color_vars ) {
-			$this->add_render_attribute( 'wrapper', 'style', $color_vars );
+		$bg_image = $s['section_image'] ?? [];
+		$bg_url   = is_array( $bg_image ) ? (string) ( $bg_image['url'] ?? '' ) : '';
+		$style    = $color_vars;
+		if ( '' !== $bg_url ) {
+			$style .= '--aew-vals-bg-image: url(' . esc_url( $bg_url ) . ');';
+		}
+		if ( '' !== $style ) {
+			$this->add_render_attribute( 'wrapper', 'style', $style );
 		}
 
 		$heading     = (string) ( $s['heading'] ?? '' );
