@@ -92,6 +92,7 @@ class Widget_Image_Cta_Band_V2 extends Widget_Base {
 	protected function register_controls(): void {
 		$this->controls_content();
 		$this->controls_button();
+		$this->controls_second_box();
 		$this->style_band();
 		$this->style_box();
 		$this->style_typography();
@@ -167,6 +168,62 @@ class Widget_Image_Cta_Band_V2 extends Widget_Base {
 			'label'   => esc_html__( 'Show arrow icon', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'yes',
+		] );
+
+		$this->end_controls_section();
+	}
+
+	/**
+	 * CONTENT tab — optional SECOND box (e.g. Vision / Mission). Off by default,
+	 * so a single-box instance is unchanged.
+	 *
+	 * @return void
+	 */
+	private function controls_second_box(): void {
+		$this->start_controls_section( 's_second', [ 'label' => esc_html__( 'Second box', 'agency-elementor-widgets' ) ] );
+
+		$this->add_control( 'show_second', [
+			'label'        => esc_html__( 'Show second box', 'agency-elementor-widgets' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'default'      => '',
+			'description'  => esc_html__( 'Adds a second card beside the first (e.g. Vision / Mission).', 'agency-elementor-widgets' ),
+		] );
+
+		$this->add_control( 'eyebrow2', [
+			'label'     => esc_html__( 'Eyebrow', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::TEXT,
+			'default'   => '',
+			'condition' => [ 'show_second' => 'yes' ],
+		] );
+
+		$this->add_control( 'heading2', [
+			'label'     => esc_html__( 'Heading', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::TEXTAREA,
+			'rows'      => 2,
+			'default'   => esc_html__( 'Our Mission', 'agency-elementor-widgets' ),
+			'condition' => [ 'show_second' => 'yes' ],
+		] );
+
+		$this->add_control( 'description2', [
+			'label'     => esc_html__( 'Description', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::TEXTAREA,
+			'rows'      => 4,
+			'default'   => '',
+			'condition' => [ 'show_second' => 'yes' ],
+		] );
+
+		$this->add_control( 'button2_text', [
+			'label'     => esc_html__( 'Button label', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::TEXT,
+			'default'   => '',
+			'condition' => [ 'show_second' => 'yes' ],
+		] );
+
+		$this->add_control( 'button2_link', [
+			'label'     => esc_html__( 'Button link', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::URL,
+			'default'   => [ 'url' => '' ],
+			'condition' => [ 'show_second' => 'yes' ],
 		] );
 
 		$this->end_controls_section();
@@ -348,38 +405,55 @@ class Widget_Image_Cta_Band_V2 extends Widget_Base {
 			$this->add_render_attribute( 'wrapper', 'style', $style );
 		}
 
-		$eyebrow = (string) ( $s['eyebrow'] ?? '' );
-		$heading = (string) ( $s['heading'] ?? '' );
-		$tag     = preg_replace( '/[^a-z0-9]/i', '', (string) ( $s['heading_tag'] ?? 'h2' ) ) ?: 'h2';
-		$desc    = (string) ( $s['description'] ?? '' );
-		$btn_lbl = (string) ( $s['button_text'] ?? '' );
-		$arrow   = 'yes' === ( $s['button_arrow'] ?? '' );
-		$link    = $this->parse_link( $s['button_link'] ?? [] );
+		$tag         = preg_replace( '/[^a-z0-9]/i', '', (string) ( $s['heading_tag'] ?? 'h2' ) ) ?: 'h2';
+		$arrow       = 'yes' === ( $s['button_arrow'] ?? '' );
+		$show_second = 'yes' === ( $s['show_second'] ?? '' );
+
+		$boxes   = [];
+		$boxes[] = [
+			'eyebrow' => (string) ( $s['eyebrow'] ?? '' ),
+			'heading' => (string) ( $s['heading'] ?? '' ),
+			'desc'    => (string) ( $s['description'] ?? '' ),
+			'btn_lbl' => (string) ( $s['button_text'] ?? '' ),
+			'link'    => $this->parse_link( $s['button_link'] ?? [] ),
+		];
+		if ( $show_second ) {
+			$boxes[] = [
+				'eyebrow' => (string) ( $s['eyebrow2'] ?? '' ),
+				'heading' => (string) ( $s['heading2'] ?? '' ),
+				'desc'    => (string) ( $s['description2'] ?? '' ),
+				'btn_lbl' => (string) ( $s['button2_text'] ?? '' ),
+				'link'    => $this->parse_link( $s['button2_link'] ?? [] ),
+			];
+			$this->add_render_attribute( 'wrapper', 'class', 'aew-icb--two' );
+		}
 		?>
 		<section <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
 			<div class="aew-icb__inner">
-				<div class="aew-icb__box">
-					<?php if ( '' !== trim( $eyebrow ) ) : ?>
-						<p class="aew-icb__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
-					<?php endif; ?>
-					<?php if ( '' !== trim( $heading ) ) : ?>
-						<<?php echo esc_html( $tag ); ?> class="aew-icb__heading"><?php echo esc_html( $heading ); ?></<?php echo esc_html( $tag ); ?>>
-					<?php endif; ?>
-					<?php if ( '' !== trim( $desc ) ) : ?>
-						<p class="aew-icb__description"><?php echo esc_html( $desc ); ?></p>
-					<?php endif; ?>
-					<?php if ( '' !== trim( $btn_lbl ) ) : ?>
-						<a class="aew-icb__btn"
-							href="<?php echo esc_url( $link['url'] ?: '#' ); ?>"
-							<?php echo $link['target'] ? 'target="' . esc_attr( $link['target'] ) . '"' : ''; ?>
-							<?php echo $link['rel'] ? 'rel="' . esc_attr( $link['rel'] ) . '"' : ''; ?>>
-							<span class="aew-icb__btn-label"><?php echo esc_html( $btn_lbl ); ?></span>
-							<?php if ( $arrow ) : ?>
-								<span class="aew-icb__btn-arrow" aria-hidden="true">&rarr;</span>
-							<?php endif; ?>
-						</a>
-					<?php endif; ?>
-				</div>
+				<?php foreach ( $boxes as $b ) : ?>
+					<div class="aew-icb__box">
+						<?php if ( '' !== trim( $b['eyebrow'] ) ) : ?>
+							<p class="aew-icb__eyebrow"><?php echo esc_html( $b['eyebrow'] ); ?></p>
+						<?php endif; ?>
+						<?php if ( '' !== trim( $b['heading'] ) ) : ?>
+							<<?php echo esc_html( $tag ); ?> class="aew-icb__heading"><?php echo esc_html( $b['heading'] ); ?></<?php echo esc_html( $tag ); ?>>
+						<?php endif; ?>
+						<?php if ( '' !== trim( $b['desc'] ) ) : ?>
+							<p class="aew-icb__description"><?php echo esc_html( $b['desc'] ); ?></p>
+						<?php endif; ?>
+						<?php if ( '' !== trim( $b['btn_lbl'] ) ) : ?>
+							<a class="aew-icb__btn"
+								href="<?php echo esc_url( $b['link']['url'] ?: '#' ); ?>"
+								<?php echo $b['link']['target'] ? 'target="' . esc_attr( $b['link']['target'] ) . '"' : ''; ?>
+								<?php echo $b['link']['rel'] ? 'rel="' . esc_attr( $b['link']['rel'] ) . '"' : ''; ?>>
+								<span class="aew-icb__btn-label"><?php echo esc_html( $b['btn_lbl'] ); ?></span>
+								<?php if ( $arrow ) : ?>
+									<span class="aew-icb__btn-arrow" aria-hidden="true">&rarr;</span>
+								<?php endif; ?>
+							</a>
+						<?php endif; ?>
+					</div>
+				<?php endforeach; ?>
 			</div>
 		</section>
 		<?php

@@ -72,6 +72,16 @@
   justify-content: center;
 }
 
+/* Two-box variant (e.g. Vision / Mission) — boxes side by side. */
+.aew-icb--two .aew-icb__inner {
+  align-items: stretch;
+  gap: 24px;
+}
+.aew-icb--two .aew-icb__box {
+  flex: 1 1 0;
+  max-width: none;         /* share the row equally instead of the single cap */
+}
+
 /* ── Centered content box ────────────────────────────────────────────────── */
 .aew-icb__box {
   background: var(--aew-icb-box-bg, var(--notched-background));
@@ -154,6 +164,11 @@
 @media (max-width: 1024px) {
   .aew-icb__inner { padding: 64px 40px; }
   .aew-icb .aew-icb__heading { font-size: 48px; }
+}
+
+/* Two-box stacks below tablet. */
+@media (max-width: 1024px) {
+  .aew-icb--two .aew-icb__inner { flex-direction: column; }
 }
 
 /* ── Mobile ──────────────────────────────────────────────────────────────── */

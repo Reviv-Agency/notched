@@ -259,6 +259,14 @@ final class Widget_Assets {
 		);
 
 		self::register_widget(
+			'values-grid-v2',
+			[
+				'style'      => 'css/values-grid-v2.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
+
+		self::register_widget(
 			'testimonials-v2',
 			[
 				'style'      => 'css/testimonials-v2.css',
