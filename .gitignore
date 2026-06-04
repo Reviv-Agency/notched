@@ -12,7 +12,6 @@ web/app/upgrade
 web/app/uploads/*
 !web/app/uploads/.gitkeep
 web/app/cache/*
-/Users/nikolacucukovski/Herd/notched/.claude/settings.json
 # WordPress
 web/wp
 web/.htaccess
@@ -43,7 +42,12 @@ wix-export/
 # Tooling scratch / screenshots
 .playwright-mcp/
 *.png
+*.jpeg
+*.jpg
 .DS_Store
+
+# Claude Code local config / session data
+.claude/
 
 # Internal build/deploy guide — contains SSH + DB credentials, keep out of the repo
 WIDGET-V2-BUILD-GUIDE.md
