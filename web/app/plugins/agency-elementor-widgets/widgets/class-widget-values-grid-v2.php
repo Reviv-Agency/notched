@@ -199,18 +199,19 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 		] );
 
 		$this->add_control( 'icon_size', [
-			'label'      => esc_html__( 'Icon size', 'agency-elementor-widgets' ),
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [ 'px' ],
-			'range'      => [ 'px' => [ 'min' => 24, 'max' => 120 ] ],
-			'default'    => [ 'unit' => 'px', 'size' => 64 ],
-			'selectors'  => [ '{{WRAPPER}} .aew-vals__icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};' ],
+			'label'       => esc_html__( 'Icon size', 'agency-elementor-widgets' ),
+			'type'        => Controls_Manager::SLIDER,
+			'size_units'  => [ 'px' ],
+			'range'       => [ 'px' => [ 'min' => 24, 'max' => 280 ] ],
+			// Default left EMPTY so the stylesheet's 180px wins (gotcha #16).
+			'selectors'   => [ '{{WRAPPER}} .aew-vals__icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};' ],
+			'description' => esc_html__( 'Defaults to a large faint mark behind each item.', 'agency-elementor-widgets' ),
 		] );
 
 		$this->add_control( 'align', [
 			'label'     => esc_html__( 'Card text alignment', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::CHOOSE,
-			'default'   => 'center',
+			'default'   => 'left',
 			'options'   => [
 				'left'   => [ 'title' => esc_html__( 'Left', 'agency-elementor-widgets' ), 'icon' => 'eicon-text-align-left' ],
 				'center' => [ 'title' => esc_html__( 'Center', 'agency-elementor-widgets' ), 'icon' => 'eicon-text-align-center' ],

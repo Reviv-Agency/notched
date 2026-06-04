@@ -71,18 +71,30 @@
 }
 
 /* ── Card ────────────────────────────────────────────────────────────────── */
+/* A large faint wood-ring icon sits behind the upper-left of the copy; the
+   title and text are left-aligned and overlap the icon's lower portion. */
 .aew-vals__card {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  text-align: left;
+  padding-top: 96px;            /* room for the icon to rise above the title */
 }
 
 .aew-vals__icon {
-  width: 64px;
-  height: 64px;
+  position: absolute;
+  top: 0;
+  left: -24px;                  /* nudge left so the title overlaps its lower-right */
+  width: 180px;
+  height: 180px;
   object-fit: contain;
-  display: inline-block;
-  margin-bottom: 16px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Copy sits above the icon. */
+.aew-vals__title,
+.aew-vals__text {
+  position: relative;
+  z-index: 1;
 }
 
 /* (0,2,0) beats the kit's heading rule — gotcha #20. */
@@ -90,7 +102,7 @@
   margin: 0 0 12px;
   font-family: "Teko", sans-serif;
   font-weight: 600;
-  font-size: 32px;
+  font-size: 30px;
   line-height: 100%;
   text-transform: uppercase;
   color: var(--aew-vals-title, var(--notched-secondary-bg));
