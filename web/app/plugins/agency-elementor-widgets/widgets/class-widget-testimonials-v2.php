@@ -55,6 +55,7 @@ class Widget_Testimonials_V2 extends Widget_Base {
 
 	protected function register_controls(): void {
 		$this->controls_heading();
+		$this->controls_summary();
 		$this->controls_items();
 
 		$this->style_body();
@@ -62,6 +63,64 @@ class Widget_Testimonials_V2 extends Widget_Base {
 		$this->style_title();
 		$this->style_name();
 		$this->style_review();
+	}
+
+	/**
+	 * Optional Google-reviews summary header (rating, count, summary, button).
+	 * Off by default so existing instances are unchanged.
+	 *
+	 * @return void
+	 */
+	private function controls_summary(): void {
+		$this->start_controls_section( 's_summary', [ 'label' => 'Reviews summary header' ] );
+
+		$this->add_control( 'show_summary', [
+			'label'        => 'Show summary header',
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => 'Yes',
+			'label_off'    => 'No',
+			'return_value' => 'yes',
+			'default'      => '',
+			'description'  => 'A rating + review-count + summary block above the cards.',
+		] );
+
+		$this->add_control( 'summary_rating', [
+			'label'     => 'Rating',
+			'type'      => Controls_Manager::TEXT,
+			'default'   => '4.9',
+			'condition' => [ 'show_summary' => 'yes' ],
+		] );
+
+		$this->add_control( 'summary_count', [
+			'label'     => 'Reviews count label',
+			'type'      => Controls_Manager::TEXT,
+			'default'   => 'Based on 72 Google reviews',
+			'condition' => [ 'show_summary' => 'yes' ],
+		] );
+
+		$this->add_control( 'summary_text', [
+			'label'     => 'Summary text',
+			'type'      => Controls_Manager::TEXTAREA,
+			'rows'      => 4,
+			'default'   => '',
+			'condition' => [ 'show_summary' => 'yes' ],
+		] );
+
+		$this->add_control( 'summary_btn_text', [
+			'label'     => 'Button label',
+			'type'      => Controls_Manager::TEXT,
+			'default'   => 'Review us on Google',
+			'condition' => [ 'show_summary' => 'yes' ],
+		] );
+
+		$this->add_control( 'summary_btn_link', [
+			'label'     => 'Button link',
+			'type'      => Controls_Manager::URL,
+			'default'   => [ 'url' => '' ],
+			'condition' => [ 'show_summary' => 'yes' ],
+		] );
+
+		$this->end_controls_section();
 	}
 
 	private function controls_heading(): void {
@@ -117,6 +176,12 @@ class Widget_Testimonials_V2 extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'default'     => 'Client Name',
 			'label_block' => true,
+		] );
+		$rep->add_control( 'date', [
+			'label'       => 'Date',
+			'type'        => Controls_Manager::TEXT,
+			'default'     => '',
+			'placeholder' => 'e.g. 3 months ago',
 		] );
 		$rep->add_control( 'review', [
 			'label'   => 'Review',
@@ -279,6 +344,15 @@ class Widget_Testimonials_V2 extends Widget_Base {
 		$eyebrow  = ( $s['show_eyebrow'] ?? 'yes' ) === 'yes';
 		$items    = $s['items'] ?? [];
 
+		$show_summary = ( $s['show_summary'] ?? '' ) === 'yes';
+		$sum_rating   = (string) ( $s['summary_rating'] ?? '' );
+		$sum_count    = (string) ( $s['summary_count'] ?? '' );
+		$sum_text     = (string) ( $s['summary_text'] ?? '' );
+		$sum_btn_lbl  = (string) ( $s['summary_btn_text'] ?? '' );
+		$sum_btn      = $s['summary_btn_link'] ?? [];
+		$sum_btn_url  = is_array( $sum_btn ) ? (string) ( $sum_btn['url'] ?? '' ) : '';
+		$sum_btn_ext  = is_array( $sum_btn ) && ! empty( $sum_btn['is_external'] );
+
 		/*
 		 * Resolved colours as inline CSS vars on the wrapper. Color_Vars::build()
 		 * emits the global reference for global-bound picks (Elementor drops those
@@ -303,6 +377,26 @@ class Widget_Testimonials_V2 extends Widget_Base {
 		<section class="aew-tsv2" data-aew-testimonials-v2<?php echo $style_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- value escaped via esc_attr above ?>>
 			<div class="aew-tsv2__inner">
 
+				<?php if ( $show_summary ) : ?>
+					<div class="aew-tsv2__summary">
+						<?php if ( '' !== trim( $sum_rating ) ) : ?>
+							<span class="aew-tsv2__summary-rating"><?php echo esc_html( $sum_rating ); ?></span>
+						<?php endif; ?>
+						<?php echo $this->stars_row( 5, esc_attr( $sum_rating ) . ' out of 5 stars' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG, label escaped ?>
+						<?php if ( '' !== trim( $sum_count ) ) : ?>
+							<p class="aew-tsv2__summary-count"><?php echo esc_html( $sum_count ); ?></p>
+						<?php endif; ?>
+						<?php if ( '' !== trim( $sum_text ) ) : ?>
+							<p class="aew-tsv2__summary-text"><?php echo esc_html( $sum_text ); ?></p>
+						<?php endif; ?>
+						<?php if ( '' !== trim( $sum_btn_lbl ) && '' !== $sum_btn_url ) : ?>
+							<a class="aew-tsv2__summary-btn" href="<?php echo esc_url( $sum_btn_url ); ?>"<?php echo $sum_btn_ext ? ' target="_blank" rel="noopener"' : ''; ?>>
+								<?php echo esc_html( $sum_btn_lbl ); ?>
+							</a>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+
 				<?php if ( $eyebrow ) : ?>
 					<?php echo $this->stars_row( 5, '5 out of 5 stars' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG, label escaped ?>
 				<?php endif; ?>
@@ -321,6 +415,7 @@ class Widget_Testimonials_V2 extends Widget_Base {
 							$av_url   = is_array( $av ) ? ( $av['url'] ?? '' ) : '';
 							$stars    = (int) ( $item['stars'] ?? 5 );
 							$name     = (string) ( $item['name'] ?? '' );
+							$date     = (string) ( $item['date'] ?? '' );
 							$review   = (string) ( $item['review'] ?? '' );
 							$initial  = '' !== trim( $name ) ? mb_strtoupper( mb_substr( trim( $name ), 0, 1 ) ) : '';
 						?>
@@ -357,6 +452,10 @@ class Widget_Testimonials_V2 extends Widget_Base {
 
 									<?php if ( $name ) : ?>
 										<p class="aew-tsv2__name"><?php echo esc_html( $name ); ?></p>
+									<?php endif; ?>
+
+									<?php if ( '' !== trim( $date ) ) : ?>
+										<p class="aew-tsv2__date"><?php echo esc_html( $date ); ?></p>
 									<?php endif; ?>
 
 									<?php if ( $review ) : ?>

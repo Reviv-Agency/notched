@@ -191,6 +191,17 @@
   letter-spacing: 0.5px;
 }
 
+/* ── Date (optional, under the name) ─────────────────────────────────────── */
+.aew-tsv2__date {
+  margin: -6px 0 12px;
+  color: var(--aew-tsv2-review, var(--notched-text));
+  opacity: 0.7;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+}
+
 /* ── Review paragraph ────────────────────────────────────────────────────── */
 .aew-tsv2__review {
   margin: 0;
@@ -200,6 +211,59 @@
   font-size: 18px;
   line-height: 140%;
 }
+
+/* ── Optional Google-reviews summary header ──────────────────────────────── */
+.aew-tsv2__summary {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.aew-tsv2__summary-rating {
+  font-family: var(--aew-teko);
+  font-weight: 600;
+  font-size: 56px;
+  line-height: 100%;
+  color: var(--aew-tsv2-title, var(--notched-secondary-bg));
+}
+.aew-tsv2__summary .aew-tsv2__stars { color: var(--aew-tsv2-star, var(--notched-cta)); }
+.aew-tsv2__summary-count {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  color: var(--aew-tsv2-review, var(--notched-text));
+  opacity: 0.8;
+}
+.aew-tsv2__summary-text {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  line-height: 140%;
+  color: var(--aew-tsv2-review, var(--notched-text));
+}
+.aew-tsv2__summary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  text-decoration: none;
+  font-family: var(--aew-teko);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 85%;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 20px 24px 16px;
+  border-radius: 8px;
+  background-color: var(--notched-cta);
+  color: #FFFFFF;
+  transition: background-color 0.2s ease;
+}
+.aew-tsv2__summary-btn:hover,
+.aew-tsv2__summary-btn:focus-visible { background-color: var(--notched-cta-hover); }
 
 /* ── Tablet: 3 → 2 columns, X padding → 40px ─────────────────────────────── */
 @media (max-width: 1024px) {
