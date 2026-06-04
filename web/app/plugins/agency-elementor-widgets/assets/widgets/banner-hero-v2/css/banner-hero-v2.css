@@ -58,11 +58,17 @@
   box-sizing: border-box;
 }
 
-/* ── Inner wrapper — max-width + responsive X padding (§6.5) + top Y pad ──── */
+/* Design-system width model: X gutter on the outer block; inner caps at 1440. */
+.aew-bhero {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/* ── Inner wrapper: true 1440 content cap; owns top Y padding only ───────── */
 .aew-bhero__inner {
-  max-width: 1600px /* 1440 content + side gutter */;   /* standardized stack-wide */
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 40px 80px 0;
+  padding: 40px 0 0;
 }
 
 /* ── Frame (rounded banner that holds the image + floating card) ──────────── */
@@ -202,7 +208,6 @@
 
 /* ── Responsive: tablet / small desktop (≤1024px) ────────────────────────── */
 @media (max-width: 1024px) {
-  .aew-bhero__inner { padding: 40px 40px 0; }
   .aew-bhero__frame { padding: 32px; }
   .aew-bhero__card  { padding: 40px 48px; }
   .aew-bhero .aew-bhero__heading { font-size: 52px; }
@@ -210,7 +215,8 @@
 
 /* ── Responsive: mobile (≤768px) ─────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .aew-bhero__inner { padding: 32px 16px 0; }
+  .aew-bhero { padding-left: 16px; padding-right: 16px; }
+  .aew-bhero__inner { padding: 32px 0 0; }
   .aew-bhero__frame { padding: 16px; }
   .aew-bhero__card  {
     max-width: none;

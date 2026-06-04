@@ -81,7 +81,7 @@
 
 .aew-feature-rows h3.aew-feature-rows__title {
 	margin: 0 0 1rem;
-	font-family: var(--aew-font-heading, 'DM Serif Display', serif);
+	font-family: var(--aew-font-heading, 'Teko', sans-serif);
 	font-size: 48px;
 	font-weight: 400;
 	line-height: 1.15;
@@ -96,7 +96,7 @@
 	align-items: center;
 	justify-content: center;
 	box-sizing: border-box;
-	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-family: var(--aew-font-body, 'Lato', sans-serif);
 	font-weight: 700;
 	text-decoration: none;
 	white-space: nowrap;

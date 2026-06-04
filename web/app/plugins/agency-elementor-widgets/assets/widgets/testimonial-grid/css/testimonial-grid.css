@@ -35,11 +35,14 @@
 	pointer-events: none;
 }
 
+/* Design-system width model: X gutter on the outer block; inner caps at 1440. */
+.aew-testimonial-grid { padding-left: 16px; padding-right: 16px; }
+
 .aew-testimonial-grid__inner {
 	width: 100%;
-	max-width: 1472px /* 1440 content + side gutter */;
+	max-width: 1440px;
 	margin: 0 auto;
-	padding: 40px 16px !important;
+	padding: 32px 0;
 	box-sizing: border-box;
 }
 
@@ -121,7 +124,7 @@
 
 .aew-testimonial-grid__attribution {
 	margin: 0;
-	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-family: var(--aew-font-body, 'Lato', sans-serif);
 	font-size: 14px !important;
 	font-weight: 400;
 	line-height: 1.4;
@@ -135,7 +138,7 @@
 
 .aew-testimonial-grid__title {
 	margin: 0;
-	font-family: var(--aew-font-heading, 'DM Serif Display', serif);
+	font-family: var(--aew-font-heading, 'Teko', sans-serif);
 	font-size: 24px !important;
 	font-weight: 400;
 	line-height: 1.15;
@@ -144,7 +147,7 @@
 
 .aew-testimonial-grid__body {
 	margin: 0;
-	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-family: var(--aew-font-body, 'Lato', sans-serif);
 	font-size: 14px !important;
 	font-weight: 400;
 	line-height: 1.5;
@@ -152,9 +155,8 @@
 }
 
 @media (min-width: 1024px) {
-	.aew-testimonial-grid__inner {
-		padding: 40px !important;
-	}
+	.aew-testimonial-grid { padding-left: 40px; padding-right: 40px; }
+	.aew-testimonial-grid__inner { padding: 64px 0; }
 
 	.aew-testimonial-grid__grid {
 		grid-template-columns: repeat(2, 1fr);
@@ -162,7 +164,7 @@
 
 	.aew-testimonial-grid__card {
 		padding: 40px !important;
-		border-radius: 40px !important;
+		border-radius: 24px !important;
 	}
 
 	.aew-testimonial-grid__project-image img {

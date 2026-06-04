@@ -55,10 +55,13 @@
 }
 
 /* ── Inner wrapper (max-width + X padding) ───────────────────────────────── */
+/* Design-system width model: X gutter on the outer block; inner caps at a true 1440. */
+.aew-rgcv2 { padding-left: 40px; padding-right: 40px; box-sizing: border-box; }
+
 .aew-rgcv2__inner {
-  max-width: 1600px /* 1440 content + side gutter */;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 4rem 5rem;          /* desktop Y 64px / X 5rem */
+  padding: 64px 0;          /* desktop Y 64px / X 5rem */
 }
 
 /* ── Grid ────────────────────────────────────────────────────────────────── */
@@ -186,9 +189,7 @@
 
 /* ── Tablet ──────────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .aew-rgcv2__inner {
-    padding: 4rem 2.5rem;      /* tablet Y 64px / X 2.5rem */
-  }
+  /* X gutter from outer (40); Y 64 from desktop inner */
   .aew-rgcv2__panel {
     --aew-rgcv2-inset: 40px;
   }
@@ -196,8 +197,9 @@
 
 /* ── Mobile (single column, image-height + bottom-anchored card) ─────────── */
 @media (max-width: 768px) {
+  .aew-rgcv2 { padding-left: 16px; padding-right: 16px; }
   .aew-rgcv2__inner {
-    padding: 2rem 2.5rem;      /* mobile Y 32px / X 2.5rem */
+    padding: 32px 0;           /* mobile Y 32 */
   }
 
   .aew-rgcv2__grid {

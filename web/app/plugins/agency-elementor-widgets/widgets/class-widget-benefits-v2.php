@@ -148,14 +148,6 @@ class Widget_Benefits_V2 extends Widget_Base {
 			'default'   => '#2A4F41',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bnv2-body-bg: {{VALUE}};' ],
 		] );
-		$this->add_responsive_control( 'body_max_w', [
-			'label'      => 'Inner max width',
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [ 'px' ],
-			'range'      => [ 'px' => [ 'min' => 800, 'max' => 1920 ] ],
-			'default'    => [ 'unit' => 'px', 'size' => 1600 ],
-			'selectors'  => [ '{{WRAPPER}} .aew-bnv2__inner' => 'max-width: {{SIZE}}{{UNIT}};' ],
-		] );
 		$this->add_control( 'image_size', [
 			'label'      => 'Circle size',
 			'type'       => Controls_Manager::SLIDER,

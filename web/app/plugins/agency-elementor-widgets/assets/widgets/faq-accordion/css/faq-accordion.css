@@ -21,6 +21,9 @@
 	box-sizing: border-box;
 	background-color: var(--aew-faq-accordion-bg);
 	color: var(--aew-color-white, #fff);
+	/* Design-system width model: X gutter on the outer block; inner caps at 1440. */
+	padding-left: 16px;
+	padding-right: 16px;
 }
 
 .aew-faq-accordion::before {
@@ -39,9 +42,9 @@
 
 .aew-faq-accordion__inner {
 	width: 100%;
-	max-width: 1472px /* 1440 content + side gutter */;
+	max-width: 1440px;
 	margin: 0 auto;
-	padding: 80px 16px 80px 16px;
+	padding: 80px 0;
 	box-sizing: border-box;
 }
 
@@ -66,7 +69,7 @@
 
 .aew-faq-accordion__title {
 	margin: 0;
-	font-family: var(--aew-font-heading, 'DM Serif Display', serif);
+	font-family: var(--aew-font-heading, 'Teko', sans-serif);
 	font-size: 32px !important;
 	font-weight: 400;
 	line-height: 1.15;
@@ -75,7 +78,7 @@
 
 .aew-faq-accordion__intro-text {
 	margin: 0;
-	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-family: var(--aew-font-body, 'Lato', sans-serif);
 	font-size: 14px !important;
 	line-height: 1.5;
 	color: var(--aew-color-white, #fff);
@@ -83,7 +86,7 @@
 
 .aew-faq-accordion__subheading {
 	margin: 0;
-	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-family: var(--aew-font-body, 'Lato', sans-serif);
 	font-size: 14px !important;
 	font-weight: 700 !important;
 	line-height: 1.5;
@@ -139,7 +142,7 @@
 	flex: 1;
 	min-width: 0;
 	margin: 0;
-	font-family: var(--aew-font-heading, 'DM Serif Display', serif);
+	font-family: var(--aew-font-heading, 'Teko', sans-serif);
 	font-size: 24px !important;
 	font-weight: 400;
 	line-height: 1.2;
@@ -204,7 +207,7 @@
 	margin: 0;
 	overflow: hidden;
 	min-height: 0;
-	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-family: var(--aew-font-body, 'Lato', sans-serif);
 	font-size: 14px !important;
 	line-height: 1.5;
 	color: var(--aew-color-white, #fff);
@@ -227,7 +230,7 @@
 .aew-faq-accordion__closing-copy {
 	margin: 0 auto;
 	max-width: 900px;
-	font-family: var(--aew-font-heading, 'DM Serif Display', serif);
+	font-family: var(--aew-font-heading, 'Teko', sans-serif);
 	font-size: 32px !important;
 	font-weight: 400;
 	line-height: 1.5;
@@ -276,6 +279,8 @@
 
 /* Desktop */
 @media (min-width: 1025px) {
+	.aew-faq-accordion { padding-left: 40px; padding-right: 40px; }   /* X 40 desktop */
+
 	.aew-faq-accordion__trigger {
 		padding: 64px !important;
 	}

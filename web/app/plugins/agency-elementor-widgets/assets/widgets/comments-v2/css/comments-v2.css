@@ -22,10 +22,12 @@
   --notched-text: #141C19; --notched-cta: #AA7D44; --notched-cta-hover: #876137;
   width: 100%;
   background-color: var(--aew-cmv2-bg, var(--notched-background));
+  /* Design-system width model: X gutter on the outer block; inner caps at 1440. */
+  padding-left: 40px; padding-right: 40px;
 }
 .aew-cmv2 *, .aew-cmv2 *::before, .aew-cmv2 *::after { box-sizing: border-box; }
 
-.aew-cmv2__inner { max-width: 1600px /* 1440 content + side gutter */; margin: 0 auto; padding: 0 5rem 4rem; }
+.aew-cmv2__inner { max-width: 1440px; margin: 0 auto; padding: 0 0 64px; }   /* bottom Y only */
 
 .aew-cmv2__card {
   max-width: 760px; margin: 0 auto; padding: 36px 48px;
@@ -219,8 +221,8 @@
 #comments.aew-cmv2__card .aew-cmv2__list .children { margin: 25px 0 0; }
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
-@media (max-width: 1024px) { .aew-cmv2__inner { padding: 0 2.5rem 4rem; } }
 @media (max-width: 768px) {
-  .aew-cmv2__inner { padding: 0 1rem 2rem; }
+  .aew-cmv2 { padding-left: 16px; padding-right: 16px; }   /* X 16 mobile */
+  .aew-cmv2__inner { padding: 0 0 32px; }                   /* bottom Y 32 mobile */
   .aew-cmv2__card { padding: 24px 20px; border-radius: 20px; }
 }

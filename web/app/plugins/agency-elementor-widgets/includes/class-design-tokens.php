@@ -28,8 +28,8 @@ final class Design_Tokens {
 			'color_cream'       => '#F8F5F1',
 			'color_white'       => '#FFFFFF',
 			'color_gray'        => '#E1DEDA',
-			'font_heading'      => 'DM Serif Display',
-			'font_body'         => 'Poppins',
+			'font_heading'      => 'Teko',
+			'font_body'         => 'Lato',
 			'text_h1_size'      => '80px',
 			'text_h1_lh'        => '1',
 			'text_h2_size'      => '64px',
@@ -84,8 +84,8 @@ final class Design_Tokens {
 	public static function css_variables(): array {
 		$t = self::get();
 
-		$heading = self::font_stack( $t['font_heading'] ?? 'DM Serif Display', 'serif' );
-		$body    = self::font_stack( $t['font_body'] ?? 'Poppins', 'sans-serif' );
+		$heading = self::font_stack( $t['font_heading'] ?? 'Teko', 'sans-serif' );
+		$body    = self::font_stack( $t['font_body'] ?? 'Lato', 'sans-serif' );
 
 		return [
 			'--aew-color-blue-dark'   => $t['color_blue_dark'],

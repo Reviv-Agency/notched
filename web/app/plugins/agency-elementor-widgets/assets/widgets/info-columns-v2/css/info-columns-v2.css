@@ -54,10 +54,13 @@
 }
 
 /* ── Inner wrapper (max-width + X padding + banded Y padding) ─────────────── */
+/* Design-system width model: X gutter on the outer block; inner caps at a true 1440. */
+.aew-infc { padding-left: 40px; padding-right: 40px; box-sizing: border-box; }
+
 .aew-infc__inner {
-  max-width: 1600px /* 1440 content + side gutter */;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 4rem 5rem;          /* desktop Y 64px / X 5rem */
+  padding: 64px 0;          /* desktop Y 64px / X 5rem */
 }
 
 /* ── Section heading ─────────────────────────────────────────────────────── */
@@ -165,9 +168,7 @@
 
 /* ── Tablet ──────────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .aew-infc__inner {
-    padding: 4rem 2.5rem;      /* tablet Y 64px / X 2.5rem */
-  }
+  /* X gutter from outer (40); Y 64 from desktop inner */
   .aew-infc__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -175,8 +176,9 @@
 
 /* ── Mobile ──────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
+  .aew-infc { padding-left: 16px; padding-right: 16px; }
   .aew-infc__inner {
-    padding: 2rem 2.5rem;      /* mobile Y 32px / X 2.5rem */
+    padding: 32px 0;           /* mobile Y 32 */
   }
   .aew-infc__grid {
     grid-template-columns: minmax(0, 1fr);

@@ -41,6 +41,9 @@
 	background-color: var(--aew-galv2-bg, var(--notched-background));
 	padding-top: 64px;
 	padding-bottom: 64px;
+	/* Design-system width model: X gutter on the outer block; inner caps at 1440. */
+	padding-left: 40px;
+	padding-right: 40px;
 }
 
 .aew-galv2 *,
@@ -51,9 +54,9 @@
 
 .aew-galv2__inner {
 	width: 100%;
-	max-width: 1600px /* 1440 content + side gutter */;
+	max-width: 1440px;
 	margin: 0 auto;
-	padding: 0 80px;
+	padding: 0;
 }
 
 /* ── Header ─────────────────────────────────────────────────────────────── */
@@ -144,10 +147,7 @@
 
 /* ── Responsive ─────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-	.aew-galv2__inner {
-		padding: 0 40px;
-	}
-
+	/* X gutter from outer (40); Y on outer */
 	.aew-galv2 .aew-galv2__heading {
 		font-size: 48px;
 	}
@@ -157,10 +157,8 @@
 	.aew-galv2 {
 		padding-top: 32px;
 		padding-bottom: 32px;
-	}
-
-	.aew-galv2__inner {
-		padding: 0 40px;
+		padding-left: 16px;
+		padding-right: 16px;
 	}
 
 	.aew-galv2__header {

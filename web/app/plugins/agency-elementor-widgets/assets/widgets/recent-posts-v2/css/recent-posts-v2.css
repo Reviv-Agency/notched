@@ -22,11 +22,13 @@
   --notched-misc-accent: #3B413F; --notched-text: #141C19; --notched-cta: #AA7D44;
   width: 100%;
   background-color: var(--aew-rpv2-bg, var(--notched-background));
+  /* Design-system width model: X gutter on the outer block; inner caps at 1440. */
+  padding-left: 40px; padding-right: 40px;
 }
 .aew-rpv2 *, .aew-rpv2 *::before, .aew-rpv2 *::after { box-sizing: border-box; }
 
 .aew-rpv2__inner {
-  max-width: 1600px /* 1440 content + side gutter */; margin: 0 auto; padding: 0 5rem 4rem;
+  max-width: 1440px; margin: 0 auto; padding: 0 0 64px;   /* bottom Y only (card grid) */
 }
 
 /* ── Head ────────────────────────────────────────────────────────────────── */
@@ -100,11 +102,11 @@
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .aew-rpv2__inner { padding: 0 2.5rem 4rem; }
   .aew-rpv2__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 768px) {
-  .aew-rpv2__inner { padding: 0 1rem 2rem; }
+  .aew-rpv2 { padding-left: 16px; padding-right: 16px; }   /* X 16 mobile */
+  .aew-rpv2__inner { padding: 0 0 32px; }                   /* bottom Y 32 mobile */
   .aew-rpv2__grid { grid-template-columns: minmax(0, 1fr); }
   .aew-rpv2__img, .aew-rpv2__img--placeholder { height: 200px; }
 }

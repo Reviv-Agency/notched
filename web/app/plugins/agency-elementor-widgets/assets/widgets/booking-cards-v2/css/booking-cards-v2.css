@@ -30,19 +30,24 @@
   padding: 0 !important;
 }
 
-/* ── Outer block: full-bleed background ──────────────────────────────────── */
+/* ── Outer block: full-bleed background; X-gutter lives here ─────────────── */
+/* Design-system width model: content caps at a TRUE 1440px (inner). The X
+   gutter sits on the OUTER block so above ~1520 it becomes empty centring
+   margin (content stays a true 1440), and below it the gutter shows. */
 .aew-bkcv2 {
   background: var(--aew-bkcv2-section-bg, var(--notched-background));
   width: 100%;
   position: relative;
+  padding-left: 40px;
+  padding-right: 40px;
+  box-sizing: border-box;
 }
 
-/* One inner wrapper owns max-width + responsive X padding (§6.5).
-   1600 = 1440 content + 2×80px desktop side padding. */
+/* Inner wrapper = true 1440 content cap; owns Y padding only. */
 .aew-bkcv2__inner {
-  max-width: 1600px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 64px 80px;
+  padding: 64px 0;
 }
 
 /* ── Grid ────────────────────────────────────────────────────────────────── */
@@ -148,14 +153,14 @@
 
 /* ── Tablet ──────────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .aew-bkcv2__inner { padding: 64px 40px; }
   .aew-bkcv2__grid  { grid-template-columns: repeat(2, 1fr); }
   .aew-bkcv2 .aew-bkcv2__title { font-size: 32px; }
 }
 
 /* ── Mobile ──────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .aew-bkcv2__inner { padding: 32px 40px; }
+  .aew-bkcv2 { padding-left: 16px; padding-right: 16px; }   /* X 16 mobile */
+  .aew-bkcv2__inner { padding: 32px 0; }                     /* Y 32 mobile */
   .aew-bkcv2__grid  { grid-template-columns: 1fr; }
   .aew-bkcv2__card  { padding: 32px 24px; }
   .aew-bkcv2 .aew-bkcv2__title { font-size: 24px; }

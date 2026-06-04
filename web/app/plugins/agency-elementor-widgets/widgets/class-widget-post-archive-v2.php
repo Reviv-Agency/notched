@@ -132,14 +132,6 @@ class Widget_Post_Archive_V2 extends Widget_Base {
 			'selectors' => [ '{{WRAPPER}}' => '--aew-pav2-bg: {{VALUE}};' ],
 		] );
 
-		$this->add_responsive_control( 'max_width', [
-			'label'      => esc_html__( 'Inner max width', 'agency-elementor-widgets' ),
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [ 'px' ],
-			'range'      => [ 'px' => [ 'min' => 800, 'max' => 1920 ] ],
-			'default'    => [ 'unit' => 'px', 'size' => 1600 ],
-			'selectors'  => [ '{{WRAPPER}} .aew-pav2__inner' => 'max-width: {{SIZE}}{{UNIT}};' ],
-		] );
 
 		$this->add_responsive_control( 'card_gap', [
 			'label'      => esc_html__( 'Gap between cards', 'agency-elementor-widgets' ),

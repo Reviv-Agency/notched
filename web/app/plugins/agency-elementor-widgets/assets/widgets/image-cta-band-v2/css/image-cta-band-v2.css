@@ -59,14 +59,16 @@
   pointer-events: none;
 }
 
-/* Inner: centers the box within the 1440 content rail + side padding. */
+/* Inner: centers the content box within a true 1440 rail. The background image
+   stays full-bleed (painted on the outer .aew-icb); only this content caps at
+   1440, with a 40px side gutter that the centred box sits within. */
 .aew-icb__inner {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 1600px;       /* 1440 + 2×80 side padding */
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 64px 80px;
+  padding: 64px 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,7 +187,7 @@
 /* ── Mobile ──────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .aew-icb { min-height: 460px; }
-  .aew-icb__inner { padding: 32px 40px; }
+  .aew-icb__inner { padding: 32px 16px; }
   .aew-icb__box { padding: 40px 24px; }
   .aew-icb .aew-icb__heading { font-size: 40px; }
   .aew-icb__description { font-size: 14px; }

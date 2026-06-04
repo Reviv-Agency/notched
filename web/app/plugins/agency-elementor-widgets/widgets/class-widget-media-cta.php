@@ -308,28 +308,18 @@ class Widget_Media_Cta extends Widget_Base {
 			]
 		);
 
+		/* Defaults left EMPTY so the stylesheet owns the design-system padding
+		   (64px/40px desktop, 32px/16px mobile on .aew-media-cta__inner). A
+		   non-empty default here emits one high-specificity rule that clobbers
+		   the stylesheet and doubles up the gutter (build guide §5 / gotcha #16). */
 		$this->add_responsive_control(
 			'section_padding',
 			[
 				'label'      => esc_html__( 'Wrapper padding', 'agency-elementor-widgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em' ],
-				'default'    => [
-					'top'      => '120',
-					'right'    => '40',
-					'bottom'   => '120',
-					'left'     => '40',
-					'unit'     => 'px',
-					'isLinked' => false,
-				],
-				'mobile_default' => [
-					'top'      => '56',
-					'right'    => '20',
-					'bottom'   => '56',
-					'left'     => '20',
-					'unit'     => 'px',
-					'isLinked' => false,
-				],
+				'default'        => [ 'top' => '', 'right' => '', 'bottom' => '', 'left' => '', 'unit' => 'px', 'isLinked' => false ],
+				'mobile_default' => [ 'top' => '', 'right' => '', 'bottom' => '', 'left' => '', 'unit' => 'px', 'isLinked' => false ],
 				'selectors'  => [
 					'{{WRAPPER}} .aew-media-cta__inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],

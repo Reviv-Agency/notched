@@ -38,10 +38,13 @@
 }
 
 /* 1600 = 1440 content + 2×80px desktop side padding (§6.5). */
+/* Design-system width model: X gutter on the outer block; inner caps at a true 1440. */
+.aew-vals { padding-left: 40px; padding-right: 40px; box-sizing: border-box; }
+
 .aew-vals__inner {
-  max-width: 1600px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 64px 80px;
+  padding: 64px 0;
 }
 
 /* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) — gotcha #20. */
@@ -136,7 +139,7 @@
 
 /* ── Tablet ──────────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .aew-vals__inner { padding: 64px 40px; }
+  /* tablet: inner padding inherited (Y64 desktop / X40 outer) */
   .aew-vals__panel { padding: 40px; }
   .aew-vals__grid  { grid-template-columns: repeat(2, 1fr); gap: 32px; }
   .aew-vals .aew-vals__heading { font-size: 48px; }
@@ -144,7 +147,8 @@
 
 /* ── Mobile ──────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .aew-vals__inner { padding: 32px 40px; }
+  .aew-vals { padding-left: 16px; padding-right: 16px; }
+  .aew-vals__inner { padding: 32px 0; }
   .aew-vals__panel { padding: 24px; }
   .aew-vals__grid  { grid-template-columns: 1fr; gap: 32px; }
   .aew-vals__card:nth-child(even) { margin-top: 0; }   /* no stagger when stacked */

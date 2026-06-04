@@ -13,6 +13,16 @@
 	--padding-left: 0px;
 }
 
+/* Defeat Elementor's boxed section width so the widget can reach a true 1440
+   (the boxed .elementor-container otherwise caps it ~1140/1200). Same breakout
+   the other contained widgets use. */
+.elementor-section:has(.elementor-widget-agency-media-cta),
+.elementor-section:has(.elementor-widget-agency-media-cta) > .elementor-container,
+.e-con:has(.elementor-widget-agency-media-cta) {
+	max-width: 100% !important;
+	width: 100% !important;
+}
+
 .aew-media-cta {
 	--aew-media-cta-bg: var(--aew-color-blue, #305b83);
 	--aew-media-cta-panel-bg: var(--aew-color-blue-light, #5796bb);
@@ -37,11 +47,19 @@
 	pointer-events: none;
 }
 
+/* Design-system width model: X gutter on the OUTER block so content is a TRUE
+   1440 (padding becomes empty centring margin above ~1520, gutter shows below).
+   The full-bleed band background is painted by .aew-media-cta::before. */
+.aew-media-cta {
+	padding-left: 16px;    /* X 16 mobile base */
+	padding-right: 16px;
+}
+
 .aew-media-cta__inner {
 	width: 100%;
-	max-width: 1520px /* 1440 content + side gutter */;
+	max-width: 1440px;
 	margin: 0 auto;
-	padding: 56px 2.5rem !important;   /* X 2.5rem mobile/tablet */
+	padding: 32px 0;       /* mobile base: Y 32 (X via outer gutter) */
 	box-sizing: border-box;
 }
 
@@ -93,7 +111,7 @@
 .aew-media-cta__title {
 	margin: 0;
 	width: 100%;
-	font-family: var(--aew-font-heading, 'DM Serif Display', serif);
+	font-family: var(--aew-font-heading, 'Teko', sans-serif);
 	font-size: 32px !important;
 	font-weight: 400;
 	line-height: 1.15;
@@ -109,7 +127,7 @@
 
 .aew-media-cta__text {
 	margin: 0;
-	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-family: var(--aew-font-body, 'Lato', sans-serif);
 	font-size: 14px !important;
 	font-weight: 400;
 	line-height: 1.5;
@@ -127,7 +145,7 @@
 	border-radius: 18px;
 	background-color: var(--aew-media-cta-btn-bg, var(--aew-color-yellow, #ebc543));
 	color: var(--aew-media-cta-btn-text, var(--aew-color-blue-dark, #252f37));
-	font-family: var(--aew-font-body, Poppins, sans-serif);
+	font-family: var(--aew-font-body, 'Lato', sans-serif);
 	font-size: 18px !important;
 	font-weight: 700;
 	line-height: 1.2;
@@ -174,8 +192,12 @@
 }
 
 @media (min-width: 1024px) {
+	.aew-media-cta {
+		padding-left: 40px;   /* X 40 desktop (outer gutter) */
+		padding-right: 40px;
+	}
 	.aew-media-cta__inner {
-		padding: 120px 5rem !important;   /* X 5rem desktop */
+		padding: 64px 0;      /* desktop: Y 64 (X via outer gutter) */
 	}
 
 	.aew-media-cta__row {

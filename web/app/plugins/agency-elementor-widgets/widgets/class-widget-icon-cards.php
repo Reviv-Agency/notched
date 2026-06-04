@@ -120,14 +120,6 @@ class Widget_Icon_Cards extends Widget_Base {
 			'selectors' => [ '{{WRAPPER}} .aew-iccr' => 'background-color: {{VALUE}};' ],
 		] );
 
-		$this->add_responsive_control( 'max_w', [
-			'label'      => esc_html__( 'Inner max width', 'agency-elementor-widgets' ),
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [ 'px' ],
-			'range'      => [ 'px' => [ 'min' => 800, 'max' => 1920 ] ],
-			'default'    => [ 'unit' => 'px', 'size' => 1600 ],
-			'selectors'  => [ '{{WRAPPER}} .aew-iccr__inner' => 'max-width: {{SIZE}}{{UNIT}};' ],
-		] );
 
 		$this->add_responsive_control( 'pad_y', [
 			'label'      => esc_html__( 'Vertical padding', 'agency-elementor-widgets' ),

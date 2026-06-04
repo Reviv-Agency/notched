@@ -60,10 +60,13 @@
 }
 
 /* ── Inner wrapper: max-width + responsive X & Y padding (stylesheet-owned) ─ */
+/* Design-system width model: X gutter on the outer block; inner caps at a true 1440. */
+.aew-tsv2 { padding-left: 40px; padding-right: 40px; box-sizing: border-box; }
+
 .aew-tsv2__inner {
-  max-width: 1600px /* 1440 content + side gutter */;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 4rem 5rem;        /* banded widget: Y 64px / X 5rem desktop */
+  padding: 64px 0;        /* banded widget: Y 64px / X 5rem desktop */
   box-sizing: border-box;
 }
 
@@ -267,14 +270,15 @@
 
 /* ── Tablet: 3 → 2 columns, X padding → 40px ─────────────────────────────── */
 @media (max-width: 1024px) {
-  .aew-tsv2__inner { padding: 4rem 2.5rem; }
+  /* tablet: inner padding inherited (Y64 desktop / X40 outer) */
   .aew-tsv2__grid  { grid-template-columns: repeat(2, 1fr); gap: 40px 32px; }
   .aew-tsv2__title { font-size: 56px; margin-bottom: 40px; }
 }
 
 /* ── Mobile: 2 → 1 column, Y padding → 32px ──────────────────────────────── */
 @media (max-width: 768px) {
-  .aew-tsv2__inner { padding: 2rem 2.5rem; }
+  .aew-tsv2 { padding-left: 16px; padding-right: 16px; }
+  .aew-tsv2__inner { padding: 32px 0; }
   .aew-tsv2__grid  { grid-template-columns: 1fr; gap: 40px; }
   .aew-tsv2__title  { font-size: 40px; margin-bottom: 32px; }   /* H2 mobile */
   .aew-tsv2__name   { font-size: 24px; }

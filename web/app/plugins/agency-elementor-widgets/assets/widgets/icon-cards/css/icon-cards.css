@@ -41,9 +41,12 @@
 }
 
 /* ── Outer block ─────────────────────────────────────────────────────────── */
+/* Design-system width model: X gutter on the outer block; inner caps at 1440. */
 .aew-iccr {
   width: 100%;
   background-color: var(--notched-background);
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .aew-iccr *,
@@ -52,11 +55,11 @@
   box-sizing: border-box;
 }
 
-/* ── Inner wrapper (max-width + X padding via _padding control) ──────────── */
+/* ── Inner wrapper: true 1440 content cap; owns Y padding only ───────────── */
 .aew-iccr__inner {
-  max-width: 1600px /* 1440 content + side gutter */;          /* desktop max width */
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 64px 80px;         /* desktop Y 64 / X 5rem */
+  padding: 64px 0;
 }
 
 /* ── Grid (equal-width row) ──────────────────────────────────────────────── */
@@ -121,11 +124,7 @@
 
 /* ── Responsive: tablet ──────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .aew-iccr__inner {
-    padding-left: 40px;  /* tablet X: 2.5rem */
-    padding-right: 40px;
-  }
-
+  /* X gutter inherited from outer (40); Y 64 from desktop inner */
   .aew-iccr__card {
     min-height: 260px;
   }
@@ -137,8 +136,9 @@
 
 /* ── Responsive: mobile (stack) ──────────────────────────────────────────── */
 @media (max-width: 768px) {
+  .aew-iccr { padding-left: 16px; padding-right: 16px; }   /* X 16 mobile */
   .aew-iccr__inner {
-    padding: 32px 40px;       /* mobile Y 32 / X 2.5rem */
+    padding: 32px 0;          /* Y 32 mobile */
   }
 
   .aew-iccr__grid {

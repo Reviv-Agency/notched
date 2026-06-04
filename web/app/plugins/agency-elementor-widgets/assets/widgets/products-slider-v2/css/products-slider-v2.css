@@ -61,7 +61,15 @@
   width: 100%;
   position: relative;
   box-sizing: border-box;
-  --prsv2-gutter: 80px;   /* X inset; stepped down at tablet/mobile */
+  /* Belt-and-braces: the track bleeds out via negative margins to flow
+     full-bleed to the viewport edge. Clip horizontal overflow at the block so
+     nothing escapes the page (the inner track keeps its own overflow-x:auto and
+     scrolls normally inside this). NOTE: the body X-inset lives on __inner, NOT
+     here — so this clip boundary is the true viewport edge and the track's
+     right bleed (to 50vw−50%) is never cut. */
+  overflow-x: clip;
+  --prsv2-gutter: 80px;   /* trailing inset on the track; stepped down at tablet/mobile */
+  --prsv2-pad: 40px;      /* body X-inset on __inner (rail edge); 16px on mobile */
 }
 
 .aew-prsv2 *,
@@ -71,10 +79,14 @@
 }
 
 /* ── Inner wrapper: max-width + responsive X/Y padding (stylesheet owns it) ── */
+/* Design-system width model: the body X-inset (40px) lives on __inner so the
+   outer block spans the full viewport and the track can bleed full-bleed to the
+   viewport edge without being clipped. Inner content (heading/header) caps at a
+   true 1440 + 40px inset, centered. */
 .aew-prsv2__inner {
-  max-width: 1600px /* 1440 content + side gutter */;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 4rem 5rem;        /* Y 64px / X 5rem desktop */
+  padding: 64px var(--prsv2-pad);   /* Y 64px / X body inset (40px desktop, 16px mobile) */
   display: flex;
   flex-direction: column;
 }
@@ -202,15 +214,31 @@
 
 .aew-prsv2__track {
   list-style: none;
-  /* Bleed past the inner wrapper's X padding so the track is full-width, then
-     re-add the gutter as the track's OWN padding. The first card still aligns
-     under the heading (gutter in from the edge) and — crucially — the last card
-     has a trailing gutter of padding to scroll fully clear of the viewport,
-     instead of being cut at the inner-wrapper boundary. */
-  margin-left: calc(-1 * var(--prsv2-gutter));
-  margin-right: calc(-1 * var(--prsv2-gutter));
-  padding: 0 var(--prsv2-gutter);
-  scroll-padding: 0 var(--prsv2-gutter);
+  /* Apple-style full-bleed peek scroller.
+
+     The track breaks out of the 1440 rail and bleeds symmetrically to BOTH
+     viewport edges (`margin-inline: 50% − 50vw`, the classic full-bleed trick:
+     50% of the centered parent vs 50% of the viewport = exactly the gap to each
+     edge). On wide screens the cards flow edge-to-edge instead of stopping at
+     the rail and leaving big empty cream margins.
+
+     `--prsv2-rail` is the inset from the viewport edge to the design rail (where
+     the heading starts). We re-add it as BOTH the leading padding (so the first
+     card aligns under the heading) AND scroll-padding-left (so cards snap to the
+     rail and are never cut off at the left edge when you scroll back). A
+     trailing gutter lets the last card scroll fully clear.
+
+     The PEEK comes from slide sizing (flex-basis below) being narrow enough that
+     the next card's edge always sits inside the viewport — never a hard cut. */
+  /* Inset from the viewport edge to where the heading starts:
+       (viewport − inner border-box)/2  +  inner's left padding.
+     inner border-box = min(1440, 100vw); padding = --prsv2-pad. */
+  --prsv2-rail: calc((100vw - min(1440px, 100vw)) / 2 + var(--prsv2-pad));
+  margin-inline: calc(50% - 50vw);
+  padding-left: var(--prsv2-rail);
+  padding-right: var(--prsv2-gutter);
+  scroll-padding-left: var(--prsv2-rail);
+  scroll-padding-right: var(--prsv2-gutter);
   display: flex;
   gap: 24px;
   overflow-x: auto;
@@ -230,7 +258,12 @@
 .aew-prsv2__track::-webkit-scrollbar { display: none; }
 
 .aew-prsv2__slide {
-  flex: 0 0 500px;
+  /* Apple-style "peek": cards are a touch narrower than a clean 1/N of the
+     visible width, so the next card's edge always sits inside the viewport and
+     is partially visible — never a hard cut at the right edge. Sized off the
+     viewport (vw) rather than the bled track so it can't overflow the page.
+     clamp floors/caps it so cards stay sensible on small and ultrawide screens. */
+  flex: 0 0 clamp(300px, 28vw, 480px);
   scroll-snap-align: start;
   min-width: 0;
 }
@@ -301,17 +334,12 @@ button.aew-prsv2__arrow {
   appearance: none;
   cursor: pointer;
   padding: 0;
-  /* Hidden until the slider is hovered (or an arrow is keyboard-focused). */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
-}
-
-/* Reveal arrows on hover over the slider, or when an arrow takes focus. */
-.aew-prsv2__viewport:hover .aew-prsv2__arrow,
-.aew-prsv2__arrow:focus-visible {
+  /* Apple-style: arrows are always visible (not hover-gated), keeping the
+     existing white rounded-square chevron design. Disabled-at-edge still hides
+     them via the [disabled] rules below. */
   opacity: 1;
   visibility: visible;
+  transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
 }
 
 .aew-prsv2__arrow--prev { left: -8px; }
@@ -326,11 +354,10 @@ button.aew-prsv2__arrow {
 .aew-prsv2__arrow:hover { transform: translateY(-50%) scale(1.04); }
 .aew-prsv2__arrow:focus-visible { outline: 2px solid var(--notched-secondary-bg); outline-offset: 2px; }
 
-/* Disabled (track at an edge) — stay invisible even while the slider is
-   hovered. Specificity is raised with __viewport so it beats the hover reveal. */
+/* Disabled (track at an edge) — hide the arrow that can't go any further, so
+   you only ever see the direction(s) you can actually scroll. */
 .aew-prsv2__arrow[hidden],
-.aew-prsv2__arrow[disabled],
-.aew-prsv2__viewport:hover .aew-prsv2__arrow[disabled] {
+.aew-prsv2__arrow[disabled] {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -375,9 +402,10 @@ button.aew-prsv2__dot {
 /* ── Tablet ≤1024 ──────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .aew-prsv2 { --prsv2-gutter: 40px; }   /* keep in sync with __inner padding (2.5rem) */
-  .aew-prsv2__inner { padding: 4rem 2.5rem; }
+  /* tablet: inner padding inherited (Y64 desktop / X40 outer) */
   .aew-prsv2__heading { font-size: 52px; }
-  .aew-prsv2__slide { flex-basis: 440px; }
+  /* ~2 cards with the next peeking. */
+  .aew-prsv2__slide { flex-basis: clamp(280px, 42vw, 440px); }
 
   /* Hide prev/next arrows on tablet + mobile — touch/swipe drives the track,
      dots remain for paging. Match the base rule's specificity (button.…) so
@@ -406,11 +434,16 @@ button.aew-prsv2__dot {
 
 /* ── Mobile ≤768 ───────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .aew-prsv2__inner { padding: 2rem 2.5rem; }
+  /* Body inset drops to 16px on mobile. It lives on __inner now (the outer block
+     stays full-width so the track can bleed to the viewport edge); --prsv2-pad
+     keeps the rail calc in sync. */
+  .aew-prsv2 { --prsv2-pad: 16px; }
+  .aew-prsv2__inner { padding: 32px var(--prsv2-pad); }
   .aew-prsv2__heading { font-size: 40px; margin-bottom: 20px; }
   .aew-prsv2__cta { width: 100%; justify-content: center; font-size: 20px; padding: 18px 24px 16px; }
   .aew-prsv2__price { font-size: 14px; }
-  .aew-prsv2__slide { flex-basis: 220px; }
+  /* Mobile: ~1 card with a generous peek of the next so swiping is obvious. */
+  .aew-prsv2__slide { flex-basis: 78vw; }
   .aew-prsv2__track { gap: 16px; }
   .aew-prsv2__media { border-radius: 16px; }
 }

@@ -90,12 +90,6 @@ class Widget_Recent_Posts_V2 extends Widget_Base {
 			'label' => esc_html__( 'Background', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
 			'default' => '#F6F0EC', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-bg: {{VALUE}};' ],
 		] );
-		$this->add_responsive_control( 'max_width', [
-			'label' => esc_html__( 'Inner max width', 'agency-elementor-widgets' ), 'type' => Controls_Manager::SLIDER,
-			'size_units' => [ 'px' ], 'range' => [ 'px' => [ 'min' => 600, 'max' => 1440 ] ],
-			'default' => [ 'unit' => 'px', 'size' => 1600 ],
-			'selectors' => [ '{{WRAPPER}} .aew-rpv2__inner' => 'max-width: {{SIZE}}{{UNIT}};' ],
-		] );
 		$this->add_responsive_control( 'grid_gap', [
 			'label' => esc_html__( 'Gap between cards', 'agency-elementor-widgets' ), 'type' => Controls_Manager::SLIDER,
 			'size_units' => [ 'px' ], 'range' => [ 'px' => [ 'min' => 0, 'max' => 60 ] ],

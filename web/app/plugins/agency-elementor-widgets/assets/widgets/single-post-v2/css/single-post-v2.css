@@ -28,10 +28,13 @@
 
 .aew-spv2 *, .aew-spv2 *::before, .aew-spv2 *::after { box-sizing: border-box; }
 
+/* Design-system width model: X gutter on the outer block; inner caps at a true 1440. */
+.aew-spv2 { padding-left: 40px; padding-right: 40px; box-sizing: border-box; }
+
 .aew-spv2__inner {
-  max-width: 1600px /* 1440 content + side gutter */;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 4rem 5rem;
+  padding: 64px 0;
 }
 
 /* ── Card ────────────────────────────────────────────────────────────────── */
@@ -204,12 +207,13 @@
 
 /* ── Tablet ──────────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .aew-spv2__inner { padding: 4rem 2.5rem; }
+  /* tablet: inner padding inherited (Y64 desktop / X40 outer) */
 }
 
 /* ── Mobile ──────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .aew-spv2__inner { padding: 2rem 1rem; }
+  .aew-spv2 { padding-left: 16px; padding-right: 16px; }
+  .aew-spv2__inner { padding: 32px 0; }
   .aew-spv2__card { padding: 24px 20px; border-radius: 20px; }
   .aew-spv2 .aew-spv2__title { font-size: 28px; }
   .aew-spv2__content { font-size: 16px; }

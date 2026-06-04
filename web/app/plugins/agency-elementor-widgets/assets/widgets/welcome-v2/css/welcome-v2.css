@@ -44,10 +44,13 @@
 }
 
 /* ── Outer block (full-bleed) ────────────────────────────────────────────── */
+/* Design-system width model: X gutter on the outer block; inner caps at 1440. */
 .aew-welc {
   background: var(--aew-welc-bg, var(--notched-secondary-accent));
   width: 100%;
   position: relative;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .aew-welc *,
@@ -56,11 +59,11 @@
   box-sizing: border-box;
 }
 
-/* ── Inner wrapper — max-width + responsive X/Y padding ──────────────────── */
+/* ── Inner wrapper: true 1440 content cap; Y owned by body_pad_y control ──── */
 .aew-welc__inner {
-  max-width: 1600px /* 1440 content + side gutter */;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 100px 80px;   /* Y owned by body_pad_y control; X owned here */
+  padding: 100px 0;   /* Y (body_pad_y control may override); X via outer gutter */
 }
 
 /* ── Two-column grid ─────────────────────────────────────────────────────── */
@@ -181,11 +184,7 @@
 
 /* ── Responsive: tablet / small desktop ──────────────────────────────────── */
 @media (max-width: 1024px) {
-  .aew-welc__inner {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-
+  /* X gutter from outer (40); Y from desktop inner */
   .aew-welc__grid {
     gap: 48px;
   }
@@ -197,9 +196,9 @@
 
 /* ── Responsive: mobile ──────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .aew-welc__inner {
-    padding-left: 40px;
-    padding-right: 40px;
+  .aew-welc {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .aew-welc__grid {
