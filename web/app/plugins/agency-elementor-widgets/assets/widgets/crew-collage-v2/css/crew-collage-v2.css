@@ -63,8 +63,8 @@
 .aew-crew__media {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
-  gap: 16px;
+  justify-content: flex-end;   /* collage hugs the right edge of its column */
+  gap: 0;
 }
 
 .aew-crew__img {
