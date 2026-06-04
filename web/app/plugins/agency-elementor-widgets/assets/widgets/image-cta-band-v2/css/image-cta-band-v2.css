@@ -72,14 +72,25 @@
   justify-content: center;
 }
 
-/* Two-box variant (e.g. Vision / Mission) — boxes side by side. */
+/* Two-box variant (e.g. Vision / Mission) — boxes side by side, each only as
+   tall as its own content (not stretched to match the taller one). */
 .aew-icb--two .aew-icb__inner {
-  align-items: stretch;
+  align-items: center;
   gap: 24px;
 }
 .aew-icb--two .aew-icb__box {
   flex: 1 1 0;
   max-width: none;         /* share the row equally instead of the single cap */
+  padding: 40px;           /* tighter than the single-box banner */
+  gap: 16px;
+}
+/* Content-scale heading in the two-box cards (H3, not the banner's H1/H2). */
+.aew-icb--two .aew-icb__heading {
+  font-size: 40px;
+}
+@media (max-width: 768px) {
+  .aew-icb--two .aew-icb__box { padding: 32px 24px; }
+  .aew-icb--two .aew-icb__heading { font-size: 32px; }
 }
 
 /* ── Centered content box ────────────────────────────────────────────────── */
