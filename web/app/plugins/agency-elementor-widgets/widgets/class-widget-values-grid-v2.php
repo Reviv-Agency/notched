@@ -185,7 +185,7 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 		$this->add_control( 'columns', [
 			'label'     => esc_html__( 'Columns (desktop)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::SELECT,
-			'default'   => '3',
+			'default'   => '2',
 			'options'   => [ '2' => '2', '3' => '3', '4' => '4' ],
 			'selectors' => [ '{{WRAPPER}} .aew-vals__grid' => '--aew-vals-cols: {{VALUE}};' ],
 		] );

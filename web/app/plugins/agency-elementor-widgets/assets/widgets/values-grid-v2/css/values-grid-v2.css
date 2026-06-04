@@ -66,8 +66,8 @@
 /* ── Grid ────────────────────────────────────────────────────────────────── */
 .aew-vals__grid {
   display: grid;
-  grid-template-columns: repeat(var(--aew-vals-cols, 3), 1fr);
-  gap: 40px;
+  grid-template-columns: repeat(var(--aew-vals-cols, 2), 1fr);
+  gap: 48px 64px;
 }
 
 /* ── Card ────────────────────────────────────────────────────────────────── */
@@ -102,10 +102,10 @@
   margin: 0 0 12px;
   font-family: "Teko", sans-serif;
   font-weight: 600;
-  font-size: 30px;
+  font-size: 32px;
   line-height: 100%;
   text-transform: uppercase;
-  color: var(--aew-vals-title, var(--notched-secondary-bg));
+  color: var(--aew-vals-title, #161C19);
 }
 
 .aew-vals__text {
@@ -114,7 +114,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 140%;
-  color: var(--aew-vals-text, var(--notched-text));
+  color: var(--aew-vals-text, #163228);
 }
 
 /* ── Tablet ──────────────────────────────────────────────────────────────── */
