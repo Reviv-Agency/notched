@@ -95,19 +95,16 @@
   margin-right: auto;
 }
 
-/* The icon is a brand-tinted mask of the wood-print PNG (so it fills with a
-   flat colour instead of the grey watermark). Sits behind the upper-left. */
+/* Pre-tinted gold wood-print icon, sits behind the upper-left of the copy. */
 .aew-vals__icon {
   position: absolute;
   top: 0;
   left: -40px;                  /* overlap so the title sits over its right half */
   width: 220px;
   height: 220px;
+  object-fit: contain;
   pointer-events: none;
   z-index: 0;
-  background-color: var(--aew-vals-icon, var(--notched-secondary-cards));
-  -webkit-mask: var(--aew-vals-icon-url) center / contain no-repeat;
-          mask: var(--aew-vals-icon-url) center / contain no-repeat;
 }
 
 /* Copy sits above the icon. */

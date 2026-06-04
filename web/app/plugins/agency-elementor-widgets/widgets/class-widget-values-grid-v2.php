@@ -262,7 +262,7 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 		$this->add_control( 'icon_color', [
 			'label'       => esc_html__( 'Icon tint', 'agency-elementor-widgets' ),
 			'type'        => Controls_Manager::COLOR,
-			'default'     => '#7D958D',
+			'default'     => '#AA7D44',
 			'selectors'   => [ '{{WRAPPER}}' => '--aew-vals-icon: {{VALUE}};' ],
 			'description' => esc_html__( 'Fills the wood-print icon with a flat brand colour.', 'agency-elementor-widgets' ),
 		] );
@@ -358,7 +358,7 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 							?>
 							<article class="aew-vals__card">
 								<?php if ( '' !== $icon_url ) : ?>
-									<span class="aew-vals__icon" role="presentation" style="--aew-vals-icon-url: url(<?php echo esc_url( $icon_url ); ?>);"></span>
+									<img class="aew-vals__icon" src="<?php echo esc_url( $icon_url ); ?>" alt="" decoding="async" loading="lazy" />
 								<?php endif; ?>
 								<?php if ( '' !== trim( $title ) ) : ?>
 									<h3 class="aew-vals__title"><?php echo esc_html( $title ); ?></h3>
