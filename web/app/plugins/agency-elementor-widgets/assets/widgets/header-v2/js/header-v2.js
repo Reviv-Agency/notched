@@ -62,6 +62,53 @@
 			});
 		}
 
+		// ── Smart sticky: hide on scroll-down, reveal on scroll-up ──────────────
+		// So the menu is always reachable with a small upward scroll instead of
+		// returning to the very top of the page.
+		(function initSmartSticky() {
+			var lastY = window.pageYOffset || document.documentElement.scrollTop || 0;
+			var ticking = false;
+			var REVEAL_AT_TOP = 8;   // always show within this many px of the top
+			var DELTA = 6;           // ignore tiny jitters
+
+			function update() {
+				ticking = false;
+				var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+				// Near the top: always show.
+				if (y <= REVEAL_AT_TOP) {
+					header.classList.remove('aew-hv2--bar-hidden');
+					lastY = y;
+					return;
+				}
+
+				// Keep the bar visible while the drawer is open.
+				if (header.classList.contains('is-open')) {
+					lastY = y;
+					return;
+				}
+
+				var diff = y - lastY;
+				if (Math.abs(diff) < DELTA) return; // too small to act on
+
+				if (diff > 0) {
+					// scrolling down → hide
+					header.classList.add('aew-hv2--bar-hidden');
+				} else {
+					// scrolling up → show
+					header.classList.remove('aew-hv2--bar-hidden');
+				}
+				lastY = y;
+			}
+
+			window.addEventListener('scroll', function () {
+				if (!ticking) {
+					ticking = true;
+					window.requestAnimationFrame(update);
+				}
+			}, { passive: true });
+		})();
+
 		// Accordion sub-menu toggles
 		overlay.querySelectorAll('.aew-hv2__drawer-toggle').forEach(function (btn) {
 			btn.addEventListener('click', function (e) {

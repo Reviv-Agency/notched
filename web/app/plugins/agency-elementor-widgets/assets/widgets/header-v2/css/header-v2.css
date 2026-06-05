@@ -37,11 +37,28 @@
 .aew-hv2__bar {
   background: var(--notched-text);
   width: 100%;
-  position: relative;
+  /* Smart sticky: pinned to the top, hides on scroll-down, reveals on scroll-up
+     (handled by header-v2.js toggling .aew-hv2--bar-hidden). position:sticky
+     keeps it in flow so no spacer is needed. */
+  position: sticky;
+  top: 0;
   z-index: 999;
   padding-left: 40px;
   padding-right: 40px;
   box-sizing: border-box;
+  transition: transform 0.3s ease;
+}
+
+/* Hidden state — slid up out of view. Applied by JS when scrolling DOWN past a
+   small threshold; removed when scrolling UP so the menu is always one swipe
+   away without returning to the top of the page. */
+.aew-hv2--bar-hidden .aew-hv2__bar {
+  transform: translateY(-100%);
+}
+
+/* Never hide the bar while the drawer is open. */
+.aew-hv2.is-open .aew-hv2__bar {
+  transform: none;
 }
 
 .aew-hv2__bar-inner {
