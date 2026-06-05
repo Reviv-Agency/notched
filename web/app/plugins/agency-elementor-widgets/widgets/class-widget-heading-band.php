@@ -676,7 +676,7 @@ class Widget_Heading_Band extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => $yellow_default,
+				'default'   => '#AA7D44',
 				'selectors' => [
 					'{{WRAPPER}} .aew-heading-band__button' => 'background-color: {{VALUE}};',
 				],
@@ -688,7 +688,7 @@ class Widget_Heading_Band extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Text color', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => $dark_default,
+				'default'   => '#FFFFFF',
 				'selectors' => [
 					'{{WRAPPER}} .aew-heading-band__button' => 'color: {{VALUE}};',
 				],

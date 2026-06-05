@@ -32,11 +32,16 @@
 }
 
 /* ── Bar ─────────────────────────────────────────────────────────────────── */
+/* Design-system width model: X gutter on the outer bar; inner caps at a true
+   1440 (gutter becomes empty centring margin above ~1520, shows below). */
 .aew-hv2__bar {
   background: var(--notched-text);
   width: 100%;
   position: relative;
   z-index: 999;
+  padding-left: 40px;
+  padding-right: 40px;
+  box-sizing: border-box;
 }
 
 .aew-hv2__bar-inner {
@@ -47,15 +52,10 @@
   max-width: 1440px;
   min-height: 64px;
   margin: 0 auto;
-  padding: 0 80px; /* desktop X: 5rem */
+  padding: 0;
 }
 
-/* Tablet & mobile X: 2.5rem (phones drop to 8px in the ≤768 block below). */
-@media (max-width: 1024px) {
-  .aew-hv2__bar-inner {
-    padding: 0 40px;
-  }
-}
+/* Tablet keeps the 40px outer gutter (inherited). */
 
 /* ── Logo ────────────────────────────────────────────────────────────────── */
 .aew-hv2__logo {
@@ -550,8 +550,12 @@ button.aew-hv2__drawer-item-row {
 
 /* ── Mobile (≤768px) ─────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
+  /* Tighter phone gutter on the outer bar (header is denser than body sections). */
+  .aew-hv2__bar {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
   .aew-hv2__bar-inner {
-    padding: 0 8px !important;
     min-height: 55px;
     max-height: 55px;
     gap: 8px;

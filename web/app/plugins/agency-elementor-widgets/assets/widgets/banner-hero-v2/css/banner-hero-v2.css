@@ -185,11 +185,11 @@
   border-color: var(--aew-bhero-pri-bg-hover, var(--notched-cta-hover));
 }
 
-/* Secondary (outline) — transparent bg, CTA-colour border + text; fills on hover. */
+/* Secondary (outline) — transparent bg, #876137 border + text; fills on hover. */
 .aew-bhero__btn--secondary {
   background-color: transparent;
-  color: var(--aew-bhero-sec-color, var(--notched-cta));
-  border-color: var(--aew-bhero-sec-color, var(--notched-cta));
+  color: var(--aew-bhero-sec-color, var(--notched-cta-hover));
+  border-color: var(--aew-bhero-sec-color, var(--notched-cta-hover));
 }
 
 .aew-bhero__btn--secondary:hover,

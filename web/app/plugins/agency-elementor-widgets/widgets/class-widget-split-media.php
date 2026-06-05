@@ -579,14 +579,7 @@ class Widget_Split_Media extends Widget_Base {
 				'label'      => esc_html__( 'Copy block margin (desktop overlay)', 'agency-elementor-widgets' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em' ],
-				'default'    => [
-					'top'      => '40',
-					'right'    => '40',
-					'bottom'   => '40',
-					'left'     => '0',
-					'unit'     => 'px',
-					'isLinked' => false,
-				],
+				'default'    => [ 'top' => '', 'right' => '', 'bottom' => '', 'left' => '', 'unit' => 'px', 'isLinked' => false ],
 				'selectors'  => [
 					'{{WRAPPER}} .aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-left .aew-split-media__body' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'{{WRAPPER}} .aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-right .aew-split-media__body' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -978,7 +971,7 @@ class Widget_Split_Media extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Secondary text / border', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#252F37',
+				'default'   => '#876137',
 				'separator' => 'before',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-spm-btns: {{VALUE}};',
@@ -991,7 +984,7 @@ class Widget_Split_Media extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Secondary background (hover)', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#252F37',
+				'default'   => '#876137',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-spm-btns-bg-hover: {{VALUE}};',
 				],

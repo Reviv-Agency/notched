@@ -44,11 +44,15 @@
 }
 
 /* ── Outer block ─────────────────────────────────────────────────────────── */
+/* The footer is full-bleed: the forest hero + dark body must reach the viewport
+   edge, so the X gutter lives on the INNER wrapper (not the outer block — that
+   would inset the hero). Inner caps at 1440 with the design-system gutter. */
 .aew-fov2 {
   background: var(--aew-fov2-body-bg, var(--notched-secondary-bg));
   width: 100%;
   position: relative;
   color: var(--notched-cta);
+  box-sizing: border-box;
 }
 
 .aew-fov2 *,
@@ -57,14 +61,7 @@
   box-sizing: border-box;
 }
 
-/* ── Hero (forest image) ─────────────────────────────────────────────────── */
-/* Hero fades into the dark body via a mask. The body is pulled up with a
-   negative margin so the faded portion overlaps the body's top region.
-   Image uses CSS background (not <img> + object-fit) because we need
-   guaranteed horizontal slack to pan into AND control over vertical crop.
-   background-size: cover always fills width × height; the visible vertical
-   window is shifted DOWN via background-position-y so the tree tops aren't
-   clipped on wide viewports. Height is tall enough to make room. */
+
 .aew-fov2__hero {
   width: 100%;
   height: 1200px;
@@ -103,9 +100,9 @@
 }
 
 .aew-fov2__inner {
-  max-width: 1440px;        /* match header v2 inner wrapper */
+  max-width: 1440px;        /* content cap; X gutter on the inner (hero stays full-bleed) */
   margin: 0 auto;
-  padding: 0 80px; /* desktop X: 5rem */
+  padding: 0 40px;          /* desktop X gutter */
   display: grid;
   grid-template-columns: 1.2fr 1fr 1fr 1.2fr;
   gap: 48px;
@@ -293,7 +290,7 @@
   .aew-fov2__inner {
     grid-template-columns: 1fr 1fr;
     gap: 40px 32px;
-    padding: 0 40px; /* tablet X: 2.5rem */
+    /* X gutter from the outer block (40); inner stays edge-to-edge of the rail */
   }
 
   .aew-fov2__brand {
@@ -307,7 +304,6 @@
 
   .aew-fov2__inner--bottom {
     grid-template-columns: none;
-    padding: 0 40px; /* tablet X: 2.5rem */
   }
 }
 
@@ -329,7 +325,7 @@
   .aew-fov2__inner {
     grid-template-columns: 1fr;
     gap: 32px;
-    padding: 0 40px; /* mobile X: 2.5rem */
+    padding: 0 16px;   /* X 16 mobile (on inner; hero stays full-bleed) */
   }
 
   .aew-fov2__brand {
@@ -362,7 +358,6 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
-    padding: 0 40px; /* mobile X: 2.5rem */
   }
 
   .aew-fov2__legal {

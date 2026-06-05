@@ -106,20 +106,21 @@
 	padding: 16px 24px;
 	border: 0;
 	border-radius: 18px;
-	background-color: var(--aew-color-yellow, #ebc543);
-	color: var(--aew-color-blue-dark, #252f37);
+	background-color: var(--notched-cta, #AA7D44);
+	color: #FFFFFF;
 	font-family: var(--aew-font-body, 'Lato', sans-serif);
 	font-size: 18px !important;
 	font-weight: 700;
 	line-height: 1.2;
 	text-decoration: none;
 	cursor: pointer;
-	transition: background-color 0.18s ease, color 0.18s ease, opacity 0.2s ease;
+	transition: background-color 0.18s ease, color 0.18s ease;
 }
 
 .aew-heading-band__button:hover,
 .aew-heading-band__button:focus-visible {
-	opacity: 0.9;
+	background-color: var(--notched-cta-hover, #876137);
+	color: #FFFFFF;
 	text-decoration: none;
 }
 
