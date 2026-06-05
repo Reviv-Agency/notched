@@ -173,3 +173,41 @@
 		font-size: 16px;
 	}
 }
+
+/* ── Optional CTA below the grid (e.g. "SHOP ALL KITS") ──────────────────────
+   Brand filled button per design system: #AA7D44 bg + white text, hover
+   #876137. Hex fallbacks since the var may not resolve in every context. */
+.aew-galv2__cta-wrap {
+	display: flex;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+.aew-galv2__cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-family: var(--aew-font-heading, 'Teko', sans-serif);
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 1;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #FFFFFF;
+	background-color: var(--notched-cta, #AA7D44);
+	padding: 20px 24px 16px;
+	border-radius: 8px;
+	transition: background-color 0.18s ease;
+}
+
+.aew-galv2__cta:hover,
+.aew-galv2__cta:focus-visible {
+	background-color: var(--notched-cta-hover, #876137);
+	color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+	.aew-galv2__cta-wrap { margin-top: 32px; }
+	.aew-galv2__cta { width: 100%; }
+}

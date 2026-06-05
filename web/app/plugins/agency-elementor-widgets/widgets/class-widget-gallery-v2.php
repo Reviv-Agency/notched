@@ -137,6 +137,28 @@ class Widget_Gallery_V2 extends Widget_Base {
 			]
 		);
 
+		// Optional CTA button below the grid. Empty by default so existing
+		// galleries (e.g. Home) render no button and are unaffected.
+		$this->add_control(
+			'cta_label',
+			[
+				'label'       => esc_html__( 'Button text (optional)', 'agency-elementor-widgets' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'placeholder' => esc_html__( 'e.g. Shop all kits', 'agency-elementor-widgets' ),
+			]
+		);
+
+		$this->add_control(
+			'cta_link',
+			[
+				'label'     => esc_html__( 'Button link', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::URL,
+				'default'   => [ 'url' => '' ],
+				'condition' => [ 'cta_label!' => '' ],
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -357,6 +379,20 @@ class Widget_Gallery_V2 extends Widget_Base {
 		$masonry  = 'yes' === ( $s['masonry'] ?? '' );
 		$has_more = $total > $initial;
 
+		// Optional CTA below the grid.
+		$cta_label = (string) ( $s['cta_label'] ?? '' );
+		$cta       = is_array( $s['cta_link'] ?? null ) ? $s['cta_link'] : [];
+		$cta_url   = (string) ( $cta['url'] ?? '' );
+		$cta_target = ! empty( $cta['is_external'] ) ? '_blank' : '';
+		$cta_rel    = '';
+		if ( $cta_target ) {
+			$cta_rel = 'noopener';
+		}
+		if ( ! empty( $cta['nofollow'] ) ) {
+			$cta_rel = trim( $cta_rel . ' nofollow' );
+		}
+		$show_cta = '' !== trim( $cta_label ) && '' !== $cta_url;
+
 		$this->add_render_attribute( 'wrapper', 'class', 'aew-galv2' );
 		$this->add_render_attribute( 'wrapper', 'data-aew-gallery-v2', '' );
 
@@ -417,6 +453,16 @@ class Widget_Gallery_V2 extends Widget_Base {
 
 				<?php if ( $has_more ) : ?>
 					<div class="aew-galv2__sentinel" aria-hidden="true"></div>
+				<?php endif; ?>
+
+				<?php if ( $show_cta ) : ?>
+					<div class="aew-galv2__cta-wrap">
+						<a class="aew-galv2__cta" href="<?php echo esc_url( $cta_url ); ?>"
+							<?php echo $cta_target ? ' target="' . esc_attr( $cta_target ) . '"' : ''; ?>
+							<?php echo $cta_rel ? ' rel="' . esc_attr( $cta_rel ) . '"' : ''; ?>>
+							<?php echo esc_html( $cta_label ); ?>
+						</a>
+					</div>
 				<?php endif; ?>
 			</div>
 		</section>
