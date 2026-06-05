@@ -31,22 +31,28 @@
   --notched-cta-hover: #876137;
 }
 
-/* ── Bar ─────────────────────────────────────────────────────────────────── */
-/* Design-system width model: X gutter on the outer bar; inner caps at a true
-   1440 (gutter becomes empty centring margin above ~1520, shows below). */
+.aew-hv2 {
+  display: block;
+  min-height: var(--aew-hv2-bar-h, 64px);
+}
+
 .aew-hv2__bar {
   background: var(--notched-text);
-  width: 100%;
-  /* Smart sticky: pinned to the top, hides on scroll-down, reveals on scroll-up
-     (handled by header-v2.js toggling .aew-hv2--bar-hidden). position:sticky
-     keeps it in flow so no spacer is needed. */
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 999;
   padding-left: 40px;
   padding-right: 40px;
   box-sizing: border-box;
   transition: transform 0.3s ease;
+}
+
+/* Offset the fixed bar below the WP admin bar when it's present (logged-in). */
+body.admin-bar .aew-hv2__bar {
+  top: var(--wp-admin--admin-bar--height, 32px);
 }
 
 /* Hidden state — slid up out of view. Applied by JS when scrolling DOWN past a
