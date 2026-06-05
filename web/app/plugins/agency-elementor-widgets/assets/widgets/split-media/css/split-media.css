@@ -227,24 +227,12 @@
 	justify-content: flex-end;
 }
 
-.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-left .aew-split-media__body {
-	margin: 40px 0 40px 40px;
-}
-
+/* X margin is ALWAYS 0 so the copy panel lines up with the 1440 content rail at
+   every breakpoint (no outer-side inset). Only the top/bottom margin is owned by
+   the user-facing "Copy block top margin" control (defaults to 40px here). */
+.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-left .aew-split-media__body,
 .aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-right .aew-split-media__body {
-	margin: 40px 40px 40px 0;
-}
-
-/* At ≥1440 the section reaches its 1440 content rail, so drop the OUTER-side
-   margin (right on copy-right, left on copy-left) — otherwise the copy sits 40px
-   in from the rail and doesn't line up with the rest of the page content. */
-@media (min-width: 1440px) {
-	.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-left .aew-split-media__body {
-		margin-left: 0;
-	}
-	.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-right .aew-split-media__body {
-		margin-right: 0;
-	}
+	margin: 40px 0;
 }
 
 /* Mobile / compact — same overlay as desktop; copy card centered on the image */

@@ -576,13 +576,15 @@ class Widget_Split_Media extends Widget_Base {
 		$this->add_responsive_control(
 			'copy_block_margin',
 			[
-				'label'      => esc_html__( 'Copy block margin (desktop overlay)', 'agency-elementor-widgets' ),
-				'type'       => Controls_Manager::DIMENSIONS,
+				'label'      => esc_html__( 'Copy block top margin (desktop overlay)', 'agency-elementor-widgets' ),
+				'description' => esc_html__( 'Vertical inset of the copy panel. Left/right margin is always 0 so the panel lines up with the content rail.', 'agency-elementor-widgets' ),
+				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em' ],
-				'default'    => [ 'top' => '', 'right' => '', 'bottom' => '', 'left' => '', 'unit' => 'px', 'isLinked' => false ],
+				'range'      => [ 'px' => [ 'min' => 0, 'max' => 160, 'step' => 1 ] ],
+				'default'    => [ 'size' => '', 'unit' => 'px' ],
 				'selectors'  => [
-					'{{WRAPPER}} .aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-left .aew-split-media__body' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-right .aew-split-media__body' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-left .aew-split-media__body' => 'margin-top: {{SIZE}}{{UNIT}}; margin-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-right .aew-split-media__body' => 'margin-top: {{SIZE}}{{UNIT}}; margin-bottom: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
