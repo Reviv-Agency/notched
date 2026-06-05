@@ -120,7 +120,11 @@
 
 .aew-stim__img {
   display: block;
-  width: 440px;          /* overridden by the Width control selector */
+  /* Width is driven by the --aew-stim-w var (set on .aew-stim by the control's
+     selector for live editor preview AND by render() inline style for the
+     frontend — the badge is re-parented out of {{WRAPPER}} into the hero, so a
+     `{{WRAPPER}} .aew-stim__img` width rule would NOT match it). */
+  width: var(--aew-stim-w, 440px);
   height: auto;
   /* `.elementor img { max-width:100% }` (frontend.css) has higher specificity
      and would otherwise resolve 100% against the zero-width collapsed wrapper,
@@ -152,6 +156,22 @@
 @media (max-width: 768px) {
   .aew-stim__img {
     width: var(--aew-stim-w-mobile, 260px) !important;
+  }
+}
+
+/* ── Tablet & mobile (≤1024px): pin FIXED to the viewport bottom-right ────────
+   On small screens the hero is short and the desktop in-hero overhang doesn't
+   read well, so revert to the original behaviour: fixed to the viewport,
+   bottom-right. This overrides the `--in-hero` absolute positioning above
+   (matching `.aew-stim--in-hero` for specificity so it always wins here). */
+@media (max-width: 1024px) {
+  .aew-stim,
+  .aew-stim.aew-stim--in-hero {
+    position: fixed;
+    left:   auto;
+    top:    auto;
+    right:  var(--aew-stim-m-offx);
+    bottom: var(--aew-stim-m-offy);
   }
 }
 

@@ -143,13 +143,18 @@ class Widget_Sticky_Image extends Widget_Base {
 	private function style_image(): void {
 		$this->start_controls_section( 'ss_image', [ 'label' => 'Size & appearance', 'tab' => Controls_Manager::TAB_STYLE ] );
 
+		// Width is written as a CSS VAR on .aew-stim (not a `.aew-stim__img`
+		// width rule). The badge is re-parented OUT of {{WRAPPER}} into the hero
+		// on the frontend, so a `{{WRAPPER}} .aew-stim__img` rule would stop
+		// matching it. The var is set here for live editor preview AND by
+		// render() inline-style for the published frontend.
 		$this->add_control( 'width', [
 			'label'      => 'Width (desktop)',
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px', 'vw' ],
 			'range'      => [ 'px' => [ 'min' => 40, 'max' => 800 ], 'vw' => [ 'min' => 5, 'max' => 60 ] ],
 			'default'    => [ 'unit' => 'px', 'size' => 440 ],
-			'selectors'  => [ '{{WRAPPER}} .aew-stim__img' => 'width: {{SIZE}}{{UNIT}};' ],
+			'selectors'  => [ '{{WRAPPER}} .aew-stim' => '--aew-stim-w: {{SIZE}}{{UNIT}};' ],
 			'description' => 'Drag to resize the badge. Updates live.',
 		] );
 
@@ -159,6 +164,7 @@ class Widget_Sticky_Image extends Widget_Base {
 			'size_units' => [ 'px', 'vw' ],
 			'range'      => [ 'px' => [ 'min' => 32, 'max' => 480 ], 'vw' => [ 'min' => 10, 'max' => 70 ] ],
 			'default'    => [ 'unit' => 'px', 'size' => 260 ],
+			'selectors'  => [ '{{WRAPPER}} .aew-stim' => '--aew-stim-w-mobile: {{SIZE}}{{UNIT}};' ],
 			'description' => 'Applied below the tablet breakpoint (768px).',
 		] );
 
@@ -249,6 +255,7 @@ class Widget_Sticky_Image extends Widget_Base {
 			'--aew-stim-offy'    => $this->dim( $s['offset_y'] ?? [], '-60px' ),
 			'--aew-stim-m-offx'  => $this->dim( $s['mobile_offset_x'] ?? [], '16px' ),
 			'--aew-stim-m-offy'  => $this->dim( $s['mobile_offset_y'] ?? [], '16px' ),
+			'--aew-stim-w'       => $this->dim( $s['width'] ?? [], '440px' ),
 			'--aew-stim-w-mobile' => $this->dim( $s['width_mobile'] ?? [], '260px' ),
 		];
 
