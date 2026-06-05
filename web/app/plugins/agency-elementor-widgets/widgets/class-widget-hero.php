@@ -645,7 +645,7 @@ class Widget_Hero extends Widget_Base {
 				'label'    => esc_html__( 'Eyebrow', 'agency-elementor-widgets' ),
 				'selector' => '{{WRAPPER}} .aew-hero__eyebrow',
 				'fields_options' => [
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '700' ],
 					'font_size'   => [
 						'default' => [
@@ -672,7 +672,7 @@ class Widget_Hero extends Widget_Base {
 				'label'    => esc_html__( 'Headline (on image)', 'agency-elementor-widgets' ),
 				'selector' => $headline_desktop_selector,
 				'fields_options' => [
-					'font_family' => [ 'default' => 'DM Serif Display' ],
+					'font_family' => [ 'default' => 'Teko' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [
@@ -717,7 +717,7 @@ class Widget_Hero extends Widget_Base {
 				'label'    => esc_html__( 'Headline (mobile panel)', 'agency-elementor-widgets' ),
 				'selector' => '{{WRAPPER}} .aew-hero__headline--mobile',
 				'fields_options' => [
-					'font_family' => [ 'default' => 'DM Serif Display' ],
+					'font_family' => [ 'default' => 'Teko' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [
@@ -743,7 +743,7 @@ class Widget_Hero extends Widget_Base {
 				'label'    => esc_html__( 'Description', 'agency-elementor-widgets' ),
 				'selector' => '{{WRAPPER}} .aew-hero__description',
 				'fields_options' => [
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_size'   => [
 						'default' => [
 							'unit' => 'px',
@@ -862,7 +862,7 @@ class Widget_Hero extends Widget_Base {
 				'name'     => 'cta_typography',
 				'selector' => '{{WRAPPER}} .aew-hero__cta',
 				'fields_options' => [
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '700' ],
 					'font_size'   => [
 						'default' => [
@@ -927,7 +927,7 @@ class Widget_Hero extends Widget_Base {
 				'label'    => esc_html__( 'Title typography', 'agency-elementor-widgets' ),
 				'selector' => '{{WRAPPER}} .aew-hero__feature-title',
 				'fields_options' => [
-					'font_family' => [ 'default' => 'DM Serif Display' ],
+					'font_family' => [ 'default' => 'Teko' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [
@@ -952,7 +952,7 @@ class Widget_Hero extends Widget_Base {
 				'label'    => esc_html__( 'Description typography', 'agency-elementor-widgets' ),
 				'selector' => '{{WRAPPER}} .aew-hero__feature-text',
 				'fields_options' => [
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_size'   => [
 						'default' => [
 							'unit' => 'px',
@@ -1438,7 +1438,7 @@ class Widget_Hero extends Widget_Base {
 				'label'    => esc_html__( 'Label typography', 'agency-elementor-widgets' ),
 				'selector' => '{{WRAPPER}} .aew-hero__social-text',
 				'fields_options' => [
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '600' ],
 					'font_size'   => [
 						'default' => [

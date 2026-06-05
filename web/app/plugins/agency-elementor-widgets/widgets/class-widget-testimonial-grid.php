@@ -584,7 +584,7 @@ class Widget_Testimonial_Grid extends Widget_Base {
 				'selector'       => '{{WRAPPER}} .aew-testimonial-grid__attribution',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [
@@ -624,7 +624,7 @@ class Widget_Testimonial_Grid extends Widget_Base {
 				'selector'       => '{{WRAPPER}} .aew-testimonial-grid__title',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'DM Serif Display' ],
+					'font_family' => [ 'default' => 'Teko' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [
@@ -670,7 +670,7 @@ class Widget_Testimonial_Grid extends Widget_Base {
 				'selector'       => '{{WRAPPER}} .aew-testimonial-grid__body',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [

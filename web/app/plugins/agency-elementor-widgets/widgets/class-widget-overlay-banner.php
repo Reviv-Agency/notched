@@ -484,7 +484,7 @@ class Widget_Overlay_Banner extends Widget_Base {
 				'selector'       => '{{WRAPPER}} .aew-overlay-banner__title',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'DM Serif Display' ],
+					'font_family' => [ 'default' => 'Teko' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [
@@ -529,7 +529,7 @@ class Widget_Overlay_Banner extends Widget_Base {
 				'selector'       => '{{WRAPPER}} .aew-overlay-banner__lead',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'DM Serif Display' ],
+					'font_family' => [ 'default' => 'Teko' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [
@@ -574,7 +574,7 @@ class Widget_Overlay_Banner extends Widget_Base {
 				'selector'       => '{{WRAPPER}} .aew-overlay-banner__description',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [
@@ -680,7 +680,7 @@ class Widget_Overlay_Banner extends Widget_Base {
 				'selector'       => '{{WRAPPER}} .aew-overlay-banner__button',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '700' ],
 					'font_size'   => [
 						'default' => [

@@ -245,6 +245,8 @@ class Widget_Welcome_V2 extends Widget_Base {
 			'name'     => 'signature_typo',
 			'selector' => '{{WRAPPER}} .aew-welc__signature',
 			'fields_options' => [
+				// Intentional decorative script font — NOT a heading, so keep
+				// Dancing Script (the global Teko sweep must not touch this).
 				'font_family' => [ 'default' => 'Dancing Script' ],
 				'font_weight' => [ 'default' => '700' ],
 				'font_size'   => [ 'default' => [ 'unit' => 'px', 'size' => 34 ] ],

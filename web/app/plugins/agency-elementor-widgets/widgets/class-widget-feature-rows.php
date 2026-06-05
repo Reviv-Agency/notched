@@ -527,7 +527,7 @@ class Widget_Feature_Rows extends Widget_Base {
 				'selector' => '{{WRAPPER}} .aew-feature-rows__title',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'DM Serif Display' ],
+					'font_family' => [ 'default' => 'Teko' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [
@@ -578,7 +578,7 @@ class Widget_Feature_Rows extends Widget_Base {
 				'selector' => '{{WRAPPER}} .aew-feature-rows__text',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_size'   => [
 						'default' => [
 							'unit' => 'px',
@@ -744,7 +744,7 @@ class Widget_Feature_Rows extends Widget_Base {
 				'selector' => '{{WRAPPER}} .aew-feature-rows__cta',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '700' ],
 					'font_size'   => [
 						'default' => [

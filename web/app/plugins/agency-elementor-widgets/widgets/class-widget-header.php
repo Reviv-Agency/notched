@@ -518,7 +518,7 @@ class Widget_Header extends Widget_Base {
 				'name'     => 'nav_typography',
 				'selector' => '{{WRAPPER}} .aew-header__nav a',
 				'fields_options' => [
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '700' ],
 					'font_size'   => [
 						'default' => [
@@ -638,7 +638,7 @@ class Widget_Header extends Widget_Base {
 				'name'     => 'cta_typography',
 				'selector' => '{{WRAPPER}} .aew-header__cta',
 				'fields_options' => [
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '700' ],
 					'font_size'   => [
 						'default' => [

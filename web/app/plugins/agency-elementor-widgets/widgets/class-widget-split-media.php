@@ -759,7 +759,7 @@ class Widget_Split_Media extends Widget_Base {
 				'selector' => '{{WRAPPER}} .aew-split-media__text',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_size'   => [
 						'default' => [
 							'unit' => 'px',

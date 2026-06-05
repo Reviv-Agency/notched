@@ -554,7 +554,7 @@ class Widget_Media_Cta extends Widget_Base {
 				'selector'       => '{{WRAPPER}} .aew-media-cta__title',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'DM Serif Display' ],
+					'font_family' => [ 'default' => 'Teko' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [
@@ -609,7 +609,7 @@ class Widget_Media_Cta extends Widget_Base {
 				'selector'       => '{{WRAPPER}} .aew-media-cta__text',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [
@@ -785,7 +785,7 @@ class Widget_Media_Cta extends Widget_Base {
 				'selector'       => '{{WRAPPER}} .aew-media-cta__button',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '700' ],
 					'font_size'   => [
 						'default' => [

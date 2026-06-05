@@ -493,7 +493,7 @@ class Widget_Process_Steps extends Widget_Base {
 				'label'          => esc_html__( 'Step label', 'agency-elementor-widgets' ),
 				'selector'       => '{{WRAPPER}} .aew-process-steps__step',
 				'fields_options' => [
-					'font_family' => [ 'default' => 'DM Serif Display' ],
+					'font_family' => [ 'default' => 'Teko' ],
 					'font_weight' => [ 'default' => '700' ],
 					'font_size'   => [
 						'default' => [ 'unit' => 'px', 'size' => 48 ],
@@ -511,7 +511,7 @@ class Widget_Process_Steps extends Widget_Base {
 				'label'          => esc_html__( 'Title', 'agency-elementor-widgets' ),
 				'selector'       => '{{WRAPPER}} .aew-process-steps__title',
 				'fields_options' => [
-					'font_family' => [ 'default' => 'DM Serif Display' ],
+					'font_family' => [ 'default' => 'Teko' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [ 'unit' => 'px', 'size' => 48 ],
@@ -529,7 +529,7 @@ class Widget_Process_Steps extends Widget_Base {
 				'label'          => esc_html__( 'Description', 'agency-elementor-widgets' ),
 				'selector'       => '{{WRAPPER}} .aew-process-steps__text',
 				'fields_options' => [
-					'font_family' => [ 'default' => 'Poppins' ],
+					'font_family' => [ 'default' => 'Lato' ],
 					'font_weight' => [ 'default' => '400' ],
 					'font_size'   => [
 						'default' => [ 'unit' => 'px', 'size' => 18 ],
