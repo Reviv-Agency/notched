@@ -82,8 +82,8 @@
    the BOTTOM-LEFT on desktop. Offsets (--aew-stim-offx/offy) are written live
    by the controls so dragging a slider moves it in the editor in real time. */
 .aew-stim {
-  --aew-stim-offx: 24px;     /* distance from the left edge (desktop)  */
-  --aew-stim-offy: 24px;     /* distance from the bottom edge (desktop) */
+  --aew-stim-offx: -160px;   /* left offset (desktop) — negative overhangs the hero edge */
+  --aew-stim-offy: -60px;    /* bottom offset (desktop) — negative overhangs below the hero */
   --aew-stim-m-offx: 16px;   /* distance from the right edge (mobile)   */
   --aew-stim-m-offy: 16px;   /* distance from the bottom edge (mobile)  */
 
@@ -97,6 +97,20 @@
   bottom: var(--aew-stim-offy);
   right:  auto;
   top:    auto;
+
+}
+
+/* When the JS anchors the badge INSIDE the hero (the normal case), it becomes
+   ABSOLUTE relative to the hero and is pinned to the hero's bottom-left. This
+   makes it scroll away with the hero — it only shows over the hero and does not
+   drift with the viewport. (Base `.aew-stim` stays `fixed` as the no-hero
+   fallback.) */
+.aew-stim.aew-stim--in-hero {
+  position: absolute;
+  left:   var(--aew-stim-offx);
+  bottom: var(--aew-stim-offy);
+  right:  auto;
+  top:    auto;
 }
 
 .aew-stim__link,
@@ -106,7 +120,7 @@
 
 .aew-stim__img {
   display: block;
-  width: 220px;          /* overridden by the Width control selector */
+  width: 440px;          /* overridden by the Width control selector */
   height: auto;
   /* `.elementor img { max-width:100% }` (frontend.css) has higher specificity
      and would otherwise resolve 100% against the zero-width collapsed wrapper,
@@ -137,7 +151,7 @@
 /* ── Mobile (≤768px): shrink to the mobile width ─────────────────────────────── */
 @media (max-width: 768px) {
   .aew-stim__img {
-    width: var(--aew-stim-w-mobile, 130px) !important;
+    width: var(--aew-stim-w-mobile, 260px) !important;
   }
 }
 

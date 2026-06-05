@@ -48,20 +48,59 @@
     apply(); // set initial angle for the current scroll position
   }
 
+  // Find the hero block the badge should live inside: the first banner/hero on
+  // the page. The badge is anchored to the bottom-left of THIS element, so it
+  // scrolls away with the hero (no viewport drift) and only shows over the hero.
+  function findHero() {
+    // Prefer the Elementor WIDGET WRAPPER (no overflow clip) over the inner
+    // hero element — the badge may overhang the hero's bottom edge, and the
+    // inner .aew-hev2 / .aew-bhero__frame use overflow:hidden which would clip
+    // it. The wrapper has the same box but no clip.
+    var sel = [
+      '.elementor-widget-agency-hero-v2',
+      '.elementor-widget-agency-banner-hero-v2',
+      '[class*="elementor-widget-agency-hero"]',
+      '[class*="elementor-widget-agency-banner-hero"]'
+    ];
+    for (var i = 0; i < sel.length; i++) {
+      var hero = document.querySelector(sel[i]);
+      if (hero && !hero.classList.contains('aew-stim') && !hero.closest('.aew-stim')) {
+        return hero;
+      }
+    }
+    return null;
+  }
+
+  // Anchor the badge inside the hero (absolute, bottom-left) so it travels with
+  // the hero and disappears as the hero scrolls off — instead of staying pinned
+  // to the viewport. Returns true if it could attach to a hero.
+  function attachToHero(el) {
+    var hero = findHero();
+    if (!hero) return false;
+
+    // The hero must establish a containing block for the absolute badge.
+    if (getComputedStyle(hero).position === 'static') {
+      hero.style.position = 'relative';
+    }
+    if (el.parentNode !== hero) {
+      hero.appendChild(el);
+    }
+    el.classList.add('aew-stim--in-hero');
+    return true;
+  }
+
   function initWidget(el) {
     if (!el || el.dataset.aewStickyImageInit === '1') return;
     el.dataset.aewStickyImageInit = '1';
 
-    // The badge is position:fixed. Re-parent it to <body> so it pins to the
-    // viewport rather than a transformed Elementor ancestor (entrance
-    // animations / motion effects create a `transform` that would otherwise
-    // become its containing block). Skip inside the editor — re-parenting would
-    // detach it from the canvas and break editing.
-    if (
-      !document.body.classList.contains('elementor-editor-active') &&
-      el.parentNode !== document.body
-    ) {
-      document.body.appendChild(el);
+    if (!document.body.classList.contains('elementor-editor-active')) {
+      // Try to anchor inside the hero so it scrolls with it. If there's no hero
+      // (badge used on a page without one), fall back to the legacy fixed-to-
+      // viewport behaviour by re-parenting to <body>.
+      var attached = attachToHero(el);
+      if (!attached && el.parentNode !== document.body) {
+        document.body.appendChild(el);
+      }
     }
 
     initSpin(el);

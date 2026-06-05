@@ -82,20 +82,20 @@ class Widget_Sticky_Image extends Widget_Base {
 			'label'      => 'Horizontal offset (desktop)',
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px', 'vw' ],
-			'range'      => [ 'px' => [ 'min' => 0, 'max' => 400 ], 'vw' => [ 'min' => 0, 'max' => 50 ] ],
-			'default'    => [ 'unit' => 'px', 'size' => 24 ],
+			'range'      => [ 'px' => [ 'min' => -400, 'max' => 400 ], 'vw' => [ 'min' => -50, 'max' => 50 ] ],
+			'default'    => [ 'unit' => 'px', 'size' => -160 ],
 			'selectors'  => [ '{{WRAPPER}} .aew-stim' => '--aew-stim-offx: {{SIZE}}{{UNIT}};' ],
-			'description' => 'Distance from the left edge.',
+			'description' => 'Distance from the left edge of the hero. Negative = overhang past the edge.',
 		] );
 
 		$this->add_control( 'offset_y', [
 			'label'      => 'Vertical offset (desktop)',
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px', 'vh' ],
-			'range'      => [ 'px' => [ 'min' => 0, 'max' => 400 ], 'vh' => [ 'min' => 0, 'max' => 90 ] ],
-			'default'    => [ 'unit' => 'px', 'size' => 24 ],
+			'range'      => [ 'px' => [ 'min' => -400, 'max' => 400 ], 'vh' => [ 'min' => -90, 'max' => 90 ] ],
+			'default'    => [ 'unit' => 'px', 'size' => -60 ],
 			'selectors'  => [ '{{WRAPPER}} .aew-stim' => '--aew-stim-offy: {{SIZE}}{{UNIT}};' ],
-			'description' => 'Distance from the bottom edge.',
+			'description' => 'Distance from the bottom edge of the hero. Negative = overhang below.',
 		] );
 
 		$this->add_control( 'mobile_offset_x', [
@@ -148,7 +148,7 @@ class Widget_Sticky_Image extends Widget_Base {
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px', 'vw' ],
 			'range'      => [ 'px' => [ 'min' => 40, 'max' => 800 ], 'vw' => [ 'min' => 5, 'max' => 60 ] ],
-			'default'    => [ 'unit' => 'px', 'size' => 220 ],
+			'default'    => [ 'unit' => 'px', 'size' => 440 ],
 			'selectors'  => [ '{{WRAPPER}} .aew-stim__img' => 'width: {{SIZE}}{{UNIT}};' ],
 			'description' => 'Drag to resize the badge. Updates live.',
 		] );
@@ -158,7 +158,7 @@ class Widget_Sticky_Image extends Widget_Base {
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px', 'vw' ],
 			'range'      => [ 'px' => [ 'min' => 32, 'max' => 480 ], 'vw' => [ 'min' => 10, 'max' => 70 ] ],
-			'default'    => [ 'unit' => 'px', 'size' => 130 ],
+			'default'    => [ 'unit' => 'px', 'size' => 260 ],
 			'description' => 'Applied below the tablet breakpoint (768px).',
 		] );
 
@@ -245,11 +245,11 @@ class Widget_Sticky_Image extends Widget_Base {
 		// Offsets are written live by the controls' `selectors`; these are the
 		// server-side fallback for the published page.
 		$vars = [
-			'--aew-stim-offx'    => $this->dim( $s['offset_x'] ?? [], '24px' ),
-			'--aew-stim-offy'    => $this->dim( $s['offset_y'] ?? [], '24px' ),
+			'--aew-stim-offx'    => $this->dim( $s['offset_x'] ?? [], '-160px' ),
+			'--aew-stim-offy'    => $this->dim( $s['offset_y'] ?? [], '-60px' ),
 			'--aew-stim-m-offx'  => $this->dim( $s['mobile_offset_x'] ?? [], '16px' ),
 			'--aew-stim-m-offy'  => $this->dim( $s['mobile_offset_y'] ?? [], '16px' ),
-			'--aew-stim-w-mobile' => $this->dim( $s['width_mobile'] ?? [], '130px' ),
+			'--aew-stim-w-mobile' => $this->dim( $s['width_mobile'] ?? [], '260px' ),
 		];
 
 		$mobile_show = ( 'yes' === ( $s['mobile_show'] ?? 'yes' ) );
