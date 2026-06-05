@@ -48,7 +48,7 @@
    edge, so the X gutter lives on the INNER wrapper (not the outer block — that
    would inset the hero). Inner caps at 1440 with the design-system gutter. */
 .aew-fov2 {
-  background: var(--aew-fov2-body-bg, var(--notched-secondary-bg));
+  background: var(--aew-fov2-body-bg, var(--notched-secondary-accent));
   width: 100%;
   position: relative;
   color: var(--notched-cta);

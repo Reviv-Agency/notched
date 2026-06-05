@@ -231,7 +231,7 @@ class Widget_Footer_V2 extends Widget_Base {
 		$this->add_control( 'body_bg', [
 			'label'   => 'Background',
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#2A4F41',
+			'default' => '#093328',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fov2-body-bg: {{VALUE}};' ],
 		] );
 		$this->add_responsive_control( 'body_max_w', [
