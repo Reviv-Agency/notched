@@ -71,9 +71,9 @@
     return null;
   }
 
-  // Anchor the badge inside the hero (absolute, bottom-left) so it travels with
-  // the hero and disappears as the hero scrolls off — instead of staying pinned
-  // to the viewport. Returns true if it could attach to a hero.
+  // Anchor the badge inside the hero (absolute) so it travels with the hero and
+  // disappears as the hero scrolls off — instead of staying pinned to the
+  // viewport. Returns true if it could attach to a hero.
   function attachToHero(el) {
     var hero = findHero();
     if (!hero) return false;
@@ -82,6 +82,14 @@
     if (getComputedStyle(hero).position === 'static') {
       hero.style.position = 'relative';
     }
+
+    // Clean up any stale badge a previous editor re-render left behind inside
+    // the hero (Elementor recreates the widget on every control change; without
+    // this the hero would accumulate duplicate badges).
+    hero.querySelectorAll('.aew-stim--in-hero').forEach(function (old) {
+      if (old !== el) old.remove();
+    });
+
     if (el.parentNode !== hero) {
       hero.appendChild(el);
     }
@@ -93,14 +101,16 @@
     if (!el || el.dataset.aewStickyImageInit === '1') return;
     el.dataset.aewStickyImageInit = '1';
 
-    if (!document.body.classList.contains('elementor-editor-active')) {
-      // Try to anchor inside the hero so it scrolls with it. If there's no hero
-      // (badge used on a page without one), fall back to the legacy fixed-to-
-      // viewport behaviour by re-parenting to <body>.
-      var attached = attachToHero(el);
-      if (!attached && el.parentNode !== document.body) {
-        document.body.appendChild(el);
-      }
+    var isEditor = document.body.classList.contains('elementor-editor-active');
+
+    // Anchor inside the hero so it scrolls with it — in BOTH the editor and the
+    // frontend so the editor preview is a true WYSIWYG. If there's no hero
+    // (badge used on a page without one), fall back to the legacy fixed-to-
+    // viewport behaviour by re-parenting to <body> (frontend only — in the
+    // editor leave it where Elementor put it so it stays selectable).
+    var attached = attachToHero(el);
+    if (!attached && !isEditor && el.parentNode !== document.body) {
+      document.body.appendChild(el);
     }
 
     initSpin(el);
