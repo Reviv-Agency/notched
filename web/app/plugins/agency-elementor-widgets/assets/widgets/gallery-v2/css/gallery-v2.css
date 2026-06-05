@@ -125,20 +125,22 @@
 	border-radius: 16px;
 }
 
-/* ── Bento mosaic — 50 / 25 / 25 ──────────────────────────────────────────────
-   A 4-column grid (each column = 25%). Each repeating band of 5 tiles:
-     • 1 big feature tile  → 2 cols × 2 rows  (50% wide, full band height)
-     • 4 quarter tiles     → 1 col × 1 row each (25%), forming a 2×2 block on
-       the OTHER half of the band.
-   So every band reads as "50% big | (25/25 over 25/25)". The big tile alternates
-   sides band-to-band so it doesn't always sit left. Pattern repeats every 5. */
+/* ── Bento mosaic — staggered 2×2 squares ─────────────────────────────────────
+   A 4-column grid. Each repeating band of 6 tiles fills a 4-col × 3-row block:
+     • Tile 1 → 2×2 square feature, top-left (cols 1-2, rows 1-2)
+     • Tiles 2,3 → 1×1 smalls, top-right (cols 3-4, row 1)
+     • Tile 4 → 2×2 square feature, staggered down-right (cols 3-4, rows 2-3)
+     • Tiles 5,6 → 1×1 smalls, bottom-left (cols 1-2, row 3)
+   grid-auto-flow:dense weaves the 1×1 smalls into the cells the two offset 2×2
+   squares leave open — matching the reference collage. Square row unit so the
+   2×2 tiles read as squares. */
 .aew-galv2__grid--bento {
 	display: grid;
 	/* !important so the bento's fixed 4-col structure wins over the per-instance
 	   `columns` control rule Elementor emits at `.elementor-NNN .elementor-element-X`
 	   (higher specificity than a plain class). Bento OWNS its column count. */
 	grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-	grid-auto-rows: 240px;
+	grid-auto-rows: 256px;
 	grid-auto-flow: dense;
 	gap: 16px;
 }
@@ -162,14 +164,11 @@
 	object-fit: cover;
 }
 
-/* Big feature tile = first of every 5 → 50% wide, 2 rows tall. With
-   grid-auto-flow:dense the four following quarter tiles pack into the
-   remaining 2×2 cells beside it. Alternate the feature side each band. */
-.aew-galv2__grid--bento .aew-galv2__item:nth-child(10n + 1) {
-	grid-column: span 2;
-	grid-row: span 2;
-}
-.aew-galv2__grid--bento .aew-galv2__item:nth-child(10n + 6) {
+/* Two 2×2 square feature tiles per 6-tile band: the 1st and the 4th. dense flow
+   places them staggered (top-left, then down-right) and packs the 1×1 smalls
+   into the open cells around them. */
+.aew-galv2__grid--bento .aew-galv2__item:nth-child(6n + 1),
+.aew-galv2__grid--bento .aew-galv2__item:nth-child(6n + 4) {
 	grid-column: span 2;
 	grid-row: span 2;
 }
@@ -233,16 +232,16 @@
 		font-size: 16px;
 	}
 
-	/* Bento on phones: collapse the 4-col 50/25/25 to 2 columns. The feature
-	   tile spans the full width (both cols) and stays 2 rows; quarters become
-	   halves. Shorter row unit so tiles aren't excessive. */
+	/* Bento on phones: collapse to 2 columns. The feature tiles become 1-col-wide
+	   × 2-rows-tall accents (full-width 2×2 would dominate too much), and the
+	   smalls dense-pack around them. Shorter row unit. */
 	.aew-galv2__grid--bento {
 		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 		grid-auto-rows: 150px;
 	}
-	.aew-galv2__grid--bento .aew-galv2__item:nth-child(10n + 1),
-	.aew-galv2__grid--bento .aew-galv2__item:nth-child(10n + 6) {
-		grid-column: span 2;
+	.aew-galv2__grid--bento .aew-galv2__item:nth-child(6n + 1),
+	.aew-galv2__grid--bento .aew-galv2__item:nth-child(6n + 4) {
+		grid-column: span 1;
 		grid-row: span 2;
 	}
 }
