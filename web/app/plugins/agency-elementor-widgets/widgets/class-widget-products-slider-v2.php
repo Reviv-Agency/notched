@@ -476,10 +476,21 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$cta = $this->parse_link( $s['cta_link'] ?? [] );
 		// Fall back to the shop page when the link is empty so an enabled button
 		// isn't silently suppressed just because the URL field wasn't filled.
+		// wc_get_page_id('shop') returns -1/0 when the WooCommerce shop page
+		// isn't set, and get_permalink() of that is false — so guard for a real
+		// permalink and otherwise use /shop/.
 		if ( empty( $cta['url'] ) ) {
-			$cta['url'] = function_exists( 'wc_get_page_id' )
-				? get_permalink( wc_get_page_id( 'shop' ) )
-				: home_url( '/shop/' );
+			$shop_url = '';
+			if ( function_exists( 'wc_get_page_id' ) ) {
+				$shop_id = (int) wc_get_page_id( 'shop' );
+				if ( $shop_id > 0 ) {
+					$perm = get_permalink( $shop_id );
+					if ( is_string( $perm ) && '' !== $perm ) {
+						$shop_url = $perm;
+					}
+				}
+			}
+			$cta['url'] = '' !== $shop_url ? $shop_url : home_url( '/shop/' );
 		}
 		// Respect the control's `yes` DEFAULT for saved instances that predate the
 		// control (a missing value must read as ON — gotcha #17). Only an explicit
