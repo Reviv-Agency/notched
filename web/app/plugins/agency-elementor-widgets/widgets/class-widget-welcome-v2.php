@@ -145,14 +145,24 @@ class Widget_Welcome_V2 extends Widget_Base {
 		] );
 
 
-		$this->add_responsive_control( 'body_pad_y', [
-			'label'      => esc_html__( 'Vertical padding', 'agency-elementor-widgets' ),
+		$this->add_responsive_control( 'body_pad_top', [
+			'label'      => esc_html__( 'Padding top', 'agency-elementor-widgets' ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px' ],
-			'range'      => [ 'px' => [ 'min' => 16, 'max' => 240 ] ],
+			'range'      => [ 'px' => [ 'min' => 0, 'max' => 240 ] ],
 			'default'        => [ 'unit' => 'px', 'size' => 100 ],
 			'mobile_default' => [ 'unit' => 'px', 'size' => 56 ],
-			'selectors'  => [ '{{WRAPPER}} .aew-welc__inner' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}};' ],
+			'selectors'  => [ '{{WRAPPER}} .aew-welc__inner' => 'padding-top: {{SIZE}}{{UNIT}};' ],
+		] );
+
+		$this->add_responsive_control( 'body_pad_bottom', [
+			'label'      => esc_html__( 'Padding bottom', 'agency-elementor-widgets' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [ 'px' => [ 'min' => 0, 'max' => 240 ] ],
+			'default'        => [ 'unit' => 'px', 'size' => 100 ],
+			'mobile_default' => [ 'unit' => 'px', 'size' => 56 ],
+			'selectors'  => [ '{{WRAPPER}} .aew-welc__inner' => 'padding-bottom: {{SIZE}}{{UNIT}};' ],
 		] );
 
 		$this->add_responsive_control( 'col_gap', [

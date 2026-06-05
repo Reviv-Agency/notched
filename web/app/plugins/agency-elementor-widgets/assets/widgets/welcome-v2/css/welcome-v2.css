@@ -63,7 +63,7 @@
 .aew-welc__inner {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 100px 0;   /* Y (body_pad_y control may override); X via outer gutter */
+  padding: 100px 0;   /* Y default (body_pad_top / body_pad_bottom controls override); X via outer gutter */
 }
 
 /* ── Two-column grid ─────────────────────────────────────────────────────── */
