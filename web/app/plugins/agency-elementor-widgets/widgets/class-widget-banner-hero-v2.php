@@ -186,6 +186,7 @@ class Widget_Banner_Hero_V2 extends Widget_Base {
 				'vh' => [ 'min' => 30, 'max' => 100 ],
 			],
 			'default'        => [ 'unit' => 'px', 'size' => 640 ],
+			'tablet_default' => [ 'unit' => 'px', 'size' => 480 ],
 			'mobile_default' => [ 'unit' => 'px', 'size' => 420 ],
 			'selectors'      => [ '{{WRAPPER}} .aew-bhero__frame' => 'min-height: {{SIZE}}{{UNIT}};' ],
 		] );
@@ -224,9 +225,13 @@ class Widget_Banner_Hero_V2 extends Widget_Base {
 		$this->add_responsive_control( 'card_max_width', [
 			'label'      => esc_html__( 'Card max width', 'agency-elementor-widgets' ),
 			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [ 'px' ],
-			'range'      => [ 'px' => [ 'min' => 360, 'max' => 800 ] ],
-			'default'    => [ 'unit' => 'px', 'size' => 560 ],
+			'size_units' => [ 'px', '%' ],
+			'range'      => [ 'px' => [ 'min' => 360, 'max' => 900 ], '%' => [ 'min' => 50, 'max' => 100 ] ],
+			// Card grows toward full width on smaller screens so the image isn't
+			// cropped into thin side slivers around a narrow centred card.
+			'default'        => [ 'unit' => 'px', 'size' => 560 ],
+			'tablet_default' => [ 'unit' => 'px', 'size' => 700 ],
+			'mobile_default' => [ 'unit' => '%', 'size' => 100 ],
 			'selectors'  => [ '{{WRAPPER}} .aew-bhero__card' => 'max-width: {{SIZE}}{{UNIT}};' ],
 		] );
 
