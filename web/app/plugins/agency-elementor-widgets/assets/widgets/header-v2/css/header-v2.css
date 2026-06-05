@@ -186,9 +186,10 @@
 
 .aew-hv2__cta-text {
   display: block;
-  transform: translateY(
-    2px
-  ); /* Teko sits high — nudge down to optical centre */
+  /* Teko renders HIGH in its line-box, so with symmetric padding the text looks
+     top-heavy (more space above than below). translateY(-1px) optically centres
+     it — empirically 5px above / 5px below at this size. */
+  transform: translateY(-1px);
 }
 
 .aew-hv2__cta-arrow {
