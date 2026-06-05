@@ -61,14 +61,15 @@
 
 /* ── Header ─────────────────────────────────────────────────────────────── */
 /* Heading on the left, optional CTA aligned to the right (matches the live
-   portfolio layout). Wraps gracefully if the heading is long. */
+   portfolio layout). Stays INLINE on desktop AND tablet (no-wrap; the heading
+   shrinks via min-width:0). Only stacks below on mobile (≤768px). */
 .aew-galv2__header {
 	margin-bottom: 40px;
 	display: flex;
 	align-items: flex-end;
 	justify-content: space-between;
 	gap: 24px;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 }
 
 .aew-galv2__header-text {
@@ -92,7 +93,10 @@
 	font-size: 64px;
 	line-height: 85%;
 	text-transform: uppercase;
-	color: var(--notched-text);
+	/* Locked to the brand text colour with a hard hex fallback so it can't drift
+	   if the token fails to resolve. Wrapper-class prefix (0,2,0) beats the
+	   kit's `.elementor-kit-N h2 { color }` rule (0,1,1). */
+	color: var(--notched-text, #141C19) !important;
 }
 
 /* ── Grid (uniform) ───────────────────────────────────────────────────────── */
@@ -220,8 +224,12 @@
 		padding-right: 16px;
 	}
 
+	/* Phones only: stack the heading and CTA (button goes full-width below the
+	   heading). Tablet keeps them inline via the base nowrap rule. */
 	.aew-galv2__header {
 		margin-bottom: 24px;
+		flex-direction: column;
+		align-items: flex-start;
 	}
 
 	.aew-galv2 .aew-galv2__heading {

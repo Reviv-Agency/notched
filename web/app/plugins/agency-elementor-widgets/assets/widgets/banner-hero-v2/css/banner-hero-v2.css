@@ -208,8 +208,18 @@
 
 /* ── Responsive: tablet / small desktop (≤1024px) ────────────────────────── */
 @media (max-width: 1024px) {
-  .aew-bhero__frame { padding: 32px; }
-  .aew-bhero__card  { padding: 40px 48px; }
+  /* Shorter frame + the card grows toward full width so the image reads as a
+     clean rounded frame instead of awkward slivers peeking around a narrow
+     centred card. */
+  .aew-bhero__frame {
+    padding: 32px;
+    min-height: 480px;
+  }
+  .aew-bhero__card {
+    max-width: 640px;
+    width: 100%;
+    padding: 40px 48px;
+  }
   .aew-bhero .aew-bhero__heading { font-size: 52px; }
 }
 
@@ -217,10 +227,16 @@
 @media (max-width: 768px) {
   .aew-bhero { padding-left: 16px; padding-right: 16px; }
   .aew-bhero__inner { padding: 32px 0 0; }
-  .aew-bhero__frame { padding: 16px; }
+  /* On phones the card fills the frame (only the frame's 12px padding shows as
+     a thin image border) so the photo isn't cropped into thin side slivers. */
+  .aew-bhero__frame {
+    padding: 12px;
+    min-height: 0;
+  }
   .aew-bhero__card  {
     max-width: none;
-    margin: 0 8px;
+    width: 100%;
+    margin: 0;
     padding: 32px 24px;
     border-radius: 16px;
   }
