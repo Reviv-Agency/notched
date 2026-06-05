@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'AEW_VERSION', '1.12.67' );
+define( 'AEW_VERSION', '1.12.68' );
 define( 'AEW_PLUGIN_FILE', __FILE__ );
 define( 'AEW_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AEW_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

@@ -227,12 +227,26 @@
 	justify-content: flex-end;
 }
 
-/* X margin is ALWAYS 0 so the copy panel lines up with the 1440 content rail at
-   every breakpoint (no outer-side inset). Only the top/bottom margin is owned by
-   the user-facing "Copy block top margin" control (defaults to 40px here). */
-.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-left .aew-split-media__body,
+/* Up to 1440px the section spans the full viewport (no centring gutter yet), so
+   the copy panel keeps a 40px OUTER-side inset (left on copy-left, right on
+   copy-right) to breathe off the screen edge. */
+.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-left .aew-split-media__body {
+	margin: 40px 0 40px 40px;
+}
+
 .aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-right .aew-split-media__body {
-	margin: 40px 0;
+	margin: 40px 40px 40px 0;
+}
+
+/* From 1441px up the 1440 rail centres with its own gutter, so drop the
+   outer-side inset — the panel lines up flush with the content rail. */
+@media (min-width: 1441px) {
+	.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-left .aew-split-media__body {
+		margin-left: 0;
+	}
+	.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-right .aew-split-media__body {
+		margin-right: 0;
+	}
 }
 
 /* Mobile / compact — same overlay as desktop; copy card centered on the image */
