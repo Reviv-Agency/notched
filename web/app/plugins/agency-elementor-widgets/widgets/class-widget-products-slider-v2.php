@@ -473,8 +473,18 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$products = $this->query_products( $s );
 		$new_tab  = 'yes' === ( $s['open_new_tab'] ?? '' );
 
-		$cta      = $this->parse_link( $s['cta_link'] ?? [] );
-		$show_cta = 'yes' === ( $s['show_cta'] ?? '' ) && $cta['url'];
+		$cta = $this->parse_link( $s['cta_link'] ?? [] );
+		// Fall back to the shop page when the link is empty so an enabled button
+		// isn't silently suppressed just because the URL field wasn't filled.
+		if ( empty( $cta['url'] ) ) {
+			$cta['url'] = function_exists( 'wc_get_page_id' )
+				? get_permalink( wc_get_page_id( 'shop' ) )
+				: home_url( '/shop/' );
+		}
+		// Respect the control's `yes` DEFAULT for saved instances that predate the
+		// control (a missing value must read as ON — gotcha #17). Only an explicit
+		// empty string (toggled off) hides the button.
+		$show_cta = 'yes' === ( $s['show_cta'] ?? 'yes' ) && ! empty( $cta['url'] );
 
 		$show_price   = 'yes' === ( $s['show_price'] ?? 'yes' );
 		$price_prefix = (string) ( $s['price_prefix'] ?? '' );
