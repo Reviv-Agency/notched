@@ -130,8 +130,8 @@ class Widget_Header_V2 extends Widget_Base {
 
 	private function style_cta(): void {
 		$this->start_controls_section( 'ss_cta', [ 'label' => 'CTA Button', 'tab' => Controls_Manager::TAB_STYLE ] );
-		$this->add_control( 'cta_bg',       [ 'label' => 'Background', 'type' => Controls_Manager::COLOR, 'default' => '#AA7D44', 'selectors' => ['{{WRAPPER}} .aew-hv2__cta' => 'background-color: {{VALUE}};'] ] );
-		$this->add_control( 'cta_bg_hover', [ 'label' => 'Hover background', 'type' => Controls_Manager::COLOR, 'default' => '#876137', 'selectors' => ['{{WRAPPER}} .aew-hv2__cta:hover' => 'background-color: {{VALUE}};'] ] );
+		$this->add_control( 'cta_bg',       [ 'label' => 'Background', 'type' => Controls_Manager::COLOR, 'default' => '#876137', 'selectors' => ['{{WRAPPER}} .aew-hv2__cta' => 'background-color: {{VALUE}};'] ] );
+		$this->add_control( 'cta_bg_hover', [ 'label' => 'Hover background', 'type' => Controls_Manager::COLOR, 'default' => '#AA7D44', 'selectors' => ['{{WRAPPER}} .aew-hv2__cta:hover' => 'background-color: {{VALUE}};'] ] );
 		$this->add_control( 'cta_color',    [ 'label' => 'Text color', 'type' => Controls_Manager::COLOR, 'default' => '#FFFFFF', 'selectors' => ['{{WRAPPER}} .aew-hv2__cta' => 'color: {{VALUE}};'] ] );
 		$this->add_control( 'cta_color_hover', [ 'label' => 'Hover text color', 'type' => Controls_Manager::COLOR, 'default' => '#FFFFFF', 'selectors' => ['{{WRAPPER}} .aew-hv2__cta:hover' => 'color: {{VALUE}};', '{{WRAPPER}} .aew-hv2__cta:focus-visible' => 'color: {{VALUE}};'] ] );
 		$this->add_control( 'cta_radius',   [ 'label' => 'Border radius', 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'default' => ['unit' => 'px', 'size' => 6], 'selectors' => ['{{WRAPPER}} .aew-hv2__cta' => 'border-radius: {{SIZE}}{{UNIT}};'] ] );

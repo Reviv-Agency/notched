@@ -171,7 +171,7 @@
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  background: var(--notched-cta);
+  background: var(--aew-hv2-cta-bg, #876137);
   color: var(--notched-cards);
   border-radius: 6px;
   border: 0;
@@ -180,7 +180,7 @@
 }
 
 .aew-hv2__cta:hover {
-  background-color: var(--notched-cta-hover);
+  background-color: var(--aew-hv2-cta-bg-hover, var(--notched-cta));
   color: var(--notched-cards);
 }
 

@@ -123,7 +123,10 @@
   font-family: "Teko", sans-serif;
   font-weight: 600;
   font-size: 40px;
-  line-height: 85%;
+  /* line-height 1 (not 85%) so Teko's tall ascenders aren't clipped above the
+     box — at 85% the glyphs overflow the line-box and crowd the card's top
+     padding, making the top gap look smaller than the bottom. */
+  line-height: 1;
   text-transform: uppercase;
 }
 

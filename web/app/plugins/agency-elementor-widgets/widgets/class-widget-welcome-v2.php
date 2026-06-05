@@ -179,11 +179,11 @@ class Widget_Welcome_V2 extends Widget_Base {
 			'name'     => 'eyebrow_typo',
 			'selector' => '{{WRAPPER}} .aew-welc__eyebrow',
 			'fields_options' => [
-				'font_family'    => [ 'default' => 'Teko' ],
-				'font_weight'    => [ 'default' => '600' ],
-				'font_size'      => [ 'default' => [ 'unit' => 'px', 'size' => 28 ] ],
+				'font_family'    => [ 'default' => 'Playfair Display' ],
+				'font_weight'    => [ 'default' => '700' ],
+				'font_size'      => [ 'default' => [ 'unit' => 'px', 'size' => 20 ] ],
 				'line_height'    => [ 'default' => [ 'unit' => 'em', 'size' => 1 ] ],
-				'letter_spacing' => [ 'default' => [ 'unit' => 'px', 'size' => 2 ] ],
+				'letter_spacing' => [ 'default' => [ 'unit' => 'px', 'size' => 1 ] ],
 				'text_transform' => [ 'default' => 'uppercase' ],
 			],
 		] );

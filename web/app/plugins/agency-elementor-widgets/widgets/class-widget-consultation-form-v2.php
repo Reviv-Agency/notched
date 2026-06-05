@@ -223,7 +223,7 @@ class Widget_Consultation_Form_V2 extends Widget_Base {
 				'font_family'    => [ 'default' => 'Teko' ],
 				'font_weight'    => [ 'default' => '600' ],
 				'font_size'      => [ 'default' => [ 'unit' => 'px', 'size' => 40 ] ],
-				'line_height'    => [ 'default' => [ 'unit' => '%', 'size' => 85 ] ],
+				'line_height'    => [ 'default' => [ 'unit' => 'em', 'size' => 1 ] ],
 				'text_transform' => [ 'default' => 'uppercase' ],
 			],
 		] );

@@ -83,11 +83,12 @@
   margin: 0 0 8px;
   padding: 0;
   color: var(--aew-welc-eyebrow, var(--notched-cta));
-  font-family: var(--aew-teko);
-  font-weight: 600;
-  font-size: 28px;
+  /* Subhead / eyebrow font per design system: Playfair Display Bold. */
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 20px;
   line-height: 1;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
@@ -207,7 +208,7 @@
   }
 
   .aew-welc__eyebrow {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .aew-welc .aew-welc__heading {
