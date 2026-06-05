@@ -186,10 +186,9 @@
 
 .aew-hv2__cta-text {
   display: block;
-  /* Teko renders HIGH in its line-box, so with symmetric padding the text looks
-     top-heavy (more space above than below). translateY(-1px) optically centres
-     it — empirically 5px above / 5px below at this size. */
-  transform: translateY(-1px);
+  /* With symmetric padding (9px) the Teko text is already optically centred at
+     this size — verified 6px ink above / 6px below. No translate nudge needed
+     (an earlier nudge was compensating for asymmetric padding that's now gone). */
 }
 
 .aew-hv2__cta-arrow {
