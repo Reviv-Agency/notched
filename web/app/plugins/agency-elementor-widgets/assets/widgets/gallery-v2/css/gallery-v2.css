@@ -134,7 +134,10 @@
    sides band-to-band so it doesn't always sit left. Pattern repeats every 5. */
 .aew-galv2__grid--bento {
 	display: grid;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
+	/* !important so the bento's fixed 4-col structure wins over the per-instance
+	   `columns` control rule Elementor emits at `.elementor-NNN .elementor-element-X`
+	   (higher specificity than a plain class). Bento OWNS its column count. */
+	grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
 	grid-auto-rows: 240px;
 	grid-auto-flow: dense;
 	gap: 16px;
@@ -234,7 +237,7 @@
 	   tile spans the full width (both cols) and stays 2 rows; quarters become
 	   halves. Shorter row unit so tiles aren't excessive. */
 	.aew-galv2__grid--bento {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 		grid-auto-rows: 150px;
 	}
 	.aew-galv2__grid--bento .aew-galv2__item:nth-child(10n + 1),
