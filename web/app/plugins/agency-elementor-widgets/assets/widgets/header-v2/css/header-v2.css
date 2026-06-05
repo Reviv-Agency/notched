@@ -186,9 +186,13 @@
 
 .aew-hv2__cta-text {
   display: block;
-  /* With symmetric padding (9px) the Teko text is already optically centred at
-     this size — verified 6px ink above / 6px below. No translate nudge needed
-     (an earlier nudge was compensating for asymmetric padding that's now gone). */
+  /* "SHOP KITS" is all-caps Teko: the INK sits entirely above the baseline with
+     no descenders, so it renders high in the line-box → with symmetric padding
+     the glyphs look top-heavy (empty space below). translateY(2px) pushes the
+     ink down to optically centre it — measured via canvas ink metrics: ~12.3px
+     above / 11.5px below the caps. (Range/line-box measurement misleads here
+     because it includes the font's leading, not the visible ink.) */
+  transform: translateY(2px);
 }
 
 .aew-hv2__cta-arrow {
