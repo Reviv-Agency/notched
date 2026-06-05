@@ -19,16 +19,16 @@
 /* Scoped to .aew-hv2 so they don't leak into other widgets. Source of truth
    is design-system.md. Update there first; copy here second. */
 .aew-hv2 {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #AA7D44;
-  --notched-cta-hover:         #876137;
+  --notched-cards: #ffffff;
+  --notched-background: #f6f0ec;
+  --notched-lines: #bfc0bf;
+  --notched-misc-accent: #3b413f;
+  --notched-secondary-cards: #7d958d;
+  --notched-secondary-bg: #2a4f41;
+  --notched-secondary-accent: #093328;
+  --notched-text: #141c19;
+  --notched-cta: #aa7d44;
+  --notched-cta-hover: #876137;
 }
 
 /* ── Bar ─────────────────────────────────────────────────────────────────── */
@@ -186,13 +186,7 @@
 
 .aew-hv2__cta-text {
   display: block;
-  /* "SHOP KITS" is all-caps Teko: the INK sits entirely above the baseline with
-     no descenders, so it renders high in the line-box → with symmetric padding
-     the glyphs look top-heavy (empty space below). translateY(2px) pushes the
-     ink down to optically centre it — measured via canvas ink metrics: ~12.3px
-     above / 11.5px below the caps. (Range/line-box measurement misleads here
-     because it includes the font's leading, not the visible ink.) */
-  transform: translateY(2px);
+  transform: translateY(1px);
 }
 
 .aew-hv2__cta-arrow {
