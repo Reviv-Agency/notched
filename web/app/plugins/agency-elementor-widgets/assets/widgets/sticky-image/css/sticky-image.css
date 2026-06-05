@@ -159,15 +159,13 @@
   }
 }
 
-/* ── Tablet & mobile (≤1024px): pin FIXED to the viewport bottom-right ────────
-   On small screens the hero is short and the desktop in-hero overhang doesn't
-   read well, so revert to the original behaviour: fixed to the viewport,
-   bottom-right. This overrides the `--in-hero` absolute positioning above
-   (matching `.aew-stim--in-hero` for specificity so it always wins here). */
+/* ── Tablet & mobile (≤1024px): anchor INSIDE the hero, bottom-RIGHT ──────────
+   Same model as desktop — absolute inside the hero so the badge scrolls away
+   with the hero instead of following the viewport. Just flips the anchor to the
+   bottom-right with the mobile offsets. (Matches `.aew-stim--in-hero` for
+   specificity so it overrides the desktop bottom-left rule above.) */
 @media (max-width: 1024px) {
-  .aew-stim,
   .aew-stim.aew-stim--in-hero {
-    position: fixed;
     left:   auto;
     top:    auto;
     right:  var(--aew-stim-m-offx);
