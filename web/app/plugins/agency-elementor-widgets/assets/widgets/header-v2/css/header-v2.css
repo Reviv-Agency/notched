@@ -204,10 +204,15 @@
 }
 
 /* ── Hamburger ───────────────────────────────────────────────────────────── */
-.aew-hv2__toggle {
+/* Wrapper-class prefix (.aew-hv2) raises specificity to (0,2,0) so `padding:0`
+   beats the Elementor kit's `.elementor-kit-N button { padding:20px 24px 16px }`
+   rule (0,1,1) — otherwise the hamburger inherits button padding and the icon
+   sits inset from the right edge. justify-content:flex-end pins the icon to the
+   button's right so there's no empty space on the right. */
+.aew-hv2 .aew-hv2__toggle {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   width: 60px;
   height: 60px;
   padding: 0;

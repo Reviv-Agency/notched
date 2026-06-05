@@ -109,7 +109,7 @@
 	margin: 0 0 24px;
 	font-family: var(--aew-font-heading, 'Teko', sans-serif);
 	font-size: 64px;
-	font-weight: 400;
+	font-weight: 600;
 	line-height: 1.15;
 	color: var(--aew-spm-title, #252F37);
 }

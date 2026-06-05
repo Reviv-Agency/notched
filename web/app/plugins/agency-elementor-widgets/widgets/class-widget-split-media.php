@@ -682,8 +682,8 @@ class Widget_Split_Media extends Widget_Base {
 				'selector' => '{{WRAPPER}} .aew-split-media__title',
 				'fields_options' => [
 					'typography'  => [ 'default' => 'custom' ],
-					'font_family' => [ 'default' => 'DM Serif Display' ],
-					'font_weight' => [ 'default' => '400' ],
+					'font_family' => [ 'default' => 'Teko' ],
+					'font_weight' => [ 'default' => '600' ],
 					'font_size'   => [
 						'default' => [
 							'unit' => 'px',
