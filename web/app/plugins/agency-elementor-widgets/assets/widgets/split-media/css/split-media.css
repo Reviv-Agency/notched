@@ -294,8 +294,10 @@ body[data-elementor-device-mode="mobile_extra"] .aew-split-media .aew-split-medi
 	padding: 40px 40px 80px 40px;
 }
 
-body.elementor-device-mobile .aew-split-media .aew-split-media__row {
-	padding: 40px 40px 80px 40px;
+body.elementor-device-mobile .aew-split-media .aew-split-media__row,
+body[data-elementor-device-mode="mobile"] .aew-split-media .aew-split-media__row,
+body[data-elementor-device-mode="mobile_extra"] .aew-split-media .aew-split-media__row {
+	padding: 40px 16px 80px 16px;   /* X 16 mobile (design-system) */
 }
 
 body.elementor-device-tablet .aew-split-media .aew-split-media__body,
@@ -401,7 +403,7 @@ body[data-elementor-device-mode="mobile_extra"] .aew-split-media .aew-split-medi
 
 	.aew-split-media__row,
 	.aew-split-media--compact .aew-split-media__row {
-		padding: 40px 40px 80px 40px;
+		padding: 40px 16px 80px 16px;   /* X 16 mobile (design-system) */
 	}
 
 	.aew-split-media__body {
