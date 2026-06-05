@@ -258,6 +258,22 @@ class Widget_Gallery_V2 extends Widget_Base {
 		);
 
 		$this->add_control(
+			'layout',
+			[
+				'label'   => esc_html__( 'Layout', 'agency-elementor-widgets' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '',
+				'options' => [
+					''        => esc_html__( 'Auto (use Masonry toggle below)', 'agency-elementor-widgets' ),
+					'grid'    => esc_html__( 'Uniform grid', 'agency-elementor-widgets' ),
+					'masonry' => esc_html__( 'Masonry (column-packed)', 'agency-elementor-widgets' ),
+					'bento'   => esc_html__( 'Bento mosaic (tall feature tiles)', 'agency-elementor-widgets' ),
+				],
+				'description' => esc_html__( 'Bento = structured mosaic with tall feature tiles (every 1st & 5th of each 6). Leave on Auto to keep the legacy Masonry toggle.', 'agency-elementor-widgets' ),
+			]
+		);
+
+		$this->add_control(
 			'masonry',
 			[
 				'label'        => esc_html__( 'Masonry layout', 'agency-elementor-widgets' ),
@@ -267,6 +283,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 				'return_value' => 'yes',
 				'default'      => 'yes',
 				'description'  => esc_html__( 'Variable-height images packed into columns (like the source site). Off = uniform square grid.', 'agency-elementor-widgets' ),
+				'condition'    => [ 'layout' => '' ],
 			]
 		);
 
@@ -376,8 +393,14 @@ class Widget_Gallery_V2 extends Widget_Base {
 
 		$eyebrow  = (string) ( $s['eyebrow'] ?? '' );
 		$heading  = (string) ( $s['heading'] ?? '' );
-		$masonry  = 'yes' === ( $s['masonry'] ?? '' );
 		$has_more = $total > $initial;
+
+		// Layout: explicit `layout` control wins; otherwise fall back to the
+		// legacy `masonry` switcher (so saved instances keep their behaviour).
+		$layout = (string) ( $s['layout'] ?? '' );
+		if ( '' === $layout ) {
+			$layout = ( 'yes' === ( $s['masonry'] ?? '' ) ) ? 'masonry' : 'grid';
+		}
 
 		// Optional CTA below the grid.
 		$cta_label = (string) ( $s['cta_label'] ?? '' );
@@ -397,8 +420,10 @@ class Widget_Gallery_V2 extends Widget_Base {
 		$this->add_render_attribute( 'wrapper', 'data-aew-gallery-v2', '' );
 
 		$grid_classes = 'aew-galv2__grid';
-		if ( $masonry ) {
+		if ( 'masonry' === $layout ) {
 			$grid_classes .= ' aew-galv2__grid--masonry';
+		} elseif ( 'bento' === $layout ) {
+			$grid_classes .= ' aew-galv2__grid--bento';
 		}
 
 		/*
@@ -420,13 +445,22 @@ class Widget_Gallery_V2 extends Widget_Base {
 		?>
 		<section <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
 			<div class="aew-galv2__inner">
-				<?php if ( '' !== trim( $eyebrow ) || '' !== trim( $heading ) ) : ?>
+				<?php if ( '' !== trim( $eyebrow ) || '' !== trim( $heading ) || $show_cta ) : ?>
 					<div class="aew-galv2__header">
-						<?php if ( '' !== trim( $eyebrow ) ) : ?>
-							<p class="aew-galv2__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
-						<?php endif; ?>
-						<?php if ( '' !== trim( $heading ) ) : ?>
-							<h2 class="aew-galv2__heading"><?php echo esc_html( $heading ); ?></h2>
+						<div class="aew-galv2__header-text">
+							<?php if ( '' !== trim( $eyebrow ) ) : ?>
+								<p class="aew-galv2__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+							<?php endif; ?>
+							<?php if ( '' !== trim( $heading ) ) : ?>
+								<h2 class="aew-galv2__heading"><?php echo esc_html( $heading ); ?></h2>
+							<?php endif; ?>
+						</div>
+						<?php if ( $show_cta ) : ?>
+							<a class="aew-galv2__cta" href="<?php echo esc_url( $cta_url ); ?>"
+								<?php echo $cta_target ? ' target="' . esc_attr( $cta_target ) . '"' : ''; ?>
+								<?php echo $cta_rel ? ' rel="' . esc_attr( $cta_rel ) . '"' : ''; ?>>
+								<?php echo esc_html( $cta_label ); ?>
+							</a>
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>
@@ -453,16 +487,6 @@ class Widget_Gallery_V2 extends Widget_Base {
 
 				<?php if ( $has_more ) : ?>
 					<div class="aew-galv2__sentinel" aria-hidden="true"></div>
-				<?php endif; ?>
-
-				<?php if ( $show_cta ) : ?>
-					<div class="aew-galv2__cta-wrap">
-						<a class="aew-galv2__cta" href="<?php echo esc_url( $cta_url ); ?>"
-							<?php echo $cta_target ? ' target="' . esc_attr( $cta_target ) . '"' : ''; ?>
-							<?php echo $cta_rel ? ' rel="' . esc_attr( $cta_rel ) . '"' : ''; ?>>
-							<?php echo esc_html( $cta_label ); ?>
-						</a>
-					</div>
 				<?php endif; ?>
 			</div>
 		</section>

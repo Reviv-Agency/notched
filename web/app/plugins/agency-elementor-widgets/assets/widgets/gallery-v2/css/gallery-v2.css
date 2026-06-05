@@ -60,8 +60,19 @@
 }
 
 /* ── Header ─────────────────────────────────────────────────────────────── */
+/* Heading on the left, optional CTA aligned to the right (matches the live
+   portfolio layout). Wraps gracefully if the heading is long. */
 .aew-galv2__header {
 	margin-bottom: 40px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 24px;
+	flex-wrap: wrap;
+}
+
+.aew-galv2__header-text {
+	min-width: 0;
 }
 
 .aew-galv2__eyebrow {
@@ -114,7 +125,29 @@
 	border-radius: 16px;
 }
 
-/* ── Masonry (CSS multi-column) ───────────────────────────────────────────── */
+/* ── Bento mosaic ─────────────────────────────────────────────────────────── */
+/* A structured 3-column CSS grid where specific tiles span 2 rows to create a
+   varied editorial collage (tall feature tiles + smaller tiles), even from
+   uniformly-landscape source photos. Row height is a fixed unit; tall tiles
+   = 2 units + the row gap. Pattern repeats every 6 items. */
+.aew-galv2__grid--bento {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-auto-rows: 240px;
+	gap: 16px;
+}
+
+.aew-galv2__grid--bento .aew-galv2__item {
+	height: 100%;
+}
+
+/* Per-6 cycle: 1st tile is a tall left feature; 5th tile is a tall right
+   feature. Their vertical neighbours fill the remaining single-height cells, so
+   the columns interlock like the reference mosaic. */
+.aew-galv2__grid--bento .aew-galv2__item:nth-child(6n + 1) { grid-row: span 2; }
+.aew-galv2__grid--bento .aew-galv2__item:nth-child(6n + 5) { grid-row: span 2; }
+
+/* Masonry (CSS multi-column) ─────────────────────────────────────────────── */
 .aew-galv2__grid--masonry {
 	display: block;
 	column-count: 3;
@@ -172,21 +205,22 @@
 	.aew-galv2__eyebrow {
 		font-size: 16px;
 	}
+
+	/* Bento: shorter row unit on phones so tall tiles aren't excessive. */
+	.aew-galv2__grid--bento {
+		grid-auto-rows: 150px;
+	}
 }
 
-/* ── Optional CTA below the grid (e.g. "SHOP ALL KITS") ──────────────────────
-   Brand filled button per design system: #AA7D44 bg + white text, hover
-   #876137. Hex fallbacks since the var may not resolve in every context. */
-.aew-galv2__cta-wrap {
-	display: flex;
-	justify-content: center;
-	margin-top: 40px;
-}
-
+/* ── Optional header CTA (e.g. "SHOP ALL KITS") ──────────────────────────────
+   Sits to the RIGHT of the heading. Brand filled button per design system:
+   #AA7D44 bg + white text, hover #876137. Hex fallbacks since the var may not
+   resolve in every context. */
 .aew-galv2__cta {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	flex-shrink: 0;
 	font-family: var(--aew-font-heading, 'Teko', sans-serif);
 	font-weight: 600;
 	font-size: 20px;
@@ -208,6 +242,5 @@
 }
 
 @media (max-width: 768px) {
-	.aew-galv2__cta-wrap { margin-top: 32px; }
 	.aew-galv2__cta { width: 100%; }
 }
