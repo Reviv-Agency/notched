@@ -480,7 +480,7 @@ class Widget_Feature_Rows_V2 extends Widget_Base {
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px' ],
 			'range'      => [ 'px' => [ 'min' => 0, 'max' => 48 ] ],
-			'default'    => [ 'unit' => 'px', 'size' => 16 ],
+			'default'    => [ 'unit' => 'px', 'size' => 24 ],
 			'selectors'  => [ '{{WRAPPER}} .aew-frv2__media' => 'border-radius: {{SIZE}}{{UNIT}};' ],
 		] );
 
