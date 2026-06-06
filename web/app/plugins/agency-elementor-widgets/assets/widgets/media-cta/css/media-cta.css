@@ -103,7 +103,7 @@
 	gap: 24px;
 	width: 100%;
 	min-width: 0;
-	padding: 24px !important;
+	padding: 24px;
 	background-color: var(--aew-media-cta-panel-bg);
 	box-sizing: border-box;
 }
@@ -112,7 +112,7 @@
 	margin: 0;
 	width: 100%;
 	font-family: var(--aew-font-heading, 'Teko', sans-serif);
-	font-size: 32px !important;
+	font-size: 32px;
 	font-weight: 400;
 	line-height: 1.15;
 	color: var(--aew-media-cta-title, var(--aew-color-white, #fff));
@@ -128,7 +128,7 @@
 .aew-media-cta__text {
 	margin: 0;
 	font-family: var(--aew-font-body, 'Lato', sans-serif);
-	font-size: 14px !important;
+	font-size: 14px;
 	font-weight: 400;
 	line-height: 1.5;
 	color: var(--aew-media-cta-text, var(--aew-color-white, #fff));
@@ -140,13 +140,13 @@
 	justify-content: center;
 	gap: 10px;
 	margin: 0;
-	padding: 16px 24px !important;
+	padding: 16px 24px;
 	border: 0;
 	border-radius: 18px;
 	background-color: var(--aew-media-cta-btn-bg, var(--notched-cta, #AA7D44));
 	color: var(--aew-media-cta-btn-text, #FFFFFF);
 	font-family: var(--aew-font-body, 'Lato', sans-serif);
-	font-size: 18px !important;
+	font-size: 18px;
 	font-weight: 700;
 	line-height: 1.2;
 	text-decoration: none;
@@ -224,22 +224,22 @@
 		width: auto;
 		max-width: none;
 		min-width: 0;
-		padding: 80px !important;
+		padding: 80px;
 	}
 
 	.aew-media-cta__title {
-		font-size: 48px !important;
+		font-size: 48px;
 	}
 
 	.aew-media-cta__text {
-		font-size: 18px !important;
+		font-size: 18px;
 	}
 
 	.aew-media-cta__media {
-		border-radius: 40px !important;
+		border-radius: 40px;
 	}
 
 	.aew-media-cta__panel {
-		border-radius: 40px !important;
+		border-radius: 40px;
 	}
 }
