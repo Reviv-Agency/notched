@@ -145,6 +145,14 @@ class Widget_Testimonials_V2 extends Widget_Base {
 			'default' => 'h2',
 			'options' => [ 'h1' => 'H1', 'h2' => 'H2', 'h3' => 'H3' ],
 		] );
+		$this->add_control( 'show_avatar', [
+			'label'        => 'Show avatar',
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => 'Show',
+			'label_off'    => 'Hide',
+			'return_value' => 'yes',
+			'default'      => 'yes',
+		] );
 		$this->end_controls_section();
 	}
 
@@ -334,6 +342,8 @@ class Widget_Testimonials_V2 extends Widget_Base {
 		$title    = (string) ( $s['title'] ?? '' );
 		$tag      = in_array( $s['title_tag'] ?? 'h2', [ 'h1', 'h2', 'h3' ], true ) ? $s['title_tag'] : 'h2';
 		$eyebrow  = ( $s['show_eyebrow'] ?? 'yes' ) === 'yes';
+		// Global avatar toggle (default ON for saved instances that predate it).
+		$show_avatar = ( $s['show_avatar'] ?? 'yes' ) === 'yes';
 		$items    = $s['items'] ?? [];
 
 		$show_summary = ( $s['show_summary'] ?? '' ) === 'yes';
@@ -425,17 +435,19 @@ class Widget_Testimonials_V2 extends Widget_Base {
 
 								<div class="aew-tsv2__body">
 
-									<div class="aew-tsv2__avatar">
-										<?php if ( $av_url ) : ?>
-											<img class="aew-tsv2__avatar-img"
-												src="<?php echo esc_url( $av_url ); ?>"
-												alt=""
-												loading="lazy"
-												decoding="async" />
-										<?php else : ?>
-											<span class="aew-tsv2__avatar-initial" aria-hidden="true"><?php echo esc_html( $initial ); ?></span>
-										<?php endif; ?>
-									</div>
+									<?php if ( $show_avatar ) : ?>
+										<div class="aew-tsv2__avatar">
+											<?php if ( $av_url ) : ?>
+												<img class="aew-tsv2__avatar-img"
+													src="<?php echo esc_url( $av_url ); ?>"
+													alt=""
+													loading="lazy"
+													decoding="async" />
+											<?php else : ?>
+												<span class="aew-tsv2__avatar-initial" aria-hidden="true"><?php echo esc_html( $initial ); ?></span>
+											<?php endif; ?>
+										</div>
+									<?php endif; ?>
 
 									<?php
 									$plural = 1 === $stars ? 'star' : 'stars';
