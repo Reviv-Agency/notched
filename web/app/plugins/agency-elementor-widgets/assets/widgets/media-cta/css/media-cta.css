@@ -209,18 +209,21 @@
 		flex-direction: row-reverse;
 	}
 
+	/* Adjustable split: image width is the --aew-media-cta-image-width % (default
+	   50%); the text panel fills the remaining width (minus the 20px row gap). */
 	.aew-media-cta__media {
-		flex: 1 1 50%;
-		width: 50%;
-		max-width: 50%;
+		flex: 0 0 var(--aew-media-cta-image-width, 50%);
+		width: var(--aew-media-cta-image-width, 50%);
+		max-width: var(--aew-media-cta-image-width, 50%);
 		height: auto;
 		min-height: 100%;
 	}
 
 	.aew-media-cta__panel {
-		flex: 1 1 50%;
-		width: 50%;
-		max-width: 50%;
+		flex: 1 1 auto;
+		width: auto;
+		max-width: none;
+		min-width: 0;
 		padding: 80px !important;
 	}
 

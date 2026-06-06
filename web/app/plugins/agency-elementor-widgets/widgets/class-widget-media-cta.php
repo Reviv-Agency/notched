@@ -393,6 +393,33 @@ class Widget_Media_Cta extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'image_width',
+			[
+				'label'       => esc_html__( 'Image width (desktop)', 'agency-elementor-widgets' ),
+				'description' => esc_html__(
+					'Width of the image as a % of the row on desktop (e.g. 40 = 40% image / 60% text). The text panel fills the rest. Side-by-side only at ≥1024px.',
+					'agency-elementor-widgets'
+				),
+				'type'        => Controls_Manager::SLIDER,
+				'size_units'  => [ '%' ],
+				'range'       => [
+					'%' => [
+						'min'  => 20,
+						'max'  => 80,
+						'step' => 1,
+					],
+				],
+				'default'     => [
+					'unit' => '%',
+					'size' => 50,
+				],
+				'selectors'   => [
+					'{{WRAPPER}} .aew-media-cta' => '--aew-media-cta-image-width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'image_radius',
 			[
