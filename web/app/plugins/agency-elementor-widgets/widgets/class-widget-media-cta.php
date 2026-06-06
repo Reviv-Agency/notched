@@ -552,6 +552,29 @@ class Widget_Media_Cta extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'title_gap',
+			[
+				'label'       => esc_html__( 'Space below title', 'agency-elementor-widgets' ),
+				'description' => esc_html__( 'Extra space between the title and the text block (adds to the gap above).', 'agency-elementor-widgets' ),
+				'type'        => Controls_Manager::SLIDER,
+				'size_units'  => [ 'px' ],
+				'range'       => [
+					'px' => [
+						'min' => 0,
+						'max' => 80,
+					],
+				],
+				'default'     => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'selectors'   => [
+					'{{WRAPPER}} .aew-media-cta__title' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(

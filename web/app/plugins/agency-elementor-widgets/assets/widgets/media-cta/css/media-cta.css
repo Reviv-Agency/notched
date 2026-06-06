@@ -110,6 +110,9 @@
 
 .aew-media-cta__title {
 	margin: 0;
+	/* Optional extra space below the title (the "Space below title" control).
+	   Adds to the panel gap. Default 0 = panel gap only. */
+	margin-bottom: var(--aew-media-cta-title-gap, 0px);
 	width: 100%;
 	font-family: var(--aew-font-heading, 'Teko', sans-serif);
 	font-size: 32px;
@@ -132,6 +135,14 @@
 	font-weight: 400;
 	line-height: 1.5;
 	color: var(--aew-media-cta-text, var(--aew-color-white, #fff));
+}
+
+/* Neutralise the global `.aew-rich-text p { margin:0 0 1em }` inside this
+   widget's text block so paragraph spacing is controlled by the widget (panel
+   gap + the body's own 16px gap), not an inherited 1em margin. Scoped to
+   .aew-media-cta so other rich-text widgets keep their default paragraph rhythm. */
+.aew-media-cta .aew-media-cta__text p {
+	margin: 0;
 }
 
 .aew-media-cta__button {
