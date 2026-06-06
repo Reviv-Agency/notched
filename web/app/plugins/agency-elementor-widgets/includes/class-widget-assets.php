@@ -386,6 +386,22 @@ final class Widget_Assets {
 				'style_deps' => [ 'aew-tokens' ],
 			]
 		);
+
+		self::register_widget(
+			'icon-grid-v2',
+			[
+				'style'      => 'css/icon-grid-v2.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
+
+		self::register_widget(
+			'feature-band-v2',
+			[
+				'style'      => 'css/feature-band-v2.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
 	}
 
 	/**

@@ -1,0 +1,268 @@
+/* ============================================================================
+ * Feature Band V2 — Notched
+ * A FULL-BLEED background image (edge to edge, NOT capped at 1440) with a
+ * content BOX overlaying it (eyebrow + Teko heading + numbered steps + two
+ * buttons) plus an optional tall side photo. The X gutter lives on the INNER
+ * so the bg stays full-bleed; only the inner content caps at 1440.
+ * Desktop-first; step down at 1024 / 768.
+ * ========================================================================== */
+
+/* ── Brand tokens (scoped) — source of truth: design-system.md ───────────── */
+.aew-fbv2 {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* Strip Elementor's column / container padding so the band is full-bleed. The
+   widget's own inner wrapper re-applies the max-width + responsive X padding. */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-feature-band-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-feature-band-v2),
+.e-con:has(.elementor-widget-agency-feature-band-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+/* Defeat Elementor's boxed section width so the background image goes truly
+   edge-to-edge. The inner wrapper keeps its own max-width + gutter, so only the
+   image becomes full-bleed. */
+.elementor-section:has(.elementor-widget-agency-feature-band-v2),
+.elementor-section:has(.elementor-widget-agency-feature-band-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-feature-band-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Full-bleed band ─────────────────────────────────────────────────────── */
+.aew-fbv2 {
+  position: relative;
+  width: 100%;
+  background-color: var(--notched-secondary-bg);
+  background-image: var(--aew-fbv2-image);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.aew-fbv2 *,
+.aew-fbv2 *::before,
+.aew-fbv2 *::after {
+  box-sizing: border-box;
+}
+
+/* Optional overlay tint over the image for legibility. */
+.aew-fbv2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--aew-fbv2-overlay, transparent);
+  pointer-events: none;
+}
+
+/* ── Inner wrapper: true 1440 content cap + 40px X gutter; owns Y padding ─── */
+.aew-fbv2__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+/* ── Row: content box + optional side photo ──────────────────────────────── */
+.aew-fbv2__grid {
+  display: flex;
+  align-items: stretch;
+  gap: 40px;
+}
+
+/* ── Content box (overlays the image) ─────────────────────────────────────── */
+.aew-fbv2__box {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 620px;
+  background: var(--aew-fbv2-box-bg, transparent);
+  border-radius: 24px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Eyebrow (Playfair Display Bold 20px / 100%) ─────────────────────────── */
+.aew-fbv2__eyebrow {
+  margin: 0;
+  color: var(--aew-fbv2-eyebrow, var(--notched-cta));
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Heading (Teko SemiBold 56px / 90%) ──────────────────────────────────── */
+/* Prefixed with .aew-fbv2 so the colour beats the kit's .elementor-kit-N
+   h1..h6 rule (0,1,1); a bare class would be (0,1,0) and lose (gotcha #20). */
+.aew-fbv2 .aew-fbv2__heading {
+  margin: 0;
+  color: var(--aew-fbv2-heading, #FFFFFF);
+  font-family: var(--aew-teko);
+  font-weight: 600;
+  font-size: 56px;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+/* ── Steps stack ─────────────────────────────────────────────────────────── */
+.aew-fbv2__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.aew-fbv2__step {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.aew-fbv2 .aew-fbv2__step-title {
+  margin: 0;
+  color: var(--aew-fbv2-step-title, #FFFFFF);
+  font-family: var(--aew-teko);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.aew-fbv2__step-text {
+  margin: 0;
+  color: var(--aew-fbv2-step-text, var(--notched-background));
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* ── Buttons row ─────────────────────────────────────────────────────────── */
+.aew-fbv2__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+/* Button base — design-system: Teko SemiBold 20px / 85%, pad 20/24/16, radius 8. */
+.aew-fbv2__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  text-align: center;
+  font-family: var(--aew-teko);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 0.85;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 20px 24px 16px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+/* Primary (solid). The --aew-fbv2-pri-* vars are set inline by render() from
+   the resolved editor values (hex or global colour); the design-system token is
+   the fallback when a slot is not overridden (§6.8). */
+.aew-fbv2__btn--primary {
+  background-color: var(--aew-fbv2-pri-bg, var(--notched-cta));
+  color: var(--aew-fbv2-pri-text, #FFFFFF);
+  border-color: var(--aew-fbv2-pri-bg, var(--notched-cta));
+}
+
+.aew-fbv2__btn--primary:hover,
+.aew-fbv2__btn--primary:focus-visible {
+  background-color: var(--aew-fbv2-pri-bg-hover, var(--notched-cta-hover));
+  color: var(--aew-fbv2-pri-text-hover, #FFFFFF);
+  border-color: var(--aew-fbv2-pri-bg-hover, var(--notched-cta-hover));
+}
+
+/* Secondary (phone) — white outline for legibility over the dark image
+   (design-system B3 exception); fills white on hover with dark text. */
+.aew-fbv2__btn--secondary {
+  background-color: transparent;
+  color: var(--aew-fbv2-sec-color, #FFFFFF);
+  border-color: var(--aew-fbv2-sec-color, #FFFFFF);
+}
+
+.aew-fbv2__btn--secondary:hover,
+.aew-fbv2__btn--secondary:focus-visible {
+  background-color: var(--aew-fbv2-sec-bg-hover, #FFFFFF);
+  color: var(--aew-fbv2-sec-text-hover, var(--notched-text));
+  border-color: var(--aew-fbv2-sec-bg-hover, #FFFFFF);
+}
+
+.aew-fbv2__btn-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+/* ── Side photo ──────────────────────────────────────────────────────────── */
+.aew-fbv2__media {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+}
+
+.aew-fbv2__photo {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  object-fit: cover;
+  border-radius: 24px;
+  display: block;
+}
+
+/* ── Responsive: tablet / small desktop (≤1024px) ────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-fbv2__inner { padding: 64px 40px; }
+  .aew-fbv2__grid { gap: 32px; }
+  .aew-fbv2 .aew-fbv2__heading { font-size: 48px; }
+  .aew-fbv2__photo { min-height: 360px; }
+}
+
+/* ── Responsive: mobile (≤768px) — stack box then photo ──────────────────── */
+@media (max-width: 768px) {
+  .aew-fbv2__inner { padding: 40px 16px; }
+  .aew-fbv2__grid {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+  .aew-fbv2__box { max-width: none; width: 100%; }
+  .aew-fbv2 .aew-fbv2__heading { font-size: 40px; }
+  .aew-fbv2 .aew-fbv2__step-title { font-size: 22px; }
+  .aew-fbv2__step-text { font-size: 14px; }
+  .aew-fbv2__buttons { flex-direction: column; align-items: stretch; }
+  .aew-fbv2__btn { width: 100%; font-size: 18px; padding: 18px 24px 16px; }
+  .aew-fbv2__photo { min-height: 280px; }
+}

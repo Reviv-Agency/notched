@@ -86,6 +86,8 @@ final class Widgets_Loader {
 		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-team-grid-v2.php';
 		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-image-cta-band-v2.php';
 		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-values-grid-v2.php';
+		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-icon-grid-v2.php';
+		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-feature-band-v2.php';
 		$widgets_manager->register( new Widget_Header() );
 		$widgets_manager->register( new Widget_Header_V2() );
 		$widgets_manager->register( new Widget_Hero() );
@@ -128,5 +130,7 @@ final class Widgets_Loader {
 		$widgets_manager->register( new Widget_Team_Grid_V2() );
 		$widgets_manager->register( new Widget_Image_Cta_Band_V2() );
 		$widgets_manager->register( new Widget_Values_Grid_V2() );
+		$widgets_manager->register( new Widget_Icon_Grid_V2() );
+		$widgets_manager->register( new Widget_Feature_Band_V2() );
 	}
 }

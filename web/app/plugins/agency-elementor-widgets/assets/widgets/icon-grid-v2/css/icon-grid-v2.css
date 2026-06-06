@@ -1,0 +1,149 @@
+/* ============================================================================
+ * Icon Grid V2 — icon + title cards in a responsive grid.
+ * Optional centred eyebrow + heading above the grid. Clean cards (transparent
+ * by default) on the section band, matching the /custom-project consultation
+ * layout. Desktop-first; step down at 1024 / 768.
+ * ========================================================================== */
+
+/* ── Brand tokens (scoped) — source of truth: design-system.md ───────────── */
+.aew-igv2 {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+}
+
+/* Strip Elementor's column / container padding so the section is full-bleed. */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-icon-grid-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-icon-grid-v2),
+.e-con:has(.elementor-widget-agency-icon-grid-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+/* ── Outer block: full-bleed background; X-gutter lives here ─────────────── */
+/* Design-system width model: content caps at a TRUE 1440px (inner). The X
+   gutter sits on the OUTER block so above ~1520 it becomes empty centring
+   margin (content stays a true 1440), and below it the gutter shows. */
+.aew-igv2 {
+  background: var(--aew-igv2-section-bg, var(--notched-background));
+  width: 100%;
+  position: relative;
+  padding-left: 40px;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.aew-igv2 *,
+.aew-igv2 *::before,
+.aew-igv2 *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper: true 1440 content cap; owns Y padding only ───────────── */
+.aew-igv2__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 64px 0;
+}
+
+/* ── Header (optional eyebrow + heading), centred above the grid ─────────── */
+.aew-igv2__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.aew-igv2__eyebrow {
+  margin: 0 0 8px;
+  padding: 0;
+  color: var(--aew-igv2-eyebrow, var(--notched-cta));
+  /* Subhead / eyebrow font per design system: Playfair Display Bold. */
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Wrapper-class prefix raises specificity to (0,2,0) so the colour beats the
+   Elementor kit's `.elementor-kit-N h1..h6 { color }` rule (0,1,1). */
+.aew-igv2 .aew-igv2__heading {
+  margin: 0;
+  padding: 0;
+  color: var(--aew-igv2-heading, var(--notched-secondary-bg));
+  font-family: var(--aew-font-heading, 'Teko', sans-serif);
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+/* ── Grid ────────────────────────────────────────────────────────────────── */
+.aew-igv2__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--aew-igv2-cols, 3), 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+/* The alignment control sets --aew-igv2-align (left | center | right). text-
+   align positions the inline-level icon + the title; the card is a plain
+   block so children inherit it without a flex cross-axis dance. */
+.aew-igv2__card {
+  --aew-igv2-align: center;
+  background: var(--aew-igv2-card-bg, transparent);
+  border-radius: 24px;
+  padding: 32px 24px;
+  text-align: var(--aew-igv2-align);
+}
+
+.aew-igv2__icon {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+/* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) — gotcha #20. */
+.aew-igv2 .aew-igv2__title {
+  margin: 0;
+  font-family: var(--aew-font-heading, 'Teko', sans-serif);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--aew-igv2-title, var(--notched-text));
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-igv2__grid { grid-template-columns: repeat(2, 1fr); }
+  .aew-igv2 .aew-igv2__heading { font-size: 40px; }
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-igv2 { padding-left: 16px; padding-right: 16px; }   /* X 16 mobile */
+  .aew-igv2__inner { padding: 32px 0; }                     /* Y 32 mobile */
+  .aew-igv2__header { margin-bottom: 32px; }
+  .aew-igv2__grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .aew-igv2__card { padding: 24px 16px; border-radius: 20px; }
+  .aew-igv2__icon { width: 56px; height: 56px; }
+  .aew-igv2 .aew-igv2__heading { font-size: 32px; }
+}

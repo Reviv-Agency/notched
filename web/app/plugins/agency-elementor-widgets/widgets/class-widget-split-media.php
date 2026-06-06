@@ -493,14 +493,16 @@ class Widget_Split_Media extends Widget_Base {
 				'size_units' => [ '%' ],
 				'range'      => [
 					'%' => [
-						'min' => 30,
-						'max' => 70,
+						'min' => 20,
+						'max' => 80,
+						'step' => 1,
 					],
 				],
 				'default'    => [
 					'unit' => '%',
 					'size' => 50,
 				],
+				'description' => esc_html__( 'Width of the copy panel as a % of the content rail (e.g. 30 = 30/70, 40 = 40/60). The background image fills the rest.', 'agency-elementor-widgets' ),
 				'selectors'  => [
 					'{{WRAPPER}} .aew-split-media:not(.aew-split-media--compact) .aew-split-media__body' => 'flex: 0 0 {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; max-width: {{SIZE}}{{UNIT}};',
 				],
