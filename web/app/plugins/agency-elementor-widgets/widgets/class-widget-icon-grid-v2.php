@@ -108,13 +108,16 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 	 * @return array<int, array<string, mixed>>
 	 */
 	private function default_items(): array {
+		$icon = static function ( string $file ): array {
+			return [ 'url' => Widget_Assets::url( self::ASSET_SLUG, 'images/' . $file ) ];
+		};
 		return [
-			[ 'title' => 'Discuss Your Goals' ],
-			[ 'title' => 'Review Inspiration Photos' ],
-			[ 'title' => 'Talk Sizing & Layout' ],
-			[ 'title' => 'Explore Timber & Roof Options' ],
-			[ 'title' => 'Review Budget Expectations' ],
-			[ 'title' => 'Get Expert Recommendations' ],
+			[ 'title' => 'Discuss Your Goals',            'icon' => $icon( 'discuss-goals.svg' ) ],
+			[ 'title' => 'Review Inspiration Photos',     'icon' => $icon( 'review-photos.svg' ) ],
+			[ 'title' => 'Talk Sizing & Layout',          'icon' => $icon( 'talk-sizing.svg' ) ],
+			[ 'title' => 'Explore Timber & Roof Options', 'icon' => $icon( 'explore-timber.svg' ) ],
+			[ 'title' => 'Review Budget Expectations',    'icon' => $icon( 'review-budget.svg' ) ],
+			[ 'title' => 'Get Expert Recommendations',    'icon' => $icon( 'get-expert.svg' ) ],
 		];
 	}
 
