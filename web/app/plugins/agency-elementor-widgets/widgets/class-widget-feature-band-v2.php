@@ -37,6 +37,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 	public function get_keywords(): array   { return [ 'feature', 'band', 'steps', 'process', 'notched' ]; }
 
 	public function get_style_depends(): array { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
+	public function get_script_depends(): array { return [ Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 
 	/**
 	 * Re-point Elementor's built-in _padding control to OUR inner wrapper so the
@@ -104,6 +105,14 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 			'type'        => Controls_Manager::MEDIA,
 			'default'     => [ 'url' => '' ],
 			'description' => esc_html__( 'Full-bleed background image (edge to edge).', 'agency-elementor-widgets' ),
+		] );
+
+		$this->add_control( 'parallax', [
+			'label'        => esc_html__( 'Parallax background', 'agency-elementor-widgets' ),
+			'description'  => esc_html__( 'The background image pans within its height as you scroll past the section. Disabled automatically for reduced-motion visitors.', 'agency-elementor-widgets' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'default'      => '',
+			'return_value' => 'yes',
 		] );
 
 		$this->add_control( 'eyebrow', [
@@ -286,14 +295,25 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 			'selectors'  => [ '{{WRAPPER}} .aew-fbv2__box' => 'border-radius: {{SIZE}}{{UNIT}};' ],
 		] );
 
+		$this->add_responsive_control( 'card_max_width', [
+			'label'       => esc_html__( 'Card width', 'agency-elementor-widgets' ),
+			'description' => esc_html__( 'Max width of the whole white card (copy + photo). It stays centred; the background image shows around it.', 'agency-elementor-widgets' ),
+			'type'        => Controls_Manager::SLIDER,
+			'size_units'  => [ 'px', '%' ],
+			'range'       => [ 'px' => [ 'min' => 600, 'max' => 1600 ], '%' => [ 'min' => 50, 'max' => 100 ] ],
+			'default'        => [ 'unit' => 'px', 'size' => 1200 ],
+			'mobile_default' => [ 'unit' => '%', 'size' => 100 ],
+			'selectors'   => [ '{{WRAPPER}} .aew-fbv2__grid' => 'max-width: {{SIZE}}{{UNIT}};' ],
+		] );
+
 		$this->add_responsive_control( 'box_max_width', [
-			'label'      => esc_html__( 'Box max width', 'agency-elementor-widgets' ),
+			'label'      => esc_html__( 'Copy box max width', 'agency-elementor-widgets' ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px', '%' ],
-			'range'      => [ 'px' => [ 'min' => 360, 'max' => 900 ], '%' => [ 'min' => 40, 'max' => 100 ] ],
-			'default'        => [ 'unit' => 'px', 'size' => 620 ],
+			'range'      => [ 'px' => [ 'min' => 360, 'max' => 900 ], '%' => [ 'min' => 30, 'max' => 100 ] ],
+			'default'        => [ 'unit' => '%', 'size' => 42 ],
 			'mobile_default' => [ 'unit' => '%', 'size' => 100 ],
-			'selectors'  => [ '{{WRAPPER}} .aew-fbv2__box' => 'max-width: {{SIZE}}{{UNIT}};' ],
+			'selectors'  => [ '{{WRAPPER}} .aew-fbv2__box' => 'flex-basis: {{SIZE}}{{UNIT}}; max-width: {{SIZE}}{{UNIT}};' ],
 		] );
 
 		$this->add_responsive_control( 'img_radius', [
@@ -535,6 +555,9 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$sec_icon       = 'yes' === ( $s['secondary_icon'] ?? 'yes' );
 
 		$this->add_render_attribute( 'wrapper', 'class', 'aew-fbv2' );
+		if ( 'yes' === ( $s['parallax'] ?? '' ) ) {
+			$this->add_render_attribute( 'wrapper', 'class', 'aew-fbv2--parallax' );
+		}
 		$this->add_render_attribute( 'wrapper', 'data-aew-feature-band-v2', '' );
 
 		// Emit resolved colours as inline CSS vars on the wrapper (live-page

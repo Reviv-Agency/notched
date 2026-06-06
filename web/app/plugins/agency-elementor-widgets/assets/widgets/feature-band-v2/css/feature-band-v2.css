@@ -50,9 +50,27 @@
   width: 100%;
   background-color: var(--notched-secondary-bg);
   background-image: var(--aew-fbv2-image);
-  background-size: cover;
-  background-position: center center;
+  /* Parallax: the image is sized a little TALLER than the band so it has room
+     to pan vertically. --aew-fbv2-pan (0→1, written by feature-band-v2.js on
+     scroll) drives background-position-y across that extra height. Default 0.5
+     = centred when JS is off / reduced-motion. */
+  background-size: var(--aew-fbv2-bg-size, cover);
+  background-position: center calc(var(--aew-fbv2-pan, 0.5) * 100%);
   background-repeat: no-repeat;
+  transition: background-position 0.08s linear;
+}
+
+/* When parallax is ON, oversize the image vertically so there's travel room. */
+.aew-fbv2--parallax {
+  --aew-fbv2-bg-size: auto 130%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aew-fbv2 {
+    background-position: center center;
+    background-size: cover;
+    transition: none;
+  }
 }
 
 .aew-fbv2 *,

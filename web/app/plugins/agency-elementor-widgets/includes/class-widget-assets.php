@@ -399,6 +399,7 @@ final class Widget_Assets {
 			'feature-band-v2',
 			[
 				'style'      => 'css/feature-band-v2.css',
+				'script'     => 'js/feature-band-v2.js',
 				'style_deps' => [ 'aew-tokens' ],
 			]
 		);
