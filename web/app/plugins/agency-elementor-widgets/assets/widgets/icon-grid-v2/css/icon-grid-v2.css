@@ -89,6 +89,15 @@
   text-transform: uppercase;
 }
 
+/* ── Cards box (wraps all cards, separate bg from the section) ───────────────
+   Background defaults to a 10% gold tint (#A27E4D1A) via the control; padding +
+   radius are control-driven. Transparent if the box bg is cleared. */
+.aew-igv2__cards-box {
+  background: var(--aew-igv2-cards-box-bg, transparent);
+  border-radius: 24px;
+  padding: 48px;
+}
+
 /* ── Grid ────────────────────────────────────────────────────────────────── */
 .aew-igv2__grid {
   display: grid;

@@ -310,6 +310,39 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 			'description' => esc_html__( 'Leave empty for transparent cards on the section background.', 'agency-elementor-widgets' ),
 		] );
 
+		$this->add_control( 'cards_box_heading', [
+			'label'     => esc_html__( 'Cards box (wraps all cards)', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'cards_box_bg', [
+			'label'       => esc_html__( 'Cards box background', 'agency-elementor-widgets' ),
+			'type'        => Controls_Manager::COLOR,
+			'default'     => '#A27E4D1A',
+			'selectors'   => [ '{{WRAPPER}}' => '--aew-igv2-cards-box-bg: {{VALUE}};' ],
+			'description' => esc_html__( 'Background of the box that wraps all the cards (separate from the section background). Leave empty for none.', 'agency-elementor-widgets' ),
+		] );
+
+		$this->add_responsive_control( 'cards_box_padding', [
+			'label'      => esc_html__( 'Cards box padding', 'agency-elementor-widgets' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [ 'px' => [ 'min' => 0, 'max' => 120 ] ],
+			'default'        => [ 'unit' => 'px', 'size' => 48 ],
+			'mobile_default' => [ 'unit' => 'px', 'size' => 24 ],
+			'selectors'  => [ '{{WRAPPER}} .aew-igv2__cards-box' => 'padding: {{SIZE}}{{UNIT}};' ],
+		] );
+
+		$this->add_control( 'cards_box_radius', [
+			'label'      => esc_html__( 'Cards box radius', 'agency-elementor-widgets' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [ 'px' => [ 'min' => 0, 'max' => 60 ] ],
+			'default'    => [ 'unit' => 'px', 'size' => 24 ],
+			'selectors'  => [ '{{WRAPPER}} .aew-igv2__cards-box' => 'border-radius: {{SIZE}}{{UNIT}};' ],
+		] );
+
 		$this->add_control( 'card_radius', [
 			'label'      => esc_html__( 'Card radius', 'agency-elementor-widgets' ),
 			'type'       => Controls_Manager::SLIDER,
@@ -376,6 +409,7 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 				'eyebrow_color' => '--aew-igv2-eyebrow',
 				'heading_color' => '--aew-igv2-heading',
 				'card_bg'       => '--aew-igv2-card-bg',
+				'cards_box_bg'  => '--aew-igv2-cards-box-bg',
 				'title_color'   => '--aew-igv2-title',
 			]
 		);
@@ -399,6 +433,7 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>
+				<div class="aew-igv2__cards-box">
 				<div class="aew-igv2__grid">
 					<?php
 					foreach ( $items as $item ) :
@@ -419,6 +454,7 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 							<?php endif; ?>
 						</article>
 					<?php endforeach; ?>
+				</div>
 				</div>
 			</div>
 		</section>
