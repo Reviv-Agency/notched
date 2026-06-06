@@ -149,6 +149,10 @@
   min-height: 0;            /* don't let an image's intrinsic height grow the row */
   align-self: stretch;      /* fill the row's full height (set by the tallest) */
   /* The child (media/box) then stretches to fill this item. */
+  /* "Fixed row height" control: when --aew-frv2-row-height is set, every item
+     (image + text box) is forced to that exact height; the box centers its copy
+     and the image covers. Empty → 0 of nothing, so normal content-sized rows. */
+  height: var(--aew-frv2-row-height, auto);
 }
 
 /* ── Image item ──────────────────────────────────────────────────────────── */
@@ -189,6 +193,7 @@
   background-color: var(--notched-secondary-accent);
   border-radius: 24px;
   padding: 120px 20px;      /* default; the Box padding control overrides */
+  overflow: hidden;         /* clip copy if a fixed row height is shorter than the padding */
 }
 
 /* Text alignment on the real text elements (wins over kit p/h rules). */

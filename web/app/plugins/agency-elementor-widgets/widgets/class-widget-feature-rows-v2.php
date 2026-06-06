@@ -494,6 +494,18 @@ class Widget_Feature_Rows_V2 extends Widget_Base {
 			'selectors'   => [ '{{WRAPPER}}' => '--aew-frv2-img-floor: {{SIZE}}{{UNIT}};' ],
 		] );
 
+		$this->add_responsive_control( 'row_height', [
+			'label'       => esc_html__( 'Fixed row height', 'agency-elementor-widgets' ),
+			'type'        => Controls_Manager::SLIDER,
+			'size_units'  => [ 'px', 'vh' ],
+			'range'       => [ 'px' => [ 'min' => 240, 'max' => 900 ], 'vh' => [ 'min' => 30, 'max' => 100 ] ],
+			'default'        => [ 'unit' => 'px', 'size' => '' ],
+			'tablet_default' => [ 'unit' => 'px', 'size' => '' ],
+			'mobile_default' => [ 'unit' => 'px', 'size' => '' ],
+			'description' => esc_html__( 'Force every row (image + text box) to this exact height, regardless of text length. Leave empty to size rows by the text box padding instead.', 'agency-elementor-widgets' ),
+			'selectors'   => [ '{{WRAPPER}}' => '--aew-frv2-row-height: {{SIZE}}{{UNIT}};' ],
+		] );
+
 		$this->end_controls_section();
 	}
 
