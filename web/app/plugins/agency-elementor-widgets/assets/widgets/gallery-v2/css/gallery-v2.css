@@ -83,7 +83,7 @@
 	font-size: 20px;
 	line-height: 140%;
 	text-transform: uppercase;
-	color: var(--notched-cta);
+	color: var(--aew-galv2-eyebrow, var(--notched-cta));
 }
 
 .aew-galv2 .aew-galv2__heading {
@@ -93,10 +93,10 @@
 	font-size: 64px;
 	line-height: 85%;
 	text-transform: uppercase;
-	/* Locked to the brand text colour with a hard hex fallback so it can't drift
-	   if the token fails to resolve. Wrapper-class prefix (0,2,0) beats the
-	   kit's `.elementor-kit-N h2 { color }` rule (0,1,1). */
-	color: var(--notched-text, #141C19) !important;
+	/* Driven by the Heading color control (--aew-galv2-heading), falling back to
+	   the brand text colour. The wrapper-class prefix (0,2,0) beats the kit's
+	   `.elementor-kit-N h2 { color }` rule (0,1,1) so the chosen colour holds. */
+	color: var(--aew-galv2-heading, var(--notched-text, #141C19));
 }
 
 /* ── Grid (uniform) ───────────────────────────────────────────────────────── */

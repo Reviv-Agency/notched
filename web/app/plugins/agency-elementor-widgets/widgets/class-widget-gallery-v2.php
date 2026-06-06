@@ -350,6 +350,30 @@ class Widget_Gallery_V2 extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'heading_color',
+			[
+				'label'     => esc_html__( 'Heading color', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#141C19',
+				'selectors' => [
+					'{{WRAPPER}}' => '--aew-galv2-heading: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eyebrow_color',
+			[
+				'label'     => esc_html__( 'Eyebrow color', 'agency-elementor-widgets' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#AA7D44',
+				'selectors' => [
+					'{{WRAPPER}}' => '--aew-galv2-eyebrow: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
