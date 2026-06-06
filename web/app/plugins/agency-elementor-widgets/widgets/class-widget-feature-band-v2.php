@@ -340,7 +340,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_control( 'heading_color', [
 			'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#FFFFFF',
+			'default'   => '#2A4F41',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fbv2-heading: {{VALUE}};' ],
 		] );
 
@@ -365,7 +365,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_control( 'step_title_color', [
 			'label'     => esc_html__( 'Step title color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#FFFFFF',
+			'default'   => '#141C19',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fbv2-step-title: {{VALUE}};' ],
 		] );
 
@@ -384,7 +384,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_control( 'step_text_color', [
 			'label'     => esc_html__( 'Step description color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '#3B413F',
 			'separator' => 'before',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fbv2-step-text: {{VALUE}};' ],
 		] );
@@ -449,7 +449,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_control( 'sec_color', [
 			'label'     => esc_html__( 'Border & text color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#FFFFFF',
+			'default'   => '#AA7D44',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fbv2-sec-color: {{VALUE}};' ],
 		] );
 		$this->add_control( 'sec_bg_hover', [
