@@ -50,25 +50,24 @@
   width: 100%;
   background-color: var(--notched-secondary-bg);
   background-image: var(--aew-fbv2-image);
-  /* Parallax: the image is sized a little TALLER than the band so it has room
-     to pan vertically. --aew-fbv2-pan (0→1, written by feature-band-v2.js on
-     scroll) drives background-position-y across that extra height. Default 0.5
-     = centred when JS is off / reduced-motion. */
-  background-size: var(--aew-fbv2-bg-size, cover);
-  background-position: center calc(var(--aew-fbv2-pan, 0.5) * 100%);
+  background-size: cover;
+  background-position: center center;
   background-repeat: no-repeat;
-  transition: background-position 0.08s linear;
 }
 
-/* When parallax is ON, oversize the image vertically so there's travel room. */
+/* Parallax: oversize the image vertically (cover → 100% width × 160% height) so
+   there's real travel room, then feature-band-v2.js pans background-position-y
+   0→100% as the band scrolls through the viewport (set inline so it beats the
+   bg_position control rule). A short transition smooths the rAF steps. */
 .aew-fbv2--parallax {
-  --aew-fbv2-bg-size: auto 130%;
+  background-size: auto 160%;
+  transition: background-position 0.1s linear;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aew-fbv2 {
-    background-position: center center;
+  .aew-fbv2--parallax {
     background-size: cover;
+    background-position: center center !important;
     transition: none;
   }
 }

@@ -32,7 +32,10 @@
 			if (progress < 0) progress = 0;
 			else if (progress > 1) progress = 1;
 
-			band.style.setProperty('--aew-fbv2-pan', progress.toFixed(4));
+			// Write background-position-y DIRECTLY as an inline style so it beats
+			// the bg_position control's stylesheet rule (which would otherwise pin
+			// it to "center center"). 0→100% pans across the oversized image.
+			band.style.backgroundPositionY = (progress * 100).toFixed(2) + '%';
 		}
 	}
 
