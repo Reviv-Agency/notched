@@ -86,7 +86,9 @@
 }
 
 /* ── Banner image (fills the frame behind the card) ───────────────────────── */
-.aew-bhero__image {
+/* Selector raised to .aew-bhero img to outrank the theme's `.elementor img { height: auto }` */
+.aew-bhero .aew-bhero__image,
+.aew-bhero img.aew-bhero__image {
   position: absolute;
   inset: 0;
   z-index: 0;
