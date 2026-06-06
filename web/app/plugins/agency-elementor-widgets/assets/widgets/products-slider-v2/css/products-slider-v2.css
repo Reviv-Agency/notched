@@ -94,7 +94,7 @@
 /* ── Header row: heading + (difficulty + Shop-all CTA) ─────────────────────── */
 .aew-prsv2__head {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 24px;
   margin-bottom: 32px;
@@ -277,6 +277,7 @@
 }
 
 .aew-prsv2__media {
+  position: relative;          /* anchor for the Quick View band */
   display: block;
   width: 100%;
   /* Default to a square image. The optional "Image height" control overrides
@@ -289,6 +290,47 @@
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
+}
+
+/* ── Quick View band ─────────────────────────────────────────────────────────
+   Sits over the bottom of the image. Hidden (slid down + faded) by default;
+   slides up + fades in when the card is hovered. */
+.aew-prsv2__quick {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+  padding: 18px 16px 16px;
+  background-color: var(--aew-prsv2-qv-bg, var(--notched-cta));
+  color: var(--aew-prsv2-qv-text, #FFFFFF);
+  font-family: var(--aew-teko, 'Teko', sans-serif);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  pointer-events: none; /* the card link handles the click */
+}
+
+.aew-prsv2__card:hover .aew-prsv2__quick,
+.aew-prsv2__card:focus-visible .aew-prsv2__quick {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Touch devices can't hover — show the band by default there. */
+@media (hover: none) {
+  .aew-prsv2__quick {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .aew-prsv2__title {

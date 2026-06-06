@@ -389,6 +389,39 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-price: {{VALUE}};' ],
 			'condition' => [ 'show_price' => 'yes' ],
 		] );
+
+		// ── Quick View band (revealed on hover, over the bottom of the image) ──
+		$this->add_control( 'quick_view_heading', [
+			'label'     => 'Quick View',
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_control( 'show_quick_view', [
+			'label'   => 'Show Quick View on hover',
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => 'yes',
+		] );
+		$this->add_control( 'quick_view_text', [
+			'label'     => 'Quick View label',
+			'type'      => Controls_Manager::TEXT,
+			'default'   => 'Quick View',
+			'condition' => [ 'show_quick_view' => 'yes' ],
+		] );
+		$this->add_control( 'quick_view_bg', [
+			'label'     => 'Quick View background',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#AA7D44',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-qv-bg: {{VALUE}};' ],
+			'condition' => [ 'show_quick_view' => 'yes' ],
+		] );
+		$this->add_control( 'quick_view_color', [
+			'label'     => 'Quick View text color',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#FFFFFF',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-qv-text: {{VALUE}};' ],
+			'condition' => [ 'show_quick_view' => 'yes' ],
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -500,6 +533,13 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$show_price   = 'yes' === ( $s['show_price'] ?? 'yes' );
 		$price_prefix = (string) ( $s['price_prefix'] ?? '' );
 
+		// Quick View band: default ON for saved instances that predate the control.
+		$show_quick_view = 'yes' === ( $s['show_quick_view'] ?? 'yes' );
+		$quick_view_text = (string) ( $s['quick_view_text'] ?? '' );
+		if ( '' === trim( $quick_view_text ) ) {
+			$quick_view_text = esc_html__( 'Quick View', 'agency-elementor-widgets' );
+		}
+
 		$subtext           = (string) ( $s['subtext'] ?? '' );
 		$difficulty        = trim( (string) ( $s['difficulty'] ?? '' ) );
 		$difficulty_prefix = (string) ( $s['difficulty_prefix'] ?? '' );
@@ -601,6 +641,9 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 										<span class="aew-prsv2__media"<?php echo $p['img'] ? ' style="background-image:url(\'' . esc_url( $p['img'] ) . '\');"' : ''; ?>
 											role="img"
 											aria-label="<?php echo esc_attr( $p['title'] ); ?>">
+											<?php if ( $show_quick_view ) : ?>
+												<span class="aew-prsv2__quick" aria-hidden="true"><?php echo esc_html( $quick_view_text ); ?></span>
+											<?php endif; ?>
 										</span>
 										<span class="aew-prsv2__title"><?php echo esc_html( $p['title'] ); ?></span>
 										<?php if ( $show_price && '' !== $p['price'] ) : ?>
