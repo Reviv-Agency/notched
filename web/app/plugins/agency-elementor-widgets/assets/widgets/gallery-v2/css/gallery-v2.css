@@ -224,12 +224,8 @@
 		padding-right: 16px;
 	}
 
-	/* Phones only: stack the heading and CTA (button goes full-width below the
-	   heading). Tablet keeps them inline via the base nowrap rule. */
 	.aew-galv2__header {
 		margin-bottom: 24px;
-		flex-direction: column;
-		align-items: flex-start;
 	}
 
 	.aew-galv2 .aew-galv2__heading {
@@ -283,6 +279,15 @@
 	color: #FFFFFF;
 }
 
-@media (max-width: 768px) {
-	.aew-galv2__cta { width: 100%; }
+/* Small phones only (≤480px): stack the heading + CTA and make the button
+   full-width. Tablets and larger phones (481px+) keep the CTA inline beside the
+   heading like desktop. */
+@media (max-width: 480px) {
+	.aew-galv2__header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.aew-galv2__cta {
+		width: 100%;
+	}
 }
