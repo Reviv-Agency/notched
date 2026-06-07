@@ -69,13 +69,18 @@
 }
 
 /* ── Section header (heading left, pill button right) ────────────────────── */
+/* The Header alignment control sets --aew-frv2-header-align (left|center|right).
+   Default keeps the classic split (heading left, button right). When set, the
+   header's items align to that side — so a heading-only header can be centered
+   even without a button. justify-content accepts left/center/right for flex. */
 .aew-frv2__header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: var(--aew-frv2-header-align, space-between);
   gap: 24px;
   margin-bottom: 48px;
 }
+
 
 /* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) (gotcha #20). */
 .aew-frv2 .aew-frv2__heading {
@@ -86,6 +91,9 @@
   font-size: 64px;
   line-height: 85%;
   text-transform: uppercase;
+  /* Follow the Header alignment control (var cascades from __header). Falls
+     back to left. Maps left|center|right directly to text-align. */
+  text-align: var(--aew-frv2-header-align, left);
 }
 
 .aew-frv2__header-btn {

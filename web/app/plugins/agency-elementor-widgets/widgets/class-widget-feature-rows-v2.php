@@ -88,6 +88,24 @@ class Widget_Feature_Rows_V2 extends Widget_Base {
 			'description'  => esc_html__( 'Heading on the left, optional button on the right, above the grid.', 'agency-elementor-widgets' ),
 		] );
 
+		$this->add_control( 'header_align', [
+			'label'     => esc_html__( 'Header alignment', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::CHOOSE,
+			'default'   => 'left',
+			'options'   => [
+				'left'   => [ 'title' => esc_html__( 'Left', 'agency-elementor-widgets' ),   'icon' => 'eicon-text-align-left' ],
+				'center' => [ 'title' => esc_html__( 'Center', 'agency-elementor-widgets' ), 'icon' => 'eicon-text-align-center' ],
+				'right'  => [ 'title' => esc_html__( 'Right', 'agency-elementor-widgets' ),  'icon' => 'eicon-text-align-right' ],
+			],
+			'description' => esc_html__( 'Centers the heading (and button, if any). Useful for a centered heading-only header.', 'agency-elementor-widgets' ),
+			// Drive one var; the CSS maps it → justify-content + text-align. Value
+			// is left|center|right so text-align is valid as-is.
+			'selectors' => [
+				'{{WRAPPER}} .aew-frv2__header' => '--aew-frv2-header-align: {{VALUE}};',
+			],
+			'condition' => [ 'show_header' => 'yes' ],
+		] );
+
 		$this->add_control( 'heading', [
 			'label'     => esc_html__( 'Heading', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::TEXTAREA,
