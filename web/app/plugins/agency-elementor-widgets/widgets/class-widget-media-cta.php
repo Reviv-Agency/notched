@@ -362,9 +362,9 @@ class Widget_Media_Cta extends Widget_Base {
 		$this->add_responsive_control(
 			'image_height',
 			[
-				'label'      => esc_html__( 'Image height (stacked layouts)', 'agency-elementor-widgets' ),
+				'label'      => esc_html__( 'Image height', 'agency-elementor-widgets' ),
 				'description' => esc_html__(
-					'On desktop, image height matches the text panel automatically.',
+					'Fixed image height (desktop, tablet and mobile). The photo crops to fit (cover); the text panel sizes to its own content.',
 					'agency-elementor-widgets'
 				),
 				'type'       => Controls_Manager::SLIDER,

@@ -221,13 +221,19 @@
 	}
 
 	/* Adjustable split: image width is the --aew-media-cta-image-width % (default
-	   50%); the text panel fills the remaining width (minus the 20px row gap). */
+	   50%); the text panel fills the remaining width (minus the 20px row gap).
+	   The image height is CAPPED (default 560px) so a tall/portrait photo can't
+	   blow the row up on wide screens — object-fit:cover crops to the cap. The
+	   panel then sizes to its own content rather than being dragged taller by the
+	   image. If the panel happens to be taller, the image stretches to match
+	   (align-items:stretch) but never past the cap. */
 	.aew-media-cta__media {
 		flex: 0 0 var(--aew-media-cta-image-width, 50%);
 		width: var(--aew-media-cta-image-width, 50%);
 		max-width: var(--aew-media-cta-image-width, 50%);
-		height: auto;
-		min-height: 100%;
+		height: var(--aew-media-cta-image-height, 500px);
+		max-height: var(--aew-media-cta-image-height, 500px);
+		align-self: center;   /* don't let the row stretch the image past its set height */
 	}
 
 	.aew-media-cta__panel {
