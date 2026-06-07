@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
+use Elementor\Repeater;
 use Elementor\Widget_Base;
 
 class Widget_Cta_Banner_V2 extends Widget_Base {
@@ -108,24 +109,68 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 	}
 
 	private function controls_button(): void {
-		$this->start_controls_section( 's_button', [ 'label' => esc_html__( 'Button', 'agency-elementor-widgets' ) ] );
+		$this->start_controls_section( 's_button', [ 'label' => esc_html__( 'Buttons', 'agency-elementor-widgets' ) ] );
 
-		$this->add_control( 'button_text', [
+		$repeater = new Repeater();
+
+		$repeater->add_control( 'text', [
 			'label'   => esc_html__( 'Button text', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::TEXT,
 			'default' => esc_html__( 'Schedule a Free Consultation', 'agency-elementor-widgets' ),
 		] );
 
-		$this->add_control( 'button_link', [
+		$repeater->add_control( 'link', [
 			'label'   => esc_html__( 'Button link', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::URL,
 			'default' => [ 'url' => '#' ],
 		] );
 
-		$this->add_control( 'button_arrow', [
+		$repeater->add_control( 'style', [
+			'label'   => esc_html__( 'Style', 'agency-elementor-widgets' ),
+			'type'    => Controls_Manager::SELECT,
+			'default' => 'primary',
+			'options' => [
+				'primary'   => esc_html__( 'Primary (filled)', 'agency-elementor-widgets' ),
+				'secondary' => esc_html__( 'Secondary (outline)', 'agency-elementor-widgets' ),
+			],
+		] );
+
+		$repeater->add_control( 'arrow', [
 			'label'   => esc_html__( 'Show arrow icon', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'yes',
+		] );
+
+		$this->add_control( 'buttons', [
+			'label'       => esc_html__( 'Buttons', 'agency-elementor-widgets' ),
+			'type'        => Controls_Manager::REPEATER,
+			'fields'      => $repeater->get_controls(),
+			'default'     => [
+				[
+					'text'  => esc_html__( 'Schedule a Free Consultation', 'agency-elementor-widgets' ),
+					'link'  => [ 'url' => '#' ],
+					'style' => 'primary',
+					'arrow' => 'yes',
+				],
+			],
+			'title_field' => '{{{ text }}}',
+		] );
+
+		// ── Legacy single-button controls (hidden) ──────────────────────────────
+		// Older saved pages stored a single button via these keys. They stay
+		// registered (hidden) so existing instances keep rendering; render()
+		// falls back to them only when the `buttons` repeater is empty.
+		$this->add_control( 'button_text', [
+			'type'        => Controls_Manager::HIDDEN,
+			'default'     => '',
+		] );
+		$this->add_control( 'button_link', [
+			'type'        => Controls_Manager::HIDDEN,
+			'default'     => [ 'url' => '' ],
+		] );
+		$this->add_control( 'button_arrow', [
+			'type'        => Controls_Manager::HIDDEN,
+			'default'     => '',
 		] );
 
 		$this->end_controls_section();
@@ -301,6 +346,40 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-btn-text-hover: {{VALUE}};' ],
 		] );
 
+		// ── Secondary (outline) button colours ───────────────────────────────
+		// Used by any repeater button whose Style = Secondary. Defaults to the
+		// design-system outline-on-light pattern, but fully editable — set the
+		// background to make it look identical to the primary if you want.
+		$this->add_control( 'btn2_heading', [
+			'label'     => esc_html__( 'Secondary (outline) button', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_control( 'btn2_bg', [
+			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => 'rgba(0,0,0,0)',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-btn2-bg: {{VALUE}};' ],
+		] );
+		$this->add_control( 'btn2_text', [
+			'label'     => esc_html__( 'Text / border color', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#876137',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-btn2-text: {{VALUE}};' ],
+		] );
+		$this->add_control( 'btn2_bg_hover', [
+			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#876137',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-btn2-bg-hover: {{VALUE}};' ],
+		] );
+		$this->add_control( 'btn2_text_hover', [
+			'label'     => esc_html__( 'Text color (hover)', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#FFFFFF',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-btn2-text-hover: {{VALUE}};' ],
+		] );
+
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'      => 'btn_typo',
 			'label'     => esc_html__( 'Button typography', 'agency-elementor-widgets' ),
@@ -341,11 +420,38 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 		$allowed_tags = [ 'h1', 'h2', 'h3' ];
 		$tag          = in_array( $s['headline_tag'] ?? 'h2', $allowed_tags, true ) ? $s['headline_tag'] : 'h2';
 
-		$button_text = (string) ( $s['button_text'] ?? '' );
-		$button      = $this->parse_link( $s['button_link'] ?? [] );
-		$show_arrow  = 'yes' === ( $s['button_arrow'] ?? 'yes' );
+		// Normalise the button list: prefer the repeater; fall back to the legacy
+		// single-button keys for pages saved before the repeater existed.
+		$buttons = [];
+		$repeater = $s['buttons'] ?? [];
+		if ( is_array( $repeater ) && ! empty( $repeater ) ) {
+			foreach ( $repeater as $b ) {
+				$txt = (string) ( $b['text'] ?? '' );
+				$lnk = $this->parse_link( $b['link'] ?? [] );
+				if ( '' === trim( $txt ) || '' === $lnk['url'] ) {
+					continue;
+				}
+				$buttons[] = [
+					'text'  => $txt,
+					'link'  => $lnk,
+					'style' => 'secondary' === ( $b['style'] ?? 'primary' ) ? 'secondary' : 'primary',
+					'arrow' => 'yes' === ( $b['arrow'] ?? 'yes' ),
+				];
+			}
+		} else {
+			$legacy_text = (string) ( $s['button_text'] ?? '' );
+			$legacy_link = $this->parse_link( $s['button_link'] ?? [] );
+			if ( '' !== trim( $legacy_text ) && '' !== $legacy_link['url'] ) {
+				$buttons[] = [
+					'text'  => $legacy_text,
+					'link'  => $legacy_link,
+					'style' => 'primary',
+					'arrow' => 'yes' === ( $s['button_arrow'] ?? 'yes' ),
+				];
+			}
+		}
 
-		$has_button = '' !== $button_text && '' !== $button['url'];
+		$has_button = ! empty( $buttons );
 
 		// Nothing to show — bail so an empty card doesn't render.
 		if ( '' === $eyebrow && '' === $headline && '' === $description && ! $has_button ) {
@@ -370,6 +476,10 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 				'btn_text'          => '--aew-ctab-btn-text',
 				'btn_bg_hover'      => '--aew-ctab-btn-bg-hover',
 				'btn_text_hover'    => '--aew-ctab-btn-text-hover',
+				'btn2_bg'           => '--aew-ctab-btn2-bg',
+				'btn2_text'         => '--aew-ctab-btn2-text',
+				'btn2_bg_hover'     => '--aew-ctab-btn2-bg-hover',
+				'btn2_text_hover'   => '--aew-ctab-btn2-text-hover',
 			]
 		);
 		if ( '' !== $color_vars ) {
@@ -407,18 +517,20 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 
 						<?php if ( $has_button ) : ?>
 							<div class="aew-ctab__actions">
-								<a class="aew-ctab__btn"
-									href="<?php echo esc_url( $button['url'] ); ?>"
-									<?php echo $button['target'] ? 'target="' . esc_attr( $button['target'] ) . '"' : ''; ?>
-									<?php echo $button['rel'] ? 'rel="' . esc_attr( $button['rel'] ) . '"' : ''; ?>>
-									<span class="aew-ctab__btn-label"><?php echo esc_html( $button_text ); ?></span>
-									<?php if ( $show_arrow ) : ?>
-										<svg class="aew-ctab__btn-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-											<line x1="4" y1="12" x2="19" y2="12"></line>
-											<polyline points="13 6 19 12 13 18"></polyline>
-										</svg>
-									<?php endif; ?>
-								</a>
+								<?php foreach ( $buttons as $btn ) : ?>
+									<a class="aew-ctab__btn aew-ctab__btn--<?php echo esc_attr( $btn['style'] ); ?>"
+										href="<?php echo esc_url( $btn['link']['url'] ); ?>"
+										<?php echo $btn['link']['target'] ? 'target="' . esc_attr( $btn['link']['target'] ) . '"' : ''; ?>
+										<?php echo $btn['link']['rel'] ? 'rel="' . esc_attr( $btn['link']['rel'] ) . '"' : ''; ?>>
+										<span class="aew-ctab__btn-label"><?php echo esc_html( $btn['text'] ); ?></span>
+										<?php if ( $btn['arrow'] ) : ?>
+											<svg class="aew-ctab__btn-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+												<line x1="4" y1="12" x2="19" y2="12"></line>
+												<polyline points="13 6 19 12 13 18"></polyline>
+											</svg>
+										<?php endif; ?>
+									</a>
+								<?php endforeach; ?>
 							</div>
 						<?php endif; ?>
 
