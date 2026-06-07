@@ -312,6 +312,30 @@
   overflow: hidden;
 }
 
+/* ── Corner category badge ───────────────────────────────────────────────────
+   Pill in the top-left of the image (e.g. DIY KIT / TRADITIONAL). Text comes
+   from the product's category; colours/radius/typography are control-driven. */
+.aew-prsv2__badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px 6px;       /* optical: Teko sits slightly low */
+  border-radius: 8px;
+  background-color: var(--aew-prsv2-badge-bg, var(--notched-cta));
+  color: var(--aew-prsv2-badge-text, #FFFFFF);
+  font-family: var(--aew-teko, 'Teko', sans-serif);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  pointer-events: none;        /* the card link handles the click */
+  white-space: nowrap;
+}
+
 /* ── Quick View band ─────────────────────────────────────────────────────────
    Sits over the bottom of the image. Hidden (slid down + faded) by default;
    slides up + fades in when the card is hovered. */

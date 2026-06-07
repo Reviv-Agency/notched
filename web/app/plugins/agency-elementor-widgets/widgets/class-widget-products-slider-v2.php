@@ -411,6 +411,55 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 			'condition' => [ 'show_price' => 'yes' ],
 		] );
 
+		// ── Corner badge (top-left of the image; text = product category) ─────
+		$this->add_control( 'badge_heading', [
+			'label'     => 'Corner badge',
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+		$this->add_control( 'show_badge', [
+			'label'       => 'Show category badge',
+			'type'        => Controls_Manager::SWITCHER,
+			'default'     => '',
+			'description' => 'Shows each product’s category (e.g. DIY KIT, TRADITIONAL) as a pill in the top-left corner of the image.',
+		] );
+		$this->add_control( 'badge_bg', [
+			'label'     => 'Badge background',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#AA7D44',
+			'condition' => [ 'show_badge' => 'yes' ],
+			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-badge-bg: {{VALUE}};' ],
+		] );
+		$this->add_control( 'badge_text_color', [
+			'label'     => 'Badge text color',
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#FFFFFF',
+			'condition' => [ 'show_badge' => 'yes' ],
+			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-badge-text: {{VALUE}};' ],
+		] );
+		$this->add_control( 'badge_radius', [
+			'label'      => 'Badge corner radius',
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [ 'px' => [ 'min' => 0, 'max' => 40 ] ],
+			'default'    => [ 'unit' => 'px', 'size' => 8 ],
+			'condition'  => [ 'show_badge' => 'yes' ],
+			'selectors'  => [ '{{WRAPPER}} .aew-prsv2__badge' => 'border-radius: {{SIZE}}{{UNIT}};' ],
+		] );
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'      => 'badge_typo',
+			'label'     => 'Badge typography',
+			'selector'  => '{{WRAPPER}} .aew-prsv2__badge',
+			'condition' => [ 'show_badge' => 'yes' ],
+			'fields_options' => [
+				'font_family'    => [ 'default' => 'Teko' ],
+				'font_weight'    => [ 'default' => '600' ],
+				'font_size'      => [ 'default' => [ 'unit' => 'px', 'size' => 18 ] ],
+				'letter_spacing' => [ 'default' => [ 'unit' => 'px', 'size' => 0.5 ] ],
+				'text_transform' => [ 'default' => 'uppercase' ],
+			],
+		] );
+
 		// ── Quick View band (revealed on hover, over the bottom of the image) ──
 		$this->add_control( 'quick_view_heading', [
 			'label'     => 'Quick View',
@@ -555,6 +604,9 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$show_price   = 'yes' === ( $s['show_price'] ?? 'yes' );
 		$price_prefix = (string) ( $s['price_prefix'] ?? '' );
 
+		// Corner category badge: default OFF (opt-in).
+		$show_badge = 'yes' === ( $s['show_badge'] ?? '' );
+
 		// Quick View band: default ON for saved instances that predate the control.
 		$show_quick_view = 'yes' === ( $s['show_quick_view'] ?? 'yes' );
 		$quick_view_text = (string) ( $s['quick_view_text'] ?? '' );
@@ -585,6 +637,8 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 				'difficulty_value_color' => '--aew-prsv2-difficulty-value',
 				'difficulty_dot_color'   => '--aew-prsv2-difficulty-dot',
 				'title_color'            => '--aew-prsv2-title',
+				'badge_bg'         => '--aew-prsv2-badge-bg',
+				'badge_text_color' => '--aew-prsv2-badge-text',
 				'price_color'      => '--aew-prsv2-price',
 				'arrow_bg'         => '--aew-prsv2-arrow-bg',
 				'arrow_color'      => '--aew-prsv2-arrow-color',
@@ -665,6 +719,9 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 										<span class="aew-prsv2__media"<?php echo $p['img'] ? ' style="background-image:url(\'' . esc_url( $p['img'] ) . '\');"' : ''; ?>
 											role="img"
 											aria-label="<?php echo esc_attr( $p['title'] ); ?>">
+											<?php if ( $show_badge && '' !== ( $p['badge'] ?? '' ) ) : ?>
+												<span class="aew-prsv2__badge"><?php echo esc_html( $p['badge'] ); ?></span>
+											<?php endif; ?>
 											<?php if ( $show_quick_view ) : ?>
 												<span class="aew-prsv2__quick" aria-hidden="true"><?php echo esc_html( $quick_view_text ); ?></span>
 											<?php endif; ?>
@@ -780,6 +837,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 				'url'   => get_permalink( $id ),
 				'img'   => $img ? $img : '',
 				'price' => $this->format_price( $product->get_price() ),
+				'badge' => $this->product_badge( $id ),
 			];
 		}
 		return $out;
@@ -819,6 +877,30 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 			}
 		}
 		return $slugs;
+	}
+
+	/**
+	 * Corner badge text for a product = its primary (first) product category
+	 * name, excluding the catch-all "Uncategorized". Returns '' when none.
+	 *
+	 * @param int $product_id
+	 * @return string
+	 */
+	private function product_badge( int $product_id ): string {
+		$terms = get_the_terms( $product_id, 'product_cat' );
+		if ( ! is_array( $terms ) || empty( $terms ) ) {
+			return '';
+		}
+		foreach ( $terms as $t ) {
+			if ( ! is_object( $t ) || empty( $t->name ) ) {
+				continue;
+			}
+			if ( 'uncategorized' === ( $t->slug ?? '' ) ) {
+				continue;
+			}
+			return (string) $t->name;
+		}
+		return '';
 	}
 
 	/**
