@@ -179,7 +179,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 				'label'       => esc_html__( 'Heading — second-colour text', 'agency-elementor-widgets' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
-				'description' => esc_html__( 'Optional. Type the part of the heading that should use the accent colour (e.g. “FOR A TIMELESS LOOK”). It must appear exactly in the heading above. Leave empty for a single-colour heading.', 'agency-elementor-widgets' ),
+				'description' => esc_html__( 'Optional second colour for the heading. If this text is part of the heading above, that part is recoloured; otherwise it is added after the heading in the accent colour. Leave empty for a single-colour heading.', 'agency-elementor-widgets' ),
 			]
 		);
 
@@ -689,13 +689,18 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 	}
 
 	/**
-	 * Build the heading HTML, wrapping an optional accent substring in a span so
-	 * it can take the second colour. The match is case-insensitive on the first
-	 * occurrence; everything stays escaped. Falls back to the plain heading when
-	 * the accent text is empty or not found.
+	 * Build the heading HTML, colouring the optional accent text with the second
+	 * colour. Two behaviours, so the field "just works" either way:
+	 *   1. If the accent text is a substring of the heading, that part is wrapped
+	 *      in place (e.g. heading "TRADITIONAL TIMBER KITS FOR A TIMELESS LOOK"
+	 *      + accent "FOR A TIMELESS LOOK").
+	 *   2. If the accent text is NOT in the heading, it is APPENDED after the
+	 *      heading in the accent colour (e.g. heading "TRADITIONAL TIMBER KITS"
+	 *      + accent "FOR A TIMELESS LOOK" → both render, accent in green).
+	 * Match is case-insensitive; everything stays escaped.
 	 *
 	 * @param string $heading Full heading text.
-	 * @param string $accent  Substring to colour with the accent colour.
+	 * @param string $accent  Text to colour with the accent colour.
 	 * @return string Escaped HTML for inside the <h3>.
 	 */
 	private function heading_html( string $heading, string $accent ): string {
@@ -706,8 +711,11 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 
 		$pos = stripos( $heading, $accent );
 		if ( false === $pos ) {
-			// Accent text not present in the heading — render plain.
-			return esc_html( $heading );
+			// Accent text not inside the heading → append it in the accent colour.
+			$sep = '' === trim( $heading ) ? '' : ' ';
+			return esc_html( $heading )
+				. $sep
+				. '<span class="aew-rgcv2__title-accent">' . esc_html( $accent ) . '</span>';
 		}
 
 		$len    = strlen( $accent );
