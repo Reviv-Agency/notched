@@ -143,6 +143,13 @@
   color: var(--aew-rgcv2-title, var(--notched-secondary-bg));
 }
 
+/* Optional two-colour heading: the accent substring is wrapped in this span and
+   takes the second colour. Inherits all type styles from the title. (0,2,0)
+   beats the kit so the colour holds. */
+.aew-rgcv2 .aew-rgcv2__title-accent {
+  color: var(--aew-rgcv2-title-accent, var(--notched-secondary-bg));
+}
+
 /* ── Paragraph ───────────────────────────────────────────────────────────── */
 .aew-rgcv2__text {
   margin: 0 0 24px;

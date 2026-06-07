@@ -174,6 +174,16 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 		);
 
 		$repeater->add_control(
+			'heading_accent',
+			[
+				'label'       => esc_html__( 'Heading — second-colour text', 'agency-elementor-widgets' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'description' => esc_html__( 'Optional. Type the part of the heading that should use the accent colour (e.g. “FOR A TIMELESS LOOK”). It must appear exactly in the heading above. Leave empty for a single-colour heading.', 'agency-elementor-widgets' ),
+			]
+		);
+
+		$repeater->add_control(
 			'paragraph',
 			[
 				'label'   => esc_html__( 'Paragraph', 'agency-elementor-widgets' ),
@@ -447,9 +457,22 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#2A4F41',
+				'default'   => '#AA7D44',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-rgcv2-title: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'heading_accent_color',
+			[
+				'label'       => esc_html__( 'Second colour (accent)', 'agency-elementor-widgets' ),
+				'type'        => Controls_Manager::COLOR,
+				'default'     => '#2A4F41',
+				'description' => esc_html__( 'Colour applied to each panel’s “second-colour text”.', 'agency-elementor-widgets' ),
+				'selectors'   => [
+					'{{WRAPPER}}' => '--aew-rgcv2-title-accent: {{VALUE}};',
 				],
 			]
 		);
@@ -666,6 +689,38 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 	}
 
 	/**
+	 * Build the heading HTML, wrapping an optional accent substring in a span so
+	 * it can take the second colour. The match is case-insensitive on the first
+	 * occurrence; everything stays escaped. Falls back to the plain heading when
+	 * the accent text is empty or not found.
+	 *
+	 * @param string $heading Full heading text.
+	 * @param string $accent  Substring to colour with the accent colour.
+	 * @return string Escaped HTML for inside the <h3>.
+	 */
+	private function heading_html( string $heading, string $accent ): string {
+		$accent = trim( $accent );
+		if ( '' === $accent ) {
+			return esc_html( $heading );
+		}
+
+		$pos = stripos( $heading, $accent );
+		if ( false === $pos ) {
+			// Accent text not present in the heading — render plain.
+			return esc_html( $heading );
+		}
+
+		$len    = strlen( $accent );
+		$before = substr( $heading, 0, $pos );
+		$match  = substr( $heading, $pos, $len );  // preserve the heading's own casing
+		$after  = substr( $heading, $pos + $len );
+
+		return esc_html( $before )
+			. '<span class="aew-rgcv2__title-accent">' . esc_html( $match ) . '</span>'
+			. esc_html( $after );
+	}
+
+	/**
 	 * @return void
 	 */
 	protected function render(): void {
@@ -689,9 +744,10 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 			$this,
 			$s,
 			[
-				'card_bg'         => '--aew-rgcv2-card-bg',
-				'heading_color'   => '--aew-rgcv2-title',
-				'paragraph_color' => '--aew-rgcv2-text',
+				'card_bg'              => '--aew-rgcv2-card-bg',
+				'heading_color'        => '--aew-rgcv2-title',
+				'heading_accent_color' => '--aew-rgcv2-title-accent',
+				'paragraph_color'      => '--aew-rgcv2-text',
 				'btn_bg'          => '--aew-rgcv2-btn-bg',
 				'btn_bg_hover'    => '--aew-rgcv2-btn-bg-hover',
 				'btn_text_color'  => '--aew-rgcv2-btn-text',
@@ -714,6 +770,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 						}
 						$focal   = $panel['image_position'] ?? 'center center';
 						$heading = (string) ( $panel['heading'] ?? '' );
+						$accent  = (string) ( $panel['heading_accent'] ?? '' );
 						$text    = (string) ( $panel['paragraph'] ?? '' );
 						$btn_lbl = (string) ( $panel['btn_text'] ?? '' );
 						$link    = $this->parse_link( $panel['btn_link'] ?? [] );
@@ -728,7 +785,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 							<div class="aew-rgcv2__media" role="img" aria-label="<?php echo esc_attr( $heading ); ?>"></div>
 							<div class="aew-rgcv2__card">
 								<?php if ( '' !== $heading ) : ?>
-									<h3 class="aew-rgcv2__title"><?php echo esc_html( $heading ); ?></h3>
+									<h3 class="aew-rgcv2__title"><?php echo $this->heading_html( $heading, $accent ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped — escaped inside helper ?></h3>
 								<?php endif; ?>
 								<?php if ( '' !== trim( $text ) ) : ?>
 									<p class="aew-rgcv2__text"><?php echo esc_html( $text ); ?></p>
