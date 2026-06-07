@@ -407,10 +407,23 @@ class Widget_Footer_V2 extends Widget_Base {
 			]
 		);
 		$style_attr = '' !== $color_vars ? ' style="' . esc_attr( $color_vars ) . '"' : '';
+
+		/*
+		 * Per-page override for the top (forest) image. The footer is a single
+		 * global template, so its "Show top image" toggle is site-wide. To let
+		 * individual pages drop the image, we check the queried page's
+		 * `_aew_footer_hide_hero` meta — when truthy, the hero is suppressed on
+		 * that page only. The global toggle remains the default everywhere else.
+		 */
+		$show_hero = 'yes' === ( $s['show_hero'] ?? 'yes' );
+		$page_id   = (int) get_queried_object_id();
+		if ( $page_id && get_post_meta( $page_id, '_aew_footer_hide_hero', true ) ) {
+			$show_hero = false;
+		}
 		?>
 		<footer class="aew-fov2" data-aew-footer-v2<?php echo $style_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- value escaped via esc_attr above ?>>
 
-			<?php if ( 'yes' === ( $s['show_hero'] ?? 'yes' ) && $hero_url ) : ?>
+			<?php if ( $show_hero && $hero_url ) : ?>
 				<div class="aew-fov2__hero"
 					role="img"
 					aria-label="<?php echo esc_attr( $hero_alt ); ?>"
