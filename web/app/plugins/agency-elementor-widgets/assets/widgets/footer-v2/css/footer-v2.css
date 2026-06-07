@@ -99,6 +99,17 @@
   padding-bottom: 64px;
 }
 
+/* No top image (per-page or globally off): drop the -400px overlap that tucks
+   the columns into the hero — otherwise the body slides up and overlaps the
+   page content above the footer. Give the columns normal top padding instead,
+   on the dark footer wrapper background. */
+.aew-fov2--no-hero .aew-fov2__body {
+  margin-top: 0;
+}
+.aew-fov2--no-hero .aew-fov2__body-inner {
+  padding-top: 64px;
+}
+
 .aew-fov2__inner {
   max-width: 1440px;        /* content cap; X gutter on the inner (hero stays full-bleed) */
   margin: 0 auto;

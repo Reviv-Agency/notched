@@ -420,10 +420,16 @@ class Widget_Footer_V2 extends Widget_Base {
 		if ( $page_id && get_post_meta( $page_id, '_aew_footer_hide_hero', true ) ) {
 			$show_hero = false;
 		}
+		// The hero only actually renders when the toggle is on AND a URL exists.
+		// The body uses a big negative top margin to overlap into the hero — when
+		// there's no hero, add a modifier so the CSS drops that margin (otherwise
+		// the body slides up and overlaps the page content above the footer).
+		$has_hero  = $show_hero && '' !== $hero_url;
+		$foot_class = 'aew-fov2' . ( $has_hero ? '' : ' aew-fov2--no-hero' );
 		?>
-		<footer class="aew-fov2" data-aew-footer-v2<?php echo $style_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- value escaped via esc_attr above ?>>
+		<footer class="<?php echo esc_attr( $foot_class ); ?>" data-aew-footer-v2<?php echo $style_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- value escaped via esc_attr above ?>>
 
-			<?php if ( $show_hero && $hero_url ) : ?>
+			<?php if ( $has_hero ) : ?>
 				<div class="aew-fov2__hero"
 					role="img"
 					aria-label="<?php echo esc_attr( $hero_alt ); ?>"
