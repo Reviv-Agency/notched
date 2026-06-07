@@ -98,6 +98,17 @@
   padding: 48px;
 }
 
+/* ── Footnote (optional line below the cards, inside the box) ─────────────── */
+.aew-igv2 .aew-igv2__footnote {
+  margin: 32px 0 0;
+  text-align: center;
+  color: var(--aew-igv2-footnote, var(--notched-text, #141C19));
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+}
+
 /* ── Grid ────────────────────────────────────────────────────────────────── */
 .aew-igv2__grid {
   display: grid;
@@ -155,4 +166,5 @@
   .aew-igv2__card { padding: 24px 16px; border-radius: 20px; }
   .aew-igv2__icon { width: 56px; height: 56px; }
   .aew-igv2 .aew-igv2__heading { font-size: 32px; }
+  .aew-igv2 .aew-igv2__footnote { margin-top: 24px; font-size: 14px; }
 }

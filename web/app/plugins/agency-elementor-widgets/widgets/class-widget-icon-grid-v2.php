@@ -174,6 +174,14 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 			'title_field' => '{{{ title }}}',
 		] );
 
+		$this->add_control( 'footnote', [
+			'label'       => esc_html__( 'Footnote (optional)', 'agency-elementor-widgets' ),
+			'type'        => Controls_Manager::TEXTAREA,
+			'default'     => '',
+			'rows'        => 2,
+			'description' => esc_html__( 'A line of text shown below the cards, inside the cards box. Leave empty to hide.', 'agency-elementor-widgets' ),
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -352,6 +360,12 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 			'selectors'  => [ '{{WRAPPER}} .aew-igv2__card' => 'border-radius: {{SIZE}}{{UNIT}};' ],
 		] );
 
+		$this->add_control( 'footnote_color', [
+			'label'     => esc_html__( 'Footnote colour', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [ '{{WRAPPER}}' => '--aew-igv2-footnote: {{VALUE}};' ],
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -409,8 +423,9 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 				'eyebrow_color' => '--aew-igv2-eyebrow',
 				'heading_color' => '--aew-igv2-heading',
 				'card_bg'       => '--aew-igv2-card-bg',
-				'cards_box_bg'  => '--aew-igv2-cards-box-bg',
-				'title_color'   => '--aew-igv2-title',
+				'cards_box_bg'   => '--aew-igv2-cards-box-bg',
+				'title_color'    => '--aew-igv2-title',
+				'footnote_color' => '--aew-igv2-footnote',
 			]
 		);
 		if ( '' !== $color_vars ) {
@@ -455,6 +470,10 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 						</article>
 					<?php endforeach; ?>
 				</div>
+				<?php $footnote = (string) ( $s['footnote'] ?? '' ); ?>
+				<?php if ( '' !== trim( $footnote ) ) : ?>
+					<p class="aew-igv2__footnote"><?php echo esc_html( $footnote ); ?></p>
+				<?php endif; ?>
 				</div>
 			</div>
 		</section>
