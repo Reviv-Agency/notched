@@ -366,6 +366,17 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 			'selectors' => [ '{{WRAPPER}}' => '--aew-igv2-footnote: {{VALUE}};' ],
 		] );
 
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'           => 'footnote_typo',
+			'label'          => esc_html__( 'Footnote typography', 'agency-elementor-widgets' ),
+			'selector'       => '{{WRAPPER}} .aew-igv2__footnote',
+			'fields_options' => [
+				'typography'  => [ 'default' => 'custom' ],
+				'font_family' => [ 'default' => 'Lato' ],
+				'font_weight' => [ 'default' => '400' ],
+			],
+		] );
+
 		$this->end_controls_section();
 	}
 
