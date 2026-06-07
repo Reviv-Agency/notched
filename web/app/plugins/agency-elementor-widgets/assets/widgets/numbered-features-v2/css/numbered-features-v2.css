@@ -186,18 +186,20 @@
   .aew-nfv2 { padding-left: 16px; padding-right: 16px; }  /* X 16 mobile gutter */
   .aew-nfv2__inner { padding: 40px 0; }                   /* Y 40 mobile */
 
-  /* Stack: copy on top, features below, both full width. */
-  .aew-nfv2__layout { flex-direction: column; gap: 32px; }
+  /* Stack: copy on top, features below, both full width and CENTER-aligned. */
+  .aew-nfv2__layout { flex-direction: column; gap: 40px; }
   .aew-nfv2__copy {
     flex-basis: auto;
     max-width: 100%;
+    text-align: center;
   }
 
-  /* Single column of features on mobile. */
-  .aew-nfv2__grid { grid-template-columns: 1fr; gap: 28px; }
+  /* Keep features as a 2-up grid on mobile (1/2 on top, 3/4 below), centered. */
+  .aew-nfv2__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 24px; }
+  .aew-nfv2__item { align-items: center; text-align: center; }
 
   .aew-nfv2 .aew-nfv2__heading { font-size: 40px; }
-  .aew-nfv2 .aew-nfv2__intro { font-size: 14px; }
-  .aew-nfv2__badge { width: 44px; height: 44px; font-size: 22px; }
+  .aew-nfv2 .aew-nfv2__intro { font-size: 16px; }
+  .aew-nfv2__badge { width: 64px; height: 64px; font-size: 28px; }
   .aew-nfv2 .aew-nfv2__title { font-size: 22px; }
 }
