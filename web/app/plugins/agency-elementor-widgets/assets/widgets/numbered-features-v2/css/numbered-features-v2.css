@@ -1,0 +1,193 @@
+/* ============================================================================
+ * Numbered Features V2 — Notched
+ * A FULL-BLEED dark band: paper-texture background image with a deep-green
+ * (#093328) colour overlay, holding a two-column layout — COPY left (Teko
+ * heading + Lato intro) and a GRID of numbered features right (gold circle with
+ * a number above a gold uppercase title). The X gutter lives on the INNER so the
+ * textured background reaches the viewport edge; content caps at the 1440 rail.
+ * Desktop-first; step down at 1024 / 768.
+ * ========================================================================== */
+
+/* ── Brand tokens (scoped) — source of truth: design-system.md ───────────── */
+.aew-nfv2 {
+  --notched-cards:             #FFFFFF;
+  --notched-background:        #F6F0EC;
+  --notched-lines:             #BFC0BF;
+  --notched-misc-accent:       #3B413F;
+  --notched-secondary-cards:   #7D958D;
+  --notched-secondary-bg:      #2A4F41;
+  --notched-secondary-accent:  #093328;
+  --notched-text:              #141C19;
+  --notched-cta:               #AA7D44;
+  --notched-cta-hover:         #876137;
+  --notched-gold-light:        #CDB797;
+}
+
+/* Strip Elementor's column / container padding so the band is full-bleed. The
+   widget's own inner wrapper re-applies the max-width + responsive X padding. */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-numbered-features-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-numbered-features-v2),
+.e-con:has(.elementor-widget-agency-numbered-features-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+/* Defeat Elementor's boxed section width so the band goes edge-to-edge. The
+   inner wrapper keeps its own max-width + gutter, so only the band is full-bleed. */
+.elementor-section:has(.elementor-widget-agency-numbered-features-v2),
+.elementor-section:has(.elementor-widget-agency-numbered-features-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-numbered-features-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Full-bleed band ─────────────────────────────────────────────────────── */
+.aew-nfv2 {
+  position: relative;
+  width: 100%;
+  background-color: var(--aew-nfv2-band-bg, var(--notched-secondary-accent));
+  background-image: var(--aew-nfv2-image);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.aew-nfv2 *,
+.aew-nfv2 *::before,
+.aew-nfv2 *::after {
+  box-sizing: border-box;
+}
+
+/* Deep-green tint laid over the texture. Default #093328; user-overridable
+   (use rgba for partial transparency). */
+.aew-nfv2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--aew-nfv2-overlay, var(--notched-secondary-accent));
+  pointer-events: none;
+}
+
+/* ── Inner wrapper: full-bleed bg edge-to-edge; gutter + 1440 rail here ───── */
+.aew-nfv2__inner {
+  position: relative;
+  z-index: 1;            /* sit above the overlay */
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 96px 40px;    /* generous Y for this hero-style band; X gutter on inner */
+}
+
+/* ── Two-column layout: copy left, numbered grid right ───────────────────── */
+.aew-nfv2__layout {
+  --aew-nfv2-copy-width: 42%;
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+}
+
+.aew-nfv2__copy {
+  flex: 0 0 var(--aew-nfv2-copy-width);
+  max-width: var(--aew-nfv2-copy-width);
+}
+
+/* ── Heading (Teko, muted-teal default to match the Wix look) ────────────── */
+/* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) (gotcha #20). */
+.aew-nfv2 .aew-nfv2__heading {
+  margin: 0 0 24px;
+  color: var(--aew-nfv2-heading, var(--notched-secondary-cards));
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 85%;
+  text-transform: uppercase;
+}
+
+/* ── Intro paragraph (Lato, light cream on dark) ─────────────────────────── */
+.aew-nfv2 .aew-nfv2__intro {
+  margin: 0;
+  color: var(--aew-nfv2-intro, var(--notched-background));
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 150%;
+}
+
+/* ── Numbered features grid ──────────────────────────────────────────────── */
+.aew-nfv2__grid {
+  flex: 1 1 auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--aew-nfv2-cols, 2), minmax(0, 1fr));
+  gap: 56px 48px;
+}
+
+.aew-nfv2__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* ── Number badge (gold circle) ──────────────────────────────────────────── */
+.aew-nfv2__badge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: var(--aew-nfv2-badge-bg, var(--notched-secondary-cards));
+  color: var(--aew-nfv2-badge-text, var(--notched-secondary-accent));
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1;
+  padding-top: 4px;     /* optical centering for Teko's tall ascenders */
+}
+
+/* ── Feature title (Teko, gold) ──────────────────────────────────────────── */
+.aew-nfv2 .aew-nfv2__title {
+  margin: 0;
+  color: var(--aew-nfv2-title, var(--notched-gold-light));
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-nfv2__inner { padding: 64px 40px; }
+  .aew-nfv2__layout { gap: 48px; }
+  .aew-nfv2 .aew-nfv2__heading { font-size: 48px; }
+  .aew-nfv2__grid { gap: 40px 32px; }
+}
+
+@media (max-width: 768px) {
+  .aew-nfv2__inner { padding: 40px 16px; }   /* Y 40 / X 16 mobile */
+
+  /* Stack: copy on top, features below, both full width. */
+  .aew-nfv2__layout { flex-direction: column; gap: 32px; }
+  .aew-nfv2__copy {
+    flex-basis: auto;
+    max-width: 100%;
+  }
+
+  /* Single column of features on mobile. */
+  .aew-nfv2__grid { grid-template-columns: 1fr; gap: 28px; }
+
+  .aew-nfv2 .aew-nfv2__heading { font-size: 40px; }
+  .aew-nfv2 .aew-nfv2__intro { font-size: 14px; }
+  .aew-nfv2__badge { width: 44px; height: 44px; font-size: 22px; }
+  .aew-nfv2 .aew-nfv2__title { font-size: 22px; }
+}

@@ -403,6 +403,14 @@ final class Widget_Assets {
 				'style_deps' => [ 'aew-tokens' ],
 			]
 		);
+
+		self::register_widget(
+			'numbered-features-v2',
+			[
+				'style'      => 'css/numbered-features-v2.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
 	}
 
 	/**
