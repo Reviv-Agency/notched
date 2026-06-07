@@ -26,7 +26,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 	public function get_title(): string     { return esc_html__( 'Products Slider V2 (Notched)', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-media-carousel'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'products', 'slider', 'carousel', 'woocommerce', 'kits', 'notched' ]; }
+	public function get_keywords(): array   { return [ 'products', 'slider', 'carousel', 'grid', 'shop', 'woocommerce', 'kits', 'notched' ]; }
 
 	public function get_style_depends(): array  { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 	public function get_script_depends(): array { return [ Widget_Assets::handle( self::ASSET_SLUG ) ]; }
@@ -101,6 +101,27 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 
 	private function controls_source(): void {
 		$this->start_controls_section( 's_source', [ 'label' => 'Products' ] );
+
+		$this->add_control( 'layout', [
+			'label'   => 'Layout',
+			'type'    => Controls_Manager::SELECT,
+			'default' => 'slider',
+			'options' => [
+				'slider' => 'Slider (carousel)',
+				'grid'   => 'Grid (wrap, no carousel)',
+			],
+		] );
+
+		$this->add_responsive_control( 'grid_columns', [
+			'label'          => 'Grid columns',
+			'type'           => Controls_Manager::SELECT,
+			'default'        => '4',
+			'tablet_default' => '3',
+			'mobile_default' => '2',
+			'options'        => [ '2' => '2', '3' => '3', '4' => '4', '5' => '5' ],
+			'condition'      => [ 'layout' => 'grid' ],
+			'selectors'      => [ '{{WRAPPER}} .aew-prsv2__track' => '--aew-prsv2-grid-cols: {{VALUE}};' ],
+		] );
 
 		if ( ! self::woo_active() ) {
 			$this->add_control( 'woo_notice', [
@@ -505,6 +526,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$tag      = in_array( $s['heading_tag'] ?? 'h2', [ 'h2', 'h3', 'div' ], true ) ? $s['heading_tag'] : 'h2';
 		$products = $this->query_products( $s );
 		$new_tab  = 'yes' === ( $s['open_new_tab'] ?? '' );
+		$is_grid  = 'grid' === ( $s['layout'] ?? 'slider' );
 
 		$cta = $this->parse_link( $s['cta_link'] ?? [] );
 		// Fall back to the shop page when the link is empty so an enabled button
@@ -576,7 +598,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		);
 		$style_attr = '' !== $color_vars ? ' style="' . esc_attr( $color_vars ) . '"' : '';
 		?>
-		<section class="aew-prsv2" data-aew-products-slider-v2<?php echo $style_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- value escaped via esc_attr above ?>>
+		<section class="aew-prsv2<?php echo $is_grid ? ' aew-prsv2--grid' : ''; ?>" <?php echo $is_grid ? '' : 'data-aew-products-slider-v2'; ?><?php echo $style_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- value escaped via esc_attr above ?>>
 			<div class="aew-prsv2__inner">
 
 				<div class="aew-prsv2__head">
@@ -628,11 +650,13 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 					</p>
 				<?php else : ?>
 					<div class="aew-prsv2__viewport">
-						<button type="button" class="aew-prsv2__arrow aew-prsv2__arrow--prev" data-aew-prs-prev aria-label="<?php esc_attr_e( 'Previous products', 'agency-elementor-widgets' ); ?>">
-							<?php echo $this->arrow_svg( 'left' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						</button>
+						<?php if ( ! $is_grid ) : ?>
+							<button type="button" class="aew-prsv2__arrow aew-prsv2__arrow--prev" data-aew-prs-prev aria-label="<?php esc_attr_e( 'Previous products', 'agency-elementor-widgets' ); ?>">
+								<?php echo $this->arrow_svg( 'left' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							</button>
+						<?php endif; ?>
 
-						<ul class="aew-prsv2__track" data-aew-prs-track>
+						<ul class="aew-prsv2__track"<?php echo $is_grid ? '' : ' data-aew-prs-track'; ?>>
 							<?php foreach ( $products as $p ) : ?>
 								<li class="aew-prsv2__slide">
 									<a class="aew-prsv2__card"
@@ -654,12 +678,16 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 							<?php endforeach; ?>
 						</ul>
 
-						<button type="button" class="aew-prsv2__arrow aew-prsv2__arrow--next" data-aew-prs-next aria-label="<?php esc_attr_e( 'Next products', 'agency-elementor-widgets' ); ?>">
-							<?php echo $this->arrow_svg( 'right' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						</button>
+						<?php if ( ! $is_grid ) : ?>
+							<button type="button" class="aew-prsv2__arrow aew-prsv2__arrow--next" data-aew-prs-next aria-label="<?php esc_attr_e( 'Next products', 'agency-elementor-widgets' ); ?>">
+								<?php echo $this->arrow_svg( 'right' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							</button>
+						<?php endif; ?>
 					</div>
 
-					<div class="aew-prsv2__dots" data-aew-prs-dots aria-hidden="true"></div>
+					<?php if ( ! $is_grid ) : ?>
+						<div class="aew-prsv2__dots" data-aew-prs-dots aria-hidden="true"></div>
+					<?php endif; ?>
 				<?php endif; ?>
 
 			</div>

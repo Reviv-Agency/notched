@@ -622,7 +622,7 @@ button.aew-hv2__drawer-item-row {
 
 /* Hamburger right padding — tablet range (769–1024px): 10px. ≥1025px keeps the
    base padding:0. Prefix with .aew-hv2 (0,2,0) to beat the base toggle rule. */
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1023px) {
   .aew-hv2 .aew-hv2__toggle {
     padding-right: 10px;
   }
