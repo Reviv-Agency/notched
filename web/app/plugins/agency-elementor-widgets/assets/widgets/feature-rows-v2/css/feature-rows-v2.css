@@ -119,10 +119,21 @@
   color: var(--aew-frv2-hbtn-text-hover, var(--notched-secondary-accent));
 }
 
+/* Shared "target" arrow (same as media-cta). Path points left → flip forward. */
 .aew-frv2__header-btn-arrow {
-  flex: none;
-  width: 22px;
-  height: 14px;
+  flex: 0 0 auto;
+  width: 1.2em;
+  height: 1.2em;
+  margin-top: -2px;
+  transform: scaleX(-1);
+  transition: transform 0.18s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aew-frv2__header-btn:hover .aew-frv2__header-btn-arrow,
+  .aew-frv2__header-btn:focus-visible .aew-frv2__header-btn-arrow {
+    transform: scaleX(-1) translateX(3px);
+  }
 }
 
 /* ── Rows & items ────────────────────────────────────────────────────────── */

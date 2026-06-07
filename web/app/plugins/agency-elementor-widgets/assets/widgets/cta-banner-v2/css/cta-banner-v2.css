@@ -184,11 +184,23 @@
   border-color: var(--aew-ctab-btn2-bg-hover, var(--notched-cta-hover));
 }
 
+/* Shared "target" arrow (same as media-cta). The path points left, so flip it
+   with scaleX(-1) to point forward; nudge forward on hover. */
 .aew-ctab__btn-arrow {
   display: block;
-  width: 24px;
-  height: 24px;
-  flex: none;
+  flex: 0 0 auto;
+  width: 1.2em;
+  height: 1.2em;
+  margin-top: -2px;
+  transform: scaleX(-1);
+  transition: transform 0.18s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aew-ctab__btn:hover .aew-ctab__btn-arrow,
+  .aew-ctab__btn:focus-visible .aew-ctab__btn-arrow {
+    transform: scaleX(-1) translateX(3px);
+  }
 }
 
 /* ── Responsive: tablet / small desktop (≤1024px) ────────────────────────── */

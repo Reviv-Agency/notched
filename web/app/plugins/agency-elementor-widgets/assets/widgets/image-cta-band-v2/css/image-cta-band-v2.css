@@ -167,10 +167,21 @@
   color: var(--aew-icb-btn-text-hover, var(--aew-icb-btn-text, #FFFFFF));
 }
 
+/* Shared "target" arrow (same as media-cta). Path points left → flip forward. */
 .aew-icb__btn-arrow {
-  font-size: 18px;
-  line-height: 1;
-  transform: translateY(-1px);
+  flex: 0 0 auto;
+  width: 1.2em;
+  height: 1.2em;
+  margin-top: -2px;
+  transform: scaleX(-1);
+  transition: transform 0.18s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aew-icb__btn:hover .aew-icb__btn-arrow,
+  .aew-icb__btn:focus-visible .aew-icb__btn-arrow {
+    transform: scaleX(-1) translateX(3px);
+  }
 }
 
 /* ── Tablet ──────────────────────────────────────────────────────────────── */

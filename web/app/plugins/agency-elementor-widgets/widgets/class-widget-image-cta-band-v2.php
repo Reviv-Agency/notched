@@ -448,7 +448,7 @@ class Widget_Image_Cta_Band_V2 extends Widget_Base {
 								<?php echo $b['link']['rel'] ? 'rel="' . esc_attr( $b['link']['rel'] ) . '"' : ''; ?>>
 								<span class="aew-icb__btn-label"><?php echo esc_html( $b['btn_lbl'] ); ?></span>
 								<?php if ( $arrow ) : ?>
-									<span class="aew-icb__btn-arrow" aria-hidden="true">&rarr;</span>
+									<svg class="aew-icb__btn-arrow" viewBox="0 0 200 200" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M179.7 96.3H55.9c10.4-6 15.6-15.8 15.6-29.1h-7.3c0 7.2 0 28.9-43 29.1h-.9v7.3c43.2.2 43.2 22 43.2 29.1h7.3c0-13.4-5.3-23.1-15.8-29.1h124.6v-7.3z"/></svg>
 								<?php endif; ?>
 							</a>
 						<?php endif; ?>

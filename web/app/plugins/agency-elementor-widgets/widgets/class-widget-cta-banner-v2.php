@@ -524,10 +524,7 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 										<?php echo $btn['link']['rel'] ? 'rel="' . esc_attr( $btn['link']['rel'] ) . '"' : ''; ?>>
 										<span class="aew-ctab__btn-label"><?php echo esc_html( $btn['text'] ); ?></span>
 										<?php if ( $btn['arrow'] ) : ?>
-											<svg class="aew-ctab__btn-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-												<line x1="4" y1="12" x2="19" y2="12"></line>
-												<polyline points="13 6 19 12 13 18"></polyline>
-											</svg>
+											<svg class="aew-ctab__btn-arrow" viewBox="0 0 200 200" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M179.7 96.3H55.9c10.4-6 15.6-15.8 15.6-29.1h-7.3c0 7.2 0 28.9-43 29.1h-.9v7.3c43.2.2 43.2 22 43.2 29.1h7.3c0-13.4-5.3-23.1-15.8-29.1h124.6v-7.3z"></path></svg>
 										<?php endif; ?>
 									</a>
 								<?php endforeach; ?>
