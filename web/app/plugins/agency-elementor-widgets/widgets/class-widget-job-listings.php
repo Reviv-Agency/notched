@@ -75,6 +75,16 @@ class Widget_Job_Listings extends Widget_Base {
 			'options' => [ 'h2' => 'H2', 'h3' => 'H3', 'div' => 'div' ],
 		] );
 
+		$this->add_responsive_control( 'columns', [
+			'label'          => esc_html__( 'Columns', 'agency-elementor-widgets' ),
+			'type'           => Controls_Manager::SELECT,
+			'default'        => '2',
+			'tablet_default' => '2',
+			'mobile_default' => '1',
+			'options'        => [ '1' => '1', '2' => '2', '3' => '3' ],
+			'selectors'      => [ '{{WRAPPER}} .aew-jobs__list' => '--aew-jobs-cols: {{VALUE}};' ],
+		] );
+
 		$repeater = new Repeater();
 		$repeater->add_control( 'title', [
 			'label'   => esc_html__( 'Role title', 'agency-elementor-widgets' ),

@@ -22,16 +22,19 @@
 }
 
 .aew-jobs__list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(var(--aew-jobs-cols, 2), minmax(0, 1fr));
   gap: 24px;
+  align-items: stretch;
 }
 
+/* Cards in a grid stack their content vertically; the apply button sits at the
+   bottom so cards of differing copy length keep their buttons aligned. */
 .aew-jobs__card {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
   background: var(--aew-jobs-card-bg, var(--notched-secondary-bg, #2A4F41));
   border-radius: 16px;
   padding: 40px;
@@ -90,10 +93,10 @@
 
 .aew-jobs__btn:hover { background: var(--notched-cta-hover, #876137); transform: translateY(-1px); }
 
-/* ── Mobile: stack the apply button below the body ── */
+/* ── Mobile ── */
 @media (max-width: 768px) {
   .aew-jobs { padding: 32px 16px; }
   .aew-jobs .aew-jobs__heading { font-size: 34px; margin-bottom: 28px; }
-  .aew-jobs__card { flex-direction: column; align-items: flex-start; gap: 24px; padding: 28px 24px; }
+  .aew-jobs__card { padding: 28px 24px; }
   .aew-jobs__btn { align-self: stretch; justify-content: center; }
 }
