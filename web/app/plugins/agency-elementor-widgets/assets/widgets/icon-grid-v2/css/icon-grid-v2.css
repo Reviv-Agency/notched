@@ -109,6 +109,34 @@
   line-height: 140%;
 }
 
+/* ── Side-heading layout: heading column (≈35%) left, cards-box right,
+   footnote spans full width at the bottom. ──────────────────────────────── */
+.aew-igv2--side .aew-igv2__inner {
+  display: grid;
+  grid-template-columns: var(--aew-igv2-heading-col, 35%) 1fr;
+  grid-template-areas:
+    "head cards"
+    "foot foot";
+  column-gap: 48px;
+  row-gap: 32px;
+  align-items: start;
+}
+
+.aew-igv2--side .aew-igv2__header {
+  grid-area: head;
+  text-align: left;
+  margin-bottom: 0;
+  align-self: center;
+}
+
+.aew-igv2--side .aew-igv2__cards-box {
+  grid-area: cards;
+}
+
+.aew-igv2--side .aew-igv2__footnote {
+  grid-area: foot;
+}
+
 /* ── Grid ────────────────────────────────────────────────────────────────── */
 .aew-igv2__grid {
   display: grid;
@@ -162,6 +190,12 @@
   .aew-igv2 { padding-left: 16px; padding-right: 16px; }   /* X 16 mobile */
   .aew-igv2__inner { padding: 32px 0; }                     /* Y 32 mobile */
   .aew-igv2__header { margin-bottom: 32px; }
+  /* Side layout collapses to a single column (heading on top) on mobile. */
+  .aew-igv2--side .aew-igv2__inner {
+    grid-template-columns: 1fr;
+    grid-template-areas: "head" "cards" "foot";
+  }
+  .aew-igv2--side .aew-igv2__header { text-align: center; margin-bottom: 0; }
   .aew-igv2__grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .aew-igv2__card { padding: 24px 16px; border-radius: 20px; }
   .aew-igv2__icon { width: 56px; height: 56px; }

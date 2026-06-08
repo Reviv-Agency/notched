@@ -193,6 +193,26 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 	private function controls_layout(): void {
 		$this->start_controls_section( 's_layout', [ 'label' => esc_html__( 'Layout', 'agency-elementor-widgets' ) ] );
 
+		$this->add_control( 'layout', [
+			'label'   => esc_html__( 'Layout', 'agency-elementor-widgets' ),
+			'type'    => Controls_Manager::SELECT,
+			'default' => 'stacked',
+			'options' => [
+				'stacked' => esc_html__( 'Stacked (heading on top)', 'agency-elementor-widgets' ),
+				'side'    => esc_html__( 'Side heading (heading left, cards right)', 'agency-elementor-widgets' ),
+			],
+		] );
+
+		$this->add_responsive_control( 'side_heading_width', [
+			'label'      => esc_html__( 'Heading column width', 'agency-elementor-widgets' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ '%' ],
+			'range'      => [ '%' => [ 'min' => 20, 'max' => 60 ] ],
+			'default'    => [ 'unit' => '%', 'size' => 35 ],
+			'selectors'  => [ '{{WRAPPER}} .aew-igv2--side .aew-igv2__inner' => '--aew-igv2-heading-col: {{SIZE}}{{UNIT}};' ],
+			'condition'  => [ 'layout' => 'side' ],
+		] );
+
 		$this->add_control( 'columns', [
 			'label'     => esc_html__( 'Columns (desktop)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::SELECT,
@@ -417,7 +437,11 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 			return;
 		}
 
+		$layout = 'side' === ( $s['layout'] ?? 'stacked' ) ? 'side' : 'stacked';
 		$this->add_render_attribute( 'wrapper', 'class', 'aew-igv2' );
+		if ( 'side' === $layout ) {
+			$this->add_render_attribute( 'wrapper', 'class', 'aew-igv2--side' );
+		}
 		$this->add_render_attribute( 'wrapper', 'data-aew-icon-grid-v2', '' );
 
 		/*
@@ -481,11 +505,11 @@ class Widget_Icon_Grid_V2 extends Widget_Base {
 						</article>
 					<?php endforeach; ?>
 				</div>
+				</div>
 				<?php $footnote = (string) ( $s['footnote'] ?? '' ); ?>
 				<?php if ( '' !== trim( $footnote ) ) : ?>
 					<p class="aew-igv2__footnote"><?php echo esc_html( $footnote ); ?></p>
 				<?php endif; ?>
-				</div>
 			</div>
 		</section>
 		<?php
