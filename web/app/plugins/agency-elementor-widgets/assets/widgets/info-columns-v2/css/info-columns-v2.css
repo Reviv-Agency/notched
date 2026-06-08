@@ -93,13 +93,14 @@
 
 /* No-image card: a self-contained padded colour box (e.g. contact cards). */
 .aew-infc__col--noimg {
-  background-color: var(--notched-secondary-cards);
+  background-color: var(--aew-infc-card-bg, var(--notched-secondary-cards));
   border-radius: 16px;
   padding: 40px;
 }
 
-.aew-infc__col--noimg .aew-infc__col-text a {
-  color: var(--notched-cta);
+/* Links inside the column text (phone / email). Default to the text colour. */
+.aew-infc__col-text a {
+  color: var(--aew-infc-link, var(--aew-infc-text, var(--notched-background)));
   text-decoration: underline;
 }
 

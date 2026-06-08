@@ -295,6 +295,32 @@ class Widget_Info_Columns_V2 extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'card_min_height',
+			[
+				'label'       => esc_html__( 'Card box height (image-less columns)', 'agency-elementor-widgets' ),
+				'description' => esc_html__( 'Minimum height of columns that have no image (e.g. contact cards). Leave empty to size to content.', 'agency-elementor-widgets' ),
+				'type'        => Controls_Manager::SLIDER,
+				'size_units'  => [ 'px', 'vh' ],
+				'range'       => [ 'px' => [ 'min' => 0, 'max' => 800 ], 'vh' => [ 'min' => 0, 'max' => 100 ] ],
+				'selectors'   => [
+					'{{WRAPPER}} .aew-infc__col--noimg' => 'min-height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'card_padding',
+			[
+				'label'      => esc_html__( 'Card box padding (image-less columns)', 'agency-elementor-widgets' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .aew-infc__col--noimg' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -392,6 +418,32 @@ class Widget_Info_Columns_V2 extends Widget_Base {
 				'default'   => '#F6F0EC',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-infc-text: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'link_color',
+			[
+				'label'       => esc_html__( 'Link color (in text)', 'agency-elementor-widgets' ),
+				'description' => esc_html__( 'Phone / email links inside the column text. Leave empty to match the text color.', 'agency-elementor-widgets' ),
+				'type'        => Controls_Manager::COLOR,
+				'default'     => '',
+				'selectors'   => [
+					'{{WRAPPER}}' => '--aew-infc-link: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'card_bg',
+			[
+				'label'       => esc_html__( 'Card box color (image-less columns)', 'agency-elementor-widgets' ),
+				'description' => esc_html__( 'Background of columns that have no image (e.g. contact cards).', 'agency-elementor-widgets' ),
+				'type'        => Controls_Manager::COLOR,
+				'default'     => '',
+				'selectors'   => [
+					'{{WRAPPER}}' => '--aew-infc-card-bg: {{VALUE}};',
 				],
 			]
 		);
@@ -566,6 +618,8 @@ class Widget_Info_Columns_V2 extends Widget_Base {
 				'heading_color'        => '--aew-infc-heading',
 				'title_color'          => '--aew-infc-title',
 				'text_color'           => '--aew-infc-text',
+				'link_color'           => '--aew-infc-link',
+				'card_bg'              => '--aew-infc-card-bg',
 				'btn_bg'               => '--aew-infc-btn-bg',
 				'btn_bg_hover'         => '--aew-infc-btn-bg-hover',
 				'btn_text_color'       => '--aew-infc-btn-text',
