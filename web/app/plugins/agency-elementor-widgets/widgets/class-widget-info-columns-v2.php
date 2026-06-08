@@ -180,8 +180,7 @@ class Widget_Info_Columns_V2 extends Widget_Base {
 			'text',
 			[
 				'label'   => esc_html__( 'Text', 'agency-elementor-widgets' ),
-				'type'    => Controls_Manager::TEXTAREA,
-				'rows'    => 4,
+				'type'    => Controls_Manager::WYSIWYG,
 				'default' => esc_html__( 'Pre-cut, pre-drilled timber frame kits engineered to fit together precisely.', 'agency-elementor-widgets' ),
 			]
 		);
@@ -599,27 +598,29 @@ class Widget_Info_Columns_V2 extends Widget_Base {
 							$text      = (string) ( $col['text'] ?? '' );
 
 							// Skip a column with no image AND no title AND no text.
-							if ( '' === $image_url && '' === trim( $title ) && '' === trim( $text ) ) {
+							if ( '' === $image_url && '' === trim( $title ) && Rich_Text::is_empty( $text ) ) {
 								continue;
 							}
+
+							// When a column has no image, render a self-contained card
+							// (padded colour box) instead of a stranded empty media panel.
+							$col_class = '' === $image_url ? 'aew-infc__col aew-infc__col--noimg' : 'aew-infc__col';
 							?>
-							<div class="aew-infc__col">
+							<div class="<?php echo esc_attr( $col_class ); ?>">
 								<?php if ( '' !== $image_url ) : ?>
 									<img class="aew-infc__media"
 										src="<?php echo esc_url( $image_url ); ?>"
 										alt="<?php echo esc_attr( $title ); ?>"
 										decoding="async"
 										loading="lazy" />
-								<?php else : ?>
-									<div class="aew-infc__media aew-infc__media--empty" aria-hidden="true"></div>
 								<?php endif; ?>
 
 								<?php if ( '' !== trim( $title ) ) : ?>
 									<h4 class="aew-infc__col-title"><?php echo esc_html( $title ); ?></h4>
 								<?php endif; ?>
 
-								<?php if ( '' !== trim( $text ) ) : ?>
-									<p class="aew-infc__col-text"><?php echo esc_html( $text ); ?></p>
+								<?php if ( ! Rich_Text::is_empty( $text ) ) : ?>
+									<div class="aew-infc__col-text aew-rich-text"><?php Rich_Text::echo_html( $text ); ?></div>
 								<?php endif; ?>
 							</div>
 						<?php endforeach; ?>
