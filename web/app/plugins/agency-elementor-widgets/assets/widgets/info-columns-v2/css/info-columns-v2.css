@@ -92,13 +92,24 @@
 }
 
 /* No-image card: a self-contained padded colour box (e.g. contact cards).
-   Stays centred in its column; width/radius/padding are editor-controllable. */
+   width/radius/padding are editor-controllable. Default centred in its column. */
 .aew-infc__col--noimg {
   background-color: var(--aew-infc-card-bg, var(--notched-secondary-cards));
   border-radius: 16px;
   padding: 40px;
   width: 100%;
   margin-inline: auto;
+}
+
+/* When a max-width makes the box narrower than its column, pull the two boxes
+   toward the centre gap: left column's box hugs the right edge, right column's
+   box hugs the left edge. (Only the first row of a 2-up grid.) */
+.aew-infc__grid:has(.aew-infc__col--noimg) .aew-infc__col--noimg:nth-child(odd) {
+  margin-inline: auto 0;
+}
+
+.aew-infc__grid:has(.aew-infc__col--noimg) .aew-infc__col--noimg:nth-child(even) {
+  margin-inline: 0 auto;
 }
 
 /* Links inside the column text (phone / email). Default to the text colour. */
@@ -199,6 +210,11 @@
   .aew-infc__grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;
+  }
+  /* Stacked on mobile — re-centre the cards (undo the pull-to-centre split). */
+  .aew-infc__grid:has(.aew-infc__col--noimg) .aew-infc__col--noimg:nth-child(odd),
+  .aew-infc__grid:has(.aew-infc__col--noimg) .aew-infc__col--noimg:nth-child(even) {
+    margin-inline: auto;
   }
   .aew-infc .aew-infc__heading {
     font-size: 40px;
