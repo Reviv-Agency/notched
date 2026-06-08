@@ -109,8 +109,9 @@
   line-height: 140%;
 }
 
-/* ── Side-heading layout: heading column (≈35%) left, cards-box right,
-   footnote spans full width at the bottom. ──────────────────────────────── */
+/* ── Side-heading layout: heading column (≈35%) left, cards right, footnote
+   full-width bottom. The WHOLE inner block is the coloured box (the card-box
+   bg / radius / padding apply to __inner, not the nested cards wrapper). ──── */
 .aew-igv2--side .aew-igv2__inner {
   display: grid;
   grid-template-columns: var(--aew-igv2-heading-col, 35%) 1fr;
@@ -120,6 +121,9 @@
   column-gap: 48px;
   row-gap: 32px;
   align-items: start;
+  background: var(--aew-igv2-cards-box-bg, transparent);
+  border-radius: 24px;
+  padding: 48px;
 }
 
 .aew-igv2--side .aew-igv2__header {
@@ -129,12 +133,18 @@
   align-self: start;
 }
 
+/* In side mode the nested cards wrapper is just a grid cell — the box styling
+   lives on __inner, so reset its own background/padding. */
 .aew-igv2--side .aew-igv2__cards-box {
   grid-area: cards;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
 }
 
 .aew-igv2--side .aew-igv2__footnote {
   grid-area: foot;
+  margin-top: 0;
 }
 
 /* ── Grid ────────────────────────────────────────────────────────────────── */
