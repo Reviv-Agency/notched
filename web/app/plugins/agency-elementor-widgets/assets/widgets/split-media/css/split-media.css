@@ -227,6 +227,16 @@
 	justify-content: flex-end;
 }
 
+.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-center {
+	justify-content: center;
+}
+
+.aew-split-media:not(.aew-split-media--compact) .aew-split-media__row--copy-center .aew-split-media__body {
+	margin: 40px auto;
+	text-align: center;
+	align-items: center;
+}
+
 /* Up to 1440px the section spans the full viewport (no centring gutter yet), so
    the copy panel keeps a 40px OUTER-side inset (left on copy-left, right on
    copy-right) to breathe off the screen edge. */

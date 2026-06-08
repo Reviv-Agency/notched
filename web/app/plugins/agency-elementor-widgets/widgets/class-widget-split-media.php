@@ -207,8 +207,9 @@ class Widget_Split_Media extends Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'right',
 				'options' => [
-					'left'  => esc_html__( 'Left', 'agency-elementor-widgets' ),
-					'right' => esc_html__( 'Right', 'agency-elementor-widgets' ),
+					'left'   => esc_html__( 'Left', 'agency-elementor-widgets' ),
+					'center' => esc_html__( 'Center', 'agency-elementor-widgets' ),
+					'right'  => esc_html__( 'Right', 'agency-elementor-widgets' ),
 				],
 			]
 		);
@@ -1068,7 +1069,7 @@ class Widget_Split_Media extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 
 		$copy_side = $settings['copy_block_side'] ?? '';
-		if ( ! in_array( $copy_side, [ 'left', 'right' ], true ) ) {
+		if ( ! in_array( $copy_side, [ 'left', 'center', 'right' ], true ) ) {
 			$legacy = $settings['image_position'] ?? 'left';
 			$copy_side = 'right' === $legacy ? 'left' : 'right';
 		}
