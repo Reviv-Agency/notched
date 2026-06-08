@@ -134,8 +134,9 @@
 }
 
 /* In side mode the nested cards wrapper is just a grid cell — the box styling
-   lives on __inner, so reset its own background/padding. */
-.aew-igv2--side .aew-igv2__cards-box {
+   lives on __inner, so reset its own background/padding (raised specificity to
+   beat the cards_box_padding/radius control selectors). */
+.aew-igv2.aew-igv2--side .aew-igv2__cards-box {
   grid-area: cards;
   background: transparent;
   padding: 0;
