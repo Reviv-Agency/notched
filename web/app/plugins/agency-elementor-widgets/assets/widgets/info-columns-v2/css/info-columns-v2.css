@@ -91,11 +91,14 @@
   flex-direction: column;
 }
 
-/* No-image card: a self-contained padded colour box (e.g. contact cards). */
+/* No-image card: a self-contained padded colour box (e.g. contact cards).
+   Stays centred in its column; width/radius/padding are editor-controllable. */
 .aew-infc__col--noimg {
   background-color: var(--aew-infc-card-bg, var(--notched-secondary-cards));
   border-radius: 16px;
   padding: 40px;
+  width: 100%;
+  margin-inline: auto;
 }
 
 /* Links inside the column text (phone / email). Default to the text colour. */

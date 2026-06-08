@@ -321,6 +321,33 @@ class Widget_Info_Columns_V2 extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'card_radius',
+			[
+				'label'      => esc_html__( 'Card box corner radius (image-less columns)', 'agency-elementor-widgets' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range'      => [ 'px' => [ 'min' => 0, 'max' => 80 ] ],
+				'selectors'  => [
+					'{{WRAPPER}} .aew-infc__col--noimg' => 'border-radius: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'card_width',
+			[
+				'label'       => esc_html__( 'Card box width (image-less columns)', 'agency-elementor-widgets' ),
+				'description' => esc_html__( 'Max width of image-less cards. The box stays centred in its column. Leave empty for full width.', 'agency-elementor-widgets' ),
+				'type'        => Controls_Manager::SLIDER,
+				'size_units'  => [ 'px', '%' ],
+				'range'       => [ 'px' => [ 'min' => 120, 'max' => 800 ], '%' => [ 'min' => 10, 'max' => 100 ] ],
+				'selectors'   => [
+					'{{WRAPPER}} .aew-infc__col--noimg' => 'max-width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
