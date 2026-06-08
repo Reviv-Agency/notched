@@ -91,7 +91,12 @@ class Widget_Feature_Rows_V2 extends Widget_Base {
 		$this->add_control( 'header_align', [
 			'label'     => esc_html__( 'Header alignment', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::CHOOSE,
-			'default'   => 'left',
+			// Default EMPTY (gotcha #16): a non-empty default bakes the var into
+			// every instance's CSS, clobbering the space-between fallback and
+			// breaking the classic heading-left / button-right split. Empty =
+			// no var emitted = CSS default (space-between) applies. Pick Left/
+			// Center/Right to override.
+			'default'   => '',
 			'options'   => [
 				'left'   => [ 'title' => esc_html__( 'Left', 'agency-elementor-widgets' ),   'icon' => 'eicon-text-align-left' ],
 				'center' => [ 'title' => esc_html__( 'Center', 'agency-elementor-widgets' ), 'icon' => 'eicon-text-align-center' ],
