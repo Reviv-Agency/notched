@@ -411,6 +411,22 @@ final class Widget_Assets {
 				'style_deps' => [ 'aew-tokens' ],
 			]
 		);
+
+		self::register_widget(
+			'benefits-card',
+			[
+				'style'      => 'css/benefits-card.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
+
+		self::register_widget(
+			'job-listings',
+			[
+				'style'      => 'css/job-listings.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
 	}
 
 	/**

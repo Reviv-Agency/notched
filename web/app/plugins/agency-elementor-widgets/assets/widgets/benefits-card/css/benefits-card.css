@@ -1,0 +1,108 @@
+/* Benefits Card — large image with a cream card overlapping its inner edge. */
+.aew-bcard {
+  background: var(--aew-bcard-section-bg, transparent);
+  padding: 64px 40px;
+}
+
+.aew-bcard__inner {
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  align-items: center;
+  min-height: 560px;
+}
+
+/* Image fills ~62% from one side; the card overlaps the opposite inner edge. */
+.aew-bcard__media {
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  width: 62%;
+  aspect-ratio: 4 / 3;
+  align-self: stretch;
+}
+
+.aew-bcard--img-left .aew-bcard__media  { justify-self: start; }
+.aew-bcard--img-right .aew-bcard__media { justify-self: end; }
+
+/* The floating cream card. */
+.aew-bcard__card {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46%;
+  max-width: 600px;
+  background: var(--aew-bcard-card-bg, var(--notched-background, #F6F0EC));
+  border-radius: 16px;
+  padding: 56px;
+  box-shadow: 0 24px 60px rgba(20, 28, 25, 0.12);
+  box-sizing: border-box;
+}
+
+.aew-bcard--img-left .aew-bcard__card  { right: 0; }
+.aew-bcard--img-right .aew-bcard__card { left: 0; }
+
+.aew-bcard .aew-bcard__heading {
+  margin: 0 0 20px;
+  padding: 0;
+  color: var(--aew-bcard-heading, var(--notched-text, #141C19));
+  font-family: var(--aew-font-heading, 'Teko', sans-serif);
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+.aew-bcard__body {
+  margin: 0 0 28px;
+  color: var(--aew-bcard-text, var(--notched-text, #141C19));
+  font-family: var(--aew-font-body, 'Lato', sans-serif);
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.aew-bcard__body p { margin: 0 0 12px; }
+.aew-bcard__body p:last-child { margin-bottom: 0; }
+
+.aew-bcard__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px 14px;
+  background: var(--aew-bcard-btn-bg, var(--notched-cta, #AA7D44));
+  color: var(--aew-bcard-btn-text, var(--notched-background, #F6F0EC));
+  border-radius: 6px;
+  font-family: var(--aew-font-heading, 'Teko', sans-serif);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.aew-bcard__btn:hover { background: var(--notched-cta-hover, #876137); transform: translateY(-1px); }
+.aew-bcard__btn-arrow { flex: none; }
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .aew-bcard__card { width: 52%; padding: 40px; }
+  .aew-bcard .aew-bcard__heading { font-size: 40px; }
+}
+
+/* ── Mobile: stack image then card (card no longer overlaps) ── */
+@media (max-width: 768px) {
+  .aew-bcard { padding: 32px 16px; }
+  .aew-bcard__inner { display: block; min-height: 0; }
+  .aew-bcard__media { width: 100%; }
+  .aew-bcard__card {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    margin-top: -40px;
+    padding: 32px 24px;
+  }
+  .aew-bcard .aew-bcard__heading { font-size: 34px; }
+}
