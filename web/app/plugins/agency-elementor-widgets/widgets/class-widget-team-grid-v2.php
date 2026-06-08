@@ -142,6 +142,33 @@ class Widget_Team_Grid_V2 extends Widget_Base {
 			'default' => '',
 		] );
 
+		$this->add_control( 'show_button', [
+			'label'   => esc_html__( 'Show header button', 'agency-elementor-widgets' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => '',
+		] );
+
+		$this->add_control( 'button_text', [
+			'label'     => esc_html__( 'Button text', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::TEXT,
+			'default'   => esc_html__( 'MEET OUR TEAM', 'agency-elementor-widgets' ),
+			'condition' => [ 'show_button' => 'yes' ],
+		] );
+
+		$this->add_control( 'button_link', [
+			'label'     => esc_html__( 'Button link', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::URL,
+			'default'   => [ 'url' => '' ],
+			'condition' => [ 'show_button' => 'yes' ],
+		] );
+
+		$this->add_control( 'button_arrow', [
+			'label'     => esc_html__( 'Button arrow', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::SWITCHER,
+			'default'   => 'yes',
+			'condition' => [ 'show_button' => 'yes' ],
+		] );
+
 		$repeater = new Repeater();
 
 		$repeater->add_control( 'photo', [
@@ -238,6 +265,53 @@ class Widget_Team_Grid_V2 extends Widget_Base {
 			'selectors' => [ '{{WRAPPER}}' => '--aew-team-section-bg: {{VALUE}};' ],
 		] );
 
+		$this->add_control( 'tray_bg', [
+			'label'       => esc_html__( 'Cards tray background', 'agency-elementor-widgets' ),
+			'description' => esc_html__( 'The inner box behind the member cards. Leave empty for none.', 'agency-elementor-widgets' ),
+			'type'        => Controls_Manager::COLOR,
+			'default'     => '',
+			'selectors'   => [ '{{WRAPPER}}' => '--aew-team-tray-bg: {{VALUE}};' ],
+		] );
+
+		$this->add_control( 'tray_radius', [
+			'label'      => esc_html__( 'Cards tray corner radius', 'agency-elementor-widgets' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [ 'px' => [ 'min' => 0, 'max' => 60 ] ],
+			'default'    => [ 'unit' => 'px', 'size' => 24 ],
+			'selectors'  => [ '{{WRAPPER}} .aew-team__tray' => 'border-radius: {{SIZE}}{{UNIT}};' ],
+		] );
+
+		$this->add_control( 'btn_bg', [
+			'label'     => esc_html__( 'Header button background', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-team-btn-bg: {{VALUE}};' ],
+		] );
+
+		$this->add_control( 'btn_text_color', [
+			'label'     => esc_html__( 'Header button text', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-team-btn-text: {{VALUE}};' ],
+		] );
+
+		$this->add_control( 'btn_border', [
+			'label'     => esc_html__( 'Header button border', 'agency-elementor-widgets' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '',
+			'selectors' => [ '{{WRAPPER}}' => '--aew-team-btn-border: {{VALUE}};' ],
+		] );
+
+		$this->add_control( 'btn_radius', [
+			'label'      => esc_html__( 'Header button corner radius', 'agency-elementor-widgets' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [ 'px' => [ 'min' => 0, 'max' => 40 ] ],
+			'default'    => [ 'unit' => 'px', 'size' => 8 ],
+			'selectors'  => [ '{{WRAPPER}} .aew-team__btn' => 'border-radius: {{SIZE}}{{UNIT}};' ],
+		] );
+
 		$this->end_controls_section();
 	}
 
@@ -249,12 +323,21 @@ class Widget_Team_Grid_V2 extends Widget_Base {
 	private function style_card(): void {
 		$this->start_controls_section( 'ss_card', [ 'label' => esc_html__( 'Photo', 'agency-elementor-widgets' ), 'tab' => Controls_Manager::TAB_STYLE ] );
 
+		$this->add_responsive_control( 'photo_height', [
+			'label'      => esc_html__( 'Photo height', 'agency-elementor-widgets' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [ 'px' => [ 'min' => 160, 'max' => 600 ] ],
+			'default'    => [ 'unit' => 'px', 'size' => 300 ],
+			'selectors'  => [ '{{WRAPPER}} .aew-team__photo' => 'height: {{SIZE}}{{UNIT}}; aspect-ratio: auto;' ],
+		] );
+
 		$this->add_control( 'photo_radius', [
 			'label'      => esc_html__( 'Photo corner radius', 'agency-elementor-widgets' ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [ 'px' ],
 			'range'      => [ 'px' => [ 'min' => 0, 'max' => 48 ] ],
-			'default'    => [ 'unit' => 'px', 'size' => 16 ],
+			'default'    => [ 'unit' => 'px', 'size' => 24 ],
 			'selectors'  => [ '{{WRAPPER}} .aew-team__photo' => 'border-radius: {{SIZE}}{{UNIT}};' ],
 		] );
 
@@ -263,6 +346,26 @@ class Widget_Team_Grid_V2 extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#7D958D',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-team-photo-bg: {{VALUE}};' ],
+		] );
+
+		$this->add_control( 'textbox_bg', [
+			'label'       => esc_html__( 'Name/title box colour', 'agency-elementor-widgets' ),
+			'description' => esc_html__( 'The box under each photo holding the name + role. Leave empty for none.', 'agency-elementor-widgets' ),
+			'type'        => Controls_Manager::COLOR,
+			'default'     => '#F6F0EC',
+			'selectors'   => [ '{{WRAPPER}}' => '--aew-team-textbox-bg: {{VALUE}};' ],
+		] );
+
+		$this->add_control( 'card_radius', [
+			'label'      => esc_html__( 'Card corner radius', 'agency-elementor-widgets' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [ 'px' => [ 'min' => 0, 'max' => 48 ] ],
+			'default'    => [ 'unit' => 'px', 'size' => 24 ],
+			'selectors'  => [
+				'{{WRAPPER}} .aew-team__card'    => 'border-radius: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .aew-team__textbox' => 'border-radius: 0 0 {{SIZE}}{{UNIT}} {{SIZE}}{{UNIT}};',
+			],
 		] );
 
 		$this->end_controls_section();
@@ -317,12 +420,17 @@ class Widget_Team_Grid_V2 extends Widget_Base {
 		$this->add_render_attribute( 'wrapper', 'data-aew-team-grid-v2', '' );
 
 		$color_vars = Color_Vars::build( $this, $s, [
-			'section_bg'    => '--aew-team-section-bg',
-			'photo_bg'      => '--aew-team-photo-bg',
-			'heading_color' => '--aew-team-heading',
-			'subtext_color' => '--aew-team-subtext',
-			'name_color'    => '--aew-team-name',
-			'role_color'    => '--aew-team-role',
+			'section_bg'     => '--aew-team-section-bg',
+			'tray_bg'        => '--aew-team-tray-bg',
+			'textbox_bg'     => '--aew-team-textbox-bg',
+			'photo_bg'       => '--aew-team-photo-bg',
+			'heading_color'  => '--aew-team-heading',
+			'subtext_color'  => '--aew-team-subtext',
+			'name_color'     => '--aew-team-name',
+			'role_color'     => '--aew-team-role',
+			'btn_bg'         => '--aew-team-btn-bg',
+			'btn_text_color' => '--aew-team-btn-text',
+			'btn_border'     => '--aew-team-btn-border',
 		] );
 		if ( '' !== $color_vars ) {
 			$this->add_render_attribute( 'wrapper', 'style', $color_vars );
@@ -331,46 +439,73 @@ class Widget_Team_Grid_V2 extends Widget_Base {
 		$heading = (string) ( $s['heading'] ?? '' );
 		$tag     = preg_replace( '/[^a-z0-9]/i', '', (string) ( $s['heading_tag'] ?? 'h2' ) ) ?: 'h2';
 		$subtext = (string) ( $s['subtext'] ?? '' );
+
+		$show_btn = 'yes' === ( $s['show_button'] ?? '' );
+		$btn_text = (string) ( $s['button_text'] ?? '' );
+		$link     = $s['button_link'] ?? [];
+		$btn_url  = is_array( $link ) ? (string) ( $link['url'] ?? '' ) : '';
+		$btn_tg   = ( is_array( $link ) && ! empty( $link['is_external'] ) ) ? ' target="_blank"' : '';
+		$btn_rel  = ( is_array( $link ) && ! empty( $link['nofollow'] ) ) ? ' rel="nofollow"' : '';
+		$btn_arrow = 'yes' === ( $s['button_arrow'] ?? '' );
+		$has_btn   = $show_btn && '' !== trim( $btn_text );
+
+		$has_header = '' !== trim( $heading ) || '' !== trim( $subtext ) || $has_btn;
 		?>
 		<section <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
 			<div class="aew-team__inner">
-				<?php if ( '' !== trim( $heading ) || '' !== trim( $subtext ) ) : ?>
-					<div class="aew-team__header">
-						<?php if ( '' !== trim( $heading ) ) : ?>
-							<<?php echo esc_html( $tag ); ?> class="aew-team__heading"><?php echo esc_html( $heading ); ?></<?php echo esc_html( $tag ); ?>>
-						<?php endif; ?>
-						<?php if ( '' !== trim( $subtext ) ) : ?>
-							<p class="aew-team__subtext"><?php echo esc_html( $subtext ); ?></p>
+				<?php if ( $has_header ) : ?>
+					<div class="aew-team__header<?php echo $has_btn ? ' aew-team__header--with-btn' : ''; ?>">
+						<div class="aew-team__header-text">
+							<?php if ( '' !== trim( $heading ) ) : ?>
+								<<?php echo esc_html( $tag ); ?> class="aew-team__heading"><?php echo esc_html( $heading ); ?></<?php echo esc_html( $tag ); ?>>
+							<?php endif; ?>
+							<?php if ( '' !== trim( $subtext ) ) : ?>
+								<p class="aew-team__subtext"><?php echo esc_html( $subtext ); ?></p>
+							<?php endif; ?>
+						</div>
+						<?php if ( $has_btn ) : ?>
+							<a class="aew-team__btn" href="<?php echo esc_url( $btn_url ?: '#' ); ?>"<?php echo $btn_tg . $btn_rel; // phpcs:ignore WordPress.Security.EscapeOutput ?>>
+								<span class="aew-team__btn-label"><?php echo esc_html( $btn_text ); ?></span>
+								<?php if ( $btn_arrow ) : ?>
+									<svg class="aew-team__btn-arrow" viewBox="0 0 200 200" width="20" height="20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M179.7 96.3H55.9c10.4-6 15.6-15.8 15.6-29.1h-7.3c0 7.2 0 28.9-43 29.1h-.9v7.3c43.2.2 43.2 22 43.2 29.1h7.3c0-13.4-5.3-23.1-15.8-29.1h124.6v-7.3z"/></svg>
+								<?php endif; ?>
+							</a>
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>
 
-				<div class="aew-team__grid">
-					<?php
-					foreach ( $members as $m ) :
-						$photo = $m['photo'] ?? [];
-						$url   = is_array( $photo ) ? (string) ( $photo['url'] ?? '' ) : '';
-						$name  = (string) ( $m['name'] ?? '' );
-						$role  = (string) ( $m['role'] ?? '' );
+				<div class="aew-team__tray">
+					<div class="aew-team__grid">
+						<?php
+						foreach ( $members as $m ) :
+							$photo = $m['photo'] ?? [];
+							$url   = is_array( $photo ) ? (string) ( $photo['url'] ?? '' ) : '';
+							$name  = (string) ( $m['name'] ?? '' );
+							$role  = (string) ( $m['role'] ?? '' );
 
-						if ( '' === $url && '' === trim( $name ) && '' === trim( $role ) ) {
-							continue;
-						}
-						?>
-						<article class="aew-team__card">
-							<?php if ( '' !== $url ) : ?>
-								<img class="aew-team__photo" src="<?php echo esc_url( $url ); ?>" alt="<?php echo esc_attr( $name ); ?>" decoding="async" loading="lazy" />
-							<?php else : ?>
-								<div class="aew-team__photo aew-team__photo--empty" aria-hidden="true"></div>
-							<?php endif; ?>
-							<?php if ( '' !== trim( $name ) ) : ?>
-								<p class="aew-team__name"><?php echo esc_html( $name ); ?></p>
-							<?php endif; ?>
-							<?php if ( '' !== trim( $role ) ) : ?>
-								<p class="aew-team__role"><?php echo esc_html( $role ); ?></p>
-							<?php endif; ?>
-						</article>
-					<?php endforeach; ?>
+							if ( '' === $url && '' === trim( $name ) && '' === trim( $role ) ) {
+								continue;
+							}
+							?>
+							<article class="aew-team__card">
+								<?php if ( '' !== $url ) : ?>
+									<img class="aew-team__photo" src="<?php echo esc_url( $url ); ?>" alt="<?php echo esc_attr( $name ); ?>" decoding="async" loading="lazy" />
+								<?php else : ?>
+									<div class="aew-team__photo aew-team__photo--empty" aria-hidden="true"></div>
+								<?php endif; ?>
+								<?php if ( '' !== trim( $name ) || '' !== trim( $role ) ) : ?>
+									<div class="aew-team__textbox">
+										<?php if ( '' !== trim( $name ) ) : ?>
+											<p class="aew-team__name"><?php echo esc_html( $name ); ?></p>
+										<?php endif; ?>
+										<?php if ( '' !== trim( $role ) ) : ?>
+											<p class="aew-team__role"><?php echo esc_html( $role ); ?></p>
+										<?php endif; ?>
+									</div>
+								<?php endif; ?>
+							</article>
+						<?php endforeach; ?>
+					</div>
 				</div>
 			</div>
 		</section>
