@@ -1,0 +1,16 @@
+/* Notched — product-page buttons (Add to Cart + Get a Quote).
+   Kept separate from the variant-option styling (woo-variations.css).
+   Brand tokens: gold #AA7D44. */
+
+/* Add-to-cart button → outline style (white bg, gold text + border) to match the
+   Get-a-Quote button. !important to beat the kit's solid-gold button default.
+   Hover is left to the existing kit/Elementor styles. */
+.elementor-element .cart button,
+.elementor-element .cart .button,
+.cart .single_add_to_cart_button,
+.single_add_to_cart_button.button {
+  background-color: #fff !important;
+  color: var(--notched-cta, #AA7D44) !important;
+  border: 1px solid var(--notched-cta, #AA7D44) !important;
+  transition: all 0.2s ease;
+}
