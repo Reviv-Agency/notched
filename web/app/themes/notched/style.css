@@ -30,3 +30,9 @@ body {
 	background-color: #F6F0EC;
 }
 
+/* Space above figures inside Elementor widgets (e.g. the stain-colour preview),
+   except text-editor / post-content widgets which manage their own spacing. */
+.elementor .elementor-widget:not(.elementor-widget-text-editor):not(.elementor-widget-theme-post-content) figure {
+	margin-top: 1rem;
+}
+
