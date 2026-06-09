@@ -44,8 +44,15 @@ table.variations { width: 100%; border: 0; margin-bottom: 0 !important; }
 /* "Clear" reset link → brand green. */
 .woocommerce div.product form.cart .variations .reset_variations,
 .reset_variations { color: var(--notched-secondary-bg, #2A4F41) !important; }
+/* WooCommerce hides "Clear" with visibility:hidden (still reserves space → a gap).
+   Collapse it with display:none while hidden so it takes no space until shown. */
+.woocommerce div.product form.cart .variations .reset_variations[style*="visibility: hidden"],
+.reset_variations[style*="visibility: hidden"] { display: none !important; }
 .variations tr,
 table.variations tr { display: block; margin-bottom: 22px; }
+/* No gap after the last variation row. */
+.variations tr:last-child,
+table.variations tr:last-child { margin-bottom: 0; }
 /* Kill the kit's zebra striping behind alternating variation rows. */
 .variations tbody > tr:nth-child(odd) > td,
 .variations tbody > tr:nth-child(odd) > th,
