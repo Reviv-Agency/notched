@@ -12,5 +12,7 @@
   background-color: #fff !important;
   color: var(--notched-cta, #AA7D44) !important;
   border: 1px solid var(--notched-cta, #AA7D44) !important;
+  margin-left: 0 !important;
+  padding: 10px 10px 5px 10px !important;
   transition: all 0.2s ease;
 }
