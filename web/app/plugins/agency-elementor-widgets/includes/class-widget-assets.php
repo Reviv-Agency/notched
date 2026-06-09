@@ -413,6 +413,14 @@ final class Widget_Assets {
 		);
 
 		self::register_widget(
+			'quote-band',
+			[
+				'style'      => 'css/quote-band.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
+
+		self::register_widget(
 			'benefits-card',
 			[
 				'style'      => 'css/benefits-card.css',

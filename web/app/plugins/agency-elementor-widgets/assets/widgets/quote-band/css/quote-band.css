@@ -1,0 +1,109 @@
+/* ============================================================================
+ * Quote Band — full-bleed gold band: heading left, outlined button right.
+ * ========================================================================== */
+
+/* Brand tokens (scoped). */
+.aew-qb {
+  --notched-background: #F6F0EC;
+  --notched-cta:        #AA7D44;
+  --notched-cta-hover:  #876137;
+  --aew-qb-bg:          var(--notched-cta);
+  --aew-qb-heading:     var(--notched-background);
+  --aew-qb-btn-bg:      #FFFFFF;
+  --aew-qb-btn-text:    var(--notched-cta);
+  --aew-qb-btn-bg-hover:   var(--notched-cta-hover);
+  --aew-qb-btn-text-hover: #FFFFFF;
+}
+
+/* Strip Elementor's column/container padding so the band is full-bleed. */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-quote-band),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-quote-band),
+.e-con:has(.elementor-widget-agency-quote-band) {
+  --padding-top: 0px; --padding-right: 0px; --padding-bottom: 0px; --padding-left: 0px;
+  padding: 0 !important;
+}
+/* Defeat the boxed 1440 container cap so the gold band spans edge-to-edge
+   (html prefix beats the theme's global .elementor-section-boxed > .elementor-container). */
+html .elementor-section:has(.elementor-widget-agency-quote-band),
+html .elementor-section:has(.elementor-widget-agency-quote-band) > .elementor-container,
+html .elementor-section.elementor-section-boxed:has(.elementor-widget-agency-quote-band) > .elementor-container,
+html .e-con:has(.elementor-widget-agency-quote-band) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Outer band: full-width gold. */
+.aew-qb {
+  width: 100%;
+  background-color: var(--aew-qb-bg);
+  box-sizing: border-box;
+}
+.aew-qb *, .aew-qb *::before, .aew-qb *::after { box-sizing: border-box; }
+
+/* Inner: 1440 content rail, heading left + button right. */
+.aew-qb__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px 40px;          /* Y overridable via control; X = body inset */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Heading (Teko, big, uppercase). */
+.aew-qb .aew-qb__heading {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--aew-qb-heading);
+  font-family: var(--aew-teko, "Teko", sans-serif);
+  font-weight: 600;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 0.85;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+/* Outlined pill button. */
+.aew-qb__btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 28px 13px;
+  border-radius: 10px;
+  background: var(--aew-qb-btn-bg);
+  color: var(--aew-qb-btn-text);
+  text-decoration: none;
+  font-family: var(--aew-teko, "Teko", sans-serif);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 0.85;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.aew-qb__btn:hover {
+  background: var(--aew-qb-btn-bg-hover);
+  color: var(--aew-qb-btn-text-hover);
+}
+.aew-qb__btn-arrow { flex: 0 0 auto; }
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-qb__inner { padding-left: 24px; padding-right: 24px; }
+}
+
+/* ── Mobile: stack heading + button ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-qb__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .aew-qb__btn { align-self: stretch; justify-content: center; }
+}

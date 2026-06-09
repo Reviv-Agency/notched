@@ -91,6 +91,7 @@ final class Widgets_Loader {
 		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-numbered-features-v2.php';
 		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-benefits-card.php';
 		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-job-listings.php';
+		require_once AEW_PLUGIN_DIR . 'widgets/class-widget-quote-band.php';
 		$widgets_manager->register( new Widget_Header() );
 		$widgets_manager->register( new Widget_Header_V2() );
 		$widgets_manager->register( new Widget_Hero() );
@@ -138,5 +139,6 @@ final class Widgets_Loader {
 		$widgets_manager->register( new Widget_Numbered_Features_V2() );
 		$widgets_manager->register( new Widget_Benefits_Card() );
 		$widgets_manager->register( new Widget_Job_Listings() );
+		$widgets_manager->register( new Widget_Quote_Band() );
 	}
 }
