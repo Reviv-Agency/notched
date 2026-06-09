@@ -36,10 +36,13 @@
 
 /* Defeat Elementor's boxed section width so the background image goes truly
    edge-to-edge. The inner wrapper keeps its own max-width + gutter, so only the
-   image becomes full-bleed. */
-.elementor-section:has(.elementor-widget-agency-feature-band-v2),
-.elementor-section:has(.elementor-widget-agency-feature-band-v2) > .elementor-container,
-.e-con:has(.elementor-widget-agency-feature-band-v2) {
+   image becomes full-bleed. The `html` prefix raises specificity to beat the
+   theme's global `html .elementor-section-boxed > .elementor-container {max-width:1440}`
+   rule (style.css) which otherwise clamps the band to 1440 on product pages. */
+html .elementor-section:has(.elementor-widget-agency-feature-band-v2),
+html .elementor-section:has(.elementor-widget-agency-feature-band-v2) > .elementor-container,
+html .elementor-section.elementor-section-boxed:has(.elementor-widget-agency-feature-band-v2) > .elementor-container,
+html .e-con:has(.elementor-widget-agency-feature-band-v2) {
   max-width: 100% !important;
   width: 100% !important;
 }
