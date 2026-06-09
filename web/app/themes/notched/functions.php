@@ -1,4 +1,16 @@
 <?php
+/*
+ * Disable WooCommerce product-gallery ZOOM (hello-elementor enables it).
+ * jquery.zoom adds a hover-zoom .zoomImg overlay that (a) magnifies on hover and
+ * (b) sits on top of the image link, swallowing clicks so only the magnifier icon
+ * opened the lightbox. Removing zoom restores whole-image click + kills the hover
+ * zoom. We keep the lightbox + slider supports. Runs after the parent theme's
+ * after_setup_theme (priority 11 > parent's default 10).
+ */
+add_action('after_setup_theme', function () {
+    remove_theme_support('wc-product-gallery-zoom');
+}, 11);
+
 add_action('wp_enqueue_scripts', function () {
     // Version by file mtime so edits to style.css bust the browser cache.
     $css = get_stylesheet_directory() . '/style.css';

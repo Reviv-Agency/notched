@@ -1,6 +1,20 @@
 /* Notched — Wix-style variation button-boxes + colour swatches on product pages.
    Pairs with woo-variations.js. Brand tokens: gold #AA7D44, text #141C19. */
 
+/* ── Single Product template (Elementor 1707) layout tweaks ──────────────────
+   Core product section: drop the bottom padding. */
+.elementor-1707 .elementor-element.elementor-element-sfd0a283 {
+  padding-bottom: 0 !important;
+}
+/* Mobile: smaller product title (was ~5rem). */
+@media (max-width: 767px) {
+  .elementor-1707 .elementor-widget-woocommerce-product-title h1,
+  .elementor-1707 .elementor-widget-woocommerce-product-title .product_title {
+    font-size: 2.5rem !important;
+    line-height: 1.05 !important;
+  }
+}
+
 /* Hide the native <select> (kept for WooCommerce's logic) but keep it accessible. */
 .aew-swatch-source {
   position: absolute !important;
@@ -12,7 +26,10 @@
 
 /* The WC variations table → make each row a clean stacked label + controls. */
 .variations,
-table.variations { width: 100%; border: 0; }
+table.variations { width: 100%; border: 0; margin-bottom: 0 !important; }
+/* "Clear" reset link → brand green. */
+.woocommerce div.product form.cart .variations .reset_variations,
+.reset_variations { color: var(--notched-secondary-bg, #2A4F41) !important; }
 .variations tr,
 table.variations tr { display: block; margin-bottom: 22px; }
 /* Kill the kit's zebra striping behind alternating variation rows. */
@@ -67,11 +84,22 @@ table.variations .label label {
   text-align: center;
   transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
-.aew-swatch--box:hover { border-color: var(--notched-cta, #AA7D44); }
-.aew-swatch--box.is-active {
-  background: var(--notched-cta, #AA7D44);
-  border-color: var(--notched-cta, #AA7D44);
-  color: #fff;
+/* High specificity + !important so hover/active beat the kit's generic
+   `.elementor-kit-7 button` styling (solid gold bg on every button). */
+.aew-swatches .aew-swatch.aew-swatch--box {
+  background-color: #fff !important;
+  background-image: none !important;
+  color: var(--notched-text, #141C19) !important;
+  border: 1px solid #BFC0BF !important;
+}
+.aew-swatches .aew-swatch.aew-swatch--box:hover {
+  border-color: var(--notched-cta, #AA7D44) !important;
+  color: var(--notched-cta, #AA7D44) !important;
+}
+.aew-swatches .aew-swatch.aew-swatch--box.is-active {
+  background-color: var(--notched-cta, #AA7D44) !important;
+  border-color: var(--notched-cta, #AA7D44) !important;
+  color: #fff !important;
 }
 
 /* ── Colour swatches (stain / roof) ── */
@@ -146,12 +174,19 @@ table.variations .label label {
 /* Show only the first 4 thumbnails. */
 .woocommerce-product-gallery .flex-control-thumbs li:nth-child(n+5) { display: none; }
 
-/* Main image: rounded, full width of the gallery column. */
+/* Main image: rounded, full width of the gallery column. Zoom is disabled in
+   functions.php; these rules also defend against any residual hover transform
+   and keep the radius. */
 .woocommerce-product-gallery__image img,
-.woocommerce-product-gallery .flex-viewport img { border-radius: 14px; }
+.woocommerce-product-gallery .flex-viewport img {
+  border-radius: 14px;
+  transform: none !important;   /* no hover zoom */
+}
+.woocommerce-product-gallery .zoomImg { display: none !important; } /* kill leftover zoom overlay */
 /* The zoom/lightbox trigger (magnifier) stays clickable to open PhotoSwipe. */
 .woocommerce-product-gallery__trigger { z-index: 5; }
 /* Whole main image is clickable to open the lightbox. */
+.woocommerce-product-gallery__image,
 .woocommerce-product-gallery__image a { cursor: zoom-in; }
 
 /* ── Lightbox thumbnail strip (injected into PhotoSwipe by woo-gallery.js) ──── */
