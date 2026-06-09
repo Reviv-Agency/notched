@@ -319,8 +319,11 @@
   padding-left: var(--prsv2-rail);
   padding-right: var(--prsv2-rail);
 }
-/* Full-width scroller; rail padding aligns the first card + traps snap at the rail. */
+/* Full-width scroller; rail padding aligns the first card + traps snap at the rail.
+   Re-declare --prsv2-rail HERE (the base .aew-prsv2__track sets its own value with
+   +40px pad which would otherwise win over the section's inherited value). */
 .aew-prsv2--related .aew-prsv2__track {
+  --prsv2-rail: calc((100vw - min(1440px, 100vw)) / 2);
   margin-inline: 0;
   padding-left: var(--prsv2-rail);
   padding-right: var(--prsv2-rail);
