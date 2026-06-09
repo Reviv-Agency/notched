@@ -202,6 +202,13 @@ html .e-con:has(.elementor-widget-agency-feature-band-v2) {
   margin-top: 8px;
 }
 
+/* ── Centered content (content_align = center) ───────────────────────────────
+   Centers the heading, eyebrow, steps and buttons within the box. */
+.aew-fbv2--center .aew-fbv2__box { align-items: center; text-align: center; }
+.aew-fbv2--center .aew-fbv2__steps,
+.aew-fbv2--center .aew-fbv2__step { align-items: center; }
+.aew-fbv2--center .aew-fbv2__buttons { justify-content: center; }
+
 /* Button base — design-system: Teko SemiBold 20px / 85%, pad 20/24/16, radius 8. */
 .aew-fbv2__btn {
   display: inline-flex;

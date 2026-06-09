@@ -138,6 +138,17 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 			],
 		] );
 
+		$this->add_control( 'content_align', [
+			'label'   => esc_html__( 'Content alignment', 'agency-elementor-widgets' ),
+			'type'    => Controls_Manager::SELECT,
+			'default' => 'left',
+			'options' => [
+				'left'   => esc_html__( 'Left', 'agency-elementor-widgets' ),
+				'center' => esc_html__( 'Center', 'agency-elementor-widgets' ),
+			],
+			'description' => esc_html__( 'Align the heading, text and buttons inside the box.', 'agency-elementor-widgets' ),
+		] );
+
 		$repeater = new Repeater();
 
 		$repeater->add_control( 'step_title', [
@@ -557,6 +568,9 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_render_attribute( 'wrapper', 'class', 'aew-fbv2' );
 		if ( 'yes' === ( $s['parallax'] ?? '' ) ) {
 			$this->add_render_attribute( 'wrapper', 'class', 'aew-fbv2--parallax' );
+		}
+		if ( 'center' === ( $s['content_align'] ?? 'left' ) ) {
+			$this->add_render_attribute( 'wrapper', 'class', 'aew-fbv2--center' );
 		}
 		$this->add_render_attribute( 'wrapper', 'data-aew-feature-band-v2', '' );
 
