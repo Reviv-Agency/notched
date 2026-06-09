@@ -288,61 +288,51 @@
   width: auto;
 }
 
-/* ── RELATED MODE (used on the single-product page, NOT a full-bleed widget) ──
-   The full-bleed breakout (margin-inline: 50% − 50vw, --prsv2-rail off 100vw)
-   only works when .aew-prsv2 spans the whole viewport. Inside WooCommerce's
-   constrained product container that math escapes the box and clips the edge
-   cards. In related mode the slider is SELF-CONTAINED: the track stays inside
-   its container with a small symmetric peek inset so the next/prev card edges
-   are always visible (never cut off), matching the kit-page peek behaviour. */
+/* ── RELATED MODE (single-product page) ──────────────────────────────────────
+   Behaves like the home-page slider: the track BREAKS OUT of its container to
+   the right and bleeds toward the viewport edge, so cards flow PAST the content
+   rail as you scroll (a peek) instead of stopping at the box edge. The first card
+   stays aligned with the "Related products" heading; the track scrolls with the
+   next card always peeking in. */
 .aew-prsv2--related {
-  overflow: visible;               /* the TRACK scrolls; don't clip the scroll here */
+  overflow-x: clip;                /* clip the right bleed at the viewport, allow scroll inside */
   background-color: transparent;   /* sits on the product page bg, not a cream band */
-  --prsv2-cols: 4;                 /* FULL cards shown across the rail */
   --prsv2-gap: 24px;
-  --prsv2-edge: 24px;              /* leading/trailing inset (Apple-style scroll-padding) */
 }
-/* Apple-style scroll model: the track is the scroller, capped to the rail. Its
-   leading/trailing padding doubles as scroll-padding so the FIRST card aligns
-   to the rail edge AND every card snaps back to that same inset when you scroll
-   — so the left card is never sliced under the edge. No peek: cards are sized to
-   a whole fraction of the rail, the slider pages by full cards. */
 .aew-prsv2--related .aew-prsv2__inner {
   padding-left: 0;
   padding-right: 0;
   overflow: visible;
 }
 .aew-prsv2--related .aew-prsv2__track {
+  /* Break out to the right edge of the viewport: extend the track's right margin
+     by the distance from the inner's right edge to the viewport's right edge, so
+     cards can flow full-bleed to the right. The left stays at the rail (0) so the
+     first card aligns under the heading. */
   margin-inline: 0;
+  margin-right: calc(-1 * (100vw - 100%) / 2);
   --prsv2-rail: 0px;
   padding-left: 0;
-  padding-right: 0;
+  padding-right: var(--prsv2-gutter, 80px);   /* trailing room so the last card clears */
   scroll-padding-left: 0;
-  scroll-padding-right: 0;
+  scroll-padding-right: var(--prsv2-gutter, 80px);
   gap: var(--prsv2-gap);
-  scroll-snap-type: x mandatory;   /* snap to whole cards */
+  scroll-snap-type: x proximity;   /* let it rest mid-scroll so the peek shows */
   overflow-x: auto;                /* the scroller */
   overflow-y: hidden;
 }
-/* slide width = (rail − inner gaps) / cols  →  full cards, no peek, no clip */
+/* Cards sized off the VIEWPORT (not the bled track) so ~4 show with the next
+   peeking — same feel as the home-page slider. */
 .aew-prsv2--related .aew-prsv2__slide {
-  flex: 0 0 calc(
-    (100% - (var(--prsv2-cols) - 1) * var(--prsv2-gap)) / var(--prsv2-cols)
-  );
+  flex: 0 0 clamp(280px, 22vw, 360px);
   scroll-snap-align: start;
 }
 /* Arrows just inside the rail edges. */
 .aew-prsv2--related .aew-prsv2__arrow--prev { left: 8px; }
 .aew-prsv2--related .aew-prsv2__arrow--next { right: 8px; }
 
-@media (max-width: 1024px) {
-  .aew-prsv2--related { --prsv2-cols: 3; }
-}
 @media (max-width: 768px) {
-  .aew-prsv2--related { --prsv2-cols: 2; }
-}
-@media (max-width: 480px) {
-  .aew-prsv2--related { --prsv2-cols: 1; }
+  .aew-prsv2--related .aew-prsv2__slide { flex: 0 0 78%; }
 }
 
 /* ── Card: image + title + price, whole card links to product ─────────────── */
