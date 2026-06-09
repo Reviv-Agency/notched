@@ -25,6 +25,29 @@ add_action('wp_head', function () {
        . "setTimeout(function(){document.documentElement.classList.remove('aew-swatch-pending');},3000);</script>\n";
 }, 0);
 
+/*
+ * Dynamic product name in the Single Product template's marketing widgets.
+ * The template (id 1707) applies to ALL products, so its CTA / feature-band copy
+ * uses the token {{product}} (or {{Product}} / {{PRODUCT}}). On a product page we
+ * replace that token in each Elementor widget's rendered output with the current
+ * product's name — so "WHY CHOOSE THE {{product}}?" becomes the real product name
+ * per product. Runs via Elementor's widget render_content filter (AEW widgets
+ * extend Elementor\Widget_Base, so their output passes through here).
+ */
+add_filter('elementor/widget/render_content', function ($content) {
+    if (!function_exists('is_product') || !is_product()) { return $content; }
+    if (strpos($content, '{{') === false) { return $content; }
+    $name = '';
+    $pid = get_queried_object_id();
+    if ($pid) { $name = get_the_title($pid); }
+    if ('' === $name) { return $content; }
+    return strtr($content, [
+        '{{product}}' => $name,
+        '{{Product}}' => $name,
+        '{{PRODUCT}}' => $name,
+    ]);
+}, 10);
+
 add_action('wp_enqueue_scripts', function () {
     // Version by file mtime so edits to style.css bust the browser cache.
     $css = get_stylesheet_directory() . '/style.css';
