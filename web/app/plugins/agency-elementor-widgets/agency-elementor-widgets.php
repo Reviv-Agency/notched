@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'AEW_VERSION', '1.18.5' );
+define( 'AEW_VERSION', '1.18.6' );
 define( 'AEW_PLUGIN_FILE', __FILE__ );
 define( 'AEW_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AEW_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -114,6 +114,33 @@ function aew_print_elementor_compat_shim(): void {
 // regardless of how WP orders enqueues.
 add_action( 'wp_head', 'aew_print_elementor_compat_shim', 1 );
 add_action( 'wp_print_footer_scripts', 'aew_print_elementor_compat_shim', 1 );
+
+/*
+ * Guard against Elementor's Cloud Library "screenshot proxy" fatal.
+ *
+ * Elementor's cloud-library module (modules/cloud-library/module.php) throws an
+ * uncaught WpOrg\Requests\Exception\Http\Status403 in its constructor when a
+ * request arrives with ?screenshot_proxy set but an invalid/missing nonce — which
+ * happens on this server during editor preview/screenshot generation. The fatal
+ * crashes that request and breaks the editor's preview of custom widgets (they
+ * render fine on the front-end but appear "gone" in the editor canvas).
+ *
+ * We run on plugins_loaded (before Elementor's init at the default priority): if
+ * the screenshot_proxy param is present without a valid nonce, strip it so the
+ * module's guard is never tripped. This is upgrade-safe (no core edits).
+ */
+add_action(
+	'plugins_loaded',
+	static function (): void {
+		if ( isset( $_GET['screenshot_proxy'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			$nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : '';
+			if ( ! $nonce || ! wp_verify_nonce( $nonce, 'screenshot-proxy' ) ) {
+				unset( $_GET['screenshot_proxy'], $_REQUEST['screenshot_proxy'] );
+			}
+		}
+	},
+	1
+);
 
 add_action(
 	'plugins_loaded',
