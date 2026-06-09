@@ -305,16 +305,16 @@
   overflow: visible;
 }
 .aew-prsv2--related .aew-prsv2__track {
-  /* Break out to the right edge of the viewport: extend the track's right margin
-     by the distance from the inner's right edge to the viewport's right edge, so
-     cards can flow full-bleed to the right. The left stays at the rail (0) so the
-     first card aligns under the heading. */
-  margin-inline: 0;
-  margin-right: calc(-1 * (100vw - 100%) / 2);
-  --prsv2-rail: 0px;
-  padding-left: 0;
-  padding-right: var(--prsv2-gutter, 80px);   /* trailing room so the last card clears */
-  scroll-padding-left: 0;
+  /* Full-bleed BOTH sides: break the track out to the viewport edges (left & right)
+     using the classic `margin-inline: 50% − 50vw` trick. Then re-add the rail as
+     leading padding + scroll-padding so the FIRST card still aligns under the
+     heading while the strip itself spans edge-to-edge — cards flow past the 1440
+     content rail on both sides, exactly like the home-page slider. */
+  --prsv2-rail: calc((100vw - min(1440px, 100vw)) / 2);
+  margin-inline: calc(50% - 50vw);
+  padding-left: var(--prsv2-rail);
+  padding-right: var(--prsv2-gutter, 80px);    /* trailing room so the last card clears */
+  scroll-padding-left: var(--prsv2-rail);
   scroll-padding-right: var(--prsv2-gutter, 80px);
   gap: var(--prsv2-gap);
   scroll-snap-type: x proximity;   /* let it rest mid-scroll so the peek shows */
