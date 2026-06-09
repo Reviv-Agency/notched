@@ -58,12 +58,13 @@ html .e-con:has(.elementor-widget-agency-feature-band-v2) {
   background-repeat: no-repeat;
 }
 
-/* Parallax: oversize the image vertically (cover → 100% width × 160% height) so
-   there's real travel room, then feature-band-v2.js pans background-position-y
-   0→100% as the band scrolls through the viewport (set inline so it beats the
-   bg_position control rule). A short transition smooths the rAF steps. */
+/* Parallax: use `cover` so the image ALWAYS fills the full width (no side gaps
+   exposing the green bg) — the previous `auto 160%` only guaranteed height, so on
+   wide viewports the image was narrower than the band and the background colour
+   showed on the sides. `cover` scales by width on wide screens, leaving vertical
+   overflow for feature-band-v2.js to pan via background-position-y. */
 .aew-fbv2--parallax {
-  background-size: auto 160%;
+  background-size: cover;
   transition: background-position 0.1s linear;
 }
 
