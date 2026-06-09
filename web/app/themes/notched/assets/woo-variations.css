@@ -20,6 +20,11 @@ table.variations tr { display: block; margin-bottom: 22px; }
 .variations tbody > tr:nth-child(odd) > th,
 table.variations tbody > tr:nth-child(odd) > td,
 table.variations tbody > tr:nth-child(odd) > th { background-color: transparent !important; }
+/* Kill the row-hover highlight on variation rows. */
+.variations tbody > tr:hover > td,
+.variations tbody > tr:hover > th,
+table.variations tbody > tr:hover > td,
+table.variations tbody > tr:hover > th { background-color: transparent !important; }
 .variations td,
 .variations th,
 table.variations td,
