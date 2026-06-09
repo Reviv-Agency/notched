@@ -296,28 +296,40 @@
    its container with a small symmetric peek inset so the next/prev card edges
    are always visible (never cut off), matching the kit-page peek behaviour. */
 .aew-prsv2--related {
-  overflow-x: visible;             /* container clips, not this */
+  overflow-x: clip;                /* clip our own right bleed at the inner rail */
+  background-color: transparent;   /* sits on the product page bg, not a cream band */
+  --prsv2-related-peek: 56px;      /* how far the next card peeks past the rail */
 }
+/* The track and the heading share ONE centered rail. The track is allowed to
+   extend past the rail's RIGHT edge by exactly the peek amount, so the next
+   card is partially visible; .aew-prsv2--related's overflow-x:clip trims the
+   rest cleanly at the peek boundary (no hard mid-card slice at the page edge). */
 .aew-prsv2--related .aew-prsv2__inner {
   padding-left: 0;
   padding-right: 0;
+  overflow: visible;
 }
 .aew-prsv2--related .aew-prsv2__track {
   margin-inline: 0;                /* cancel full-bleed breakout */
-  --prsv2-rail: 24px;              /* small leading inset so first card isn't flush */
-  padding-left: 24px;
-  padding-right: 24px;
-  scroll-padding-left: 24px;
-  scroll-padding-right: 24px;
+  margin-right: calc(var(--prsv2-related-peek) * -1); /* let the peek card extend right */
+  --prsv2-rail: 0px;
+  padding-left: 0;
+  padding-right: var(--prsv2-related-peek);
+  scroll-padding-left: 0;
+  scroll-padding-right: var(--prsv2-related-peek);
 }
-/* Peek: cards sized so ~3 show with the next/prev edges visible inside the box. */
+/* Peek: ~3 cards across the rail with the 4th edge showing. */
 .aew-prsv2--related .aew-prsv2__slide {
-  flex: 0 0 clamp(260px, 30%, 360px);
+  flex: 0 0 calc((100% - 48px - var(--prsv2-related-peek)) / 3);
 }
-/* Keep the arrows just inside the container edges (the -8px outset can clip in
-   WooCommerce's bounded product container). */
-.aew-prsv2--related .aew-prsv2__arrow--prev { left: 4px; }
-.aew-prsv2--related .aew-prsv2__arrow--next { right: 4px; }
+/* Arrows just inside the rail edges. */
+.aew-prsv2--related .aew-prsv2__arrow--prev { left: 8px; }
+.aew-prsv2--related .aew-prsv2__arrow--next { right: 8px; }
+
+@media (max-width: 768px) {
+  .aew-prsv2--related { --prsv2-related-peek: 40px; }
+  .aew-prsv2--related .aew-prsv2__slide { flex: 0 0 calc(100% - var(--prsv2-related-peek)); }
+}
 
 /* ── Card: image + title + price, whole card links to product ─────────────── */
 .aew-prsv2__card {
