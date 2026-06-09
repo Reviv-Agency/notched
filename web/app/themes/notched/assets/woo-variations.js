@@ -88,6 +88,13 @@
 		});
 	}
 
+	function resyncAll() {
+		document.querySelectorAll('.variations select').forEach(function (s) {
+			var w = s.nextElementSibling;
+			if (w && w.classList.contains('aew-swatches')) { syncActive(w, s); }
+		});
+	}
+
 	function boot() { init(document); }
 
 	if (document.readyState === 'loading') {
@@ -95,15 +102,31 @@
 	} else {
 		boot();
 	}
-	// WC fires events on the form as variations update; re-sync defensively
+	// Run again after full load (Elementor/WC may render the variations form late).
+	window.addEventListener('load', boot);
+
+	/*
+	 * The real fix for "some products still show dropdowns": WooCommerce / Elementor
+	 * can (re)render the variation <select>s AFTER our first pass, leaving fresh,
+	 * unconverted selects. A MutationObserver watches for any select that appears
+	 * (or is replaced) anywhere in the document and converts it immediately. This
+	 * makes conversion timing-independent and consistent across all products.
+	 */
+	if ('MutationObserver' in window) {
+		var pending = null;
+		var mo = new MutationObserver(function () {
+			if (pending) { return; }
+			pending = setTimeout(function () { pending = null; boot(); }, 60);
+		});
+		mo.observe(document.body, { childList: true, subtree: true });
+	}
+
+	// WC fires events on the form as variations update; convert + re-sync defensively.
 	document.addEventListener('woocommerce_update_variation_values', boot);
-	// jQuery-based WC events (variations form): re-sync active states
 	if (window.jQuery) {
-		window.jQuery(document.body).on('woocommerce_variation_has_changed wc_variation_form check_variations found_variation reset_data', function () {
-			document.querySelectorAll('.variations select').forEach(function (s) {
-				var w = s.nextElementSibling;
-				if (w && w.classList.contains('aew-swatches')) { syncActive(w, s); }
-			});
+		window.jQuery(document.body).on('woocommerce_variation_has_changed wc_variation_form check_variations found_variation reset_data update_variation_values', function () {
+			boot();        // convert any newly-rendered selects
+			resyncAll();   // refresh active/disabled states
 		});
 	}
 })();
