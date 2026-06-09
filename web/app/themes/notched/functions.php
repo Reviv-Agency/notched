@@ -74,6 +74,17 @@ add_action('wp_enqueue_scripts', function () {
             }
         }
         wp_localize_script('notched-woo-variations', 'NotchedStainImg', $stainImg);
+
+        // slug => image URL for the END CUT boxes (term meta `cut_img`),
+        // previewed the same way as the stain image.
+        $cutImg = [];
+        if (taxonomy_exists('pa_end-cut')) {
+            foreach (get_terms(['taxonomy' => 'pa_end-cut', 'hide_empty' => false]) as $t) {
+                $img = get_term_meta($t->term_id, 'cut_img', true);
+                if ($img) { $cutImg[$t->slug] = ['url' => $img, 'name' => $t->name]; }
+            }
+        }
+        wp_localize_script('notched-woo-variations', 'NotchedCutImg', $cutImg);
     }
 }, 20);
 

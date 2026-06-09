@@ -12,12 +12,14 @@
 
 	// Colour attributes render as swatches; everything else as button-boxes.
 	var COLOR_ATTRS = ['attribute_pa_stain-color', 'attribute_pa_roof-color'];
-	// the stain attribute also gets an image preview below its swatches
-	var STAIN_ATTR = 'attribute_pa_stain-color';
 	// hex map injected by the theme (slug -> #hex), see functions.php
 	var HEX = window.NotchedSwatchHex || {};
-	// stain slug -> { url, name } sample image, injected by the theme
-	var STAIN_IMG = window.NotchedStainImg || {};
+	// Attributes that get an image preview (slug -> { url, name }) below their
+	// swatches/boxes: stain colour + end cut. Injected by the theme.
+	var PREVIEW_MAPS = {
+		'attribute_pa_stain-color': window.NotchedStainImg || {},
+		'attribute_pa_end-cut': window.NotchedCutImg || {}
+	};
 
 	function labelFor(select) {
 		// the WC variations table row has a <th class="label"><label>NAME</label></th>
@@ -68,14 +70,15 @@
 		select.classList.add('aew-swatch-source');
 		select.insertAdjacentElement('afterend', wrap);
 
-		// STAIN COLOR: add an image preview below the swatches. Empty by default;
-		// hover a swatch to preview that stain, select to keep it shown.
-		if (name === STAIN_ATTR) { buildStainPreview(wrap, select); }
+		// STAIN COLOR + END CUT: image preview below the controls. Empty by default;
+		// hover an option to preview its image, select to keep it shown.
+		var previewMap = PREVIEW_MAPS[name];
+		if (previewMap && Object.keys(previewMap).length) { buildPreview(wrap, select, previewMap); }
 
 		syncActive(wrap, select);
 	}
 
-	function buildStainPreview(wrap, select) {
+	function buildPreview(wrap, select, imgMap) {
 		var preview = document.createElement('figure');
 		preview.className = 'aew-stain-preview';
 		preview.innerHTML = '<img alt="" /><figcaption></figcaption>';
@@ -84,7 +87,7 @@
 		wrap.insertAdjacentElement('afterend', preview);
 
 		function show(slug) {
-			var rec = STAIN_IMG[slug];
+			var rec = imgMap[slug];
 			if (rec && rec.url) {
 				img.src = rec.url;
 				img.alt = rec.name || '';
