@@ -66,20 +66,25 @@ table.variations .label label {
 
 /* ── Colour swatches (stain / roof) ── */
 .aew-swatches--color { gap: 12px; }
-.aew-swatch--color {
+/* High specificity + !important so the swatch's own --sw colour always wins over
+   theme/Elementor/WC generic <button> background rules (which were painting every
+   swatch the brand gold). The active state only adds a ring — never recolours. */
+.aew-swatches .aew-swatch.aew-swatch--color {
   appearance: none;
+  -webkit-appearance: none;
   cursor: pointer;
   width: 34px;
   height: 34px;
   padding: 0;
   border-radius: 8px;
   border: 1px solid rgba(20, 28, 25, 0.18);
-  background-color: var(--sw, #ccc);
+  background-color: var(--sw, #ccc) !important;
+  background-image: none !important;
   position: relative;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
-.aew-swatch--color:hover { transform: translateY(-1px); }
-.aew-swatch--color.is-active {
+.aew-swatches .aew-swatch.aew-swatch--color:hover { transform: translateY(-1px); }
+.aew-swatches .aew-swatch.aew-swatch--color.is-active {
   box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--notched-cta, #AA7D44);
 }
 
@@ -94,3 +99,40 @@ table.variations .label label {
 
 /* Add-to-cart row spacing under the swatches. */
 .woocommerce-variation-add-to-cart { margin-top: 8px; }
+
+/* ── Product gallery: main image on top + exactly 4 thumbnails below ──────────
+   WooCommerce/flexslider renders a main slider + an <ol class="flex-control-thumbs">
+   thumbnail nav. We lay the thumbnails out as a 4-column row and hide the 5th+
+   (all images remain available in the main slider + the PhotoSwipe lightbox). */
+.woocommerce-product-gallery .flex-control-thumbs {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.woocommerce-product-gallery .flex-control-thumbs li {
+  margin: 0;
+  width: auto !important;
+}
+.woocommerce-product-gallery .flex-control-thumbs li img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+.woocommerce-product-gallery .flex-control-thumbs li img.flex-active,
+.woocommerce-product-gallery .flex-control-thumbs li img:hover { opacity: 1; }
+/* Show only the first 4 thumbnails. */
+.woocommerce-product-gallery .flex-control-thumbs li:nth-child(n+5) { display: none; }
+
+/* Main image: rounded, full width of the gallery column. */
+.woocommerce-product-gallery__image img,
+.woocommerce-product-gallery .flex-viewport img { border-radius: 14px; }
+/* The zoom/lightbox trigger (magnifier) stays clickable to open PhotoSwipe. */
+.woocommerce-product-gallery__trigger { z-index: 5; }
