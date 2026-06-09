@@ -296,14 +296,17 @@
    its container with a small symmetric peek inset so the next/prev card edges
    are always visible (never cut off), matching the kit-page peek behaviour. */
 .aew-prsv2--related {
-  overflow-x: clip;                /* no horizontal bleed outside the rail */
+  overflow: visible;               /* the TRACK scrolls; don't clip the scroll here */
   background-color: transparent;   /* sits on the product page bg, not a cream band */
-  --prsv2-cols: 4;                 /* FULL cards shown across the rail (no peek) */
+  --prsv2-cols: 4;                 /* FULL cards shown across the rail */
   --prsv2-gap: 24px;
+  --prsv2-edge: 24px;              /* leading/trailing inset (Apple-style scroll-padding) */
 }
-/* Track + heading share one centered rail. Cards are sized to a WHOLE fraction
-   of the rail so exactly --prsv2-cols complete cards fit — nothing is sliced at
-   either edge. The slider pages by full cards via the arrows/scroll-snap. */
+/* Apple-style scroll model: the track is the scroller, capped to the rail. Its
+   leading/trailing padding doubles as scroll-padding so the FIRST card aligns
+   to the rail edge AND every card snaps back to that same inset when you scroll
+   — so the left card is never sliced under the edge. No peek: cards are sized to
+   a whole fraction of the rail, the slider pages by full cards. */
 .aew-prsv2--related .aew-prsv2__inner {
   padding-left: 0;
   padding-right: 0;
@@ -318,12 +321,15 @@
   scroll-padding-right: 0;
   gap: var(--prsv2-gap);
   scroll-snap-type: x mandatory;   /* snap to whole cards */
+  overflow-x: auto;                /* the scroller */
+  overflow-y: hidden;
 }
-/* slide width = (rail − inner gaps) / cols  →  full cards, no peek */
+/* slide width = (rail − inner gaps) / cols  →  full cards, no peek, no clip */
 .aew-prsv2--related .aew-prsv2__slide {
   flex: 0 0 calc(
     (100% - (var(--prsv2-cols) - 1) * var(--prsv2-gap)) / var(--prsv2-cols)
   );
+  scroll-snap-align: start;
 }
 /* Arrows just inside the rail edges. */
 .aew-prsv2--related .aew-prsv2__arrow--prev { left: 8px; }
