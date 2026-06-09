@@ -296,39 +296,44 @@
    its container with a small symmetric peek inset so the next/prev card edges
    are always visible (never cut off), matching the kit-page peek behaviour. */
 .aew-prsv2--related {
-  overflow-x: clip;                /* clip our own right bleed at the inner rail */
+  overflow-x: clip;                /* trim the peek cleanly at the rail's right edge */
   background-color: transparent;   /* sits on the product page bg, not a cream band */
-  --prsv2-related-peek: 56px;      /* how far the next card peeks past the rail */
+  --prsv2-cols: 3;                 /* fully-visible cards across the rail */
+  --prsv2-gap: 24px;
 }
-/* The track and the heading share ONE centered rail. The track is allowed to
-   extend past the rail's RIGHT edge by exactly the peek amount, so the next
-   card is partially visible; .aew-prsv2--related's overflow-x:clip trims the
-   rest cleanly at the peek boundary (no hard mid-card slice at the page edge). */
+/* Track + heading share one centered rail. Cards are sized so that exactly
+   --prsv2-cols fit, MINUS a slice, leaving a SUBSTANTIAL half-card peek of the
+   next card (not a thin sliver). overflow-x:clip on the parent trims it. */
 .aew-prsv2--related .aew-prsv2__inner {
   padding-left: 0;
   padding-right: 0;
   overflow: visible;
 }
 .aew-prsv2--related .aew-prsv2__track {
-  margin-inline: 0;                /* cancel full-bleed breakout */
-  margin-right: calc(var(--prsv2-related-peek) * -1); /* let the peek card extend right */
+  margin-inline: 0;
   --prsv2-rail: 0px;
   padding-left: 0;
-  padding-right: var(--prsv2-related-peek);
+  padding-right: 0;
   scroll-padding-left: 0;
-  scroll-padding-right: var(--prsv2-related-peek);
+  scroll-padding-right: 0;
+  gap: var(--prsv2-gap);
 }
-/* Peek: ~3 cards across the rail with the 4th edge showing. */
+/* slide width = (rail − gaps for the visible cards) / (cols + 0.5 peek).
+   The +0.5 shrinks each card just enough that half of the next one shows. */
 .aew-prsv2--related .aew-prsv2__slide {
-  flex: 0 0 calc((100% - 48px - var(--prsv2-related-peek)) / 3);
+  flex: 0 0 calc(
+    (100% - (var(--prsv2-cols)) * var(--prsv2-gap)) / (var(--prsv2-cols) + 0.5)
+  );
 }
 /* Arrows just inside the rail edges. */
 .aew-prsv2--related .aew-prsv2__arrow--prev { left: 8px; }
 .aew-prsv2--related .aew-prsv2__arrow--next { right: 8px; }
 
+@media (max-width: 1024px) {
+  .aew-prsv2--related { --prsv2-cols: 2; }
+}
 @media (max-width: 768px) {
-  .aew-prsv2--related { --prsv2-related-peek: 40px; }
-  .aew-prsv2--related .aew-prsv2__slide { flex: 0 0 calc(100% - var(--prsv2-related-peek)); }
+  .aew-prsv2--related { --prsv2-cols: 1; }
 }
 
 /* ── Card: image + title + price, whole card links to product ─────────────── */
