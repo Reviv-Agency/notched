@@ -117,11 +117,13 @@ table.variations .label label {
    WooCommerce/flexslider renders a main slider + an <ol class="flex-control-thumbs">
    thumbnail nav. We lay the thumbnails out as a 4-column row and hide the 5th+
    (all images remain available in the main slider + the PhotoSwipe lightbox). */
+/* Space between the main image and the thumbnail row below it. */
+.woocommerce-product-gallery .flex-viewport { margin-bottom: 24px; }
 .woocommerce-product-gallery .flex-control-thumbs {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  margin: 14px 0 0;
+  margin: 24px 0 0;
   padding: 0;
   list-style: none;
 }
@@ -149,3 +151,44 @@ table.variations .label label {
 .woocommerce-product-gallery .flex-viewport img { border-radius: 14px; }
 /* The zoom/lightbox trigger (magnifier) stays clickable to open PhotoSwipe. */
 .woocommerce-product-gallery__trigger { z-index: 5; }
+/* Whole main image is clickable to open the lightbox. */
+.woocommerce-product-gallery__image a { cursor: zoom-in; }
+
+/* ── Lightbox thumbnail strip (injected into PhotoSwipe by woo-gallery.js) ──── */
+.pswp .aew-pswp-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1600;
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  background: rgba(0, 0, 0, 0.45);
+  scrollbar-width: thin;
+  justify-content: center;
+}
+.pswp .aew-pswp-strip::-webkit-scrollbar { height: 6px; }
+.pswp .aew-pswp-strip::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.4); border-radius: 3px; }
+.aew-pswp-thumb {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+.aew-pswp-thumb:hover { opacity: 1; }
+.aew-pswp-thumb.is-active {
+  opacity: 1;
+  border-color: var(--notched-cta, #AA7D44);
+}
+/* lift PhotoSwipe's bottom caption so it doesn't collide with the strip */
+.pswp .pswp__caption { bottom: 80px; }

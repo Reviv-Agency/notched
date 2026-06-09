@@ -35,9 +35,11 @@ add_action('wp_enqueue_scripts', function () {
         $cssv = is_readable("$dir/assets/woo-variations.css") ? (string) filemtime("$dir/assets/woo-variations.css") : null;
         $jsv  = is_readable("$dir/assets/woo-variations.js")  ? (string) filemtime("$dir/assets/woo-variations.js")  : null;
         $btnv = is_readable("$dir/assets/woo-buttons.css")    ? (string) filemtime("$dir/assets/woo-buttons.css")    : null;
+        $galv = is_readable("$dir/assets/woo-gallery.js")     ? (string) filemtime("$dir/assets/woo-gallery.js")     : null;
         wp_enqueue_style('notched-woo-variations', "$uri/assets/woo-variations.css", [], $cssv);
         wp_enqueue_style('notched-woo-buttons', "$uri/assets/woo-buttons.css", [], $btnv);
         wp_enqueue_script('notched-woo-variations', "$uri/assets/woo-variations.js", ['jquery'], $jsv, true);
+        wp_enqueue_script('notched-woo-gallery', "$uri/assets/woo-gallery.js", [], $galv, true);
 
         // slug => #hex map for the colour attributes, read from term meta `swatch_hex`.
         $hex = [];
