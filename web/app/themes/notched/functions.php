@@ -63,6 +63,17 @@ add_action('wp_enqueue_scripts', function () {
             }
         }
         wp_localize_script('notched-woo-variations', 'NotchedSwatchHex', $hex);
+
+        // slug => image URL for the STAIN COLOR swatches (term meta `stain_img`),
+        // used to preview the selected/hovered stain below the swatch row.
+        $stainImg = [];
+        if (taxonomy_exists('pa_stain-color')) {
+            foreach (get_terms(['taxonomy' => 'pa_stain-color', 'hide_empty' => false]) as $t) {
+                $img = get_term_meta($t->term_id, 'stain_img', true);
+                if ($img) { $stainImg[$t->slug] = ['url' => $img, 'name' => $t->name]; }
+            }
+        }
+        wp_localize_script('notched-woo-variations', 'NotchedStainImg', $stainImg);
     }
 }, 20);
 

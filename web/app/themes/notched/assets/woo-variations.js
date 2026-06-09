@@ -12,8 +12,12 @@
 
 	// Colour attributes render as swatches; everything else as button-boxes.
 	var COLOR_ATTRS = ['attribute_pa_stain-color', 'attribute_pa_roof-color'];
+	// the stain attribute also gets an image preview below its swatches
+	var STAIN_ATTR = 'attribute_pa_stain-color';
 	// hex map injected by the theme (slug -> #hex), see functions.php
 	var HEX = window.NotchedSwatchHex || {};
+	// stain slug -> { url, name } sample image, injected by the theme
+	var STAIN_IMG = window.NotchedStainImg || {};
 
 	function labelFor(select) {
 		// the WC variations table row has a <th class="label"><label>NAME</label></th>
@@ -63,7 +67,48 @@
 		// hide the native select but keep it in the DOM (WC reads/writes it)
 		select.classList.add('aew-swatch-source');
 		select.insertAdjacentElement('afterend', wrap);
+
+		// STAIN COLOR: add an image preview below the swatches. Empty by default;
+		// hover a swatch to preview that stain, select to keep it shown.
+		if (name === STAIN_ATTR) { buildStainPreview(wrap, select); }
+
 		syncActive(wrap, select);
+	}
+
+	function buildStainPreview(wrap, select) {
+		var preview = document.createElement('figure');
+		preview.className = 'aew-stain-preview';
+		preview.innerHTML = '<img alt="" /><figcaption></figcaption>';
+		var img = preview.querySelector('img');
+		var cap = preview.querySelector('figcaption');
+		wrap.insertAdjacentElement('afterend', preview);
+
+		function show(slug) {
+			var rec = STAIN_IMG[slug];
+			if (rec && rec.url) {
+				img.src = rec.url;
+				img.alt = rec.name || '';
+				cap.textContent = rec.name || '';
+				preview.classList.add('is-shown');
+			} else {
+				preview.classList.remove('is-shown');
+			}
+		}
+		function showSelectedOrHide() {
+			if (select.value) { show(select.value); }
+			else { preview.classList.remove('is-shown'); }
+		}
+
+		// hover previews; mouse-out reverts to the selected (or hidden) state
+		wrap.querySelectorAll('.aew-swatch').forEach(function (b) {
+			b.addEventListener('mouseenter', function () { show(b.getAttribute('data-value')); });
+			b.addEventListener('focus', function () { show(b.getAttribute('data-value')); });
+		});
+		wrap.addEventListener('mouseleave', showSelectedOrHide);
+		// keep in sync with selection changes (click or WC reset)
+		select.addEventListener('change', showSelectedOrHide);
+		wrap._aewStainSync = showSelectedOrHide;
+		showSelectedOrHide();
 	}
 
 	function syncActive(wrap, select) {

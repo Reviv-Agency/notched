@@ -126,6 +126,28 @@ table.variations .label label {
   box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--notched-cta, #AA7D44);
 }
 
+/* ── Stain colour image preview (below the stain swatches) ── */
+.aew-stain-preview {
+  margin: 12px 0 0;
+  display: none;            /* hidden until a stain is hovered/selected */
+}
+.aew-stain-preview.is-shown { display: block; }
+.aew-stain-preview img {
+  display: block;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(20, 28, 25, 0.12);
+}
+.aew-stain-preview figcaption {
+  margin-top: 8px;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--notched-text, #141C19);
+}
+
 /* ── Disabled (out-of-stock combo) ── */
 .aew-swatch.is-disabled {
   opacity: 0.35;
