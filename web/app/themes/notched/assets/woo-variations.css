@@ -15,6 +15,20 @@
   }
 }
 
+/* Anti-FOUC: before woo-variations.js converts the dropdowns to swatches, take
+   the native <select>s out of flow so they neither flash nor reserve a gap that
+   the swatches would then shift into. `aew-swatch-pending` is set on <html> by an
+   inline head script (functions.php) and removed once conversion completes (or
+   after a 3s safety timeout). Labels stay visible. */
+.aew-swatch-pending .variations select,
+.aew-swatch-pending table.variations select {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
 /* Hide the native <select> (kept for WooCommerce's logic) but keep it accessible. */
 .aew-swatch-source {
   position: absolute !important;

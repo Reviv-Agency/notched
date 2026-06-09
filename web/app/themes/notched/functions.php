@@ -11,6 +11,20 @@ add_action('after_setup_theme', function () {
     remove_theme_support('wc-product-gallery-zoom');
 }, 11);
 
+/*
+ * Anti-FOUC for the variation swatches: on product pages, print an inline <head>
+ * script that immediately marks <html> with `aew-swatch-pending`. CSS uses that
+ * to hide the native variation dropdowns from the very first paint, so the user
+ * never sees dropdowns flash before woo-variations.js converts them to swatches.
+ * The JS removes the class once conversion is done; a safety timeout also removes
+ * it so the form is never permanently hidden if JS fails.
+ */
+add_action('wp_head', function () {
+    if (!function_exists('is_product') || !is_product()) { return; }
+    echo "<script>document.documentElement.classList.add('aew-swatch-pending');"
+       . "setTimeout(function(){document.documentElement.classList.remove('aew-swatch-pending');},3000);</script>\n";
+}, 0);
+
 add_action('wp_enqueue_scripts', function () {
     // Version by file mtime so edits to style.css bust the browser cache.
     $css = get_stylesheet_directory() . '/style.css';

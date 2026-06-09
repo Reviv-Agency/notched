@@ -134,6 +134,12 @@
 				select.addEventListener('change', function () { syncActive(wrap, select); });
 			}
 		});
+		// Reveal: once every select on the page is converted, drop the anti-FOUC
+		// flag so nothing stays hidden. (Safety timeout in the head also clears it.)
+		var pending = document.querySelectorAll('.variations select:not(.aew-swatch-source)').length;
+		if (pending === 0) {
+			document.documentElement.classList.remove('aew-swatch-pending');
+		}
 	}
 
 	function resyncAll() {
