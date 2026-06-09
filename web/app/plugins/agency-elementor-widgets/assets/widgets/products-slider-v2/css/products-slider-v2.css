@@ -296,14 +296,14 @@
    its container with a small symmetric peek inset so the next/prev card edges
    are always visible (never cut off), matching the kit-page peek behaviour. */
 .aew-prsv2--related {
-  overflow-x: clip;                /* trim the peek cleanly at the rail's right edge */
+  overflow-x: clip;                /* no horizontal bleed outside the rail */
   background-color: transparent;   /* sits on the product page bg, not a cream band */
-  --prsv2-cols: 3;                 /* fully-visible cards across the rail */
+  --prsv2-cols: 4;                 /* FULL cards shown across the rail (no peek) */
   --prsv2-gap: 24px;
 }
-/* Track + heading share one centered rail. Cards are sized so that exactly
-   --prsv2-cols fit, MINUS a slice, leaving a SUBSTANTIAL half-card peek of the
-   next card (not a thin sliver). overflow-x:clip on the parent trims it. */
+/* Track + heading share one centered rail. Cards are sized to a WHOLE fraction
+   of the rail so exactly --prsv2-cols complete cards fit — nothing is sliced at
+   either edge. The slider pages by full cards via the arrows/scroll-snap. */
 .aew-prsv2--related .aew-prsv2__inner {
   padding-left: 0;
   padding-right: 0;
@@ -317,12 +317,12 @@
   scroll-padding-left: 0;
   scroll-padding-right: 0;
   gap: var(--prsv2-gap);
+  scroll-snap-type: x mandatory;   /* snap to whole cards */
 }
-/* slide width = (rail − gaps for the visible cards) / (cols + 0.5 peek).
-   The +0.5 shrinks each card just enough that half of the next one shows. */
+/* slide width = (rail − inner gaps) / cols  →  full cards, no peek */
 .aew-prsv2--related .aew-prsv2__slide {
   flex: 0 0 calc(
-    (100% - (var(--prsv2-cols)) * var(--prsv2-gap)) / (var(--prsv2-cols) + 0.5)
+    (100% - (var(--prsv2-cols) - 1) * var(--prsv2-gap)) / var(--prsv2-cols)
   );
 }
 /* Arrows just inside the rail edges. */
@@ -330,9 +330,12 @@
 .aew-prsv2--related .aew-prsv2__arrow--next { right: 8px; }
 
 @media (max-width: 1024px) {
-  .aew-prsv2--related { --prsv2-cols: 2; }
+  .aew-prsv2--related { --prsv2-cols: 3; }
 }
 @media (max-width: 768px) {
+  .aew-prsv2--related { --prsv2-cols: 2; }
+}
+@media (max-width: 480px) {
   .aew-prsv2--related { --prsv2-cols: 1; }
 }
 
