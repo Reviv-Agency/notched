@@ -72,7 +72,7 @@ if ( empty( $items ) ) {
 
 		<div class="aew-prsv2__viewport">
 			<button type="button" class="aew-prsv2__arrow aew-prsv2__arrow--prev" data-aew-prs-prev aria-label="<?php esc_attr_e( 'Previous products', 'notched' ); ?>">
-				<svg viewBox="0 0 200 200" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.3 96.3h123.8c-10.4-6-15.6-15.8-15.6-29.1h7.3c0 7.2 0 28.9 43 29.1h.9v7.3c-43.2.2-43.2 22-43.2 29.1h-7.3c0-13.4 5.3-23.1 15.8-29.1H20.3v-7.3z"/></svg>
+				<svg class="aew-prsv2__chev" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
 			</button>
 
 			<ul class="aew-prsv2__track" data-aew-prs-track>
@@ -94,7 +94,7 @@ if ( empty( $items ) ) {
 			</ul>
 
 			<button type="button" class="aew-prsv2__arrow aew-prsv2__arrow--next" data-aew-prs-next aria-label="<?php esc_attr_e( 'Next products', 'notched' ); ?>">
-				<svg viewBox="0 0 200 200" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M179.7 96.3H55.9c10.4-6 15.6-15.8 15.6-29.1h-7.3c0 7.2 0 28.9-43 29.1h-.9v7.3c43.2.2 43.2 22 43.2 29.1h7.3c0-13.4-5.3-23.1-15.8-29.1h124.6v-7.3z"/></svg>
+				<svg class="aew-prsv2__chev" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
 			</button>
 		</div>
 

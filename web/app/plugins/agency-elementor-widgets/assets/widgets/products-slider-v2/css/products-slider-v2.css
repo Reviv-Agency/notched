@@ -288,6 +288,37 @@
   width: auto;
 }
 
+/* ── RELATED MODE (used on the single-product page, NOT a full-bleed widget) ──
+   The full-bleed breakout (margin-inline: 50% − 50vw, --prsv2-rail off 100vw)
+   only works when .aew-prsv2 spans the whole viewport. Inside WooCommerce's
+   constrained product container that math escapes the box and clips the edge
+   cards. In related mode the slider is SELF-CONTAINED: the track stays inside
+   its container with a small symmetric peek inset so the next/prev card edges
+   are always visible (never cut off), matching the kit-page peek behaviour. */
+.aew-prsv2--related {
+  overflow-x: visible;             /* container clips, not this */
+}
+.aew-prsv2--related .aew-prsv2__inner {
+  padding-left: 0;
+  padding-right: 0;
+}
+.aew-prsv2--related .aew-prsv2__track {
+  margin-inline: 0;                /* cancel full-bleed breakout */
+  --prsv2-rail: 24px;              /* small leading inset so first card isn't flush */
+  padding-left: 24px;
+  padding-right: 24px;
+  scroll-padding-left: 24px;
+  scroll-padding-right: 24px;
+}
+/* Peek: cards sized so ~3 show with the next/prev edges visible inside the box. */
+.aew-prsv2--related .aew-prsv2__slide {
+  flex: 0 0 clamp(260px, 30%, 360px);
+}
+/* Keep the arrows just inside the container edges (the -8px outset can clip in
+   WooCommerce's bounded product container). */
+.aew-prsv2--related .aew-prsv2__arrow--prev { left: 4px; }
+.aew-prsv2--related .aew-prsv2__arrow--next { right: 4px; }
+
 /* ── Card: image + title + price, whole card links to product ─────────────── */
 .aew-prsv2__card {
   display: flex;
