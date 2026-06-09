@@ -288,48 +288,58 @@
   width: auto;
 }
 
-/* ── RELATED MODE (single-product page) ──────────────────────────────────────
-   Behaves like the home-page slider: the track BREAKS OUT of its container to
-   the right and bleeds toward the viewport edge, so cards flow PAST the content
-   rail as you scroll (a peek) instead of stopping at the box edge. The first card
-   stays aligned with the "Related products" heading; the track scrolls with the
-   next card always peeking in. */
+/* ── RELATED MODE (single-product page) — Apple iPad-style edge-to-edge slider ─
+   The whole SECTION breaks out of the 1440 content rail to span the full viewport
+   (margin-inline: 50%−50vw). The scroll TRACK is then full-width and uses
+   padding-inline + scroll-padding equal to the content rail, so:
+     • at rest the first card aligns to the content margin (under the heading),
+     • cards scroll fully edge-to-edge (past the 1440 rail on BOTH sides),
+     • scroll-padding snaps cards back to the rail so the first/last never clip.
+   This mirrors apple.com/ipad-air. The heading uses the same rail padding so it
+   lines up with the first card. */
 .aew-prsv2--related {
-  overflow-x: clip;                /* clip the right bleed at the viewport, allow scroll inside */
-  background-color: transparent;   /* sits on the product page bg, not a cream band */
+  margin-inline: calc(50% - 50vw);   /* section spans the full viewport width */
+  width: 100vw;
+  background-color: transparent;
+  overflow: visible;                 /* do NOT clip — the track owns the scroll */
   --prsv2-gap: 24px;
+  /* inset from the viewport edge to the 1440 content rail */
+  --prsv2-rail: calc((100vw - min(1440px, 100vw)) / 2);
 }
+/* Heading sits at the content rail (matches the first card). */
 .aew-prsv2--related .aew-prsv2__inner {
+  max-width: none;
+  width: 100%;
+  margin: 0;
   padding-left: 0;
   padding-right: 0;
   overflow: visible;
 }
-.aew-prsv2--related .aew-prsv2__track {
-  /* Full-bleed BOTH sides: break the track out to the viewport edges (left & right)
-     using the classic `margin-inline: 50% − 50vw` trick. Then re-add the rail as
-     leading padding + scroll-padding so the FIRST card still aligns under the
-     heading while the strip itself spans edge-to-edge — cards flow past the 1440
-     content rail on both sides, exactly like the home-page slider. */
-  --prsv2-rail: calc((100vw - min(1440px, 100vw)) / 2);
-  margin-inline: calc(50% - 50vw);
+.aew-prsv2--related .aew-prsv2__head {
   padding-left: var(--prsv2-rail);
-  padding-right: var(--prsv2-gutter, 80px);    /* trailing room so the last card clears */
+  padding-right: var(--prsv2-rail);
+}
+/* Full-width scroller; rail padding aligns the first card + traps snap at the rail. */
+.aew-prsv2--related .aew-prsv2__track {
+  margin-inline: 0;
+  padding-left: var(--prsv2-rail);
+  padding-right: var(--prsv2-rail);
   scroll-padding-left: var(--prsv2-rail);
-  scroll-padding-right: var(--prsv2-gutter, 80px);
+  scroll-padding-right: var(--prsv2-rail);
   gap: var(--prsv2-gap);
-  scroll-snap-type: x proximity;   /* let it rest mid-scroll so the peek shows */
-  overflow-x: auto;                /* the scroller */
+  scroll-snap-type: x proximity;
+  overflow-x: auto;
   overflow-y: hidden;
 }
-/* Cards sized off the VIEWPORT (not the bled track) so ~4 show with the next
-   peeking — same feel as the home-page slider. */
+/* Cards sized off the viewport so ~4 show with the next peeking. */
 .aew-prsv2--related .aew-prsv2__slide {
   flex: 0 0 clamp(280px, 22vw, 360px);
   scroll-snap-align: start;
 }
-/* Arrows just inside the rail edges. */
-.aew-prsv2--related .aew-prsv2__arrow--prev { left: 8px; }
-.aew-prsv2--related .aew-prsv2__arrow--next { right: 8px; }
+/* Arrows sit at the content rail edges (over the first/last visible card). */
+.aew-prsv2--related .aew-prsv2__viewport { position: relative; }
+.aew-prsv2--related .aew-prsv2__arrow--prev { left: calc(var(--prsv2-rail) + 8px); }
+.aew-prsv2--related .aew-prsv2__arrow--next { right: calc(var(--prsv2-rail) + 8px); }
 
 @media (max-width: 768px) {
   .aew-prsv2--related .aew-prsv2__slide { flex: 0 0 78%; }
