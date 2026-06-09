@@ -15,6 +15,11 @@
 table.variations { width: 100%; border: 0; }
 .variations tr,
 table.variations tr { display: block; margin-bottom: 22px; }
+/* Kill the kit's zebra striping behind alternating variation rows. */
+.variations tbody > tr:nth-child(odd) > td,
+.variations tbody > tr:nth-child(odd) > th,
+table.variations tbody > tr:nth-child(odd) > td,
+table.variations tbody > tr:nth-child(odd) > th { background-color: transparent !important; }
 .variations td,
 .variations th,
 table.variations td,
@@ -99,6 +104,19 @@ table.variations .label label {
 
 /* Add-to-cart row spacing under the swatches. */
 .woocommerce-variation-add-to-cart { margin-top: 8px; }
+
+/* Add-to-cart button → outline style (white bg, gold text + border) to match the
+   Get-a-Quote button. !important to beat the kit's solid-gold button default.
+   Hover is left to the existing kit/Elementor styles. */
+.elementor-element .cart button,
+.elementor-element .cart .button,
+.cart .single_add_to_cart_button,
+.single_add_to_cart_button.button {
+  background-color: #fff !important;
+  color: var(--notched-cta, #AA7D44) !important;
+  border: 1px solid var(--notched-cta, #AA7D44) !important;
+  transition: all 0.2s ease;
+}
 
 /* ── Product gallery: main image on top + exactly 4 thumbnails below ──────────
    WooCommerce/flexslider renders a main slider + an <ol class="flex-control-thumbs">
