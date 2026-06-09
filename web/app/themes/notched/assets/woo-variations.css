@@ -1,0 +1,96 @@
+/* Notched — Wix-style variation button-boxes + colour swatches on product pages.
+   Pairs with woo-variations.js. Brand tokens: gold #AA7D44, text #141C19. */
+
+/* Hide the native <select> (kept for WooCommerce's logic) but keep it accessible. */
+.aew-swatch-source {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  clip: rect(0 0 0 0); clip-path: inset(50%);
+  overflow: hidden; white-space: nowrap;
+}
+
+/* The WC variations table → make each row a clean stacked label + controls. */
+.variations,
+table.variations { width: 100%; border: 0; }
+.variations tr,
+table.variations tr { display: block; margin-bottom: 22px; }
+.variations td,
+.variations th,
+table.variations td,
+table.variations th { display: block; padding: 0; border: 0; width: auto; }
+.variations .label label,
+table.variations .label label {
+  display: block;
+  margin: 0 0 10px;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--notched-text, #141C19);
+}
+/* WooCommerce's "Clear" link under a chosen variation */
+.variations .reset_variations { font-size: 13px; }
+
+/* ── Swatch container ── */
+.aew-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ── Box buttons (sizes / timber / power / end-cut) ── */
+.aew-swatch--box {
+  appearance: none;
+  cursor: pointer;
+  padding: 10px 16px;
+  min-width: 56px;
+  background: #fff;
+  border: 1px solid #BFC0BF;
+  border-radius: 8px;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--notched-text, #141C19);
+  text-align: center;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+.aew-swatch--box:hover { border-color: var(--notched-cta, #AA7D44); }
+.aew-swatch--box.is-active {
+  background: var(--notched-cta, #AA7D44);
+  border-color: var(--notched-cta, #AA7D44);
+  color: #fff;
+}
+
+/* ── Colour swatches (stain / roof) ── */
+.aew-swatches--color { gap: 12px; }
+.aew-swatch--color {
+  appearance: none;
+  cursor: pointer;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid rgba(20, 28, 25, 0.18);
+  background-color: var(--sw, #ccc);
+  position: relative;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.aew-swatch--color:hover { transform: translateY(-1px); }
+.aew-swatch--color.is-active {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--notched-cta, #AA7D44);
+}
+
+/* ── Disabled (out-of-stock combo) ── */
+.aew-swatch.is-disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+  position: relative;
+}
+.aew-swatch--box.is-disabled { text-decoration: line-through; }
+
+/* Add-to-cart row spacing under the swatches. */
+.woocommerce-variation-add-to-cart { margin-top: 8px; }

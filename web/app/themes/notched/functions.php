@@ -24,6 +24,29 @@ add_action('wp_enqueue_scripts', function () {
                 wp_enqueue_script($handle);
             }
         }
+
+        /*
+         * Convert WooCommerce variation dropdowns into Wix-style button-boxes
+         * (sizes / timber / power / end-cut) and colour swatches (stain / roof).
+         * The JS keeps the native <select> as WC's source of truth.
+         */
+        $dir = get_stylesheet_directory();
+        $uri = get_stylesheet_directory_uri();
+        $cssv = is_readable("$dir/assets/woo-variations.css") ? (string) filemtime("$dir/assets/woo-variations.css") : null;
+        $jsv  = is_readable("$dir/assets/woo-variations.js")  ? (string) filemtime("$dir/assets/woo-variations.js")  : null;
+        wp_enqueue_style('notched-woo-variations', "$uri/assets/woo-variations.css", [], $cssv);
+        wp_enqueue_script('notched-woo-variations', "$uri/assets/woo-variations.js", ['jquery'], $jsv, true);
+
+        // slug => #hex map for the colour attributes, read from term meta `swatch_hex`.
+        $hex = [];
+        foreach (['pa_stain-color', 'pa_roof-color'] as $tax) {
+            if (!taxonomy_exists($tax)) { continue; }
+            foreach (get_terms(['taxonomy' => $tax, 'hide_empty' => false]) as $t) {
+                $h = get_term_meta($t->term_id, 'swatch_hex', true);
+                if ($h) { $hex[$t->slug] = $h; }
+            }
+        }
+        wp_localize_script('notched-woo-variations', 'NotchedSwatchHex', $hex);
     }
 }, 20);
 
