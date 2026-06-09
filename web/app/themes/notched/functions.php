@@ -26,3 +26,14 @@ add_action('wp_enqueue_scripts', function () {
         }
     }
 }, 20);
+
+/*
+ * Show up to 8 related products on the single product page (default is 4), so the
+ * Products-Slider-V2-styled related section (woocommerce/single-product/related.php)
+ * has enough cards to scroll through — 4 are visible at a time, the rest scroll.
+ */
+add_filter('woocommerce_output_related_products_args', function ($args) {
+    $args['posts_per_page'] = 8;
+    $args['columns']        = 8; // prevent WC from chunking into rows; our slider lays them out
+    return $args;
+});
