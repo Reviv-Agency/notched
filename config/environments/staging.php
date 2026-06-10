@@ -15,4 +15,9 @@ use Roots\WPConfig\Config;
  * Example: `Config::define('DISALLOW_FILE_MODS', false);`
  */
 
-Config::define('DISALLOW_INDEXING', true);
+/*
+ * Indexing is allowed on staging so PageSpeed/Lighthouse SEO audits pass
+ * (requested 2026-06-10). The nip.io staging URL is therefore crawlable —
+ * flip back to `true` if staging should disappear from search engines again.
+ */
+Config::define('DISALLOW_INDEXING', false);
