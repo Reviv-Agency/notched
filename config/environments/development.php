@@ -14,7 +14,13 @@ Config::define('WP_DEBUG_DISPLAY', false);
 Config::define('WP_DEBUG_LOG', env('WP_DEBUG_LOG') ?? true);
 Config::define('WP_DISABLE_FATAL_ERROR_HANDLER', true);
 Config::define('SCRIPT_DEBUG', true);
-Config::define('DISALLOW_INDEXING', true);
+/*
+ * The Ploi staging server runs with WP_ENV=development, so this flag governs
+ * it too. Indexing is allowed so PageSpeed/Lighthouse SEO audits pass
+ * (requested 2026-06-10); flip back to `true` to noindex staging again.
+ * Local (notched.test) is not publicly reachable, so this is moot locally.
+ */
+Config::define('DISALLOW_INDEXING', false);
 
 ini_set('display_errors', '1');
 
