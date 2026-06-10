@@ -186,7 +186,8 @@ add_filter('style_loader_tag', function ($tag, $handle) {
         'aew-widget-faq-v2',
         'aew-widget-footer-v2',
         'aew-widget-icon-cards',
-        'aew-widget-sticky-image',
+        // NOT sticky-image: it positions an overlay badge; unstyled it renders
+        // in normal flow and shoves the hero down (CLS 0.76 when deferred).
     ];
     if (!in_array($handle, $async_handles, true)) { return $tag; }
     if (strpos($tag, "media='print'") !== false || strpos($tag, 'onload=') !== false) { return $tag; }
