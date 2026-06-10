@@ -78,6 +78,63 @@ add_action('wp_head', function () {
 }, 1);
 
 /*
+ * Fully permissive robots.txt: every crawler, AI agent and bot may access the
+ * whole site (requested 2026-06-10). Replaces WordPress/WooCommerce's default
+ * directives (which disallowed wp-admin and some Woo upload paths) with a
+ * blanket Allow, plus the core sitemap for discovery.
+ */
+add_filter('robots_txt', function () {
+    return "User-agent: *\nAllow: /\n\nSitemap: " . home_url('/wp-sitemap.xml') . "\n";
+}, 99);
+
+/*
+ * Drop WooCommerce's render-blocking CSS (and its marketing/tracking JS) on
+ * pages with no WooCommerce context. The homepage & landing pages render
+ * product cards through AEW widgets with their own styles; Woo's stylesheets
+ * cost ~750ms of render-blocking time there. Cart/checkout/account/product
+ * and taxonomy pages keep everything.
+ */
+add_action('wp_enqueue_scripts', function () {
+    if (!function_exists('is_woocommerce')) { return; }
+    if (is_woocommerce() || is_cart() || is_checkout() || is_account_page()) { return; }
+    foreach (['woocommerce-general', 'woocommerce-layout', 'woocommerce-smallscreen', 'wc-blocks-style', 'wc-blocks-vendors-style'] as $handle) {
+        wp_dequeue_style($handle);
+    }
+    foreach (['sourcebuster-js', 'wc-order-attribution', 'woocommerce', 'wc-add-to-cart', 'jquery-blockui', 'js-cookie'] as $handle) {
+        wp_dequeue_script($handle);
+    }
+}, 99);
+
+/*
+ * Remove jquery-migrate on the front end. Nothing in the stack relies on the
+ * pre-3.x jQuery APIs it shims (Elementor 4.x, Woo 10.x and our vanilla-JS
+ * widgets are all migrate-clean), and it is a render-blocking head script.
+ */
+add_action('wp_default_scripts', function ($scripts) {
+    if (is_admin() || !isset($scripts->registered['jquery'])) { return; }
+    $scripts->registered['jquery']->deps = array_diff(
+        $scripts->registered['jquery']->deps,
+        ['jquery-migrate']
+    );
+});
+
+/*
+ * Load the external Google Fonts stylesheets (AEW's Teko/Lato + the Welcome
+ * widget's Dancing Script) asynchronously: fetched as media="print", swapped
+ * to "all" onload. They use font-display:swap anyway, and Elementor self-hosts
+ * Teko/Lato on Elementor pages, so nothing visible blocks on fonts.googleapis.
+ */
+add_filter('style_loader_tag', function ($tag, $handle) {
+    if (!in_array($handle, ['aew-google-fonts', 'aew-welc-script-font'], true)) { return $tag; }
+    if (strpos($tag, "media='print'") !== false || strpos($tag, 'onload=') !== false) { return $tag; }
+    return str_replace(
+        "media='all'",
+        "media='print' onload=\"this.media='all'\"",
+        $tag
+    );
+}, 10, 2);
+
+/*
  * Preconnect to the Google Fonts origins. Elementor self-hosts most fonts, but
  * the Dancing Script face still loads from fonts.googleapis.com/fonts.gstatic.com;
  * warming those connections removes ~2 round-trips from the critical path.
