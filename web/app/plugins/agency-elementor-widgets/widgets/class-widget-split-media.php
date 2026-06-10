@@ -1193,7 +1193,15 @@ class Widget_Split_Media extends Widget_Base {
 						<?php endif; ?>
 					</div>
 					<div class="aew-split-media__bg" aria-hidden="true">
-						<img src="<?php echo esc_url( $image_url ); ?>" alt="" width="1440" height="960" loading="eager" decoding="async" />
+						<?php
+						/*
+						 * fetchpriority is pinned to "auto" so WP/Elementor's first-image
+						 * heuristic can't inject fetchpriority="high" here — this band sits
+						 * below the fold on every current layout, and at high priority its
+						 * background out-competed the hero LCP image for bandwidth.
+						 */
+						?>
+						<img src="<?php echo esc_url( $image_url ); ?>" alt="" width="1440" height="960" loading="eager" fetchpriority="auto" decoding="async" />
 					</div>
 				</article>
 			</div>

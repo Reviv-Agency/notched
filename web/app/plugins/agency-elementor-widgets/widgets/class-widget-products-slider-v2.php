@@ -711,12 +711,27 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 						<?php endif; ?>
 
 						<ul class="aew-prsv2__track"<?php echo $is_grid ? '' : ' data-aew-prs-track'; ?>>
-							<?php foreach ( $products as $p ) : ?>
+							<?php foreach ( $products as $i => $p ) : ?>
+								<?php
+								/*
+								 * Card images are CSS backgrounds, so every slide used to download
+								 * eagerly (~3 MB before the first paint). Only the first two slides
+								 * (the at-most-visible set on load) keep an inline background; the
+								 * rest carry the URL in data-aew-bg and products-slider-v2.js swaps
+								 * it in via IntersectionObserver as slides approach the viewport.
+								 */
+								$bg_attr = '';
+								if ( $p['img'] ) {
+									$bg_attr = $i < 2
+										? ' style="background-image:url(\'' . esc_url( $p['img'] ) . '\');"'
+										: ' data-aew-bg="' . esc_url( $p['img'] ) . '"';
+								}
+								?>
 								<li class="aew-prsv2__slide">
 									<a class="aew-prsv2__card"
 										href="<?php echo esc_url( $p['url'] ); ?>"
 										<?php echo $new_tab ? 'target="_blank" rel="noopener"' : ''; ?>>
-										<span class="aew-prsv2__media"<?php echo $p['img'] ? ' style="background-image:url(\'' . esc_url( $p['img'] ) . '\');"' : ''; ?>
+										<span class="aew-prsv2__media"<?php echo $bg_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 											role="img"
 											aria-label="<?php echo esc_attr( $p['title'] ); ?>">
 											<?php if ( $show_badge && '' !== ( $p['badge'] ?? '' ) ) : ?>

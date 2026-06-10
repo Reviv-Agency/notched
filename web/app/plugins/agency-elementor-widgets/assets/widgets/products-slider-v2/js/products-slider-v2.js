@@ -12,8 +12,39 @@
     if (!el || el.dataset.aewPrsv2Init === '1') return;
     el.dataset.aewPrsv2Init = '1';
 
+    // ── Lazy card backgrounds ────────────────────────────────────────────────
+    // PHP inlines the background only on the first two slides; the rest carry
+    // the URL in data-aew-bg so they don't compete with the LCP image. Swap it
+    // in as a slide approaches the viewport (or all at once on old browsers /
+    // first slider interaction, so paging never shows an empty card). Runs for
+    // both slider and grid layouts, so it lives above the track bail-out.
+    function hydrateBg(media) {
+      if (media && media.dataset.aewBg) {
+        media.style.backgroundImage = "url('" + media.dataset.aewBg + "')";
+        delete media.dataset.aewBg;
+      }
+    }
+    function hydrateAll() {
+      Array.prototype.forEach.call(el.querySelectorAll('[data-aew-bg]'), hydrateBg);
+    }
+    if ('IntersectionObserver' in window) {
+      var bgObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          hydrateBg(entry.target);
+          bgObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: '300px 900px 300px 900px' });
+      Array.prototype.forEach.call(el.querySelectorAll('[data-aew-bg]'), function (media) {
+        bgObserver.observe(media);
+      });
+    } else {
+      hydrateAll();
+    }
+
     var track = el.querySelector('[data-aew-prs-track]');
     if (!track) return;
+    track.addEventListener('scroll', hydrateAll, { once: true, passive: true });
 
     var prev = el.querySelector('[data-aew-prs-prev]');
     var next = el.querySelector('[data-aew-prs-next]');
