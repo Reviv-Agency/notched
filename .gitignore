@@ -51,3 +51,5 @@ wix-export/
 
 # Internal build/deploy guide — contains SSH + DB credentials, keep out of the repo
 WIDGET-V2-BUILD-GUIDE.md
+# Go-live runbook — contains server IP, paths, and admin creds, keep out of the repo
+LAUNCH-RUNBOOK.md
