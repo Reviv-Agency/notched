@@ -222,9 +222,11 @@ add_filter('style_loader_tag', function ($tag, $handle) {
         'aew-widget-cta-banner-v2',
         'aew-widget-faq-v2',
         'aew-widget-footer-v2',
-        'aew-widget-icon-cards',
         // NOT sticky-image: it positions an overlay badge; unstyled it renders
         // in normal flow and shoves the hero down (CLS 0.76 when deferred).
+        // NOT icon-cards: the icon strip's top edge sits inside the first
+        // desktop viewport (hero ~750px there), so deferring its CSS shifted
+        // visible content when the styles landed (CLS 0.2 on desktop).
     ];
     if (!in_array($handle, $async_handles, true)) { return $tag; }
     if (strpos($tag, "media='print'") !== false || strpos($tag, 'onload=') !== false) { return $tag; }
