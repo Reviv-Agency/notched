@@ -153,6 +153,39 @@ add_action('wp_head', function () {
             printf("<link rel=\"preload\" href=\"%s\" as=\"font\" type=\"font/woff2\" crossorigin>\n", esc_url($url . $f));
         }
     }
+
+    /*
+     * Page-aware preloads, derived from the page's Elementor data so they only
+     * print where the asset is actually used:
+     * - Hero V2's mobile LCP image. The widget used to emit its own <link
+     *   rel=preload>, but that sits mid-<body>, so on slow connections the
+     *   browser discovered it ~670ms late (PSI "resource load delay").
+     *   Emitting it here in <head> starts the download with the document.
+     * - Welcome V2's self-hosted Dancing Script woff2, whose late arrival
+     *   from Google's CDN previously reflowed the section (CLS 0.19 desktop).
+     */
+    if (is_singular() && defined('AEW_PLUGIN_URL')) {
+        $data = get_post_meta(get_queried_object_id(), '_elementor_data', true);
+        if (is_string($data) && '' !== $data) {
+            if (strpos($data, 'agency-hero-v2') !== false) {
+                $hero = '';
+                if (preg_match('/"mobile_image":\{[^{}]*?"url":"([^"]*)"/', $data, $m)) {
+                    $hero = str_replace('\\/', '/', $m[1]);
+                }
+                if ('' === $hero) {
+                    // Default media values aren't saved into _elementor_data.
+                    $hero = AEW_PLUGIN_URL . 'assets/widgets/hero-v2/images/mobile image.avif';
+                }
+                printf("<link rel=\"preload\" as=\"image\" fetchpriority=\"high\" href=\"%s\" media=\"(max-width: 1024px)\">\n", esc_url($hero));
+            }
+            if (strpos($data, 'agency-welcome-v2') !== false) {
+                printf(
+                    "<link rel=\"preload\" href=\"%s\" as=\"font\" type=\"font/woff2\" crossorigin>\n",
+                    esc_url(AEW_PLUGIN_URL . 'assets/widgets/welcome-v2/fonts/dancing-script-700-latin.woff2')
+                );
+            }
+        }
+    }
 }, 2);
 
 /*
@@ -172,7 +205,11 @@ add_filter('style_loader_tag', function ($tag, $handle) {
      */
     static $async_handles = [
         'aew-google-fonts',
-        'aew-welc-script-font',
+        // NOT aew-welc-script-font: now a tiny self-hosted @font-face whose
+        // woff2 is preloaded — it must be present at first paint or the
+        // Dancing Script swap reflows the section (CLS).
+        'elementor-gf-local-roboto',     // kit-default fonts, unused by the
+        'elementor-gf-local-robotoslab', // visible widgets (all Teko/Lato)
         'aew-widget-benefits-v2',
         'aew-widget-split-media',
         'aew-widget-media-cta',

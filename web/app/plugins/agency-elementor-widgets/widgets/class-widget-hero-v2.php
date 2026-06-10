@@ -518,19 +518,15 @@ class Widget_Hero_V2 extends Widget_Base {
 			$this->add_render_attribute( 'wrapper', 'style', $btn_color_vars );
 		}
 		?>
-		<?php if ( $mobile_url ) : ?>
-			<?php
-			/*
-			 * The mobile/tablet hero is a CSS background-image (≤1024px, see
-			 * hero-v2.css), so the browser can't discover it until layout — it was
-			 * the page's LCP element arriving seconds late. Preloading it from the
-			 * markup with fetchpriority=high starts the download with the document.
-			 */
-			?>
-			<link rel="preload" as="image" fetchpriority="high"
-				href="<?php echo esc_url( $mobile_url ); ?>"
-				media="(max-width: 1024px)">
-		<?php endif; ?>
+		<?php
+		/*
+		 * The mobile/tablet hero is a CSS background-image (≤1024px, see
+		 * hero-v2.css), invisible to the preload scanner. The notched child
+		 * theme preloads it from wp_head (earlier discovery than a mid-body
+		 * tag) by reading mobile_image out of the page's _elementor_data —
+		 * keep that in sync if this control is ever renamed.
+		 */
+		?>
 		<section <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
 
 			<div class="aew-hev2__media" aria-hidden="true">

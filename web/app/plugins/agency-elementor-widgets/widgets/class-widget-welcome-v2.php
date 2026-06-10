@@ -328,12 +328,13 @@ class Widget_Welcome_V2 extends Widget_Base {
 		$s = $this->get_settings_for_display();
 
 		// The signature uses a script font that isn't part of the site's base
-		// font set — enqueue it only when this widget renders. display=swap so
-		// text never blocks paint.
+		// font set — enqueue it only when this widget renders. Self-hosted
+		// (assets/widgets/welcome-v2/fonts/) rather than fonts.googleapis.com:
+		// the CDN's late-arriving woff2 reflowed the section and cost CLS.
 		if ( ! wp_style_is( 'aew-welc-script-font', 'enqueued' ) ) {
 			wp_enqueue_style(
 				'aew-welc-script-font',
-				'https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap',
+				Widget_Assets::url( self::ASSET_SLUG, 'css/dancing-script.css' ),
 				[],
 				AEW_VERSION
 			);

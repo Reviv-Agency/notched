@@ -265,16 +265,37 @@ class Widget_Benefits_V2 extends Widget_Base {
 						<?php foreach ( $items as $item ) :
 							$img     = $item['image'] ?? [];
 							$img_url = is_array( $img ) ? ( $img['url'] ?? '' ) : '';
+							$img_id  = is_array( $img ) ? (int) ( $img['id'] ?? 0 ) : 0;
 							$alt     = (string) ( $item['image_alt'] ?? '' );
 							$heading = (string) ( $item['heading'] ?? '' );
 							$text    = (string) ( $item['text'] ?? '' );
+
+							/*
+							 * Intrinsic width/height so the browser reserves the box
+							 * before the lazy image loads (Lighthouse "unsized image
+							 * element" CLS culprit). Media-library images resolve via
+							 * attachment meta; the plugin-shipped defaults via the file.
+							 */
+							$dims = '';
+							if ( $img_id ) {
+								$src = wp_get_attachment_image_src( $img_id, 'full' );
+								if ( $src && ! empty( $src[1] ) && ! empty( $src[2] ) ) {
+									$dims = sprintf( ' width="%d" height="%d"', $src[1], $src[2] );
+								}
+							} elseif ( '' !== $img_url && defined( 'AEW_PLUGIN_URL' ) && str_starts_with( $img_url, AEW_PLUGIN_URL ) ) {
+								$file = AEW_PLUGIN_DIR . rawurldecode( substr( $img_url, strlen( AEW_PLUGIN_URL ) ) );
+								$size = is_readable( $file ) ? getimagesize( $file ) : false;
+								if ( $size ) {
+									$dims = sprintf( ' width="%d" height="%d"', $size[0], $size[1] );
+								}
+							}
 						?>
 							<li class="aew-bnv2__item">
 								<?php if ( $img_url ) : ?>
 									<div class="aew-bnv2__media">
 										<img class="aew-bnv2__img"
 											src="<?php echo esc_url( $img_url ); ?>"
-											alt="<?php echo esc_attr( $alt ); ?>"
+											alt="<?php echo esc_attr( $alt ); ?>"<?php echo $dims; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- integers formatted via sprintf ?>
 											loading="lazy"
 											decoding="async" />
 									</div>
