@@ -17,8 +17,8 @@
   --notched-secondary-bg:      #2A4F41;
   --notched-secondary-accent:  #093328;
   --notched-text:              #141C19;
-  --notched-cta:               #AA7D44;
-  --notched-cta-hover:         #876137;
+  --notched-cta:               #876137;
+  --notched-cta-hover:         #6E4F2D;
 }
 
 /* Strip Elementor's column / container padding so the band is full-bleed. The
@@ -251,15 +251,15 @@ html .e-con:has(.elementor-widget-agency-feature-band-v2) {
 .aew-fbv2__btn--secondary {
   background-color: transparent;
   /* gold outline+text on the white card (override per-instance) */
-  color: var(--aew-fbv2-sec-color, #AA7D44);
-  border-color: var(--aew-fbv2-sec-color, #AA7D44);
+  color: var(--aew-fbv2-sec-color, #876137);
+  border-color: var(--aew-fbv2-sec-color, #876137);
 }
 
 .aew-fbv2__btn--secondary:hover,
 .aew-fbv2__btn--secondary:focus-visible {
-  background-color: var(--aew-fbv2-sec-bg-hover, #AA7D44);
+  background-color: var(--aew-fbv2-sec-bg-hover, #876137);
   color: var(--aew-fbv2-sec-text-hover, #FFFFFF);
-  border-color: var(--aew-fbv2-sec-bg-hover, #AA7D44);
+  border-color: var(--aew-fbv2-sec-bg-hover, #876137);
 }
 
 .aew-fbv2__btn-icon {

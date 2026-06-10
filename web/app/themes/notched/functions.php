@@ -119,13 +119,76 @@ add_action('wp_default_scripts', function ($scripts) {
 });
 
 /*
+ * Wrap Elementor full-width page content in <main id="content">. Pages using
+ * the "Elementor Full Width" template (home, landing pages) bypass the parent
+ * theme's template-parts, so they shipped with no <main> landmark and a
+ * "Skip to content" link pointing at a #content that didn't exist — both
+ * Lighthouse accessibility failures.
+ */
+add_action('elementor/page_templates/header-footer/before_content', function () {
+    echo '<main id="content">';
+});
+add_action('elementor/page_templates/header-footer/after_content', function () {
+    echo '</main>';
+});
+
+/*
+ * Preload the hero's self-hosted display fonts. Teko (H1) and Lato (body)
+ * are discovered late — HTML → google-fonts CSS → woff2 — so the headline
+ * painted in the fallback font and reflowed when Teko arrived (CLS 0.16 on
+ * mobile PSI). Preloading lets the first paint use the real fonts.
+ * Filenames are Elementor's content-hashed exports; guarded by file_exists
+ * so a font re-export can't leave dangling preloads.
+ */
+add_action('wp_head', function () {
+    $base = wp_upload_dir()['basedir'] . '/elementor/google-fonts/fonts/';
+    $url  = wp_upload_dir()['baseurl'] . '/elementor/google-fonts/fonts/';
+    $fonts = [
+        'teko-lyjndg7kme0gfan9pq.woff2',       // Teko 400-700 latin (H1/H2/buttons)
+        'lato-s6uyw4bmutphjx4wxg.woff2',        // Lato 400 latin (body)
+        'lato-s6u9w4bmutphh6uvswipgq.woff2',    // Lato 700 latin (bold/price)
+    ];
+    foreach ($fonts as $f) {
+        if (is_readable($base . $f)) {
+            printf("<link rel=\"preload\" href=\"%s\" as=\"font\" type=\"font/woff2\" crossorigin>\n", esc_url($url . $f));
+        }
+    }
+}, 2);
+
+/*
  * Load the external Google Fonts stylesheets (AEW's Teko/Lato + the Welcome
  * widget's Dancing Script) asynchronously: fetched as media="print", swapped
  * to "all" onload. They use font-display:swap anyway, and Elementor self-hosts
  * Teko/Lato on Elementor pages, so nothing visible blocks on fonts.googleapis.
  */
 add_filter('style_loader_tag', function ($tag, $handle) {
-    if (!in_array($handle, ['aew-google-fonts', 'aew-welc-script-font'], true)) { return $tag; }
+    /*
+     * Also deferred: widget stylesheets for sections that sit below the fold
+     * on every current layout (the hero/banner fills the first viewport, so
+     * none of these are visible at first paint). Deferring them takes ~14
+     * requests off the render-blocking critical path (~3.5s est. on slow 4G).
+     * Do NOT add header-v2 / hero-v2 / banner-hero-v2 / products-slider-v2 /
+     * tokens here — those style above-the-fold content.
+     */
+    static $async_handles = [
+        'aew-google-fonts',
+        'aew-welc-script-font',
+        'aew-widget-benefits-v2',
+        'aew-widget-split-media',
+        'aew-widget-media-cta',
+        'aew-widget-testimonials-v2',
+        'aew-widget-region-cards-v2',
+        'aew-widget-consultation-form-v2',
+        'aew-widget-parallax-image-v2',
+        'aew-widget-welcome-v2',
+        'aew-widget-feature-rows-v2',
+        'aew-widget-cta-banner-v2',
+        'aew-widget-faq-v2',
+        'aew-widget-footer-v2',
+        'aew-widget-icon-cards',
+        'aew-widget-sticky-image',
+    ];
+    if (!in_array($handle, $async_handles, true)) { return $tag; }
     if (strpos($tag, "media='print'") !== false || strpos($tag, 'onload=') !== false) { return $tag; }
     return str_replace(
         "media='all'",

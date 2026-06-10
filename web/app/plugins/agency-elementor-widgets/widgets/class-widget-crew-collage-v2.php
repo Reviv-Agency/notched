@@ -258,7 +258,7 @@ class Widget_Crew_Collage_V2 extends Widget_Base {
 		$this->add_control( 'btn_bg', [
 			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-crew-btn-bg: {{VALUE}};' ],
 		] );
 
@@ -272,7 +272,7 @@ class Widget_Crew_Collage_V2 extends Widget_Base {
 		$this->add_control( 'btn_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '#6E4F2D',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-crew-btn-bg-hover: {{VALUE}};' ],
 		] );
 

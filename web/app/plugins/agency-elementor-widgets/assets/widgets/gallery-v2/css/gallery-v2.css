@@ -32,8 +32,8 @@
 	--notched-secondary-bg: #2A4F41;
 	--notched-secondary-accent: #093328;
 	--notched-text: #141C19;
-	--notched-cta: #AA7D44;
-	--notched-cta-hover: #876137;
+	--notched-cta: #876137;
+	--notched-cta-hover: #6E4F2D;
 
 	display: block;
 	box-sizing: border-box;
@@ -252,7 +252,7 @@
 
 /* ── Optional header CTA (e.g. "SHOP ALL KITS") ──────────────────────────────
    Sits to the RIGHT of the heading. Brand filled button per design system:
-   #AA7D44 bg + white text, hover #876137. Hex fallbacks since the var may not
+   #876137 bg + white text, hover #6E4F2D. Hex fallbacks since the var may not
    resolve in every context. */
 .aew-galv2__cta {
 	display: inline-flex;
@@ -267,7 +267,7 @@
 	text-transform: uppercase;
 	text-decoration: none;
 	color: #FFFFFF;
-	background-color: var(--notched-cta, #AA7D44);
+	background-color: var(--notched-cta, #876137);
 	padding: 20px 24px 16px;
 	border-radius: 8px;
 	transition: background-color 0.18s ease;
@@ -275,7 +275,7 @@
 
 .aew-galv2__cta:hover,
 .aew-galv2__cta:focus-visible {
-	background-color: var(--notched-cta-hover, #876137);
+	background-color: var(--notched-cta-hover, #6E4F2D);
 	color: #FFFFFF;
 }
 

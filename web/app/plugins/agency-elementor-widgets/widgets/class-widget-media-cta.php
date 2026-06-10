@@ -287,7 +287,7 @@ class Widget_Media_Cta extends Widget_Base {
 		$yellow_default = $tokens['color_yellow'] ?? '#EBC543';
 		$dark_default   = $tokens['color_blue_dark'] ?? '#252F37';
 		$white_default  = $tokens['color_white'] ?? '#FFFFFF';
-		$cta_default    = '#AA7D44';   /* brand CTA — filled button background */
+		$cta_default    = '#876137';   /* brand CTA — filled button background */
 
 		$this->start_controls_section(
 			'section_style',
@@ -767,7 +767,7 @@ class Widget_Media_Cta extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#876137',
+				'default'   => '#6E4F2D',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-media-cta-btn-bg-hover: {{VALUE}};',
 				],

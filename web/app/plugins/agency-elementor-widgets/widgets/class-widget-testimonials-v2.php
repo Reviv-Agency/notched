@@ -243,7 +243,7 @@ class Widget_Testimonials_V2 extends Widget_Base {
 		$this->add_control( 'star_color', [
 			'label'     => 'Star color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-tsv2-star: {{VALUE}};' ],
 		] );
 		$this->end_controls_section();

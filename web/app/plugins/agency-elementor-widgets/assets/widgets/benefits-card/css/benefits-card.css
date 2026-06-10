@@ -70,7 +70,7 @@
   align-items: center;
   gap: 10px;
   padding: 16px 28px 14px;
-  background: var(--aew-bcard-btn-bg, var(--notched-cta, #AA7D44));
+  background: var(--aew-bcard-btn-bg, var(--notched-cta, #876137));
   color: var(--aew-bcard-btn-text, var(--notched-background, #F6F0EC));
   border-radius: 6px;
   font-family: var(--aew-font-heading, 'Teko', sans-serif);
@@ -82,7 +82,7 @@
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.aew-bcard__btn:hover { background: var(--notched-cta-hover, #876137); transform: translateY(-1px); }
+.aew-bcard__btn:hover { background: var(--notched-cta-hover, #6E4F2D); transform: translateY(-1px); }
 .aew-bcard__btn-arrow { flex: none; }
 
 /* ── Tablet ── */

@@ -27,8 +27,8 @@
   --notched-secondary-bg: #2a4f41;
   --notched-secondary-accent: #093328;
   --notched-text: #141c19;
-  --notched-cta: #aa7d44;
-  --notched-cta-hover: #876137;
+  --notched-cta: #876137;
+  --notched-cta-hover: #6E4F2D;
 }
 
 .aew-hv2 {
@@ -194,7 +194,7 @@ body.admin-bar .aew-hv2__bar {
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  background: var(--aew-hv2-cta-bg, #876137);
+  background: var(--aew-hv2-cta-bg, #6E4F2D);
   color: var(--notched-cards);
   border-radius: 6px;
   border: 0;

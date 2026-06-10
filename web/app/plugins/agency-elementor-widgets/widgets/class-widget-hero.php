@@ -793,7 +793,7 @@ class Widget_Hero extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#876137',
+				'default'   => '#6E4F2D',
 				'selectors' => [
 					'{{WRAPPER}} .aew-hero__cta:hover'         => 'background-color: {{VALUE}};',
 					'{{WRAPPER}} .aew-hero__cta:focus-visible' => 'background-color: {{VALUE}};',

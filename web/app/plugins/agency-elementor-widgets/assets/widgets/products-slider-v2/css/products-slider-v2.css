@@ -51,8 +51,8 @@
   --notched-secondary-bg:      #2A4F41;
   --notched-secondary-accent:  #093328;
   --notched-text:              #141C19;
-  --notched-cta:               #AA7D44;
-  --notched-cta-hover:         #876137;
+  --notched-cta:               #876137;
+  --notched-cta-hover:         #6E4F2D;
 }
 
 /* ── Outer block: full-bleed background ────────────────────────────────────── */
@@ -512,25 +512,39 @@ button.aew-prsv2__arrow {
 .aew-prsv2__dots {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 28px;
+  gap: 0;
+  margin-top: 21px; /* 28px visual: 24px hit area leaves ~7px above the 9px dot */
 }
 .aew-prsv2__dots:empty { display: none; }
 
+/* The button is the 24×24 accessible touch target (WCAG 2.5.8); the visible
+   9px dot is drawn by ::before so the design stays unchanged. */
 .aew-prsv2__dot,
 button.aew-prsv2__dot {
-  width: 9px;
-  height: 9px;
+  position: relative;
+  width: 24px;
+  height: 24px;
   padding: 0;
   border: 0 !important;
   border-radius: 50%;
-  background-color: var(--aew-prsv2-dot-idle, var(--notched-lines));
+  background: transparent;
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
+}
+.aew-prsv2__dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background-color: var(--aew-prsv2-dot-idle, var(--notched-lines));
   transition: background-color 0.18s ease, transform 0.18s ease;
 }
-.aew-prsv2__dot[aria-current="true"] {
+.aew-prsv2__dot[aria-current="true"]::before {
   background-color: var(--aew-prsv2-dot-active, var(--notched-misc-accent));
   transform: scale(1.25);
 }
@@ -598,5 +612,6 @@ button.aew-prsv2__dot {
   .aew-prsv2__track { scroll-behavior: auto; }
   .aew-prsv2__arrow,
   .aew-prsv2__dot,
+  .aew-prsv2__dot::before,
   .aew-prsv2__cta { transition: none; }
 }

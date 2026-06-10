@@ -16,8 +16,14 @@ Source: Figma (captured 2026-05-28). **Use these values for every page, widget, 
 | Secondary BG / H1–H2 | `#2A4F41` | `notched-secondary-bg` |
 | Secondary Accent | `#093328` | `notched-secondary-accent` |
 | Header H3+ / Paragraph | `#141C19` | `notched-text` |
-| Main CTA | `#AA7D44` | `notched-cta` |
-| CTA Hover | `#876137` | `notched-cta-hover` |
+| Main CTA | `#876137` | `notched-cta` |
+| CTA Hover | `#6E4F2D` | `notched-cta-hover` |
+
+> **Accessibility note (2026-06-10):** the CTA gold was darkened from `#AA7D44`
+> to `#876137` (the former hover tone) so white-on-gold buttons and gold-on-cream
+> text meet WCAG AA 4.5:1 contrast (`#AA7D44` measured only ~3.1:1 against white).
+> The hover tone moved to `#6E4F2D`. `#AA7D44` remains acceptable for decorative,
+> non-text use (icons, borders, illustrations).
 
 ---
 
@@ -82,6 +88,6 @@ Source: Figma (captured 2026-05-28). **Use these values for every page, widget, 
 | Padding Bottom | 16px | 16px |
 | Padding X | 24px | 24px |
 | Border Radius | 8px | 8px |
-| BG Default | `#AA7D44` | `#AA7D44` |
-| BG Hover | `#876137` | `#876137` |
+| BG Default | `#876137` | `#876137` |
+| BG Hover | `#6E4F2D` | `#6E4F2D` |
 | Text Color | `#FFFFFF` | `#FFFFFF` |

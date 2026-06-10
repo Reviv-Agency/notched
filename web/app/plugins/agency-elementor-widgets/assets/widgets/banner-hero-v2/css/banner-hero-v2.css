@@ -41,8 +41,8 @@
   --notched-secondary-bg:      #2A4F41;
   --notched-secondary-accent:  #093328;
   --notched-text:              #141C19;
-  --notched-cta:               #AA7D44;
-  --notched-cta-hover:         #876137;
+  --notched-cta:               #876137;
+  --notched-cta-hover:         #6E4F2D;
 }
 
 /* ── Outer block (boxed light page band) ─────────────────────────────────── */
@@ -187,7 +187,7 @@
   border-color: var(--aew-bhero-pri-bg-hover, var(--notched-cta-hover));
 }
 
-/* Secondary (outline) — transparent bg, #876137 border + text; fills on hover. */
+/* Secondary (outline) — transparent bg, #6E4F2D border + text; fills on hover. */
 .aew-bhero__btn--secondary {
   background-color: transparent;
   color: var(--aew-bhero-sec-color, var(--notched-cta-hover));

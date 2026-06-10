@@ -145,7 +145,7 @@
 	padding: 16px 24px !important;
 	border: 0;
 	border-radius: 18px;
-	background-color: var(--notched-cta, #AA7D44);
+	background-color: var(--notched-cta, #876137);
 	color: #FFFFFF;
 	font-family: var(--aew-font-body, 'Lato', sans-serif);
 	font-size: 14px !important;
@@ -158,7 +158,7 @@
 
 .aew-overlay-banner__button:hover,
 .aew-overlay-banner__button:focus-visible {
-	background-color: var(--notched-cta-hover, #876137);
+	background-color: var(--notched-cta-hover, #6E4F2D);
 	color: #FFFFFF;
 	text-decoration: none;
 }

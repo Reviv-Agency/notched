@@ -270,7 +270,7 @@ class Widget_Faq_V2 extends Widget_Base {
 		$this->add_control( 'cat_active_color', [
 			'label'     => 'Active color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-cat-active: {{VALUE}};' ],
 		] );
 		$this->add_control( 'cat_color', [

@@ -19,7 +19,7 @@
 
 .aew-rpv2 {
   --notched-cards: #FFFFFF; --notched-background: #F6F0EC; --notched-lines: #BFC0BF;
-  --notched-misc-accent: #3B413F; --notched-text: #141C19; --notched-cta: #AA7D44;
+  --notched-misc-accent: #3B413F; --notched-text: #141C19; --notched-cta: #876137;
   width: 100%;
   background-color: var(--aew-rpv2-bg, var(--notched-background));
   /* Design-system width model: X gutter on the outer block; inner caps at 1440. */

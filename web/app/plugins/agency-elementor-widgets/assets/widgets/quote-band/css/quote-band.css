@@ -5,8 +5,8 @@
 /* Brand tokens (scoped). */
 .aew-qb {
   --notched-background: #F6F0EC;
-  --notched-cta:        #AA7D44;
-  --notched-cta-hover:  #876137;
+  --notched-cta:        #876137;
+  --notched-cta-hover:  #6E4F2D;
   --aew-qb-bg:          var(--notched-cta);
   --aew-qb-heading:     var(--notched-background);
   --aew-qb-btn-bg:      #FFFFFF;

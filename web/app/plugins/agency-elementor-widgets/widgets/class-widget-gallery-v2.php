@@ -367,7 +367,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Eyebrow color', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#AA7D44',
+				'default'   => '#876137',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-galv2-eyebrow: {{VALUE}};',
 				],

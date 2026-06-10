@@ -278,13 +278,13 @@ class Widget_Welcome_V2 extends Widget_Base {
 		$this->add_control( 'btn_text', [
 			'label'     => esc_html__( 'Text color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '#6E4F2D',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-welc-btn-text: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-welc-btn-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn_text_hover', [

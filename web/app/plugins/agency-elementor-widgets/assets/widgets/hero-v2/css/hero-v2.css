@@ -39,8 +39,8 @@
   --notched-secondary-bg:      #2A4F41;
   --notched-secondary-accent:  #093328;
   --notched-text:              #141C19;
-  --notched-cta:               #AA7D44;
-  --notched-cta-hover:         #876137;
+  --notched-cta:               #876137;
+  --notched-cta-hover:         #6E4F2D;
 }
 
 /* ── Outer block (full-bleed stage) ──────────────────────────────────────── */
@@ -190,7 +190,7 @@
   transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
-/* Primary — design-system default BG #AA7D44, white text, hover #876137.
+/* Primary — design-system default BG #876137, white text, hover #6E4F2D.
    The --aew-hev2-pri-* vars are set inline by render() from the resolved
    editor values (hex or global colour); the design-system token is the
    fallback when the user hasn't overridden that slot. This keeps editor and

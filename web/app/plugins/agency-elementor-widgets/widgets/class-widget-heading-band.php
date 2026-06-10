@@ -676,7 +676,7 @@ class Widget_Heading_Band extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#AA7D44',
+				'default'   => '#876137',
 				'selectors' => [
 					'{{WRAPPER}} .aew-heading-band__button' => 'background-color: {{VALUE}};',
 				],
@@ -700,7 +700,7 @@ class Widget_Heading_Band extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#876137',
+				'default'   => '#6E4F2D',
 				'selectors' => [
 					'{{WRAPPER}} .aew-heading-band__button:hover'         => 'background-color: {{VALUE}};',
 					'{{WRAPPER}} .aew-heading-band__button:focus-visible' => 'background-color: {{VALUE}};',

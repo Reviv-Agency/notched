@@ -9,7 +9,7 @@
  * "colour shows in the editor, not on the live page" bug. The reliable fix is
  * for each widget's render() to emit the resolved value as an inline CSS var on
  * the wrapper:
- *   - plain hex  → emit the hex verbatim (e.g. `#AA7D44`)
+ *   - plain hex  → emit the hex verbatim (e.g. `#876137`)
  *   - global     → emit `var(--e-global-color-<id>)`, which the active kit's
  *                  stylesheet defines site-wide (and which Elementor keeps in
  *                  the kit CSS even when it drops the per-widget rule).

@@ -185,28 +185,28 @@
 }
 
 .aew-split-media__btn--primary {
-	background-color: var(--aew-spm-btnp-bg, #AA7D44);
-	border-color: var(--aew-spm-btnp-bg, #AA7D44);
+	background-color: var(--aew-spm-btnp-bg, #876137);
+	border-color: var(--aew-spm-btnp-bg, #876137);
 	color: var(--aew-spm-btnp-text, #FFFFFF);
 }
 
 .aew-split-media__btn--primary:hover,
 .aew-split-media__btn--primary:focus-visible {
-	background-color: var(--aew-spm-btnp-bg-hover, #876137);
-	border-color: var(--aew-spm-btnp-bg-hover, #876137);
+	background-color: var(--aew-spm-btnp-bg-hover, #6E4F2D);
+	border-color: var(--aew-spm-btnp-bg-hover, #6E4F2D);
 	color: var(--aew-spm-btnp-text-hover, var(--aew-spm-btnp-text, #FFFFFF));
 }
 
 .aew-split-media__btn--secondary {
 	background-color: transparent;
-	border-color: var(--aew-spm-btns, #876137);
-	color: var(--aew-spm-btns, #876137);
+	border-color: var(--aew-spm-btns, #6E4F2D);
+	color: var(--aew-spm-btns, #6E4F2D);
 }
 
 .aew-split-media__btn--secondary:hover,
 .aew-split-media__btn--secondary:focus-visible {
-	background-color: var(--aew-spm-btns-bg-hover, #876137);
-	border-color: var(--aew-spm-btns-bg-hover, #876137);
+	background-color: var(--aew-spm-btns-bg-hover, #6E4F2D);
+	border-color: var(--aew-spm-btns-bg-hover, #6E4F2D);
 	color: var(--aew-spm-btns-text-hover, #FFFFFF);
 }
 

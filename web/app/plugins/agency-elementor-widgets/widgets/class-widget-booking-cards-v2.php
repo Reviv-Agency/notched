@@ -428,7 +428,7 @@ class Widget_Booking_Cards_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#AA7D44',
+				'default'   => '#876137',
 				'selectors' => [ '{{WRAPPER}}' => '--aew-bkcv2-btn-bg: {{VALUE}};' ],
 			]
 		);
@@ -448,7 +448,7 @@ class Widget_Booking_Cards_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#876137',
+				'default'   => '#6E4F2D',
 				'selectors' => [ '{{WRAPPER}}' => '--aew-bkcv2-btn-bg-hover: {{VALUE}};' ],
 			]
 		);

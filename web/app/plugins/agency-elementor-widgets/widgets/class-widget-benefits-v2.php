@@ -164,7 +164,7 @@ class Widget_Benefits_V2 extends Widget_Base {
 		$this->add_control( 'title_color', [
 			'label'     => 'Color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bnv2-title: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -186,7 +186,7 @@ class Widget_Benefits_V2 extends Widget_Base {
 		$this->add_control( 'item_heading_color', [
 			'label'     => 'Color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bnv2-heading: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [

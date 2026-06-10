@@ -301,7 +301,7 @@ class Widget_Banner_Hero_V2 extends Widget_Base {
 		$this->add_control( 'pri_bg', [
 			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bhero-pri-bg: {{VALUE}};' ],
 		] );
 		$this->add_control( 'pri_text', [
@@ -313,7 +313,7 @@ class Widget_Banner_Hero_V2 extends Widget_Base {
 		$this->add_control( 'pri_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '#6E4F2D',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bhero-pri-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_control( 'pri_text_hover', [
@@ -332,13 +332,13 @@ class Widget_Banner_Hero_V2 extends Widget_Base {
 		$this->add_control( 'sec_color', [
 			'label'     => esc_html__( 'Border & text color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '#6E4F2D',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bhero-sec-color: {{VALUE}};' ],
 		] );
 		$this->add_control( 'sec_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bhero-sec-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_control( 'sec_text_hover', [

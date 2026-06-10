@@ -143,7 +143,7 @@ class Widget_Single_Post_V2 extends Widget_Base {
 		] );
 		$this->add_control( 'link_color', [
 			'label' => esc_html__( 'Link color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#AA7D44', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-link: {{VALUE}};' ],
+			'default' => '#876137', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-link: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name' => 'body_typo', 'selector' => '{{WRAPPER}} .aew-spv2__content',

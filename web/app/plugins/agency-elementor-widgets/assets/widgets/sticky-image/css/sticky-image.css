@@ -17,8 +17,8 @@
   --notched-secondary-bg:      #2A4F41;
   --notched-secondary-accent:  #093328;
   --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #AA7D44;
+  --notched-cta:               #6E4F2D;
+  --notched-cta-hover:         #876137;
 }
 
 /* ── Strip Elementor's column padding so the widget can float freely ─────────── */

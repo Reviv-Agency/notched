@@ -282,14 +282,14 @@ class Widget_Consultation_Form_V2 extends Widget_Base {
 		$this->add_control( 'btn_bg', [
 			'label'     => 'Button background',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-cfv2-btn-bg: {{VALUE}};' ],
 		] );
 
 		$this->add_control( 'btn_bg_hover', [
 			'label'     => 'Button background (hover)',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '#6E4F2D',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-cfv2-btn-bg-hover: {{VALUE}};' ],
 		] );
 

@@ -100,11 +100,11 @@ class Widget_Comments_V2 extends Widget_Base {
 		] );
 		$this->add_control( 'btn_bg', [
 			'label' => esc_html__( 'Button background', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#AA7D44', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-btn-bg: {{VALUE}};' ],
+			'default' => '#876137', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-btn-bg: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn_bg_hover', [
 			'label' => esc_html__( 'Button background (hover)', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#876137', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-btn-bg-hover: {{VALUE}};' ],
+			'default' => '#6E4F2D', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-btn-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name' => 'heading_typo', 'selector' => '{{WRAPPER}} .aew-cmv2__heading',

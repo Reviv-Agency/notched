@@ -262,7 +262,7 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 		$this->add_control( 'icon_color', [
 			'label'       => esc_html__( 'Icon tint', 'agency-elementor-widgets' ),
 			'type'        => Controls_Manager::COLOR,
-			'default'     => '#AA7D44',
+			'default'     => '#876137',
 			'selectors'   => [ '{{WRAPPER}}' => '--aew-vals-icon: {{VALUE}};' ],
 			'description' => esc_html__( 'Fills the wood-print icon with a flat brand colour.', 'agency-elementor-widgets' ),
 		] );

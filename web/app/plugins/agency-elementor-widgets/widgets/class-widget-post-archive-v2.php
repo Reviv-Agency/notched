@@ -211,7 +211,7 @@ class Widget_Post_Archive_V2 extends Widget_Base {
 		$this->add_control( 'title_hover', [
 			'label'     => esc_html__( 'Color (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-pav2-title-hover: {{VALUE}};' ],
 		] );
 

@@ -109,7 +109,7 @@ class Widget_Recent_Posts_V2 extends Widget_Base {
 		] );
 		$this->add_control( 'see_all_color', [
 			'label' => esc_html__( '"See All" color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#AA7D44', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-see-all: {{VALUE}};' ],
+			'default' => '#876137', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-see-all: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name' => 'heading_typo', 'selector' => '{{WRAPPER}} .aew-rpv2__heading',

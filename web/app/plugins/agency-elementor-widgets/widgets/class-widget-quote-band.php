@@ -78,7 +78,7 @@ class Widget_Quote_Band extends Widget_Base {
 		$this->add_control( 'band_bg', [
 			'label'   => esc_html__( 'Band background', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#AA7D44',
+			'default' => '#876137',
 			'selectors' => [ '{{WRAPPER}} .aew-qb' => '--aew-qb-bg: {{VALUE}};' ],
 		] );
 
@@ -97,7 +97,7 @@ class Widget_Quote_Band extends Widget_Base {
 		$this->add_control( 'btn_text_color', [
 			'label'   => esc_html__( 'Button text', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#AA7D44',
+			'default' => '#876137',
 			'selectors' => [ '{{WRAPPER}} .aew-qb' => '--aew-qb-btn-text: {{VALUE}};' ],
 		] );
 
@@ -118,7 +118,7 @@ class Widget_Quote_Band extends Widget_Base {
 		$this->add_control( 'btn_bg_hover', [
 			'label'   => esc_html__( 'Button background (hover)', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#876137',
+			'default' => '#6E4F2D',
 			'selectors' => [ '{{WRAPPER}} .aew-qb' => '--aew-qb-btn-bg-hover: {{VALUE}};' ],
 		] );
 

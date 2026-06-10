@@ -78,7 +78,7 @@
   display: inline-flex;
   align-items: center;
   padding: 16px 32px 14px;
-  background: var(--aew-jobs-btn-bg, var(--notched-cta, #AA7D44));
+  background: var(--aew-jobs-btn-bg, var(--notched-cta, #876137));
   color: var(--aew-jobs-btn-text, var(--notched-background, #F6F0EC));
   border-radius: 6px;
   font-family: var(--aew-font-heading, 'Teko', sans-serif);
@@ -91,7 +91,7 @@
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.aew-jobs__btn:hover { background: var(--notched-cta-hover, #876137); transform: translateY(-1px); }
+.aew-jobs__btn:hover { background: var(--notched-cta-hover, #6E4F2D); transform: translateY(-1px); }
 
 /* ── Mobile ── */
 @media (max-width: 768px) {

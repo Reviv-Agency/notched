@@ -406,7 +406,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'price_color', [
 			'label'     => 'Price color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-price: {{VALUE}};' ],
 			'condition' => [ 'show_price' => 'yes' ],
 		] );
@@ -426,7 +426,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'badge_bg', [
 			'label'     => 'Badge background',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'condition' => [ 'show_badge' => 'yes' ],
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-badge-bg: {{VALUE}};' ],
 		] );
@@ -480,7 +480,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'quick_view_bg', [
 			'label'     => 'Quick View background',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-qv-bg: {{VALUE}};' ],
 			'condition' => [ 'show_quick_view' => 'yes' ],
 		] );
@@ -529,13 +529,13 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'cta_bg', [
 			'label'     => 'Background',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#AA7D44',
+			'default'   => '#876137',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-cta-bg: {{VALUE}};' ],
 		] );
 		$this->add_control( 'cta_bg_hover', [
 			'label'     => 'Background (hover)',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '#6E4F2D',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-cta-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_control( 'cta_text', [

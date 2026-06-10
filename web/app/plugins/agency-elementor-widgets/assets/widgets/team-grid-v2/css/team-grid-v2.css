@@ -13,8 +13,8 @@
   --notched-secondary-bg:      #2A4F41;
   --notched-secondary-accent:  #093328;
   --notched-text:              #141C19;
-  --notched-cta:               #AA7D44;
-  --notched-cta-hover:         #876137;
+  --notched-cta:               #876137;
+  --notched-cta-hover:         #6E4F2D;
 }
 
 /* Strip Elementor's column / container padding so the section is full-bleed. */
@@ -92,9 +92,9 @@
   gap: 10px;
   padding: 16px 28px 14px;
   border-radius: 8px;
-  border: 1px solid var(--aew-team-btn-border, var(--notched-cta, #AA7D44));
+  border: 1px solid var(--aew-team-btn-border, var(--notched-cta, #876137));
   background: var(--aew-team-btn-bg, transparent);
-  color: var(--aew-team-btn-text, var(--notched-cta, #AA7D44));
+  color: var(--aew-team-btn-text, var(--notched-cta, #876137));
   font-family: "Teko", sans-serif;
   font-weight: 600;
   font-size: 18px;
