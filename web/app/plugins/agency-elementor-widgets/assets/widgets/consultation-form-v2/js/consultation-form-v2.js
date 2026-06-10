@@ -253,7 +253,14 @@
 			if (btn) { btn.disabled = true; }
 			setStatus(form, 'Sending…', true);
 
-			fetch(form.action, {
+			// NOTE: use getAttribute('action'), not form.action — the form has a
+			// hidden <input name="action"> (required by admin-ajax) which shadows the
+			// form.action DOM property, making it return that input node instead of
+			// the URL. Using form.action posts to a bad URL → 404 → "Unexpected
+			// server response." getAttribute returns the real admin-ajax URL.
+			var endpoint = form.getAttribute('action');
+
+			fetch(endpoint, {
 				method: 'POST',
 				body: data,
 				credentials: 'same-origin'
