@@ -48,6 +48,48 @@ add_filter('elementor/widget/render_content', function ($content) {
     ]);
 }, 10);
 
+/*
+ * Meta description for search engines. There is no SEO plugin on this stack and
+ * Elementor pages keep post_content empty, so derive a description per context:
+ * manual excerpt → product short description → term description → the site-wide
+ * brand default. Output early in <head> so crawlers find it before asset tags.
+ */
+add_action('wp_head', function () {
+    $default = 'Notched builds handcrafted timber pergola, pavilion and zen den kits — '
+             . 'precision pre-cut, dovetail-notched and ready to assemble in your backyard.';
+    $desc = '';
+    if (is_front_page()) {
+        $desc = $default;
+    } elseif (is_singular()) {
+        $post = get_queried_object();
+        if ($post instanceof WP_Post) {
+            if ('' !== $post->post_excerpt) {
+                $desc = $post->post_excerpt;
+            } elseif ('' !== $post->post_content) {
+                $desc = wp_trim_words(wp_strip_all_tags(strip_shortcodes($post->post_content)), 30, '…');
+            }
+        }
+    } elseif (is_category() || is_tag() || is_tax()) {
+        $desc = term_description();
+    }
+    $desc = trim(wp_strip_all_tags((string) $desc));
+    if ('' === $desc) { $desc = $default; }
+    printf("<meta name=\"description\" content=\"%s\" />\n", esc_attr($desc));
+}, 1);
+
+/*
+ * Preconnect to the Google Fonts origins. Elementor self-hosts most fonts, but
+ * the Dancing Script face still loads from fonts.googleapis.com/fonts.gstatic.com;
+ * warming those connections removes ~2 round-trips from the critical path.
+ */
+add_filter('wp_resource_hints', function ($urls, $relation_type) {
+    if ('preconnect' === $relation_type) {
+        $urls[] = ['href' => 'https://fonts.googleapis.com'];
+        $urls[] = ['href' => 'https://fonts.gstatic.com', 'crossorigin' => 'anonymous'];
+    }
+    return $urls;
+}, 10, 2);
+
 add_action('wp_enqueue_scripts', function () {
     // Version by file mtime so edits to style.css bust the browser cache.
     $css = get_stylesheet_directory() . '/style.css';
