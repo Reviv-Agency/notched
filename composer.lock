@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02e129070b703678f828e855d2d4f388",
+    "content-hash": "600cbf6b32a8719b38f209ec1ce5e434",
     "packages": [
         {
             "name": "composer/installers",
@@ -1495,6 +1495,68 @@
                 "source": "https://plugins.svn.wordpress.org/elementor"
             },
             "time": "2026-05-27T11:30:55+00:00"
+        },
+        {
+            "name": "wp-plugin/google-site-kit",
+            "version": "1.180.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/google-site-kit/",
+                "reference": "tags/1.180.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/google-site-kit.1.180.0.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Google"
+                }
+            ],
+            "description": "Site Kit is a one-stop solution for WordPress users to use everything Google has to offer to make them successful on the web.",
+            "homepage": "https://sitekit.withgoogle.com",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/google-site-kit/#developers",
+                "issues": "https://wordpress.org/support/plugin/google-site-kit",
+                "source": "https://plugins.svn.wordpress.org/google-site-kit"
+            },
+            "time": "2026-06-01T18:40:57+00:00"
+        },
+        {
+            "name": "wp-plugin/microsoft-clarity",
+            "version": "0.10.24",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/microsoft-clarity/",
+                "reference": "tags/0.10.24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/microsoft-clarity.0.10.24.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Microsoft"
+                }
+            ],
+            "description": "How do you make your website great? Clarity can help you quickly see what's working on your site and where people get stuck. And it's free.",
+            "homepage": "https://clarity.microsoft.com/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/microsoft-clarity/#developers",
+                "issues": "https://wordpress.org/support/plugin/microsoft-clarity",
+                "source": "https://plugins.svn.wordpress.org/microsoft-clarity"
+            },
+            "time": "2026-05-08T01:40:51+00:00"
         },
         {
             "name": "wp-plugin/woocommerce",

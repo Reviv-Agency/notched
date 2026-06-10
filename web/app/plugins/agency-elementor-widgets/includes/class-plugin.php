@@ -67,6 +67,16 @@ final class Plugin {
 		);
 
 		wp_add_inline_style( 'aew-tokens', Design_Tokens::inline_root_css() );
+
+		// Global GA4 CTA click tracking. No-ops when gtag is absent (e.g. local
+		// dev or Site Kit not connected), so it is safe to load everywhere.
+		wp_enqueue_script(
+			'aew-analytics',
+			AEW_PLUGIN_URL . 'assets/js/aew-analytics.js',
+			[],
+			AEW_VERSION,
+			true
+		);
 	}
 
 	/**

@@ -261,6 +261,13 @@
 				.then(function (r) { return r.json().catch(function () { return { success: false, data: { message: 'Unexpected server response.' } }; }); })
 				.then(function (json) {
 					if (json && json.success) {
+						// GA4 lead conversion. No-ops without gtag; no PII sent.
+						if (typeof window.gtag === 'function') {
+							window.gtag('event', 'generate_lead', {
+								form: 'consultation-form-v2',
+								page_path: window.location.pathname
+							});
+						}
 						setStatus(form, (json.data && json.data.message) || 'Thanks!', true);
 						form.reset();
 					} else {
