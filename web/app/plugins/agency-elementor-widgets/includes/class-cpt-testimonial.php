@@ -10,11 +10,15 @@ namespace AEW;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Registers bh_testimonial CPT and admin meta.
+ * Registers aew_testimonial CPT and admin meta.
  */
 final class Cpt_Testimonial {
 
-	public const POST_TYPE = 'bh_testimonial';
+	public const POST_TYPE = 'aew_testimonial';
+
+	/** Legacy brand-prefixed identifiers, migrated to the neutral aew_* set. */
+	private const LEGACY_POST_TYPE = 'bh_testimonial';
+	private const MIGRATED_OPTION  = 'aew_testimonial_migrated';
 
 	/**
 	 * @return void
@@ -25,6 +29,35 @@ final class Cpt_Testimonial {
 		add_action( 'add_meta_boxes', [ self::class, 'register_meta_boxes' ] );
 		add_action( 'save_post_' . self::POST_TYPE, [ self::class, 'save_meta' ], 10, 2 );
 		add_action( 'admin_enqueue_scripts', [ self::class, 'enqueue_admin_scripts' ] );
+		add_action( 'admin_init', [ self::class, 'maybe_migrate' ] );
+	}
+
+	/**
+	 * One-time migration from the legacy `bh_testimonial` post type and `bh_*`
+	 * meta keys to the neutral `aew_testimonial` / `aew_*` set. Idempotent.
+	 *
+	 * @return void
+	 */
+	public static function maybe_migrate(): void {
+		if ( get_option( self::MIGRATED_OPTION ) ) {
+			return;
+		}
+
+		global $wpdb;
+		$wpdb->query( // phpcs:ignore WordPress.DB
+			$wpdb->prepare(
+				"UPDATE {$wpdb->posts} SET post_type = %s WHERE post_type = %s",
+				self::POST_TYPE,
+				self::LEGACY_POST_TYPE
+			)
+		);
+		// Rename the legacy `bh_*` testimonial meta keys to `aew_*` (plugin owns the prefix).
+		$wpdb->query( // phpcs:ignore WordPress.DB
+			"UPDATE {$wpdb->postmeta} SET meta_key = CONCAT( 'aew_', SUBSTRING( meta_key, 4 ) ) WHERE meta_key LIKE 'bh\\_%'"
+		);
+
+		update_option( self::MIGRATED_OPTION, '1' );
+		flush_rewrite_rules();
 	}
 
 	/**
@@ -83,7 +116,7 @@ final class Cpt_Testimonial {
 	public static function register_meta(): void {
 		register_post_meta(
 			self::POST_TYPE,
-			'bh_profile_image_id',
+			'aew_profile_image_id',
 			[
 				'type'              => 'integer',
 				'single'            => true,
@@ -95,7 +128,7 @@ final class Cpt_Testimonial {
 			]
 		);
 
-		foreach ( [ 'bh_reviewer_name', 'bh_project_meta', 'bh_quote_title' ] as $key ) {
+		foreach ( [ 'aew_reviewer_name', 'aew_project_meta', 'aew_quote_title' ] as $key ) {
 			register_post_meta(
 				self::POST_TYPE,
 				$key,
@@ -113,7 +146,7 @@ final class Cpt_Testimonial {
 
 		register_post_meta(
 			self::POST_TYPE,
-			'bh_quote_body',
+			'aew_quote_body',
 			[
 				'type'              => 'string',
 				'single'            => true,
@@ -131,7 +164,7 @@ final class Cpt_Testimonial {
 	 */
 	public static function register_meta_boxes(): void {
 		add_meta_box(
-			'bh_testimonial_details',
+			'aew_testimonial_details',
 			esc_html__( 'Testimonial details', 'agency-elementor-widgets' ),
 			[ self::class, 'render_meta_box' ],
 			self::POST_TYPE,
@@ -145,48 +178,48 @@ final class Cpt_Testimonial {
 	 * @return void
 	 */
 	public static function render_meta_box( \WP_Post $post ): void {
-		wp_nonce_field( 'bh_testimonial_meta_save', 'bh_testimonial_meta_nonce' );
+		wp_nonce_field( 'aew_testimonial_meta_save', 'aew_testimonial_meta_nonce' );
 
-		$profile_id   = (int) get_post_meta( $post->ID, 'bh_profile_image_id', true );
-		$reviewer     = (string) get_post_meta( $post->ID, 'bh_reviewer_name', true );
-		$project_meta = (string) get_post_meta( $post->ID, 'bh_project_meta', true );
-		$quote_title  = (string) get_post_meta( $post->ID, 'bh_quote_title', true );
-		$quote_body   = (string) get_post_meta( $post->ID, 'bh_quote_body', true );
+		$profile_id   = (int) get_post_meta( $post->ID, 'aew_profile_image_id', true );
+		$reviewer     = (string) get_post_meta( $post->ID, 'aew_reviewer_name', true );
+		$project_meta = (string) get_post_meta( $post->ID, 'aew_project_meta', true );
+		$quote_title  = (string) get_post_meta( $post->ID, 'aew_quote_title', true );
+		$quote_body   = (string) get_post_meta( $post->ID, 'aew_quote_body', true );
 		$profile_url  = $profile_id > 0 ? wp_get_attachment_image_url( $profile_id, 'thumbnail' ) : '';
 		?>
 		<p>
-			<label for="bh_profile_image_id"><strong><?php esc_html_e( 'Profile image', 'agency-elementor-widgets' ); ?></strong></label><br />
-			<input type="hidden" id="bh_profile_image_id" name="bh_profile_image_id" value="<?php echo esc_attr( (string) $profile_id ); ?>" />
-			<button type="button" class="button" id="bh_profile_image_select"><?php esc_html_e( 'Select image', 'agency-elementor-widgets' ); ?></button>
-			<button type="button" class="button" id="bh_profile_image_clear"><?php esc_html_e( 'Remove', 'agency-elementor-widgets' ); ?></button>
-			<span id="bh_profile_image_preview" style="display:block;margin-top:8px;">
+			<label for="aew_profile_image_id"><strong><?php esc_html_e( 'Profile image', 'agency-elementor-widgets' ); ?></strong></label><br />
+			<input type="hidden" id="aew_profile_image_id" name="aew_profile_image_id" value="<?php echo esc_attr( (string) $profile_id ); ?>" />
+			<button type="button" class="button" id="aew_profile_image_select"><?php esc_html_e( 'Select image', 'agency-elementor-widgets' ); ?></button>
+			<button type="button" class="button" id="aew_profile_image_clear"><?php esc_html_e( 'Remove', 'agency-elementor-widgets' ); ?></button>
+			<span id="aew_profile_image_preview" style="display:block;margin-top:8px;">
 				<?php if ( $profile_url ) : ?>
 					<img src="<?php echo esc_url( $profile_url ); ?>" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;" />
 				<?php endif; ?>
 			</span>
 		</p>
 		<p>
-			<label for="bh_reviewer_name"><strong><?php esc_html_e( 'Reviewer name', 'agency-elementor-widgets' ); ?></strong></label><br />
-			<input type="text" class="widefat" id="bh_reviewer_name" name="bh_reviewer_name" value="<?php echo esc_attr( $reviewer ); ?>" placeholder="Mandi J." />
+			<label for="aew_reviewer_name"><strong><?php esc_html_e( 'Reviewer name', 'agency-elementor-widgets' ); ?></strong></label><br />
+			<input type="text" class="widefat" id="aew_reviewer_name" name="aew_reviewer_name" value="<?php echo esc_attr( $reviewer ); ?>" placeholder="Jane D." />
 		</p>
 		<p>
-			<label for="bh_project_meta"><strong><?php esc_html_e( 'Project / location', 'agency-elementor-widgets' ); ?></strong></label><br />
-			<input type="text" class="widefat" id="bh_project_meta" name="bh_project_meta" value="<?php echo esc_attr( $project_meta ); ?>" placeholder="Whole Home Remodel, Draper, Utah County" />
+			<label for="aew_project_meta"><strong><?php esc_html_e( 'Project / location', 'agency-elementor-widgets' ); ?></strong></label><br />
+			<input type="text" class="widefat" id="aew_project_meta" name="aew_project_meta" value="<?php echo esc_attr( $project_meta ); ?>" placeholder="Project name, City, State" />
 			<span class="description"><?php esc_html_e( 'Shown after the name, separated by |', 'agency-elementor-widgets' ); ?></span>
 		</p>
 		<p>
-			<label for="bh_quote_title"><strong><?php esc_html_e( 'Quote title', 'agency-elementor-widgets' ); ?></strong></label><br />
-			<input type="text" class="widefat" id="bh_quote_title" name="bh_quote_title" value="<?php echo esc_attr( $quote_title ); ?>" />
+			<label for="aew_quote_title"><strong><?php esc_html_e( 'Quote title', 'agency-elementor-widgets' ); ?></strong></label><br />
+			<input type="text" class="widefat" id="aew_quote_title" name="aew_quote_title" value="<?php echo esc_attr( $quote_title ); ?>" />
 		</p>
 		<p>
-			<label for="bh_quote_body"><strong><?php esc_html_e( 'Quote body', 'agency-elementor-widgets' ); ?></strong></label>
+			<label for="aew_quote_body"><strong><?php esc_html_e( 'Quote body', 'agency-elementor-widgets' ); ?></strong></label>
 		</p>
 		<?php
 		wp_editor(
 			$quote_body,
-			'bh_quote_body',
+			'aew_quote_body',
 			[
-				'textarea_name' => 'bh_quote_body',
+				'textarea_name' => 'aew_quote_body',
 				'textarea_rows' => 6,
 				'media_buttons' => false,
 				'teeny'         => true,
@@ -198,7 +231,7 @@ final class Cpt_Testimonial {
 		<script>
 		(function ($) {
 			var frame;
-			$('#bh_profile_image_select').on('click', function (e) {
+			$('#aew_profile_image_select').on('click', function (e) {
 				e.preventDefault();
 				if (frame) {
 					frame.open();
@@ -211,15 +244,15 @@ final class Cpt_Testimonial {
 				});
 				frame.on('select', function () {
 					var attachment = frame.state().get('selection').first().toJSON();
-					$('#bh_profile_image_id').val(attachment.id);
-					$('#bh_profile_image_preview').html('<img src="' + attachment.url + '" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;" />');
+					$('#aew_profile_image_id').val(attachment.id);
+					$('#aew_profile_image_preview').html('<img src="' + attachment.url + '" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;" />');
 				});
 				frame.open();
 			});
-			$('#bh_profile_image_clear').on('click', function (e) {
+			$('#aew_profile_image_clear').on('click', function (e) {
 				e.preventDefault();
-				$('#bh_profile_image_id').val('');
-				$('#bh_profile_image_preview').empty();
+				$('#aew_profile_image_id').val('');
+				$('#aew_profile_image_preview').empty();
 			});
 		})(jQuery);
 		</script>
@@ -236,7 +269,7 @@ final class Cpt_Testimonial {
 			return;
 		}
 
-		if ( ! isset( $_POST['bh_testimonial_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['bh_testimonial_meta_nonce'] ) ), 'bh_testimonial_meta_save' ) ) {
+		if ( ! isset( $_POST['aew_testimonial_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['aew_testimonial_meta_nonce'] ) ), 'aew_testimonial_meta_save' ) ) {
 			return;
 		}
 
@@ -244,14 +277,14 @@ final class Cpt_Testimonial {
 			return;
 		}
 
-		$profile_id = isset( $_POST['bh_profile_image_id'] ) ? absint( $_POST['bh_profile_image_id'] ) : 0;
-		update_post_meta( $post_id, 'bh_profile_image_id', $profile_id );
+		$profile_id = isset( $_POST['aew_profile_image_id'] ) ? absint( $_POST['aew_profile_image_id'] ) : 0;
+		update_post_meta( $post_id, 'aew_profile_image_id', $profile_id );
 
 		$fields = [
-			'bh_reviewer_name' => 'sanitize_text_field',
-			'bh_project_meta'  => 'sanitize_text_field',
-			'bh_quote_title'   => 'sanitize_text_field',
-			'bh_quote_body'    => [ Rich_Text::class, 'sanitize' ],
+			'aew_reviewer_name' => 'sanitize_text_field',
+			'aew_project_meta'  => 'sanitize_text_field',
+			'aew_quote_title'   => 'sanitize_text_field',
+			'aew_quote_body'    => [ Rich_Text::class, 'sanitize' ],
 		];
 
 		foreach ( $fields as $key => $callback ) {

@@ -2,10 +2,10 @@
 /**
  * Numbered Features V2 Elementor widget.
  *
- * A FULL-BLEED dark band (paper-texture image + #093328 colour overlay) split
+ * A FULL-BLEED dark band (paper-texture image + #555555 colour overlay) split
  * into two columns: a left COPY column (Teko heading + Lato intro) and a right
  * GRID of numbered features — each a gold circle with a number above a short
- * gold uppercase title. Recreates the "WHY NOTCHED?" section from notched.com.
+ * gold uppercase title. Recreates the "WHY [COMPANY]?" section from example.com.
  *
  * The X gutter lives on the INNER wrapper so the textured background stays
  * full-bleed; only the content caps at the 1440 rail.
@@ -40,7 +40,7 @@ class Widget_Numbered_Features_V2 extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title(): string {
-		return esc_html__( 'Numbered Features V2 (Notched)', 'agency-elementor-widgets' );
+		return esc_html__( 'Numbered Features V2', 'agency-elementor-widgets' );
 	}
 
 	/**
@@ -61,7 +61,7 @@ class Widget_Numbered_Features_V2 extends Widget_Base {
 	 * @return array<int, string>
 	 */
 	public function get_keywords(): array {
-		return [ 'numbered', 'features', 'why', 'steps', 'list', 'band', 'notched' ];
+		return [ 'numbered', 'features', 'why', 'steps', 'list', 'band' ];
 	}
 
 	/**
@@ -103,7 +103,7 @@ class Widget_Numbered_Features_V2 extends Widget_Base {
 	}
 
 	/**
-	 * Default features — the live /shop-kits "WHY NOTCHED?" list.
+	 * Default features — the live /shop-kits "WHY [COMPANY]?" list.
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
@@ -134,7 +134,7 @@ class Widget_Numbered_Features_V2 extends Widget_Base {
 		$this->add_control( 'heading', [
 			'label'   => esc_html__( 'Heading', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::TEXT,
-			'default' => esc_html__( 'WHY NOTCHED?', 'agency-elementor-widgets' ),
+			'default' => esc_html__( 'WHY [COMPANY]?', 'agency-elementor-widgets' ),
 		] );
 
 		$this->add_control( 'heading_tag', [

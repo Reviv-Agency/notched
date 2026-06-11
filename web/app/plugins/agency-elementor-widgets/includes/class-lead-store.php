@@ -3,7 +3,7 @@
  * Lead Store — backend for the self-contained Consultation Form V2 widget.
  *
  * Responsibilities:
- *   - install/maintain a custom `{$prefix}notched_leads` table
+ *   - install/maintain a custom `{$prefix}aew_leads` table
  *   - handle the public admin-ajax submission (nonce + validate → email + store)
  *   - expose a small wp-admin screen to review leads
  *
@@ -19,8 +19,10 @@ defined( 'ABSPATH' ) || exit;
 
 final class Lead_Store {
 
-	private const DB_VERSION     = '1';
+	private const DB_VERSION     = '2';
 	private const DB_VERSION_KEY = 'aew_leads_db_version';
+	private const TABLE          = 'aew_leads';
+	private const LEGACY_TABLE   = 'notched_leads';
 	private const AJAX_ACTION    = 'aew_consultation_submit';
 	private const NONCE_ACTION   = 'aew_consultation_form';
 
@@ -39,13 +41,24 @@ final class Lead_Store {
 
 	private static function table(): string {
 		global $wpdb;
-		return $wpdb->prefix . 'notched_leads';
+		return $wpdb->prefix . self::TABLE;
 	}
 
 	public static function install(): void {
 		global $wpdb;
 		$table           = self::table();
 		$charset_collate = $wpdb->get_charset_collate();
+
+		// One-time migration off the legacy brand-named table: if it exists and
+		// the neutral table doesn't, rename in place (preserves all leads).
+		$legacy = $wpdb->prefix . self::LEGACY_TABLE;
+		if ( $legacy !== $table ) {
+			$legacy_exists = (bool) $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $legacy ) ); // phpcs:ignore WordPress.DB
+			$table_exists  = (bool) $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ); // phpcs:ignore WordPress.DB
+			if ( $legacy_exists && ! $table_exists ) {
+				$wpdb->query( "RENAME TABLE `{$legacy}` TO `{$table}`" ); // phpcs:ignore WordPress.DB
+			}
+		}
 
 		$sql = "CREATE TABLE {$table} (
 			id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -167,10 +180,10 @@ final class Lead_Store {
 
 	public static function register_admin_page(): void {
 		add_menu_page(
-			__( 'Notched Leads', 'agency-elementor-widgets' ),
-			__( 'Notched Leads', 'agency-elementor-widgets' ),
+			__( 'Leads', 'agency-elementor-widgets' ),
+			__( 'Leads', 'agency-elementor-widgets' ),
 			'manage_options',
-			'aew-notched-leads',
+			'aew-leads',
 			[ __CLASS__, 'render_admin_page' ],
 			'dashicons-email-alt',
 			58
@@ -191,7 +204,7 @@ final class Lead_Store {
 		$total = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table}" ); // phpcs:ignore WordPress.DB
 		$rows  = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$table} ORDER BY created_at DESC LIMIT %d OFFSET %d", $per_page, $offset ) ); // phpcs:ignore WordPress.DB
 
-		echo '<div class="wrap"><h1>' . esc_html__( 'Notched Leads', 'agency-elementor-widgets' ) . '</h1>';
+		echo '<div class="wrap"><h1>' . esc_html__( 'Leads', 'agency-elementor-widgets' ) . '</h1>';
 		echo '<p>' . sprintf( /* translators: %d count */ esc_html__( '%d total submissions.', 'agency-elementor-widgets' ), $total ) . '</p>';
 
 		if ( empty( $rows ) ) {

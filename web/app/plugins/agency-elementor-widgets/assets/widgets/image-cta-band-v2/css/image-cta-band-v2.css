@@ -6,16 +6,16 @@
 
 /* ── Brand tokens (scoped) — source of truth: design-system.md ───────────── */
 .aew-icb {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards:   var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent:  var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
 }
 
 /* Strip Elementor's column / container padding so the band is full-bleed. */
@@ -97,7 +97,7 @@
 
 /* ── Centered content box ────────────────────────────────────────────────── */
 .aew-icb__box {
-  background: var(--aew-icb-box-bg, var(--notched-background));
+  background: var(--aew-icb-box-bg, var(--aew-background));
   border-radius: 24px;
   max-width: 800px;
   width: 100%;
@@ -117,7 +117,7 @@
   line-height: 100%;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--aew-icb-eyebrow, var(--notched-cta));
+  color: var(--aew-icb-eyebrow, var(--aew-cta));
 }
 
 /* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) — gotcha #20. */
@@ -128,7 +128,7 @@
   font-size: 64px;
   line-height: 85%;
   text-transform: uppercase;
-  color: var(--aew-icb-heading, var(--notched-secondary-bg));
+  color: var(--aew-icb-heading, var(--aew-secondary-bg));
 }
 
 .aew-icb__description {
@@ -138,7 +138,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 140%;
-  color: var(--aew-icb-description, var(--notched-text));
+  color: var(--aew-icb-description, var(--aew-text));
 }
 
 /* ── Button — design-system button spec ──────────────────────────────────── */
@@ -156,14 +156,14 @@
   letter-spacing: 0.02em;
   padding: 20px 24px 16px;
   border-radius: 8px;
-  background-color: var(--aew-icb-btn-bg, var(--notched-cta));
+  background-color: var(--aew-icb-btn-bg, var(--aew-cta));
   color: var(--aew-icb-btn-text, #FFFFFF);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .aew-icb__btn:hover,
 .aew-icb__btn:focus-visible {
-  background-color: var(--aew-icb-btn-bg-hover, var(--notched-cta-hover));
+  background-color: var(--aew-icb-btn-bg-hover, var(--aew-cta-hover));
   color: var(--aew-icb-btn-text-hover, var(--aew-icb-btn-text, #FFFFFF));
 }
 

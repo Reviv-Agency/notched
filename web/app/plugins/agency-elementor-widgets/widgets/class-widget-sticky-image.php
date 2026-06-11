@@ -1,6 +1,6 @@
 <?php
 /**
- * Sticky Image — Notched brand.
+ * Sticky Image — [Company] brand.
  *
  * A single image pinned to the page. Choose a position mode (Sticky /
  * Fixed / Absolute), a corner anchor, X/Y offsets and a size. Mobile gets
@@ -23,10 +23,10 @@ class Widget_Sticky_Image extends Widget_Base {
 	private const ASSET_SLUG = 'sticky-image';
 
 	public function get_name(): string      { return 'agency-sticky-image'; }
-	public function get_title(): string     { return esc_html__( 'Sticky Image (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Sticky Image', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-image'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'sticky', 'fixed', 'image', 'badge', 'float', 'warranty', 'notched' ]; }
+	public function get_keywords(): array   { return [ 'sticky', 'fixed', 'image', 'badge', 'float', 'warranty' ]; }
 
 	public function get_style_depends(): array  { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 	public function get_script_depends(): array { return [ Widget_Assets::handle( self::ASSET_SLUG ) ]; }

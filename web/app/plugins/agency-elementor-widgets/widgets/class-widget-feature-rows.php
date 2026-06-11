@@ -674,7 +674,7 @@ class Widget_Feature_Rows extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#6E4F2D',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .aew-feature-rows__cta:hover'         => 'background-color: {{VALUE}};',
 					'{{WRAPPER}} .aew-feature-rows__cta:focus-visible' => 'background-color: {{VALUE}};',

@@ -1,6 +1,6 @@
 <?php
 /**
- * Feature Band V2 — Notched brand.
+ * Feature Band V2 — [Company] brand.
  *
  * A FULL-BLEED background-image band (edge to edge, NOT capped at the 1440
  * content rail) with a content BOX overlaying it plus an optional tall side
@@ -31,10 +31,10 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'feature-band-v2';
 
 	public function get_name(): string      { return 'agency-feature-band-v2'; }
-	public function get_title(): string     { return esc_html__( 'Feature Band V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Feature Band V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-image-box'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'feature', 'band', 'steps', 'process', 'notched' ]; }
+	public function get_keywords(): array   { return [ 'feature', 'band', 'steps', 'process' ]; }
 
 	public function get_style_depends(): array { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 	public function get_script_depends(): array { return [ Widget_Assets::handle( self::ASSET_SLUG ) ]; }
@@ -345,7 +345,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_control( 'eyebrow_color', [
 			'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fbv2-eyebrow: {{VALUE}};' ],
 		] );
 
@@ -371,7 +371,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_control( 'heading_color', [
 			'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#2A4F41',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fbv2-heading: {{VALUE}};' ],
 		] );
 
@@ -396,7 +396,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_control( 'step_title_color', [
 			'label'     => esc_html__( 'Step title color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fbv2-step-title: {{VALUE}};' ],
 		] );
 
@@ -415,7 +415,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_control( 'step_text_color', [
 			'label'     => esc_html__( 'Step description color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#3B413F',
+			'default'   => '',
 			'separator' => 'before',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fbv2-step-text: {{VALUE}};' ],
 		] );
@@ -448,7 +448,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_control( 'pri_bg', [
 			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fbv2-pri-bg: {{VALUE}};' ],
 		] );
 		$this->add_control( 'pri_text', [
@@ -460,7 +460,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_control( 'pri_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#6E4F2D',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fbv2-pri-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_control( 'pri_text_hover', [
@@ -480,7 +480,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_control( 'sec_color', [
 			'label'     => esc_html__( 'Border & text color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fbv2-sec-color: {{VALUE}};' ],
 		] );
 		$this->add_control( 'sec_bg_hover', [
@@ -492,7 +492,7 @@ class Widget_Feature_Band_V2 extends Widget_Base {
 		$this->add_control( 'sec_text_hover', [
 			'label'     => esc_html__( 'Text color (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fbv2-sec-text-hover: {{VALUE}};' ],
 		] );
 

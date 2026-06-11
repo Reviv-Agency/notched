@@ -15,7 +15,7 @@ use Elementor\Repeater;
 use Elementor\Widget_Base;
 
 /**
- * 2×3 testimonial cards — manual repeater or bh_testimonial posts.
+ * 2×3 testimonial cards — manual repeater or aew_testimonial posts.
  */
 class Widget_Testimonial_Grid extends Widget_Base {
 
@@ -761,10 +761,10 @@ class Widget_Testimonial_Grid extends Widget_Base {
 		}
 
 		$project_url = get_the_post_thumbnail_url( $post_id, 'full' ) ?: '';
-		$profile_id  = (int) get_post_meta( $post_id, 'bh_profile_image_id', true );
+		$profile_id  = (int) get_post_meta( $post_id, 'aew_profile_image_id', true );
 		$profile_url = $profile_id > 0 ? (string) wp_get_attachment_image_url( $profile_id, 'full' ) : Widget_Assets::url( self::ASSET_SLUG, 'images/avatar-placeholder.webp' );
 
-		$quote_title = (string) get_post_meta( $post_id, 'bh_quote_title', true );
+		$quote_title = (string) get_post_meta( $post_id, 'aew_quote_title', true );
 		if ( '' === $quote_title ) {
 			$quote_title = get_the_title( $post_id );
 		}
@@ -772,10 +772,10 @@ class Widget_Testimonial_Grid extends Widget_Base {
 		return [
 			'project_image' => $project_url,
 			'profile_image' => $profile_url,
-			'reviewer_name' => (string) get_post_meta( $post_id, 'bh_reviewer_name', true ),
-			'project_meta'  => (string) get_post_meta( $post_id, 'bh_project_meta', true ),
+			'reviewer_name' => (string) get_post_meta( $post_id, 'aew_reviewer_name', true ),
+			'project_meta'  => (string) get_post_meta( $post_id, 'aew_project_meta', true ),
 			'quote_title'   => $quote_title,
-			'quote_body'    => (string) get_post_meta( $post_id, 'bh_quote_body', true ),
+			'quote_body'    => (string) get_post_meta( $post_id, 'aew_quote_body', true ),
 		];
 	}
 

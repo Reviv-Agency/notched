@@ -1,6 +1,6 @@
 <?php
 /**
- * Products Slider V2 — Notched brand.
+ * Products Slider V2 — [Company] brand.
  *
  * "Our most popular kit options" — a horizontal, scroll-snapping slider of
  * WooCommerce products. Each card shows the product image + title and links
@@ -23,10 +23,10 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'products-slider-v2';
 
 	public function get_name(): string      { return 'agency-products-slider-v2'; }
-	public function get_title(): string     { return esc_html__( 'Products Slider V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Products Slider V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-media-carousel'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'products', 'slider', 'carousel', 'grid', 'shop', 'woocommerce', 'kits', 'notched' ]; }
+	public function get_keywords(): array   { return [ 'products', 'slider', 'carousel', 'grid', 'shop', 'woocommerce', 'kits' ]; }
 
 	public function get_style_depends(): array  { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 	public function get_script_depends(): array { return [ Widget_Assets::handle( self::ASSET_SLUG ) ]; }
@@ -232,7 +232,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'body_bg', [
 			'label'     => 'Background',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-body-bg: {{VALUE}};' ],
 		] );
 		$this->end_controls_section();
@@ -243,7 +243,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'heading_color', [
 			'label'     => 'Color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#2A4F41',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-heading: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -262,7 +262,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'subtext_color', [
 			'label'     => 'Subtext color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'separator' => 'before',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-subtext: {{VALUE}};' ],
 		] );
@@ -290,7 +290,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'difficulty_color', [
 			'label'     => 'Label color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-difficulty: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -309,7 +309,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'difficulty_value_color', [
 			'label'     => 'Value color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'separator' => 'before',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-difficulty-value: {{VALUE}};' ],
 		] );
@@ -335,7 +335,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'difficulty_dot_color', [
 			'label'     => 'Dot color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#2A4F41',
+			'default'   => '',
 			'condition' => [ 'difficulty_dot' => 'yes' ],
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-difficulty-dot: {{VALUE}};' ],
 		] );
@@ -377,7 +377,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'title_color', [
 			'label'     => 'Title color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-title: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -406,7 +406,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'price_color', [
 			'label'     => 'Price color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-price: {{VALUE}};' ],
 			'condition' => [ 'show_price' => 'yes' ],
 		] );
@@ -426,7 +426,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'badge_bg', [
 			'label'     => 'Badge background',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'condition' => [ 'show_badge' => 'yes' ],
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-badge-bg: {{VALUE}};' ],
 		] );
@@ -480,7 +480,7 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'quick_view_bg', [
 			'label'     => 'Quick View background',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-qv-bg: {{VALUE}};' ],
 			'condition' => [ 'show_quick_view' => 'yes' ],
 		] );
@@ -506,19 +506,19 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'arrow_color', [
 			'label'     => 'Arrow icon color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-arrow-color: {{VALUE}};' ],
 		] );
 		$this->add_control( 'dot_color', [
 			'label'     => 'Dot color (active)',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#3B413F',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-dot-active: {{VALUE}};' ],
 		] );
 		$this->add_control( 'dot_color_idle', [
 			'label'     => 'Dot color (idle)',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#BFC0BF',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-dot-idle: {{VALUE}};' ],
 		] );
 		$this->end_controls_section();
@@ -529,13 +529,13 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 		$this->add_control( 'cta_bg', [
 			'label'     => 'Background',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-cta-bg: {{VALUE}};' ],
 		] );
 		$this->add_control( 'cta_bg_hover', [
 			'label'     => 'Background (hover)',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#6E4F2D',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-prsv2-cta-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_control( 'cta_text', [

@@ -4,7 +4,7 @@
  *
  * A split section: a copy block (eyebrow-free heading + paragraph + button) on
  * one side and a three-image collage on the other (one tall lead image plus two
- * stacked supporting images), mirroring notched.com/contact-us "Our Crew".
+ * stacked supporting images), mirroring example.com/contact-us "Our Crew".
  * Desktop = side-by-side; mobile = stacked with the collage below the copy.
  * Colours and the button are editable per-instance from the Style tab (§6.8).
  *
@@ -37,7 +37,7 @@ class Widget_Crew_Collage_V2 extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title(): string {
-		return esc_html__( 'Crew Collage V2 (Notched)', 'agency-elementor-widgets' );
+		return esc_html__( 'Crew Collage V2', 'agency-elementor-widgets' );
 	}
 
 	/**
@@ -58,7 +58,7 @@ class Widget_Crew_Collage_V2 extends Widget_Base {
 	 * @return array<int, string>
 	 */
 	public function get_keywords(): array {
-		return [ 'crew', 'team', 'collage', 'about', 'notched' ];
+		return [ 'crew', 'team', 'collage', 'about' ];
 	}
 
 	/**
@@ -123,7 +123,7 @@ class Widget_Crew_Collage_V2 extends Widget_Base {
 			'label'   => esc_html__( 'Paragraph', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::TEXTAREA,
 			'rows'    => 6,
-			'default' => esc_html__( 'With expertise spanning from design conception through to meticulous building and seamless installation, our experienced team at Notched ensures every project is crafted with precision and care. Whether you’re envisioning a custom timber structure or assembling one of our DIY kits, trust our seasoned professionals to bring your outdoor vision to life with expertise and dedication.', 'agency-elementor-widgets' ),
+			'default' => esc_html__( 'With expertise spanning from design conception through to meticulous building and seamless installation, our experienced team at [Company] ensures every project is crafted with precision and care. Whether you’re envisioning a custom timber structure or assembling one of our DIY kits, trust our seasoned professionals to bring your outdoor vision to life with expertise and dedication.', 'agency-elementor-widgets' ),
 		] );
 
 		$this->add_control( 'btn_text', [
@@ -182,7 +182,7 @@ class Widget_Crew_Collage_V2 extends Widget_Base {
 		$this->add_control( 'image_alt', [
 			'label'       => esc_html__( 'Images alt text', 'agency-elementor-widgets' ),
 			'type'        => Controls_Manager::TEXT,
-			'default'     => esc_html__( 'The Notched crew', 'agency-elementor-widgets' ),
+			'default'     => esc_html__( 'The [Company] crew', 'agency-elementor-widgets' ),
 		] );
 
 		$this->end_controls_section();
@@ -258,7 +258,7 @@ class Widget_Crew_Collage_V2 extends Widget_Base {
 		$this->add_control( 'btn_bg', [
 			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-crew-btn-bg: {{VALUE}};' ],
 		] );
 
@@ -272,7 +272,7 @@ class Widget_Crew_Collage_V2 extends Widget_Base {
 		$this->add_control( 'btn_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#6E4F2D',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-crew-btn-bg-hover: {{VALUE}};' ],
 		] );
 

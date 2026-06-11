@@ -4,7 +4,7 @@
  *
  * A heading + a row of full-width region boxes. Each box holds, INSIDE the box,
  * the region name plus a list of contact lines (phone / email), each line
- * optionally linked (tel: / mailto:). Mirrors notched.com/contact-us
+ * optionally linked (tel: / mailto:). Mirrors example.com/contact-us
  * "Reach Us Directly" — full-bleed coloured boxes with the text inside, not
  * beneath. Colours are editable per-instance from the Style tab (§6.8 pattern).
  *
@@ -37,7 +37,7 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title(): string {
-		return esc_html__( 'Contact Regions V2 (Notched)', 'agency-elementor-widgets' );
+		return esc_html__( 'Contact Regions V2', 'agency-elementor-widgets' );
 	}
 
 	/**
@@ -58,7 +58,7 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 	 * @return array<int, string>
 	 */
 	public function get_keywords(): array {
-		return [ 'contact', 'region', 'phone', 'email', 'notched' ];
+		return [ 'contact', 'region', 'phone', 'email' ];
 	}
 
 	/**
@@ -108,15 +108,15 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 				'name'        => 'UTAH',
 				'phone'       => '801.410.4255',
 				'phone_link'  => [ 'url' => 'tel:8014104255' ],
-				'email'       => 'hello@notched.com',
-				'email_link'  => [ 'url' => 'mailto:hello@notched.com' ],
+				'email'       => 'hello@example.com',
+				'email_link'  => [ 'url' => 'mailto:hello@example.com' ],
 			],
 			[
 				'name'        => 'ARIZONA',
 				'phone'       => '480.716.6300',
 				'phone_link'  => [ 'url' => 'tel:4807166300' ],
-				'email'       => 'hello@notched.com',
-				'email_link'  => [ 'url' => 'mailto:hello@notched.com' ],
+				'email'       => 'hello@example.com',
+				'email_link'  => [ 'url' => 'mailto:hello@example.com' ],
 			],
 		];
 	}
@@ -174,14 +174,14 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 		$repeater->add_control( 'email', [
 			'label'   => esc_html__( 'Email', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::TEXT,
-			'default' => 'hello@notched.com',
+			'default' => 'hello@example.com',
 		] );
 
 		$repeater->add_control( 'email_link', [
 			'label'         => esc_html__( 'Email link', 'agency-elementor-widgets' ),
 			'type'          => Controls_Manager::URL,
-			'default'       => [ 'url' => 'mailto:hello@notched.com' ],
-			'placeholder'   => 'mailto:hello@notched.com',
+			'default'       => [ 'url' => 'mailto:hello@example.com' ],
+			'placeholder'   => 'mailto:hello@example.com',
 			'show_external' => false,
 		] );
 
@@ -266,7 +266,7 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 		$this->add_control( 'section_bg', [
 			'label'     => esc_html__( 'Section background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#2A4F41',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-crgn-section-bg: {{VALUE}};' ],
 		] );
 
@@ -284,7 +284,7 @@ class Widget_Contact_Regions_V2 extends Widget_Base {
 		$this->add_control( 'box_bg', [
 			'label'     => esc_html__( 'Box background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#7D958D',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-crgn-box-bg: {{VALUE}};' ],
 		] );
 

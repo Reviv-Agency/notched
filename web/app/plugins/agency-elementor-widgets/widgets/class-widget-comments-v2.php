@@ -1,6 +1,6 @@
 <?php
 /**
- * Comments V2 — Notched.
+ * Comments V2 — [Company].
  *
  * Renders the native WordPress comment list + form for the current post,
  * brand-styled, inside a card. Uses wp_list_comments() + comment_form() so
@@ -26,10 +26,10 @@ class Widget_Comments_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'comments-v2';
 
 	public function get_name(): string      { return 'agency-comments-v2'; }
-	public function get_title(): string     { return esc_html__( 'Comments V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Comments V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-comments'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'comments', 'discussion', 'blog', 'notched' ]; }
+	public function get_keywords(): array   { return [ 'comments', 'discussion', 'blog' ]; }
 
 	public function get_style_depends(): array  { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 	public function get_script_depends(): array { return [ 'comment-reply', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
@@ -69,7 +69,7 @@ class Widget_Comments_V2 extends Widget_Base {
 
 		$this->add_control( 'section_bg', [
 			'label' => esc_html__( 'Background', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#F6F0EC', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-bg: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-bg: {{VALUE}};' ],
 		] );
 
 		$this->end_controls_section();
@@ -84,27 +84,27 @@ class Widget_Comments_V2 extends Widget_Base {
 		] );
 		$this->add_control( 'card_border', [
 			'label' => esc_html__( 'Card border', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#BFC0BF', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-card-border: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-card-border: {{VALUE}};' ],
 		] );
 		$this->add_control( 'heading_color', [
 			'label' => esc_html__( 'Heading color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#141C19', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-heading: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-heading: {{VALUE}};' ],
 		] );
 		$this->add_control( 'text_color', [
 			'label' => esc_html__( 'Text color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#141C19', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-text: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-text: {{VALUE}};' ],
 		] );
 		$this->add_control( 'field_border', [
 			'label' => esc_html__( 'Field border', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#BFC0BF', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-field-border: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-field-border: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn_bg', [
 			'label' => esc_html__( 'Button background', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#876137', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-btn-bg: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-btn-bg: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn_bg_hover', [
 			'label' => esc_html__( 'Button background (hover)', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#6E4F2D', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-btn-bg-hover: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-cmv2-btn-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name' => 'heading_typo', 'selector' => '{{WRAPPER}} .aew-cmv2__heading',

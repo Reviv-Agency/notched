@@ -1,5 +1,5 @@
 /**
- * Feature Rows V2 — Notched
+ * Feature Rows V2
  * A flat list of items (Image or Text Box) grouped into rows of 2 or 3 (PHP
  * builds the row markup from a "Start new row" toggle). Images stretch to the
  * tallest item in their row; text boxes are configurable per item. Full-bleed
@@ -33,22 +33,22 @@
 /* Scoped to .aew-frv2 so they don't leak into other widgets. Source of truth
    is design-system.md. Update there first; copy here second. */
 .aew-frv2 {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards:   var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent:  var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
 }
 
 /* ── Outer block (full-bleed) ────────────────────────────────────────────── */
 /* Design-system width model: X gutter on the outer block; inner caps at 1440. */
 .aew-frv2 {
-  background: var(--aew-frv2-bg, var(--notched-background));
+  background: var(--aew-frv2-bg, var(--aew-background));
   width: 100%;
   position: relative;
   padding-left: 40px;
@@ -85,7 +85,7 @@
 /* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) (gotcha #20). */
 .aew-frv2 .aew-frv2__heading {
   margin: 0;
-  color: var(--aew-frv2-heading, var(--notched-cta));
+  color: var(--aew-frv2-heading, var(--aew-cta));
   font-family: "Teko", sans-serif;
   font-weight: 600;
   font-size: 64px;
@@ -101,7 +101,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  border: 1px solid var(--aew-frv2-hbtn-border, var(--notched-background));
+  border: 1px solid var(--aew-frv2-hbtn-border, var(--aew-background));
   /* Empty bg control → transparent (outlined). Set it for a filled pill. */
   background-color: var(--aew-frv2-hbtn-bg, transparent);
   box-shadow: none;
@@ -111,7 +111,7 @@
   text-decoration: none;
   padding: 16px 24px 12px;
   border-radius: 999px;
-  color: var(--aew-frv2-hbtn-text, var(--notched-background));
+  color: var(--aew-frv2-hbtn-text, var(--aew-background));
   font-family: "Teko", sans-serif;
   font-weight: 600;
   font-size: 20px;
@@ -123,8 +123,8 @@
 
 .aew-frv2__header-btn:hover,
 .aew-frv2__header-btn:focus-visible {
-  background-color: var(--aew-frv2-hbtn-bg-hover, var(--notched-background));
-  color: var(--aew-frv2-hbtn-text-hover, var(--notched-secondary-accent));
+  background-color: var(--aew-frv2-hbtn-bg-hover, var(--aew-background));
+  color: var(--aew-frv2-hbtn-text-hover, var(--aew-secondary-accent));
 }
 
 /* Shared "target" arrow (same as media-cta). Path points left → flip forward. */
@@ -209,7 +209,7 @@
   flex-direction: column;
   justify-content: center;  /* vertically center copy within a stretched box */
   align-items: stretch;     /* base; overridden per alignment below */
-  background-color: var(--notched-secondary-accent);
+  background-color: var(--aew-secondary-accent);
   border-radius: 24px;
   padding: 120px 20px;      /* default; the Box padding control overrides */
   overflow: hidden;         /* clip copy if a fixed row height is shorter than the padding */
@@ -273,7 +273,7 @@
   text-decoration: none;
   padding: 20px 24px 16px;  /* design-system button padding (top/x/bottom) */
   border-radius: 8px;
-  background-color: var(--aew-frv2-btn-bg, var(--notched-cta));
+  background-color: var(--aew-frv2-btn-bg, var(--aew-cta));
   color: var(--aew-frv2-btn-text, #FFFFFF);
   font-family: "Teko", sans-serif;
   font-weight: 600;
@@ -286,7 +286,7 @@
 
 .aew-frv2__btn:hover,
 .aew-frv2__btn:focus-visible {
-  background-color: var(--aew-frv2-btn-bg-hover, var(--notched-cta-hover));
+  background-color: var(--aew-frv2-btn-bg-hover, var(--aew-cta-hover));
   color: var(--aew-frv2-btn-text-hover, #FFFFFF);
 }
 

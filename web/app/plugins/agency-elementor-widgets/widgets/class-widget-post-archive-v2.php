@@ -1,6 +1,6 @@
 <?php
 /**
- * Post Archive V2 — Notched blog index ("All Posts").
+ * Post Archive V2 — [Company] blog index ("All Posts").
  *
  * Renders a vertical list of blog cards (image left, copy right) with date +
  * read-time, title, excerpt, and a like / view / comment stat row plus a 3-dot
@@ -26,10 +26,10 @@ class Widget_Post_Archive_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'post-archive-v2';
 
 	public function get_name(): string      { return 'agency-post-archive-v2'; }
-	public function get_title(): string     { return esc_html__( 'Post Archive V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Post Archive V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-posts-grid'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'posts', 'blog', 'archive', 'all posts', 'notched' ]; }
+	public function get_keywords(): array   { return [ 'posts', 'blog', 'archive', 'all posts' ]; }
 
 	public function get_style_depends(): array  { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 	public function get_script_depends(): array { return [ Widget_Assets::handle( self::ASSET_SLUG ) ]; }
@@ -128,7 +128,7 @@ class Widget_Post_Archive_V2 extends Widget_Base {
 		$this->add_control( 'section_bg', [
 			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-pav2-bg: {{VALUE}};' ],
 		] );
 
@@ -151,7 +151,7 @@ class Widget_Post_Archive_V2 extends Widget_Base {
 		$this->add_control( 'heading_color', [
 			'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-pav2-heading: {{VALUE}};' ],
 		] );
 
@@ -182,7 +182,7 @@ class Widget_Post_Archive_V2 extends Widget_Base {
 		$this->add_control( 'card_border', [
 			'label'     => esc_html__( 'Card border', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#BFC0BF',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-pav2-card-border: {{VALUE}};' ],
 		] );
 
@@ -204,14 +204,14 @@ class Widget_Post_Archive_V2 extends Widget_Base {
 		$this->add_control( 'title_color', [
 			'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-pav2-title: {{VALUE}};' ],
 		] );
 
 		$this->add_control( 'title_hover', [
 			'label'     => esc_html__( 'Color (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-pav2-title-hover: {{VALUE}};' ],
 		] );
 
@@ -236,7 +236,7 @@ class Widget_Post_Archive_V2 extends Widget_Base {
 		$this->add_control( 'excerpt_color', [
 			'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-pav2-excerpt: {{VALUE}};' ],
 		] );
 
@@ -260,14 +260,14 @@ class Widget_Post_Archive_V2 extends Widget_Base {
 		$this->add_control( 'meta_color', [
 			'label'     => esc_html__( 'Date / read-time color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#3B413F',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-pav2-meta: {{VALUE}};' ],
 		] );
 
 		$this->add_control( 'stat_color', [
 			'label'     => esc_html__( 'Stat color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#3B413F',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-pav2-stat: {{VALUE}};' ],
 		] );
 
@@ -281,7 +281,7 @@ class Widget_Post_Archive_V2 extends Widget_Base {
 		$this->add_control( 'divider_color', [
 			'label'     => esc_html__( 'Divider color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#BFC0BF',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-pav2-divider: {{VALUE}};' ],
 		] );
 

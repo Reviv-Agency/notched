@@ -927,7 +927,7 @@ class Widget_Split_Media extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Primary background', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#876137',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-spm-btnp-bg: {{VALUE}};',
 				],
@@ -939,7 +939,7 @@ class Widget_Split_Media extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Primary background (hover)', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#6E4F2D',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-spm-btnp-bg-hover: {{VALUE}};',
 				],
@@ -976,7 +976,7 @@ class Widget_Split_Media extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Secondary text / border', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#6E4F2D',
+				'default'   => '',
 				'separator' => 'before',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-spm-btns: {{VALUE}};',
@@ -989,7 +989,7 @@ class Widget_Split_Media extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Secondary background (hover)', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#6E4F2D',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-spm-btns-bg-hover: {{VALUE}};',
 				],

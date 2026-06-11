@@ -1,5 +1,5 @@
 /**
- * Comments V2 — Notched
+ * Comments V2
  *
  *  - Threaded "Reply" moves the form inline (via WP's comment-reply.js
  *    moveForm) — no page navigation.

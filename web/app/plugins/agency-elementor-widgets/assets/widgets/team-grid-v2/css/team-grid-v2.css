@@ -5,16 +5,16 @@
 
 /* ── Brand tokens (scoped) — source of truth: design-system.md ───────────── */
 .aew-team {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards:   var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent:  var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
 }
 
 /* Strip Elementor's column / container padding so the section is full-bleed. */
@@ -31,7 +31,7 @@
 
 /* ── Outer block ─────────────────────────────────────────────────────────── */
 .aew-team {
-  background: var(--aew-team-section-bg, var(--notched-background));
+  background: var(--aew-team-section-bg, var(--aew-background));
   width: 100%;
   position: relative;
 }
@@ -69,7 +69,7 @@
   font-size: 64px;
   line-height: 85%;
   text-transform: uppercase;
-  color: var(--aew-team-heading, var(--notched-secondary-bg));
+  color: var(--aew-team-heading, var(--aew-secondary-bg));
 }
 
 .aew-team__subtext {
@@ -79,7 +79,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 140%;
-  color: var(--aew-team-subtext, var(--notched-text));
+  color: var(--aew-team-subtext, var(--aew-text));
 }
 
 .aew-team__header--with-btn .aew-team__subtext { margin-left: 0; }
@@ -92,9 +92,9 @@
   gap: 10px;
   padding: 16px 28px 14px;
   border-radius: 8px;
-  border: 1px solid var(--aew-team-btn-border, var(--notched-cta, #876137));
+  border: 1px solid var(--aew-team-btn-border, var(--aew-cta, #444444));
   background: var(--aew-team-btn-bg, transparent);
-  color: var(--aew-team-btn-text, var(--notched-cta, #876137));
+  color: var(--aew-team-btn-text, var(--aew-cta, #444444));
   font-family: "Teko", sans-serif;
   font-weight: 600;
   font-size: 18px;
@@ -137,7 +137,7 @@
   height: 300px;
   object-fit: cover;
   border-radius: 24px;
-  background: var(--aew-team-photo-bg, var(--notched-secondary-cards));
+  background: var(--aew-team-photo-bg, var(--aew-secondary-cards));
 }
 
 .aew-team__photo--empty {
@@ -146,7 +146,7 @@
 
 /* Name + title box under the photo. */
 .aew-team__textbox {
-  background: var(--aew-team-textbox-bg, var(--notched-background, #F6F0EC));
+  background: var(--aew-team-textbox-bg, var(--aew-background, #F4F4F4));
   border-radius: 0 0 24px 24px;
   padding: 20px 24px 24px;
   margin-top: -16px;
@@ -160,7 +160,7 @@
   font-size: 28px;
   line-height: 100%;
   text-transform: uppercase;
-  color: var(--aew-team-name, var(--notched-text, #141C19));
+  color: var(--aew-team-name, var(--aew-text, #1A1A1A));
 }
 
 .aew-team__role {
@@ -169,7 +169,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
-  color: var(--aew-team-role, var(--notched-text));
+  color: var(--aew-team-role, var(--aew-text));
 }
 
 /* ── Tablet ──────────────────────────────────────────────────────────────── */

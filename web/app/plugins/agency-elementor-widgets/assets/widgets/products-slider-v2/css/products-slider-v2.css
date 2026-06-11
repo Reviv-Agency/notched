@@ -1,5 +1,5 @@
 /**
- * Products Slider V2 — Notched brand.
+ * Products Slider V2
  * "Our most popular kit options" horizontal scroll-snap product slider.
  *
  * BEM block: aew-prsv2   |   widget: agency-products-slider-v2
@@ -32,32 +32,32 @@
 /* ── Force the host section/column to the design background ────────────────── */
 /* The widget paints its own cream bg on .aew-prsv2, but the Elementor section
    and column it lives in can render a white box on top/around it. Neutralize
-   the host chain to the design "Background" (#F6F0EC) so no white band shows. */
+   the host chain to the design "Background" (#F4F4F4) so no white band shows. */
 .elementor-section:has(.elementor-widget-agency-products-slider-v2),
 .elementor-column
   > .elementor-element-populated:has(.elementor-widget-agency-products-slider-v2),
 .e-con:has(.elementor-widget-agency-products-slider-v2),
 .e-con:has(.elementor-widget-agency-products-slider-v2) > .e-con-inner {
-  background-color: #F6F0EC !important;
+  background-color: var(--e-global-color-aew-background, #F4F4F4) !important;
 }
 
 /* ── Brand tokens (scoped). Source of truth: design-system.md ──────────────── */
 .aew-prsv2 {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards:   var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent:  var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
 }
 
 /* ── Outer block: full-bleed background ────────────────────────────────────── */
 .aew-prsv2 {
-  background-color: var(--aew-prsv2-body-bg, var(--notched-background));
+  background-color: var(--aew-prsv2-body-bg, var(--aew-background));
   width: 100%;
   position: relative;
   box-sizing: border-box;
@@ -124,7 +124,7 @@
   font-size: 64px;
   line-height: 85%;
   text-transform: uppercase;
-  color: var(--aew-prsv2-heading, var(--notched-secondary-bg));
+  color: var(--aew-prsv2-heading, var(--aew-secondary-bg));
 }
 
 /* ── Subtext (paragraph under the heading) ─────────────────────────────────── */
@@ -135,7 +135,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 1.4;
-  color: var(--aew-prsv2-subtext, var(--notched-text));
+  color: var(--aew-prsv2-subtext, var(--aew-text));
 }
 
 /* ── Assembly difficulty ───────────────────────────────────────────────────── */
@@ -155,7 +155,7 @@
   font-size: 20px;
   line-height: 1;
   text-transform: uppercase;
-  color: var(--aew-prsv2-difficulty, var(--notched-text));
+  color: var(--aew-prsv2-difficulty, var(--aew-text));
 }
 
 .aew-prsv2__difficulty-value {
@@ -167,7 +167,7 @@
   font-size: 20px;
   line-height: 1;
   text-transform: uppercase;
-  color: var(--aew-prsv2-difficulty-value, var(--notched-text));
+  color: var(--aew-prsv2-difficulty-value, var(--aew-text));
 }
 
 .aew-prsv2__difficulty-dot {
@@ -175,7 +175,7 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background-color: var(--aew-prsv2-difficulty-dot, var(--notched-secondary-bg));
+  background-color: var(--aew-prsv2-difficulty-dot, var(--aew-secondary-bg));
   flex: none;
 }
 
@@ -193,13 +193,13 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--aew-prsv2-cta-text, #fff);
-  background-color: var(--aew-prsv2-cta-bg, var(--notched-cta));
+  background-color: var(--aew-prsv2-cta-bg, var(--aew-cta));
   padding: 20px 24px 16px;
   border-radius: 8px;
   transition: background-color 0.18s ease;
 }
 
-.aew-prsv2__cta:hover { background-color: var(--aew-prsv2-cta-bg-hover, var(--notched-cta-hover)); color: var(--aew-prsv2-cta-text-hover, var(--aew-prsv2-cta-text, #fff)); }
+.aew-prsv2__cta:hover { background-color: var(--aew-prsv2-cta-bg-hover, var(--aew-cta-hover)); color: var(--aew-prsv2-cta-text-hover, var(--aew-prsv2-cta-text, #fff)); }
 
 .aew-prsv2__cta svg {
   width: 18px;
@@ -365,7 +365,7 @@
      swapping the square for a fixed-height image when a value is set. */
   aspect-ratio: 1 / 1;
   border-radius: 24px;
-  background-color: var(--notched-lines);
+  background-color: var(--aew-lines);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -384,7 +384,7 @@
   align-items: center;
   padding: 8px 16px 6px;       /* optical: Teko sits slightly low */
   border-radius: 8px;
-  background-color: var(--aew-prsv2-badge-bg, var(--notched-cta));
+  background-color: var(--aew-prsv2-badge-bg, var(--aew-cta));
   color: var(--aew-prsv2-badge-text, #FFFFFF);
   font-family: var(--aew-teko, 'Teko', sans-serif);
   font-weight: 600;
@@ -408,7 +408,7 @@
   align-items: center;
   justify-content: center;
   padding: 18px 16px 16px;
-  background-color: var(--aew-prsv2-qv-bg, var(--notched-cta));
+  background-color: var(--aew-prsv2-qv-bg, var(--aew-cta));
   color: var(--aew-prsv2-qv-text, #FFFFFF);
   font-family: var(--aew-teko, 'Teko', sans-serif);
   font-weight: 600;
@@ -443,7 +443,7 @@
   line-height: 100%;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: var(--aew-prsv2-title, var(--notched-text));
+  color: var(--aew-prsv2-title, var(--aew-text));
 }
 
 /* ── Price on card ─────────────────────────────────────────────────────────── */
@@ -451,13 +451,13 @@
   font-family: 'Lato', sans-serif;
   font-weight: 700;
   font-size: 18px;
-  color: var(--aew-prsv2-price, var(--notched-cta));
+  color: var(--aew-prsv2-price, var(--aew-cta));
   margin-top: 4px;
   display: block;
 }
 
 .aew-prsv2__card:hover .aew-prsv2__media { opacity: 0.92; }
-.aew-prsv2__card:focus-visible { outline: 2px solid var(--notched-secondary-bg); outline-offset: 4px; border-radius: 4px; }
+.aew-prsv2__card:focus-visible { outline: 2px solid var(--aew-secondary-bg); outline-offset: 4px; border-radius: 4px; }
 
 /* ── Arrows ────────────────────────────────────────────────────────────────── */
 .aew-prsv2__arrow,
@@ -493,11 +493,11 @@ button.aew-prsv2__arrow {
 .aew-prsv2__arrow svg {
   width: 26px;
   height: 26px;
-  color: var(--aew-prsv2-arrow-color, var(--notched-text));
+  color: var(--aew-prsv2-arrow-color, var(--aew-text));
 }
 
 .aew-prsv2__arrow:hover { transform: translateY(-50%) scale(1.04); }
-.aew-prsv2__arrow:focus-visible { outline: 2px solid var(--notched-secondary-bg); outline-offset: 2px; }
+.aew-prsv2__arrow:focus-visible { outline: 2px solid var(--aew-secondary-bg); outline-offset: 2px; }
 
 /* Disabled (track at an edge) — hide the arrow that can't go any further, so
    you only ever see the direction(s) you can actually scroll. */
@@ -541,21 +541,21 @@ button.aew-prsv2__dot {
   height: 9px;
   margin: -4.5px 0 0 -4.5px;
   border-radius: 50%;
-  background-color: var(--aew-prsv2-dot-idle, var(--notched-lines));
+  background-color: var(--aew-prsv2-dot-idle, var(--aew-lines));
   transition: background-color 0.18s ease, transform 0.18s ease;
 }
 .aew-prsv2__dot[aria-current="true"]::before {
-  background-color: var(--aew-prsv2-dot-active, var(--notched-misc-accent));
+  background-color: var(--aew-prsv2-dot-active, var(--aew-misc-accent));
   transform: scale(1.25);
 }
-.aew-prsv2__dot:focus-visible { outline: 2px solid var(--notched-secondary-bg); outline-offset: 2px; }
+.aew-prsv2__dot:focus-visible { outline: 2px solid var(--aew-secondary-bg); outline-offset: 2px; }
 
 /* ── Empty state ───────────────────────────────────────────────────────────── */
 .aew-prsv2__empty {
   margin: 0;
   font-family: 'Lato', sans-serif;
   font-size: 18px;
-  color: var(--notched-text);
+  color: var(--aew-text);
 }
 
 /* ── Tablet ≤1024 ──────────────────────────────────────────────────────────── */

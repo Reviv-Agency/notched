@@ -1,5 +1,5 @@
 /**
- * FAQ V2 — Notched
+ * FAQ V2
  * Title + search + vertical category rail + searchable accordion with
  * per-answer social share bar. Matches the Wix "Questions Customers Ask".
  */
@@ -34,22 +34,22 @@
 /* Scoped to .aew-faqv2 so they don't leak. Source of truth is design-system.md.
    Update there first; copy here second. */
 .aew-faqv2 {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards:   var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent:  var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
 }
 
 /* ── Outer block ─────────────────────────────────────────────────────────── */
 /* Design-system width model: X gutter on the outer block; inner caps at 1440. */
 .aew-faqv2 {
-  background: var(--aew-faqv2-body-bg, var(--notched-background));
+  background: var(--aew-faqv2-body-bg, var(--aew-background));
   width: 100%;
   position: relative;
   padding-left: 40px;
@@ -98,7 +98,7 @@
 /* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) — gotcha #20 */
 .aew-faqv2 .aew-faqv2__title {
   margin: 0;
-  color: var(--aew-faqv2-title, var(--notched-secondary-bg));
+  color: var(--aew-faqv2-title, var(--aew-secondary-bg));
   font-family: var(--aew-faqv2-teko);
   font-weight: 600;
   font-size: 40px;
@@ -121,24 +121,24 @@
   border-top: 0 !important;
   border-left: 0 !important;
   border-right: 0 !important;
-  border-bottom: 1px solid var(--aew-faqv2-search-border, var(--notched-lines)) !important;
+  border-bottom: 1px solid var(--aew-faqv2-search-border, var(--aew-lines)) !important;
   border-radius: 0 !important;
   background: transparent !important;
   padding: 8px 28px 8px 0;
   font-family: 'Lato', sans-serif;
   font-size: 15px;
-  color: var(--aew-faqv2-search-text, var(--notched-text));
+  color: var(--aew-faqv2-search-text, var(--aew-text));
   outline: none;
   box-shadow: none !important;
 }
 
 .aew-faqv2__search-input::placeholder {
-  color: var(--aew-faqv2-search-text, var(--notched-text));
+  color: var(--aew-faqv2-search-text, var(--aew-text));
   opacity: .6;
 }
 
 .aew-faqv2__search-input:focus {
-  border-bottom-color: var(--notched-cta);
+  border-bottom-color: var(--aew-cta);
 }
 
 .aew-faqv2__search-icon {
@@ -148,7 +148,7 @@
   transform: translateY(-50%);
   display: inline-flex;
   pointer-events: none;
-  color: var(--aew-faqv2-search-text, var(--notched-text));
+  color: var(--aew-faqv2-search-text, var(--aew-text));
   opacity: .7;
 }
 
@@ -197,17 +197,17 @@ button.aew-faqv2__share-btn {
   font-size: 24px;
   letter-spacing: .5px;
   text-transform: uppercase;
-  color: var(--aew-faqv2-cat, var(--notched-secondary-bg));
+  color: var(--aew-faqv2-cat, var(--aew-secondary-bg));
   line-height: 1.2;
   transition: color .15s ease;
 }
 
 .aew-faqv2 button.aew-faqv2__cat:hover {
-  color: var(--aew-faqv2-cat-active, var(--notched-cta));
+  color: var(--aew-faqv2-cat-active, var(--aew-cta));
 }
 
 .aew-faqv2 button.aew-faqv2__cat.is-active {
-  color: var(--aew-faqv2-cat-active, var(--notched-cta));
+  color: var(--aew-faqv2-cat-active, var(--aew-cta));
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -221,7 +221,7 @@ button.aew-faqv2__share-btn {
   margin: 0 0 12px;
   font-family: 'Lato', sans-serif;
   font-size: 16px;
-  color: var(--notched-text);
+  color: var(--aew-text);
   opacity: .8;
 }
 
@@ -233,8 +233,8 @@ button.aew-faqv2__share-btn {
 
 /* ── Question card ───────────────────────────────────────────────────────── */
 .aew-faqv2__item {
-  background: var(--aew-faqv2-card-bg, var(--notched-background));
-  border: 1px solid var(--aew-faqv2-card-border, var(--notched-lines));
+  background: var(--aew-faqv2-card-bg, var(--aew-background));
+  border: 1px solid var(--aew-faqv2-card-border, var(--aew-lines));
   border-radius: 8px;
   overflow: hidden;
 }
@@ -263,14 +263,14 @@ button.aew-faqv2__share-btn {
   letter-spacing: .5px;
   text-transform: uppercase;
   line-height: 1.2;
-  color: var(--aew-faqv2-question, var(--notched-text));
+  color: var(--aew-faqv2-question, var(--aew-text));
 }
 
 .aew-faqv2__icon {
   flex: 0 0 auto;                 /* never shrink — the +/- always stays visible */
   display: inline-flex;
   margin-top: 1px;               /* optical align with first line of text */
-  color: var(--aew-faqv2-icon, var(--notched-text));
+  color: var(--aew-faqv2-icon, var(--aew-text));
 }
 
 .aew-faqv2__icon-minus { display: none; }
@@ -289,7 +289,7 @@ button.aew-faqv2__share-btn {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--aew-faqv2-answer, var(--notched-text));
+  color: var(--aew-faqv2-answer, var(--aew-text));
 }
 
 .aew-faqv2__answer p { margin: 0 0 1em; }
@@ -300,7 +300,7 @@ button.aew-faqv2__share-btn {
   font-family: var(--aew-faqv2-teko);
   font-weight: 600;
   margin: 1em 0 .35em;
-  color: var(--notched-text);
+  color: var(--aew-text);
 }
 
 .aew-faqv2__answer ul,
@@ -310,15 +310,15 @@ button.aew-faqv2__share-btn {
 }
 
 .aew-faqv2__answer li { margin: 0 0 .25em; }
-.aew-faqv2__answer a { color: var(--notched-cta); }
-.aew-faqv2__answer a:hover { color: var(--notched-cta-hover); }
+.aew-faqv2__answer a { color: var(--aew-cta); }
+.aew-faqv2__answer a:hover { color: var(--aew-cta-hover); }
 
 /* Inline CTA button inside an answer (e.g. "FREE CONSULTATION") */
 .aew-faqv2__answer a.aew-faqv2__answer-btn {
   display: inline-block;
   margin-top: 4px;
   padding: 20px 24px 16px;
-  background: var(--notched-cta);
+  background: var(--aew-cta);
   color: #FFFFFF;
   font-family: var(--aew-faqv2-teko);
   font-weight: 600;
@@ -331,7 +331,7 @@ button.aew-faqv2__share-btn {
   transition: background-color .15s ease;
 }
 .aew-faqv2__answer a.aew-faqv2__answer-btn:hover {
-  background: var(--notched-cta-hover);
+  background: var(--aew-cta-hover);
   color: #FFFFFF;
 }
 
@@ -358,7 +358,7 @@ button.aew-faqv2__share-btn {
   cursor: pointer;
   /* Editable via the "Share icon color" control (--aew-faqv2-share); falls back
      to the misc-accent token. !important beats the kit's button colour. */
-  color: var(--aew-faqv2-share, var(--notched-misc-accent)) !important;
+  color: var(--aew-faqv2-share, var(--aew-misc-accent)) !important;
   opacity: .85;
   transition: opacity .15s ease, color .15s ease;
 }
@@ -368,13 +368,13 @@ button.aew-faqv2__share-btn {
 .aew-faqv2 .aew-faqv2__share-btn:hover,
 .aew-faqv2 .aew-faqv2__share-btn:focus {
   opacity: 1;
-  color: var(--notched-cta) !important;
+  color: var(--aew-cta) !important;
 }
 
 .aew-faqv2 .aew-faqv2__share-btn svg { width: 20px; height: 20px; }
 
 .aew-faqv2 .aew-faqv2__share-btn.is-copied {
-  color: var(--notched-secondary-bg) !important;
+  color: var(--aew-secondary-bg) !important;
   opacity: 1;
 }
 

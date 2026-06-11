@@ -1,5 +1,5 @@
 /**
- * Consultation Form V2 — Notched
+ * Consultation Form V2
  * Left photo + overlapping white card holding a self-contained lead form
  * (Name, Email, intl-tel Phone, Zip, Project, consent, brown CTA).
  */
@@ -32,22 +32,22 @@
 /* Scoped to .aew-cfv2 so they don't leak. Source of truth is design-system.md.
    Update there first; copy here second. */
 .aew-cfv2 {
-  --notched-cards: #ffffff;
-  --notched-background: #f6f0ec;
-  --notched-lines: #bfc0bf;
-  --notched-misc-accent: #3b413f;
-  --notched-secondary-cards: #7d958d;
-  --notched-secondary-bg: #2a4f41;
-  --notched-secondary-accent: #093328;
-  --notched-text: #141c19;
-  --notched-cta: #876137;
-  --notched-cta-hover: #6E4F2D;
+  --aew-cards: var(--e-global-color-aew-cards, #ffffff);
+  --aew-background: var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines: var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent: var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards: var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg: var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent: var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text: var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta: var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover: var(--e-global-color-aew-cta-hover, #2B2B2B);
 }
 
 /* ── Outer block ─────────────────────────────────────────────────────────── */
 /* Design-system width model: X gutter on the outer block; inner caps at 1440. */
 .aew-cfv2 {
-  background: var(--aew-cfv2-body-bg, var(--notched-background));
+  background: var(--aew-cfv2-body-bg, var(--aew-background));
   width: 100%;
   position: relative;
   padding-left: 40px;
@@ -109,7 +109,7 @@
 .aew-cfv2__card {
   position: relative;
   z-index: 2;
-  background: var(--aew-cfv2-card-bg, var(--notched-cards));
+  background: var(--aew-cfv2-card-bg, var(--aew-cards));
   border-radius: 24px;
   padding: 48px;
 }
@@ -117,7 +117,7 @@
 /* ── Heading (specificity bump beats the kit's h1..h6 colour, gotcha #20) ─── */
 .aew-cfv2 .aew-cfv2__heading {
   margin: 0 0 12px;
-  color: var(--aew-cfv2-heading, var(--notched-secondary-bg));
+  color: var(--aew-cfv2-heading, var(--aew-secondary-bg));
   font-family: "Teko", sans-serif;
   font-weight: 600;
   font-size: 40px;
@@ -130,7 +130,7 @@
 
 .aew-cfv2__subtext {
   margin: 0 0 28px;
-  color: var(--aew-cfv2-subtext, var(--notched-text));
+  color: var(--aew-cfv2-subtext, var(--aew-text));
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-size: 18px;
@@ -172,7 +172,7 @@
 }
 
 .aew-cfv2__label {
-  color: var(--aew-cfv2-form-label, var(--notched-text));
+  color: var(--aew-cfv2-form-label, var(--aew-text));
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -180,19 +180,19 @@
 }
 
 .aew-cfv2__req {
-  color: var(--notched-cta);
+  color: var(--aew-cta);
 }
 
 /* Inputs + textarea */
 .aew-cfv2__input {
   width: 100%;
-  background: var(--aew-cfv2-form-field-bg, var(--notched-cards));
-  border: 1px solid var(--aew-cfv2-form-field-border, var(--notched-lines));
+  background: var(--aew-cfv2-form-field-bg, var(--aew-cards));
+  border: 1px solid var(--aew-cfv2-form-field-border, var(--aew-lines));
   border-radius: 8px;
   padding: 12px 14px;
   font-family: "Lato", sans-serif;
   font-size: 16px;
-  color: var(--notched-text);
+  color: var(--aew-text);
   min-height: 46px;
   transition: border-color 0.15s ease;
 }
@@ -204,20 +204,20 @@
 
 .aew-cfv2__input:focus {
   outline: none;
-  border-color: var(--notched-cta);
+  border-color: var(--aew-cta);
 }
 
 .aew-cfv2__input[aria-invalid="true"] {
   border-color: #c0392b;
 }
 
-/* ── Submit button (Notched CTA) ─────────────────────────────────────────── */
+/* ── Submit button ([Company] CTA) ─────────────────────────────────────────── */
 .aew-cfv2__btn,
 button.aew-cfv2__btn {
   width: 100%;
   border: 0 !important;
-  background: var(--aew-cfv2-btn-bg, var(--notched-cta)) !important;
-  background-color: var(--aew-cfv2-btn-bg, var(--notched-cta)) !important;
+  background: var(--aew-cfv2-btn-bg, var(--aew-cta)) !important;
+  background-color: var(--aew-cfv2-btn-bg, var(--aew-cta)) !important;
   color: var(--aew-cfv2-btn-text, #ffffff);
   font-family: "Teko", sans-serif;
   font-weight: 600;
@@ -238,10 +238,10 @@ button.aew-cfv2__btn {
 
 .aew-cfv2__btn:hover,
 .aew-cfv2__btn:focus-visible {
-  background: var(--aew-cfv2-btn-bg-hover, var(--notched-cta-hover)) !important;
+  background: var(--aew-cfv2-btn-bg-hover, var(--aew-cta-hover)) !important;
   background-color: var(
     --aew-cfv2-btn-bg-hover,
-    var(--notched-cta-hover)
+    var(--aew-cta-hover)
   ) !important;
   color: var(--aew-cfv2-btn-text-hover, var(--aew-cfv2-btn-text, #ffffff));
 }
@@ -262,12 +262,12 @@ button.aew-cfv2__btn {
   gap: 8px;
   font-family: "Lato", sans-serif;
   font-size: 13px;
-  color: var(--notched-text);
+  color: var(--aew-text);
   cursor: pointer;
 }
 
 .aew-cfv2__checkbox {
-  accent-color: var(--notched-cta);
+  accent-color: var(--aew-cta);
   width: 16px;
   height: 16px;
   flex: 0 0 auto;
@@ -284,7 +284,7 @@ button.aew-cfv2__btn {
   display: none;
 }
 .aew-cfv2__status--ok {
-  color: var(--notched-secondary-bg);
+  color: var(--aew-secondary-bg);
 }
 .aew-cfv2__status--error {
   color: #c0392b;
@@ -321,7 +321,7 @@ button.aew-cfv2-tel__flag-btn {
   font-family: "Lato", sans-serif;
   font-size: 14px;
   font-weight: 400;
-  color: var(--notched-text) !important;
+  color: var(--aew-text) !important;
   text-transform: none;
   letter-spacing: normal;
   box-shadow: none !important;
@@ -352,7 +352,7 @@ button.aew-cfv2-tel__flag-btn {
   z-index: 30;
   width: 280px;
   background: #ffffff;
-  border: 1px solid var(--notched-lines);
+  border: 1px solid var(--aew-lines);
   border-radius: 8px;
   padding: 4px;
   margin: 0;
@@ -371,14 +371,14 @@ button.aew-cfv2-tel__flag-btn {
   margin-bottom: 4px;
   font-family: "Lato", sans-serif;
   font-size: 14px;
-  color: var(--notched-text);
+  color: var(--aew-text);
   background: #ffffff;
   -webkit-appearance: none;
   appearance: none;
 }
 .aew-cfv2-tel__search:focus {
   outline: none;
-  border-color: var(--notched-cta);
+  border-color: var(--aew-cta);
 }
 
 /* Scrollable option list (the menu itself stays put so search is pinned). */
@@ -394,7 +394,7 @@ button.aew-cfv2-tel__flag-btn {
   padding: 10px;
   font-family: "Lato", sans-serif;
   font-size: 14px;
-  color: var(--notched-text);
+  color: var(--aew-text);
   opacity: 0.6;
   text-align: center;
 }
@@ -408,12 +408,12 @@ button.aew-cfv2-tel__flag-btn {
   cursor: pointer;
   font-family: "Lato", sans-serif;
   font-size: 14px;
-  color: var(--notched-text);
+  color: var(--aew-text);
 }
 
 .aew-cfv2-tel__option:hover,
 .aew-cfv2-tel__option--active {
-  background: var(--notched-background);
+  background: var(--aew-background);
 }
 .aew-cfv2-tel__option-dial {
   margin-left: auto;

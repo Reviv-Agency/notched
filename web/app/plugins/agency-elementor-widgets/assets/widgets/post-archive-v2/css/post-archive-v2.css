@@ -1,5 +1,5 @@
 /**
- * Post Archive V2 — Notched ("All Posts" blog index).
+ * Post Archive V2 ("All Posts" blog index).
  * Vertical list of cards: image on the left, copy on the right.
  * Each card: date · read-time + 3-dot Share menu, title, excerpt, and a
  * like / view / comment stat row. New cards stream in on scroll (infinite load).
@@ -28,20 +28,20 @@
 /* ── Brand tokens ────────────────────────────────────────────────────────── */
 /* Scoped to .aew-pav2 so they don't leak. Source of truth is design-system.md. */
 .aew-pav2 {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
 }
 
 /* ── Outer block (full-bleed background) ─────────────────────────────────── */
 .aew-pav2 {
   width: 100%;
-  background-color: var(--aew-pav2-bg, var(--notched-background));
+  background-color: var(--aew-pav2-bg, var(--aew-background));
 }
 
 .aew-pav2 *,
@@ -67,7 +67,7 @@
   font-weight: 600;
   font-size: 40px;
   line-height: 100%;
-  color: var(--aew-pav2-heading, var(--notched-text));
+  color: var(--aew-pav2-heading, var(--aew-text));
 }
 
 /* ── List ────────────────────────────────────────────────────────────────── */
@@ -81,8 +81,8 @@
 .aew-pav2__card {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
-  background-color: var(--aew-pav2-card-bg, var(--notched-cards));
-  border: 1px solid var(--aew-pav2-card-border, var(--notched-lines));
+  background-color: var(--aew-pav2-card-bg, var(--aew-cards));
+  border: 1px solid var(--aew-pav2-card-border, var(--aew-lines));
   border-radius: 24px;
   overflow: hidden;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
@@ -152,7 +152,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 1.4;
-  color: var(--aew-pav2-meta, var(--notched-misc-accent));
+  color: var(--aew-pav2-meta, var(--aew-misc-accent));
 }
 
 .aew-pav2__dot { margin: 0 0.4em; }
@@ -176,7 +176,7 @@
 /* Keep the like button's icon color even after the reset above: the kit's
    `button { color }` rule would otherwise win and blank the outline heart. */
 .aew-pav2 button.aew-pav2__like {
-  color: var(--aew-pav2-stat, var(--notched-misc-accent));
+  color: var(--aew-pav2-stat, var(--aew-misc-accent));
   padding-left: 0;
 }
 
@@ -210,7 +210,7 @@
 }
 
 .aew-pav2__share-btn:hover .aew-pav2__dots span {
-  background-color: var(--aew-pav2-title-hover, var(--notched-cta));
+  background-color: var(--aew-pav2-title-hover, var(--aew-cta));
 }
 
 .aew-pav2__dots {
@@ -223,7 +223,7 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background-color: var(--aew-pav2-stat, var(--notched-misc-accent));
+  background-color: var(--aew-pav2-stat, var(--aew-misc-accent));
 }
 
 .aew-pav2__menu {
@@ -233,8 +233,8 @@
   z-index: 5;
   min-width: 140px;
   padding: 6px;
-  background-color: var(--notched-cards);
-  border: 1px solid var(--aew-pav2-divider, var(--notched-lines));
+  background-color: var(--aew-cards);
+  border: 1px solid var(--aew-pav2-divider, var(--aew-lines));
   border-radius: 12px;
   box-shadow: 0 10px 28px rgba(20, 28, 25, 0.14);
 }
@@ -248,7 +248,7 @@
   font-family: "Lato", sans-serif;
   font-size: 15px;
   text-align: left;
-  color: var(--notched-text);
+  color: var(--aew-text);
   background: transparent;
   border: 0;
   border-radius: 8px;
@@ -263,7 +263,7 @@
 }
 
 .aew-pav2__menu-item.is-copied {
-  color: var(--notched-secondary-bg);
+  color: var(--aew-secondary-bg);
   font-weight: 700;
 }
 
@@ -279,14 +279,14 @@
 }
 
 .aew-pav2__title a {
-  color: var(--aew-pav2-title, var(--notched-text));
+  color: var(--aew-pav2-title, var(--aew-text));
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
 .aew-pav2__title a:hover,
 .aew-pav2__title a:focus-visible {
-  color: var(--aew-pav2-title-hover, var(--notched-cta));
+  color: var(--aew-pav2-title-hover, var(--aew-cta));
 }
 
 /* ── Excerpt ─────────────────────────────────────────────────────────────── */
@@ -297,7 +297,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 140%;
-  color: var(--aew-pav2-excerpt, var(--notched-text));
+  color: var(--aew-pav2-excerpt, var(--aew-text));
 }
 
 /* ── Footer stat row ─────────────────────────────────────────────────────── */
@@ -312,7 +312,7 @@
   gap: 22px;
   margin-top: auto;
   padding-top: 22px;
-  border-top: 1px solid var(--aew-pav2-divider, var(--notched-lines));
+  border-top: 1px solid var(--aew-pav2-divider, var(--aew-lines));
 }
 
 .aew-pav2__stat {
@@ -323,7 +323,7 @@
   font-family: "Lato", sans-serif;
   font-size: 14px;
   line-height: 1;
-  color: var(--aew-pav2-stat, var(--notched-misc-accent));
+  color: var(--aew-pav2-stat, var(--aew-misc-accent));
   background: transparent;
   border: 0;
   text-decoration: none;
@@ -367,7 +367,7 @@ button.aew-pav2__stat { cursor: pointer; }
 
 .aew-pav2__like:focus-visible,
 .aew-pav2__share-btn:focus-visible {
-  outline: 2px solid var(--notched-secondary-bg);
+  outline: 2px solid var(--aew-secondary-bg);
   outline-offset: 2px;
   border-radius: 6px;
 }
@@ -377,7 +377,7 @@ button.aew-pav2__stat { cursor: pointer; }
 .aew-pav2__empty {
   font-family: "Lato", sans-serif;
   font-size: 18px;
-  color: var(--notched-text);
+  color: var(--aew-text);
 }
 
 /* ── Load more / spinner ─────────────────────────────────────────────────── */
@@ -398,8 +398,8 @@ button.aew-pav2__stat { cursor: pointer; }
   text-transform: uppercase;
   letter-spacing: 0.02em;
   color: #FFFFFF;
-  background-color: var(--notched-cta);
-  border: 1px solid var(--notched-cta);
+  background-color: var(--aew-cta);
+  border: 1px solid var(--aew-cta);
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease;
@@ -407,8 +407,8 @@ button.aew-pav2__stat { cursor: pointer; }
 
 .aew-pav2__more-btn:hover,
 .aew-pav2__more-btn:focus-visible {
-  background-color: var(--notched-cta-hover);
-  border-color: var(--notched-cta-hover);
+  background-color: var(--aew-cta-hover);
+  border-color: var(--aew-cta-hover);
 }
 
 .aew-pav2__more-btn[hidden] { display: none; }
@@ -424,7 +424,7 @@ button.aew-pav2__stat { cursor: pointer; }
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--notched-cta);
+  background-color: var(--aew-cta);
   animation: aew-pav2-bounce 0.9s ease-in-out infinite;
 }
 

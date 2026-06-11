@@ -1,5 +1,5 @@
 /**
- * Consultation Form V2 — Notched
+ * Consultation Form V2
  *
  *  - Upgrades the phone input into a dependency-free intl-tel flag dropdown.
  *  - Submits the form via fetch() to admin-ajax and shows inline status.

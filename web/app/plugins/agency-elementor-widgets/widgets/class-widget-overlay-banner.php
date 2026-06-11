@@ -608,7 +608,7 @@ class Widget_Overlay_Banner extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#876137',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .aew-overlay-banner__button' => 'background-color: {{VALUE}};',
 				],
@@ -632,7 +632,7 @@ class Widget_Overlay_Banner extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#6E4F2D',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .aew-overlay-banner__button:hover'         => 'background-color: {{VALUE}};',
 					'{{WRAPPER}} .aew-overlay-banner__button:focus-visible' => 'background-color: {{VALUE}};',

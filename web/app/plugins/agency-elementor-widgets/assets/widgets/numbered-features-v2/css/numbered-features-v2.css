@@ -1,7 +1,7 @@
 /* ============================================================================
- * Numbered Features V2 — Notched
+ * Numbered Features V2
  * A FULL-BLEED dark band: paper-texture background image with a deep-green
- * (#093328) colour overlay, holding a two-column layout — COPY left (Teko
+ * (#555555) colour overlay, holding a two-column layout — COPY left (Teko
  * heading + Lato intro) and a GRID of numbered features right (gold circle with
  * a number above a gold uppercase title). The X gutter lives on the INNER so the
  * textured background reaches the viewport edge; content caps at the 1440 rail.
@@ -10,17 +10,17 @@
 
 /* ── Brand tokens (scoped) — source of truth: design-system.md ───────────── */
 .aew-nfv2 {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
-  --notched-gold-light:        #CDB797;
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards:   var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent:  var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
+  --aew-gold-light:        var(--e-global-color-aew-gold-light, #BBBBBB);
 }
 
 /* Strip Elementor's column / container padding so the band is full-bleed. The
@@ -54,7 +54,7 @@
 .aew-nfv2 {
   position: relative;
   width: 100%;
-  background-color: var(--aew-nfv2-band-bg, var(--notched-secondary-accent));
+  background-color: var(--aew-nfv2-band-bg, var(--aew-secondary-accent));
   background-image: var(--aew-nfv2-image);
   background-size: cover;
   background-position: center center;
@@ -69,14 +69,14 @@
   box-sizing: border-box;
 }
 
-/* Deep-green tint laid over the texture. Default #093328; user-overridable
+/* Deep-green tint laid over the texture. Default #555555; user-overridable
    (use rgba for partial transparency). */
 .aew-nfv2::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: var(--aew-nfv2-overlay, var(--notched-secondary-accent));
+  background: var(--aew-nfv2-overlay, var(--aew-secondary-accent));
   pointer-events: none;
 }
 
@@ -108,7 +108,7 @@
 /* (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1) (gotcha #20). */
 .aew-nfv2 .aew-nfv2__heading {
   margin: 0 0 24px;
-  color: var(--aew-nfv2-heading, var(--notched-secondary-cards));
+  color: var(--aew-nfv2-heading, var(--aew-secondary-cards));
   font-family: "Teko", sans-serif;
   font-weight: 600;
   font-size: 64px;
@@ -119,7 +119,7 @@
 /* ── Intro paragraph (Lato, light cream on dark) ─────────────────────────── */
 .aew-nfv2 .aew-nfv2__intro {
   margin: 0;
-  color: var(--aew-nfv2-intro, var(--notched-background));
+  color: var(--aew-nfv2-intro, var(--aew-background));
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-size: 18px;
@@ -154,8 +154,8 @@
   width: 48px;
   height: 48px;
   border-radius: 999px;
-  background: var(--aew-nfv2-badge-bg, var(--notched-secondary-cards));
-  color: var(--aew-nfv2-badge-text, var(--notched-secondary-accent));
+  background: var(--aew-nfv2-badge-bg, var(--aew-secondary-cards));
+  color: var(--aew-nfv2-badge-text, var(--aew-secondary-accent));
   font-family: "Teko", sans-serif;
   font-weight: 600;
   font-size: 24px;
@@ -166,7 +166,7 @@
 /* ── Feature title (Teko, gold) ──────────────────────────────────────────── */
 .aew-nfv2 .aew-nfv2__title {
   margin: 0;
-  color: var(--aew-nfv2-title, var(--notched-gold-light));
+  color: var(--aew-nfv2-title, var(--aew-gold-light));
   font-family: "Teko", sans-serif;
   font-weight: 600;
   font-size: 24px;

@@ -1,8 +1,8 @@
 <?php
 /**
- * Testimonials V2 — Notched brand.
+ * Testimonials V2 — [Company] brand.
  *
- * "Notched Client Testimonials" section: a centered gold star eyebrow over a
+ * "[Company] Client Testimonials" section: a centered gold star eyebrow over a
  * section title, then a grid of testimonial cards. Each card shows a rounded
  * project image, a circular avatar (image or initial-letter fallback), a gold
  * star rating, a client name and a review paragraph.
@@ -25,10 +25,10 @@ class Widget_Testimonials_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'testimonials-v2';
 
 	public function get_name(): string      { return 'agency-testimonials-v2'; }
-	public function get_title(): string     { return esc_html__( 'Testimonials V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Testimonials V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-testimonial'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'testimonials', 'notched', 'reviews', 'clients', 'stars' ]; }
+	public function get_keywords(): array   { return [ 'testimonials', 'reviews', 'clients', 'stars' ]; }
 
 	public function get_style_depends(): array { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 
@@ -136,7 +136,7 @@ class Widget_Testimonials_V2 extends Widget_Base {
 		$this->add_control( 'title', [
 			'label'       => 'Title',
 			'type'        => Controls_Manager::TEXT,
-			'default'     => 'Notched Client Testimonials',
+			'default'     => '[Company] Client Testimonials',
 			'label_block' => true,
 		] );
 		$this->add_control( 'title_tag', [
@@ -207,17 +207,17 @@ class Widget_Testimonials_V2 extends Widget_Base {
 				[
 					'stars'  => '5',
 					'name'   => 'Skeeter Draper',
-					'review' => 'The Notched team built our pergola one afternoon a little over 2 years ago and we have been very happy with the fit, finish, and utility of its form and function. I would chose to work with Notched again!',
+					'review' => 'The [Company] team built our pergola one afternoon a little over 2 years ago and we have been very happy with the fit, finish, and utility of its form and function. I would chose to work with [Company] again!',
 				],
 				[
 					'stars'  => '5',
 					'name'   => 'Ty Tillotson',
-					'review' => 'We have been working with Notched for years! Jardin and his team have always treated us well and done fantastic work for us. Very professional and our clients are always thrilled with their work!',
+					'review' => 'We have been working with [Company] for years! Jardin and his team have always treated us well and done fantastic work for us. Very professional and our clients are always thrilled with their work!',
 				],
 				[
 					'stars'  => '5',
 					'name'   => 'Mandy Taylor',
-					'review' => 'Notched built us a Zen Den, and it\'s our favorite place to gather outside! Provides awesome shade and still looks amazing! They were very easy to work with and responsive! Highly recommend!',
+					'review' => '[Company] built us a Zen Den, and it\'s our favorite place to gather outside! Provides awesome shade and still looks amazing! They were very easy to work with and responsive! Highly recommend!',
 				],
 			],
 		] );
@@ -232,7 +232,7 @@ class Widget_Testimonials_V2 extends Widget_Base {
 		$this->add_control( 'body_bg', [
 			'label'     => 'Background',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-tsv2-body-bg: {{VALUE}};' ],
 		] );
 		$this->end_controls_section();
@@ -243,7 +243,7 @@ class Widget_Testimonials_V2 extends Widget_Base {
 		$this->add_control( 'star_color', [
 			'label'     => 'Star color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-tsv2-star: {{VALUE}};' ],
 		] );
 		$this->end_controls_section();
@@ -254,7 +254,7 @@ class Widget_Testimonials_V2 extends Widget_Base {
 		$this->add_control( 'title_color', [
 			'label'     => 'Color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#2A4F41',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-tsv2-title: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -276,7 +276,7 @@ class Widget_Testimonials_V2 extends Widget_Base {
 		$this->add_control( 'name_color', [
 			'label'     => 'Color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#2A4F41',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-tsv2-name: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -299,7 +299,7 @@ class Widget_Testimonials_V2 extends Widget_Base {
 		$this->add_control( 'review_color', [
 			'label'     => 'Color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-tsv2-review: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [

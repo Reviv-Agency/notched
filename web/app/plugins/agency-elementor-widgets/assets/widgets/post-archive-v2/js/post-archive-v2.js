@@ -1,5 +1,5 @@
 /**
- * Post Archive V2 — Notched
+ * Post Archive V2
  *
  *  - Infinite scroll (IntersectionObserver) or a "Load more" button, fetching
  *    rendered card HTML from admin-ajax.

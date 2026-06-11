@@ -1,4 +1,4 @@
-/* Gallery V2 (Notched) — auto-reveal hidden grid items on scroll (infinite scroll). */
+/* Gallery V2 — auto-reveal hidden grid items on scroll (infinite scroll). */
 (function () {
 	'use strict';
 

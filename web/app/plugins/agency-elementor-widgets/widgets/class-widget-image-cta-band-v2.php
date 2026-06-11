@@ -4,7 +4,7 @@
  *
  * A FULL-BLEED background image (edge to edge, not capped at the 1440 content
  * width) with a centered content box floating on top — eyebrow + heading +
- * description + button. Mirrors notched.com "Want to Know More About Notched?".
+ * description + button. Mirrors example.com "Want to Know More About [Company]?".
  * The background image, box surface, colours and button are editable from the
  * Style tab (§6.8 var pattern). An optional dark overlay improves legibility.
  *
@@ -37,7 +37,7 @@ class Widget_Image_Cta_Band_V2 extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title(): string {
-		return esc_html__( 'Image CTA Band V2 (Notched)', 'agency-elementor-widgets' );
+		return esc_html__( 'Image CTA Band V2', 'agency-elementor-widgets' );
 	}
 
 	/**
@@ -58,7 +58,7 @@ class Widget_Image_Cta_Band_V2 extends Widget_Base {
 	 * @return array<int, string>
 	 */
 	public function get_keywords(): array {
-		return [ 'cta', 'banner', 'image', 'full bleed', 'notched' ];
+		return [ 'cta', 'banner', 'image', 'full bleed' ];
 	}
 
 	/**
@@ -124,7 +124,7 @@ class Widget_Image_Cta_Band_V2 extends Widget_Base {
 			'label'   => esc_html__( 'Heading', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::TEXTAREA,
 			'rows'    => 2,
-			'default' => esc_html__( 'Want to Know More About Notched?', 'agency-elementor-widgets' ),
+			'default' => esc_html__( 'Want to Know More About [Company]?', 'agency-elementor-widgets' ),
 		] );
 
 		$this->add_control( 'heading_tag', [
@@ -282,7 +282,7 @@ class Widget_Image_Cta_Band_V2 extends Widget_Base {
 		$this->add_control( 'box_bg', [
 			'label'     => esc_html__( 'Box background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-icb-box-bg: {{VALUE}};' ],
 		] );
 
@@ -347,7 +347,7 @@ class Widget_Image_Cta_Band_V2 extends Widget_Base {
 		$this->add_control( 'btn_bg', [
 			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-icb-btn-bg: {{VALUE}};' ],
 		] );
 
@@ -361,7 +361,7 @@ class Widget_Image_Cta_Band_V2 extends Widget_Base {
 		$this->add_control( 'btn_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#6E4F2D',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-icb-btn-bg-hover: {{VALUE}};' ],
 		] );
 

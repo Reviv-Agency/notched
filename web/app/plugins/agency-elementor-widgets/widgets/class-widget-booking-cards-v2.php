@@ -6,7 +6,7 @@
  * tagline, a duration label (e.g. "30 min") on a divided footer row, and a
  * "Book Now" button. Unlike Region Cards V2 there is NO background image; the
  * cards are flat surfaces on the section background, matching the live
- * notched.com/book-online consultation layout. Colours, the card surface and
+ * example.com/book-online consultation layout. Colours, the card surface and
  * the button are editable per-instance from the Style tab (§6.8 var pattern).
  *
  * @package Agency_Elementor_Widgets
@@ -39,7 +39,7 @@ class Widget_Booking_Cards_V2 extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title(): string {
-		return esc_html__( 'Booking Cards V2 (Notched)', 'agency-elementor-widgets' );
+		return esc_html__( 'Booking Cards V2', 'agency-elementor-widgets' );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class Widget_Booking_Cards_V2 extends Widget_Base {
 	 * @return array<int, string>
 	 */
 	public function get_keywords(): array {
-		return [ 'booking', 'consultation', 'cards', 'schedule', 'notched' ];
+		return [ 'booking', 'consultation', 'cards', 'schedule' ];
 	}
 
 	/**
@@ -110,21 +110,21 @@ class Widget_Booking_Cards_V2 extends Widget_Base {
 	private function default_cards(): array {
 		return [
 			[
-				'heading'  => 'Free Notched Consultation | Virtual',
+				'heading'  => 'Free [Company] Consultation | Virtual',
 				'tagline'  => 'Anytime, Anywhere!',
 				'duration' => '30 min',
 				'btn_text' => 'Book Now',
 				'btn_link' => [ 'url' => '#' ],
 			],
 			[
-				'heading'  => 'Free Notched Consultation | Utah',
+				'heading'  => 'Free [Company] Consultation | Utah',
 				'tagline'  => "Living in Utah? Let's chat in person!",
 				'duration' => '30 min',
 				'btn_text' => 'Book Now',
 				'btn_link' => [ 'url' => '#' ],
 			],
 			[
-				'heading'  => 'Free Notched Consultation | Arizona',
+				'heading'  => 'Free [Company] Consultation | Arizona',
 				'tagline'  => "Want a timber structure in Arizona? Let's chat!",
 				'duration' => '30 min',
 				'btn_text' => 'Book Now',
@@ -157,7 +157,7 @@ class Widget_Booking_Cards_V2 extends Widget_Base {
 			[
 				'label'   => esc_html__( 'Heading', 'agency-elementor-widgets' ),
 				'type'    => Controls_Manager::TEXT,
-				'default' => esc_html__( 'Free Notched Consultation | Virtual', 'agency-elementor-widgets' ),
+				'default' => esc_html__( 'Free [Company] Consultation | Virtual', 'agency-elementor-widgets' ),
 			]
 		);
 
@@ -356,7 +356,7 @@ class Widget_Booking_Cards_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Border colour', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#BFC0BF',
+				'default'   => '',
 				'selectors' => [ '{{WRAPPER}}' => '--aew-bkcv2-border: {{VALUE}};' ],
 			]
 		);
@@ -428,7 +428,7 @@ class Widget_Booking_Cards_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#876137',
+				'default'   => '',
 				'selectors' => [ '{{WRAPPER}}' => '--aew-bkcv2-btn-bg: {{VALUE}};' ],
 			]
 		);
@@ -448,7 +448,7 @@ class Widget_Booking_Cards_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#6E4F2D',
+				'default'   => '',
 				'selectors' => [ '{{WRAPPER}}' => '--aew-bkcv2-btn-bg-hover: {{VALUE}};' ],
 			]
 		);

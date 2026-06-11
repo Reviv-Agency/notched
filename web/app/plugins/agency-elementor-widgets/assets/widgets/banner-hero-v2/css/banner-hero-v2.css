@@ -1,5 +1,5 @@
 /**
- * Banner Hero V2 — Notched
+ * Banner Hero V2
  * A boxed page-top banner: a large rounded banner image inside a padded inner
  * wrapper, with a centered floating card (eyebrow/subtext + Teko heading +
  * sub-line + two buttons) overlaying it.
@@ -33,23 +33,23 @@
 /* Scoped to .aew-bhero so they don't leak into other widgets. Source of truth
    is design-system.md. Update there first; copy here second. */
 .aew-bhero {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards:   var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent:  var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
 }
 
 /* ── Outer block (boxed light page band) ─────────────────────────────────── */
 .aew-bhero {
   position: relative;
   width: 100%;
-  background: var(--aew-bhero-page-bg, var(--notched-background));
+  background: var(--aew-bhero-page-bg, var(--aew-background));
 }
 
 .aew-bhero *,
@@ -104,7 +104,7 @@
   z-index: 1;
   width: 100%;
   max-width: 560px;
-  background: var(--aew-bhero-card-bg, var(--notched-background));
+  background: var(--aew-bhero-card-bg, var(--aew-background));
   border-radius: 20px;
   padding: 48px 64px;
 }
@@ -120,7 +120,7 @@
 /* ── Subtext / eyebrow line (Paragraph — Lato Regular 18px / 140%) ────────── */
 .aew-bhero__subtext {
   margin: 0;
-  color: var(--aew-bhero-subtext, var(--notched-text));
+  color: var(--aew-bhero-subtext, var(--aew-text));
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 18px;
@@ -132,7 +132,7 @@
    h1..h6 rule (0,1,1); a bare class would be (0,1,0) and lose (gotcha #20). */
 .aew-bhero .aew-bhero__heading {
   margin: 0;
-  color: var(--aew-bhero-heading, var(--notched-secondary-bg));
+  color: var(--aew-bhero-heading, var(--aew-secondary-bg));
   font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 64px;
@@ -175,30 +175,30 @@
    the resolved editor values (hex or global colour); the design-system token is
    the fallback when a slot is not overridden (§6.8). */
 .aew-bhero__btn--primary {
-  background-color: var(--aew-bhero-pri-bg, var(--notched-cta));
+  background-color: var(--aew-bhero-pri-bg, var(--aew-cta));
   color: var(--aew-bhero-pri-text, #FFFFFF);
-  border-color: var(--aew-bhero-pri-bg, var(--notched-cta));
+  border-color: var(--aew-bhero-pri-bg, var(--aew-cta));
 }
 
 .aew-bhero__btn--primary:hover,
 .aew-bhero__btn--primary:focus-visible {
-  background-color: var(--aew-bhero-pri-bg-hover, var(--notched-cta-hover));
+  background-color: var(--aew-bhero-pri-bg-hover, var(--aew-cta-hover));
   color: var(--aew-bhero-pri-text-hover, #FFFFFF);
-  border-color: var(--aew-bhero-pri-bg-hover, var(--notched-cta-hover));
+  border-color: var(--aew-bhero-pri-bg-hover, var(--aew-cta-hover));
 }
 
-/* Secondary (outline) — transparent bg, #6E4F2D border + text; fills on hover. */
+/* Secondary (outline) — transparent bg, #2B2B2B border + text; fills on hover. */
 .aew-bhero__btn--secondary {
   background-color: transparent;
-  color: var(--aew-bhero-sec-color, var(--notched-cta-hover));
-  border-color: var(--aew-bhero-sec-color, var(--notched-cta-hover));
+  color: var(--aew-bhero-sec-color, var(--aew-cta-hover));
+  border-color: var(--aew-bhero-sec-color, var(--aew-cta-hover));
 }
 
 .aew-bhero__btn--secondary:hover,
 .aew-bhero__btn--secondary:focus-visible {
-  background-color: var(--aew-bhero-sec-bg-hover, var(--notched-cta));
+  background-color: var(--aew-bhero-sec-bg-hover, var(--aew-cta));
   color: var(--aew-bhero-sec-text-hover, #FFFFFF);
-  border-color: var(--aew-bhero-sec-bg-hover, var(--notched-cta));
+  border-color: var(--aew-bhero-sec-bg-hover, var(--aew-cta));
 }
 
 .aew-bhero__btn-icon {

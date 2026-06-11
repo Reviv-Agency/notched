@@ -1,6 +1,6 @@
 <?php
 /**
- * Welcome V2 — Notched brand.
+ * Welcome V2 — [Company] brand.
  *
  * Two-column intro band: eyebrow + large Teko heading on the left, body
  * paragraphs + script signature + two CTA buttons on the right. Owns its own
@@ -25,10 +25,10 @@ class Widget_Welcome_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'welcome-v2';
 
 	public function get_name(): string      { return 'agency-welcome-v2'; }
-	public function get_title(): string     { return esc_html__( 'Welcome V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Welcome V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-text-area'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'welcome', 'intro', 'about', 'notched', 'cta' ]; }
+	public function get_keywords(): array   { return [ 'welcome', 'intro', 'about', 'cta' ]; }
 
 	public function get_style_depends(): array { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 
@@ -76,14 +76,14 @@ class Widget_Welcome_V2 extends Widget_Base {
 		$this->add_control( 'heading', [
 			'label'   => esc_html__( 'Heading', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::TEXTAREA,
-			'default' => esc_html__( "NOTCHED\nTIMBER", 'agency-elementor-widgets' ),
+			'default' => esc_html__( "[COMPANY]\nTIMBER", 'agency-elementor-widgets' ),
 			'description' => esc_html__( 'Use line breaks to control wrapping.', 'agency-elementor-widgets' ),
 		] );
 
 		$this->add_control( 'body', [
 			'label'   => esc_html__( 'Body text', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::WYSIWYG,
-			'default' => '<p>Welcome to Notched Timbers. I&#8217;m Jardin, the owner and founder. Thank you for all the support over the years. It really means a lot.</p><p>My team and I love helping people design and build outdoor spaces where life happens. We focus on real timber craftsmanship, using techniques like dovetail joinery to create structures that look incredible and last.</p><p>Take a look around and explore what&#8217;s possible. We&#8217;re a small team, and we&#8217;ll treat you like family every step of the way. If you&#8217;re thinking about building something, give us a call. We&#8217;d love to help.</p>',
+			'default' => '<p>Welcome to [Company] Timbers. I&#8217;m Jardin, the owner and founder. Thank you for all the support over the years. It really means a lot.</p><p>My team and I love helping people design and build outdoor spaces where life happens. We focus on real timber craftsmanship, using techniques like dovetail joinery to create structures that look incredible and last.</p><p>Take a look around and explore what&#8217;s possible. We&#8217;re a small team, and we&#8217;ll treat you like family every step of the way. If you&#8217;re thinking about building something, give us a call. We&#8217;d love to help.</p>',
 		] );
 
 		$this->add_control( 'signature', [
@@ -140,7 +140,7 @@ class Widget_Welcome_V2 extends Widget_Base {
 		$this->add_control( 'body_bg', [
 			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#093328',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-welc-bg: {{VALUE}};' ],
 		] );
 
@@ -272,19 +272,19 @@ class Widget_Welcome_V2 extends Widget_Base {
 		$this->add_control( 'btn_bg', [
 			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-welc-btn-bg: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn_text', [
 			'label'     => esc_html__( 'Text color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#6E4F2D',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-welc-btn-text: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-welc-btn-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn_text_hover', [

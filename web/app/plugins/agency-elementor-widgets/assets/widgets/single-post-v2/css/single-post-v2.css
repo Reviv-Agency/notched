@@ -1,5 +1,5 @@
 /**
- * Single Post Content V2 — Notched.
+ * Single Post Content V2
  * Author byline + 3-dot menu, title, "Updated:" line, post body, and a footer
  * with social share buttons + views/comments/like, all inside a white card on
  * the cream page background.
@@ -19,11 +19,11 @@
 }
 
 .aew-spv2 {
-  --notched-cards: #FFFFFF; --notched-background: #F6F0EC; --notched-lines: #BFC0BF;
-  --notched-misc-accent: #3B413F; --notched-secondary-bg: #2A4F41;
-  --notched-text: #141C19; --notched-cta: #876137; --notched-cta-hover: #6E4F2D;
+  --aew-cards: var(--e-global-color-aew-cards, #FFFFFF); --aew-background: var(--e-global-color-aew-background, #F4F4F4); --aew-lines: var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent: var(--e-global-color-aew-misc-accent, #666666); --aew-secondary-bg: var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-text: var(--e-global-color-aew-text, #1A1A1A); --aew-cta: var(--e-global-color-aew-cta, #444444); --aew-cta-hover: var(--e-global-color-aew-cta-hover, #2B2B2B);
   width: 100%;
-  background-color: var(--aew-spv2-bg, var(--notched-background));
+  background-color: var(--aew-spv2-bg, var(--aew-background));
 }
 
 .aew-spv2 *, .aew-spv2 *::before, .aew-spv2 *::after { box-sizing: border-box; }
@@ -42,8 +42,8 @@
   max-width: 760px;
   margin: 0 auto;
   padding: 40px 48px;
-  background-color: var(--aew-spv2-card-bg, var(--notched-cards));
-  border: 1px solid var(--aew-spv2-card-border, var(--notched-lines));
+  background-color: var(--aew-spv2-card-bg, var(--aew-cards));
+  border: 1px solid var(--aew-spv2-card-border, var(--aew-lines));
   border-radius: 24px;
 }
 
@@ -68,7 +68,7 @@
   font-family: "Lato", sans-serif;
   font-size: 14px;
   line-height: 1.3;
-  color: var(--aew-spv2-meta, var(--notched-misc-accent));
+  color: var(--aew-spv2-meta, var(--aew-misc-accent));
 }
 
 .aew-spv2__author { font-weight: 700; }
@@ -83,36 +83,36 @@
   background: transparent; border: 0; box-shadow: none; cursor: pointer;
 }
 .aew-spv2__dots { display: inline-flex; flex-direction: column; gap: 3px; }
-.aew-spv2__dots span { width: 4px; height: 4px; border-radius: 50%; background-color: var(--aew-spv2-stat, var(--notched-misc-accent)); }
+.aew-spv2__dots span { width: 4px; height: 4px; border-radius: 50%; background-color: var(--aew-spv2-stat, var(--aew-misc-accent)); }
 
 .aew-spv2__menu {
   position: absolute; top: calc(100% + 6px); right: 0; z-index: 5;
   min-width: 140px; padding: 6px;
-  background-color: var(--notched-cards);
-  border: 1px solid var(--aew-spv2-divider, var(--notched-lines));
+  background-color: var(--aew-cards);
+  border: 1px solid var(--aew-spv2-divider, var(--aew-lines));
   border-radius: 12px; box-shadow: 0 10px 28px rgba(20,28,25,0.14);
 }
 .aew-spv2__menu[hidden] { display: none; }
 .aew-spv2 button.aew-spv2__menu-item {
   display: block; width: 100%; padding: 9px 12px;
   font-family: "Lato", sans-serif; font-size: 15px; text-align: left;
-  color: var(--notched-text); background: transparent; border: 0; border-radius: 8px; cursor: pointer;
+  color: var(--aew-text); background: transparent; border: 0; border-radius: 8px; cursor: pointer;
 }
 .aew-spv2__menu-item:hover { background-color: rgba(20,28,25,0.06); }
-.aew-spv2__menu-item.is-copied { color: var(--notched-secondary-bg); font-weight: 700; }
+.aew-spv2__menu-item.is-copied { color: var(--aew-secondary-bg); font-weight: 700; }
 
 /* ── Title + updated ─────────────────────────────────────────────────────── */
 .aew-spv2 .aew-spv2__title {
   margin: 18px 0 0;
   font-family: "Teko", sans-serif; font-weight: 600;
   font-size: 40px; line-height: 100%; text-transform: uppercase; letter-spacing: 0.01em;
-  color: var(--aew-spv2-title, var(--notched-secondary-bg));
+  color: var(--aew-spv2-title, var(--aew-secondary-bg));
 }
 
 .aew-spv2__updated {
   margin: 8px 0 0;
   font-family: "Lato", sans-serif; font-size: 14px;
-  color: var(--aew-spv2-meta, var(--notched-misc-accent));
+  color: var(--aew-spv2-meta, var(--aew-misc-accent));
 }
 
 /* ── Post body ───────────────────────────────────────────────────────────── */
@@ -120,7 +120,7 @@
   margin-top: 28px;
   font-family: "Lato", sans-serif; font-weight: 400;
   font-size: 18px; line-height: 160%;
-  color: var(--aew-spv2-body, var(--notched-text));
+  color: var(--aew-spv2-body, var(--aew-text));
 }
 
 .aew-spv2__content > *:first-child { margin-top: 0; }
@@ -132,18 +132,18 @@
 .aew-spv2__content h2,
 .aew-spv2__content h3 {
   font-family: "Teko", sans-serif; font-weight: 600; line-height: 100%;
-  text-transform: uppercase; color: var(--aew-spv2-title, var(--notched-secondary-bg));
+  text-transform: uppercase; color: var(--aew-spv2-title, var(--aew-secondary-bg));
   margin: 1.5em 0 0.5em;
 }
 .aew-spv2__content h2 { font-size: 30px; }
 .aew-spv2__content h3 { font-size: 24px; }
-.aew-spv2__content a { color: var(--aew-spv2-link, var(--notched-cta)); text-underline-offset: 2px; }
+.aew-spv2__content a { color: var(--aew-spv2-link, var(--aew-cta)); text-underline-offset: 2px; }
 .aew-spv2__content ul,
 .aew-spv2__content ol { margin: 0 0 1.25em; padding-left: 1.4em; }
 .aew-spv2__content blockquote {
   margin: 1.5em 0; padding: 0.5em 0 0.5em 1.25em;
-  border-left: 3px solid var(--notched-cta);
-  font-style: italic; color: var(--notched-misc-accent);
+  border-left: 3px solid var(--aew-cta);
+  font-style: italic; color: var(--aew-misc-accent);
 }
 
 /* ── Footer: social + stats ──────────────────────────────────────────────── */
@@ -151,7 +151,7 @@
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
   gap: 16px;
   margin-top: 36px; padding-top: 22px;
-  border-top: 1px solid var(--aew-spv2-divider, var(--notched-lines));
+  border-top: 1px solid var(--aew-spv2-divider, var(--aew-lines));
 }
 
 .aew-spv2__social { display: inline-flex; align-items: center; gap: 10px; }
@@ -160,20 +160,20 @@
 .aew-spv2 button.aew-spv2__social-btn {
   display: inline-flex; align-items: center; justify-content: center;
   width: 34px; height: 34px; padding: 0;
-  color: var(--aew-spv2-stat, var(--notched-misc-accent));
+  color: var(--aew-spv2-stat, var(--aew-misc-accent));
   background: transparent; border: 0; box-shadow: none; cursor: pointer;
   border-radius: 50%;
   transition: color 0.15s ease, transform 0.15s ease;
 }
 .aew-spv2__social-btn svg { width: 18px; height: 18px; fill: currentColor; }
-.aew-spv2__social-btn:hover { color: var(--notched-cta); transform: translateY(-1px); }
+.aew-spv2__social-btn:hover { color: var(--aew-cta); transform: translateY(-1px); }
 
 .aew-spv2__stats { display: inline-flex; align-items: center; gap: 20px; }
 
 .aew-spv2 .aew-spv2__stat {
   display: inline-flex; align-items: center; gap: 7px;
   font-family: "Lato", sans-serif; font-size: 14px; line-height: 1;
-  color: var(--aew-spv2-stat, var(--notched-misc-accent));
+  color: var(--aew-spv2-stat, var(--aew-misc-accent));
   background: transparent; border: 0; text-decoration: none; padding: 0;
 }
 .aew-spv2 button.aew-spv2__stat { cursor: pointer; }
@@ -196,14 +196,14 @@
    visibly. Without this, removing .is-liked left the heart with no color and it
    rendered white/invisible. */
 .aew-spv2 button.aew-spv2__like {
-  color: var(--aew-spv2-stat, var(--notched-misc-accent));
+  color: var(--aew-spv2-stat, var(--aew-misc-accent));
 }
 .aew-spv2__heart { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; transition: fill .15s ease, stroke .15s ease, transform .15s ease; }
 .aew-spv2__like:hover .aew-spv2__heart { transform: scale(1.12); }
 .aew-spv2 button.aew-spv2__like.is-liked { color: var(--aew-spv2-like, #D2453F); }
 .aew-spv2__like.is-liked .aew-spv2__heart { fill: var(--aew-spv2-like, #D2453F); stroke: var(--aew-spv2-like, #D2453F); }
 
-.aew-spv2__empty { font-family: "Lato", sans-serif; font-size: 18px; color: var(--notched-text); }
+.aew-spv2__empty { font-family: "Lato", sans-serif; font-size: 18px; color: var(--aew-text); }
 
 /* ── Tablet ──────────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {

@@ -38,7 +38,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title(): string {
-		return esc_html__( 'Region Cards V2 (Notched)', 'agency-elementor-widgets' );
+		return esc_html__( 'Region Cards V2', 'agency-elementor-widgets' );
 	}
 
 	/**
@@ -59,7 +59,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 	 * @return array<int, string>
 	 */
 	public function get_keywords(): array {
-		return [ 'region', 'cards', 'built for', 'utah', 'arizona', 'notched' ];
+		return [ 'region', 'cards', 'built for', 'utah', 'arizona' ];
 	}
 
 	/**
@@ -99,14 +99,14 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 			[
 				'heading'   => esc_html__( 'BUILT FOR UTAH', 'agency-elementor-widgets' ),
 				'paragraph' => esc_html__( 'Explore timber pergola kits designed specifically for Utah snow load, elevation, temperature swings, and long-term outdoor durability.', 'agency-elementor-widgets' ),
-				'btn_text'  => esc_html__( 'WHY UTAH CHOOSES NOTCHED', 'agency-elementor-widgets' ),
+				'btn_text'  => esc_html__( 'WHY UTAH CHOOSES [COMPANY]', 'agency-elementor-widgets' ),
 				'btn_link'  => [ 'url' => '#' ],
 				'image'     => [ 'url' => Widget_Assets::url( self::ASSET_SLUG, 'images/region-1.webp' ) ],
 			],
 			[
 				'heading'   => esc_html__( 'BUILT FOR ARIZONA', 'agency-elementor-widgets' ),
 				'paragraph' => esc_html__( 'Explore timber pergola kits designed specifically for Arizona heat, UV exposure, dry climates, and long-term outdoor living.', 'agency-elementor-widgets' ),
-				'btn_text'  => esc_html__( 'WHY ARIZONA CHOOSES NOTCHED', 'agency-elementor-widgets' ),
+				'btn_text'  => esc_html__( 'WHY ARIZONA CHOOSES [COMPANY]', 'agency-elementor-widgets' ),
 				'btn_link'  => [ 'url' => '#' ],
 				'image'     => [ 'url' => Widget_Assets::url( self::ASSET_SLUG, 'images/region-2.webp' ) ],
 			],
@@ -198,7 +198,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 			[
 				'label'   => esc_html__( 'Button label', 'agency-elementor-widgets' ),
 				'type'    => Controls_Manager::TEXT,
-				'default' => esc_html__( 'WHY UTAH CHOOSES NOTCHED', 'agency-elementor-widgets' ),
+				'default' => esc_html__( 'WHY UTAH CHOOSES [COMPANY]', 'agency-elementor-widgets' ),
 			]
 		);
 
@@ -341,7 +341,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Card background', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#F6F0EC',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-rgcv2-card-bg: {{VALUE}};',
 				],
@@ -457,7 +457,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#876137',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-rgcv2-title: {{VALUE}};',
 				],
@@ -469,7 +469,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 			[
 				'label'       => esc_html__( 'Second colour (accent)', 'agency-elementor-widgets' ),
 				'type'        => Controls_Manager::COLOR,
-				'default'     => '#2A4F41',
+				'default'     => '',
 				'description' => esc_html__( 'Colour applied to each panel’s “second-colour text”.', 'agency-elementor-widgets' ),
 				'selectors'   => [
 					'{{WRAPPER}}' => '--aew-rgcv2-title-accent: {{VALUE}};',
@@ -531,7 +531,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#141C19',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-rgcv2-text: {{VALUE}};',
 				],
@@ -592,7 +592,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#876137',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-rgcv2-btn-bg: {{VALUE}};',
 				],
@@ -604,7 +604,7 @@ class Widget_Region_Cards_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#6E4F2D',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-rgcv2-btn-bg-hover: {{VALUE}};',
 				],

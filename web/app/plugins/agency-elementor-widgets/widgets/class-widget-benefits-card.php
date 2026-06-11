@@ -2,7 +2,7 @@
 /**
  * Benefits Card — a large image with a cream card overlapping its inner edge,
  * holding a heading + rich body + a CTA button. Image left or right.
- * Built to match the notched.com "BENEFITS AT NOTCHED" section.
+ * Built to match the example.com "BENEFITS AT [COMPANY]" section.
  *
  * @package Agency_Elementor_Widgets
  */
@@ -43,7 +43,7 @@ class Widget_Benefits_Card extends Widget_Base {
 	}
 
 	public function get_keywords(): array {
-		return [ 'benefits', 'image', 'card', 'cta', 'overlap', 'notched' ];
+		return [ 'benefits', 'image', 'card', 'cta', 'overlap' ];
 	}
 
 	protected function register_controls(): void {
@@ -69,7 +69,7 @@ class Widget_Benefits_Card extends Widget_Base {
 		$this->add_control( 'heading', [
 			'label'   => esc_html__( 'Heading', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::TEXT,
-			'default' => esc_html__( 'BENEFITS AT NOTCHED', 'agency-elementor-widgets' ),
+			'default' => esc_html__( 'BENEFITS AT [COMPANY]', 'agency-elementor-widgets' ),
 		] );
 
 		$this->add_control( 'heading_tag', [
@@ -127,7 +127,7 @@ class Widget_Benefits_Card extends Widget_Base {
 		$this->add_control( 'card_bg', [
 			'label'     => esc_html__( 'Card background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bcard-card-bg: {{VALUE}};' ],
 		] );
 
@@ -152,28 +152,28 @@ class Widget_Benefits_Card extends Widget_Base {
 		$this->add_control( 'heading_color', [
 			'label'     => esc_html__( 'Heading color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bcard-heading: {{VALUE}};' ],
 		] );
 
 		$this->add_control( 'text_color', [
 			'label'     => esc_html__( 'Text color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bcard-text: {{VALUE}};' ],
 		] );
 
 		$this->add_control( 'btn_bg', [
 			'label'     => esc_html__( 'Button background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bcard-btn-bg: {{VALUE}};' ],
 		] );
 
 		$this->add_control( 'btn_text', [
 			'label'     => esc_html__( 'Button text color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bcard-btn-text: {{VALUE}};' ],
 		] );
 

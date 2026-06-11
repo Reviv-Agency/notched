@@ -1,5 +1,5 @@
 /**
- * Single Post Content V2 — Notched
+ * Single Post Content V2
  *  - Like toggle (shared Post_Engagement AJAX endpoint, optimistic).
  *  - 3-dot Share menu + copy-link buttons (header menu item + footer copy btn).
  */

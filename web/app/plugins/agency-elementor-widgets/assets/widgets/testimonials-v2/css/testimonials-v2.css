@@ -1,5 +1,5 @@
 /* ──────────────────────────────────────────────────────────────────────────
-   Testimonials V2 (Notched) — "Notched Client Testimonials"
+   Testimonials V2 — "[Company] Client Testimonials"
    Banded section on the light page background: a centered gold star eyebrow
    over a section title, then a grid of testimonial cards. Each card has a
    rounded project image, a circular avatar (image or initial-letter), a gold
@@ -10,16 +10,16 @@
 /* ── Brand tokens ────────────────────────────────────────────────────────── */
 /* Scoped to .aew-tsv2 so they don't leak. Source of truth: design-system.md. */
 .aew-tsv2 {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards:   var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent:  var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
 }
 
 /* ── Strip Elementor's column padding (full-bleed) ───────────────────────── */
@@ -51,7 +51,7 @@
    width so the background reaches both edges regardless of the parent
    container's max-width. */
 .aew-tsv2 {
-  background: var(--aew-tsv2-body-bg, var(--notched-background));
+  background: var(--aew-tsv2-body-bg, var(--aew-background));
   position: relative;
   width: 100vw;
   max-width: 100vw;
@@ -85,7 +85,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  color: var(--aew-tsv2-star, var(--notched-cta));
+  color: var(--aew-tsv2-star, var(--aew-cta));
   line-height: 0;
 }
 .aew-tsv2__star { display: block; flex: 0 0 auto; }
@@ -96,7 +96,7 @@
 .aew-tsv2 .aew-tsv2__title {
   margin: 0 0 48px;
   text-align: center;
-  color: var(--aew-tsv2-title, var(--notched-secondary-bg));
+  color: var(--aew-tsv2-title, var(--aew-secondary-bg));
   font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 64px;
@@ -157,7 +157,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--notched-cta);
+  background: var(--aew-cta);
 }
 .aew-tsv2 .aew-tsv2__avatar-img {
   width: 100% !important;
@@ -185,7 +185,7 @@
 /* ── Client name ─────────────────────────────────────────────────────────── */
 .aew-tsv2 .aew-tsv2__name {
   margin: 0 0 12px;
-  color: var(--aew-tsv2-name, var(--notched-secondary-bg));
+  color: var(--aew-tsv2-name, var(--aew-secondary-bg));
   font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 24px;
@@ -197,7 +197,7 @@
 /* ── Date (optional, under the name) ─────────────────────────────────────── */
 .aew-tsv2__date {
   margin: -6px 0 12px;
-  color: var(--aew-tsv2-review, var(--notched-text));
+  color: var(--aew-tsv2-review, var(--aew-text));
   opacity: 0.7;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
@@ -208,7 +208,7 @@
 /* ── Review paragraph ────────────────────────────────────────────────────── */
 .aew-tsv2__review {
   margin: 0;
-  color: var(--aew-tsv2-review, var(--notched-text));
+  color: var(--aew-tsv2-review, var(--aew-text));
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 18px;
@@ -230,14 +230,14 @@
   font-weight: 600;
   font-size: 56px;
   line-height: 100%;
-  color: var(--aew-tsv2-title, var(--notched-secondary-bg));
+  color: var(--aew-tsv2-title, var(--aew-secondary-bg));
 }
-.aew-tsv2__summary .aew-tsv2__stars { color: var(--aew-tsv2-star, var(--notched-cta)); }
+.aew-tsv2__summary .aew-tsv2__stars { color: var(--aew-tsv2-star, var(--aew-cta)); }
 .aew-tsv2__summary-count {
   margin: 0;
   font-family: 'Lato', sans-serif;
   font-size: 16px;
-  color: var(--aew-tsv2-review, var(--notched-text));
+  color: var(--aew-tsv2-review, var(--aew-text));
   opacity: 0.8;
 }
 .aew-tsv2__summary-text {
@@ -245,7 +245,7 @@
   font-family: 'Lato', sans-serif;
   font-size: 18px;
   line-height: 140%;
-  color: var(--aew-tsv2-review, var(--notched-text));
+  color: var(--aew-tsv2-review, var(--aew-text));
 }
 .aew-tsv2__summary-btn {
   display: inline-flex;
@@ -261,12 +261,12 @@
   letter-spacing: 0.02em;
   padding: 20px 24px 16px;
   border-radius: 8px;
-  background-color: var(--notched-cta);
+  background-color: var(--aew-cta);
   color: #FFFFFF;
   transition: background-color 0.2s ease;
 }
 .aew-tsv2__summary-btn:hover,
-.aew-tsv2__summary-btn:focus-visible { background-color: var(--notched-cta-hover); }
+.aew-tsv2__summary-btn:focus-visible { background-color: var(--aew-cta-hover); }
 
 /* ── Tablet: 3 → 2 columns, X padding → 40px ─────────────────────────────── */
 @media (max-width: 1024px) {

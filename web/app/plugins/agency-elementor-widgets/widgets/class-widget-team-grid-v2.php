@@ -4,7 +4,7 @@
  *
  * An optional section heading + subtext, then a responsive grid of member
  * cards — each a photo with the member's name and role beneath it. Mirrors
- * notched.com/our-crew. Column count, gap, image radius and all colours are
+ * example.com/our-crew. Column count, gap, image radius and all colours are
  * editable per-instance from the Style tab (§6.8 var pattern).
  *
  * @package Agency_Elementor_Widgets
@@ -37,7 +37,7 @@ class Widget_Team_Grid_V2 extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title(): string {
-		return esc_html__( 'Team Grid V2 (Notched)', 'agency-elementor-widgets' );
+		return esc_html__( 'Team Grid V2', 'agency-elementor-widgets' );
 	}
 
 	/**
@@ -58,7 +58,7 @@ class Widget_Team_Grid_V2 extends Widget_Base {
 	 * @return array<int, string>
 	 */
 	public function get_keywords(): array {
-		return [ 'team', 'crew', 'staff', 'people', 'notched' ];
+		return [ 'team', 'crew', 'staff', 'people' ];
 	}
 
 	/**
@@ -344,7 +344,7 @@ class Widget_Team_Grid_V2 extends Widget_Base {
 		$this->add_control( 'photo_bg', [
 			'label'     => esc_html__( 'Photo placeholder colour', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#7D958D',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-team-photo-bg: {{VALUE}};' ],
 		] );
 
@@ -352,7 +352,7 @@ class Widget_Team_Grid_V2 extends Widget_Base {
 			'label'       => esc_html__( 'Name/title box colour', 'agency-elementor-widgets' ),
 			'description' => esc_html__( 'The box under each photo holding the name + role. Leave empty for none.', 'agency-elementor-widgets' ),
 			'type'        => Controls_Manager::COLOR,
-			'default'     => '#F6F0EC',
+			'default'     => '',
 			'selectors'   => [ '{{WRAPPER}}' => '--aew-team-textbox-bg: {{VALUE}};' ],
 		] );
 

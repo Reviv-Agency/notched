@@ -1,5 +1,5 @@
 /**
- * Recent Posts V2 — Notched
+ * Recent Posts V2
  * Like toggle on each card (shared Post_Engagement AJAX endpoint, optimistic).
  * The like is a real button now (was a link that navigated to the post).
  */

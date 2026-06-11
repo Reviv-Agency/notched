@@ -3,7 +3,7 @@
  * Values Grid V2 Elementor widget ("A Few Things We Believe").
  *
  * A section heading + a responsive grid of value cards — each an icon, a title
- * and a paragraph. Mirrors notched.com/our-story "A Few Things We Believe".
+ * and a paragraph. Mirrors example.com/our-story "A Few Things We Believe".
  * Column count, gap, icon size and all colours are editable from the Style tab
  * (§6.8 var pattern).
  *
@@ -36,7 +36,7 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title(): string {
-		return esc_html__( 'Values Grid V2 (Notched)', 'agency-elementor-widgets' );
+		return esc_html__( 'Values Grid V2', 'agency-elementor-widgets' );
 	}
 
 	/**
@@ -57,7 +57,7 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 	 * @return array<int, string>
 	 */
 	public function get_keywords(): array {
-		return [ 'values', 'beliefs', 'icons', 'features', 'notched' ];
+		return [ 'values', 'beliefs', 'icons', 'features' ];
 	}
 
 	/**
@@ -102,10 +102,10 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 	 */
 	private function default_values(): array {
 		return [
-			[ 'title' => 'Championing Sustainability', 'text' => 'At Notched, we are committed to sustainable practices, using eco-friendly materials and precision techniques that minimize waste and honor our natural resources.' ],
+			[ 'title' => 'Championing Sustainability', 'text' => 'At [Company], we are committed to sustainable practices, using eco-friendly materials and precision techniques that minimize waste and honor our natural resources.' ],
 			[ 'title' => 'Our Team Feels Like Family', 'text' => 'We want our employees to be well paid, happy, and hardworking. If our people don’t enjoy their work, they don’t do good work. Our team loves their work.' ],
 			[ 'title' => 'Unwavering Innovation', 'text' => 'From bold ideas to intricate details, we relentlessly pursue excellence to bring your vision to life.' ],
-			[ 'title' => 'Warm & Welcome', 'text' => 'Every Notched interaction should feel like you’re talking to a good friend or family member who has your best interest at heart. Our foundation is trust.' ],
+			[ 'title' => 'Warm & Welcome', 'text' => 'Every [Company] interaction should feel like you’re talking to a good friend or family member who has your best interest at heart. Our foundation is trust.' ],
 			[ 'title' => 'Expert Guidance', 'text' => 'Our team of skilled designers, engineers, and craftsmen delivers expert solutions to every project, empowering our customers with knowledge, resources, and superior craftsmanship.' ],
 			[ 'title' => 'Safety & Durability', 'text' => 'Our structures are built with premium materials, precise joinery, and a dedication to safety, ensuring unmatched quality and long-lasting strength for years to come.' ],
 		];
@@ -262,7 +262,7 @@ class Widget_Values_Grid_V2 extends Widget_Base {
 		$this->add_control( 'icon_color', [
 			'label'       => esc_html__( 'Icon tint', 'agency-elementor-widgets' ),
 			'type'        => Controls_Manager::COLOR,
-			'default'     => '#876137',
+			'default'     => '',
 			'selectors'   => [ '{{WRAPPER}}' => '--aew-vals-icon: {{VALUE}};' ],
 			'description' => esc_html__( 'Fills the wood-print icon with a flat brand colour.', 'agency-elementor-widgets' ),
 		] );

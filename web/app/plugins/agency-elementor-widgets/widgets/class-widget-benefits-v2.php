@@ -1,6 +1,6 @@
 <?php
 /**
- * Benefits V2 — Notched brand.
+ * Benefits V2 — [Company] brand.
  *
  * "Benefits of a Traditional Pergola" band: a section title over a row of
  * feature columns, each with a circular image, a heading and a paragraph.
@@ -23,10 +23,10 @@ class Widget_Benefits_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'benefits-v2';
 
 	public function get_name(): string      { return 'agency-benefits-v2'; }
-	public function get_title(): string     { return esc_html__( 'Benefits V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Benefits V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-check-circle'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'benefits', 'notched', 'features', 'pergola', 'columns' ]; }
+	public function get_keywords(): array   { return [ 'benefits', 'features', 'pergola', 'columns' ]; }
 
 	public function get_style_depends(): array { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 
@@ -145,7 +145,7 @@ class Widget_Benefits_V2 extends Widget_Base {
 		$this->add_control( 'body_bg', [
 			'label'     => 'Background',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#2A4F41',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bnv2-body-bg: {{VALUE}};' ],
 		] );
 		$this->add_control( 'image_size', [
@@ -164,7 +164,7 @@ class Widget_Benefits_V2 extends Widget_Base {
 		$this->add_control( 'title_color', [
 			'label'     => 'Color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bnv2-title: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -186,7 +186,7 @@ class Widget_Benefits_V2 extends Widget_Base {
 		$this->add_control( 'item_heading_color', [
 			'label'     => 'Color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bnv2-heading: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -208,7 +208,7 @@ class Widget_Benefits_V2 extends Widget_Base {
 		$this->add_control( 'item_text_color', [
 			'label'     => 'Color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-bnv2-text: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [

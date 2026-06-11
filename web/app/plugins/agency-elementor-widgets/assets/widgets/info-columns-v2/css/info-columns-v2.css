@@ -1,5 +1,5 @@
 /**
- * Info Columns V2 — Notched
+ * Info Columns V2
  * Dark banded section: centered section heading, a 3-up grid of columns
  * (rounded image + Teko title + paragraph) and a single centered CTA below.
  * Desktop = 3-up; tablet = 2-up; mobile = 1-up.
@@ -29,22 +29,22 @@
 /* Scoped to .aew-infc so they don't leak into other widgets. Source of truth
    is design-system.md. Update there first; copy here second. */
 .aew-infc {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards:   var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent:  var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
 }
 
 /* ── Outer block (full-bleed dark band) ──────────────────────────────────── */
 .aew-infc {
   width: 100%;
-  background-color: var(--aew-infc-bg, var(--notched-secondary-bg));
+  background-color: var(--aew-infc-bg, var(--aew-secondary-bg));
 }
 
 .aew-infc *,
@@ -75,7 +75,7 @@
   text-transform: uppercase;
   letter-spacing: 0.01em;
   text-align: center;
-  color: var(--aew-infc-heading, var(--notched-background));
+  color: var(--aew-infc-heading, var(--aew-background));
 }
 
 /* ── Grid ────────────────────────────────────────────────────────────────── */
@@ -94,7 +94,7 @@
 /* No-image card: a self-contained padded colour box (e.g. contact cards).
    width/radius/padding are editor-controllable. Default centred in its column. */
 .aew-infc__col--noimg {
-  background-color: var(--aew-infc-card-bg, var(--notched-secondary-cards));
+  background-color: var(--aew-infc-card-bg, var(--aew-secondary-cards));
   border-radius: 16px;
   padding: 40px;
   width: 100%;
@@ -114,7 +114,7 @@
 
 /* Links inside the column text (phone / email). Default to the text colour. */
 .aew-infc__col-text a {
-  color: var(--aew-infc-link, var(--aew-infc-text, var(--notched-background)));
+  color: var(--aew-infc-link, var(--aew-infc-text, var(--aew-background)));
   text-decoration: underline;
 }
 
@@ -129,7 +129,7 @@
 }
 
 .aew-infc__media--empty {
-  background-color: var(--notched-secondary-cards);
+  background-color: var(--aew-secondary-cards);
 }
 
 /* ── Column title ────────────────────────────────────────────────────────── */
@@ -141,7 +141,7 @@
   line-height: 100%;
   text-transform: uppercase;
   letter-spacing: 0.01em;
-  color: var(--aew-infc-title, var(--notched-cta));
+  color: var(--aew-infc-title, var(--aew-cta));
 }
 
 /* ── Column text ─────────────────────────────────────────────────────────── */
@@ -151,7 +151,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 140%;
-  color: var(--aew-infc-text, var(--notched-background));
+  color: var(--aew-infc-text, var(--aew-background));
 }
 
 /* ── CTA ─────────────────────────────────────────────────────────────────── */
@@ -174,8 +174,8 @@
   letter-spacing: 0.02em;
   text-decoration: none;
   color: var(--aew-infc-btn-text, #FFFFFF);
-  background-color: var(--aew-infc-btn-bg, var(--notched-cta));
-  border: 1px solid var(--aew-infc-btn-bg, var(--notched-cta));
+  background-color: var(--aew-infc-btn-bg, var(--aew-cta));
+  border: 1px solid var(--aew-infc-btn-bg, var(--aew-cta));
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
@@ -183,13 +183,13 @@
 
 .aew-infc__cta:hover,
 .aew-infc__cta:focus-visible {
-  background-color: var(--aew-infc-btn-bg-hover, var(--notched-cta-hover));
-  border-color: var(--aew-infc-btn-bg-hover, var(--notched-cta-hover));
+  background-color: var(--aew-infc-btn-bg-hover, var(--aew-cta-hover));
+  border-color: var(--aew-infc-btn-bg-hover, var(--aew-cta-hover));
   color: var(--aew-infc-btn-text-hover, var(--aew-infc-btn-text, #FFFFFF));
 }
 
 .aew-infc__cta:focus-visible {
-  outline: 2px solid var(--notched-background);
+  outline: 2px solid var(--aew-background);
   outline-offset: 2px;
 }
 

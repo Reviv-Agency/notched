@@ -38,7 +38,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title(): string {
-		return esc_html__( 'Gallery V2 (Notched)', 'agency-elementor-widgets' );
+		return esc_html__( 'Gallery V2', 'agency-elementor-widgets' );
 	}
 
 	/**
@@ -59,7 +59,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 	 * @return array<int, string>
 	 */
 	public function get_keywords(): array {
-		return [ 'gallery', 'grid', 'images', 'infinite scroll', 'notched' ];
+		return [ 'gallery', 'grid', 'images', 'infinite scroll' ];
 	}
 
 	/**
@@ -343,7 +343,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background color', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#F6F0EC',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-galv2-bg: {{VALUE}};',
 				],
@@ -355,7 +355,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Heading color', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#141C19',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-galv2-heading: {{VALUE}};',
 				],
@@ -367,7 +367,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Eyebrow color', 'agency-elementor-widgets' ),
 				'type'      => Controls_Manager::COLOR,
-				'default'   => '#876137',
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}}' => '--aew-galv2-eyebrow: {{VALUE}};',
 				],

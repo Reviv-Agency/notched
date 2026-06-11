@@ -9,7 +9,7 @@
  * "colour shows in the editor, not on the live page" bug. The reliable fix is
  * for each widget's render() to emit the resolved value as an inline CSS var on
  * the wrapper:
- *   - plain hex  → emit the hex verbatim (e.g. `#876137`)
+ *   - plain hex  → emit the hex verbatim (e.g. `#888888`)
  *   - global     → emit `var(--e-global-color-<id>)`, which the active kit's
  *                  stylesheet defines site-wide (and which Elementor keeps in
  *                  the kit CSS even when it drops the per-widget rule).
@@ -38,7 +38,7 @@ final class Color_Vars {
 	 * @param Widget_Base          $widget The widget (for raw __globals__ access).
 	 * @param array<string, mixed> $settings get_settings_for_display() output.
 	 * @param array<string, string> $map      setting_key => css_var_name.
-	 * @return string e.g. `--aew-x-bg:var(--e-global-color-notched-cards);--aew-x-text:#FFF;`
+	 * @return string e.g. `--aew-x-bg:var(--e-global-color-aew-cards);--aew-x-text:#FFF;`
 	 */
 	public static function build( Widget_Base $widget, array $settings, array $map ): string {
 		$globals = [];
@@ -81,7 +81,7 @@ final class Color_Vars {
 
 	/**
 	 * Pull the colour id out of a global ref like
-	 * `globals/colors?id=notched-cards` → `notched-cards`.
+	 * `globals/colors?id=aew-cards` → `aew-cards`.
 	 *
 	 * @param string $ref Global reference string.
 	 * @return string Sanitised id, or ''.

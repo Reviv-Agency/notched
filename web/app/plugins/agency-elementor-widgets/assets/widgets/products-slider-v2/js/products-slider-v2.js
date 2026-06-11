@@ -1,5 +1,5 @@
 /**
- * Products Slider V2 — Notched.
+ * Products Slider V2
  *
  * Drives a native scroll-snap track: prev/next arrows page by the visible
  * width, dot pagination reflects the closest slide, and arrows disable at the

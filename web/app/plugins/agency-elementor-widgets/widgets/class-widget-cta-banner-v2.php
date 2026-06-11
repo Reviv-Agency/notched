@@ -1,6 +1,6 @@
 <?php
 /**
- * CTA Banner V2 — Notched brand.
+ * CTA Banner V2 — [Company] brand.
  *
  * A centered call-to-action banner inside a large rounded card sitting on the
  * light page background: eyebrow + Teko headline + description + single CTA
@@ -27,10 +27,10 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'cta-banner-v2';
 
 	public function get_name(): string      { return 'agency-cta-banner-v2'; }
-	public function get_title(): string     { return esc_html__( 'CTA Banner V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'CTA Banner V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-call-to-action'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'cta', 'banner', 'call to action', 'notched', 'consultation' ]; }
+	public function get_keywords(): array   { return [ 'cta', 'banner', 'call to action', 'consultation' ]; }
 
 	public function get_style_depends(): array { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 
@@ -184,7 +184,7 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 		$this->add_control( 'page_bg', [
 			'label'     => esc_html__( 'Page background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-page-bg: {{VALUE}};' ],
 		] );
 
@@ -245,7 +245,7 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 		$this->add_control( 'eyebrow_color', [
 			'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#2A4F41',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-eyebrow: {{VALUE}};' ],
 		] );
 
@@ -270,7 +270,7 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 		$this->add_control( 'headline_color', [
 			'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#2A4F41',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-headline: {{VALUE}};' ],
 		] );
 
@@ -295,7 +295,7 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 		$this->add_control( 'description_color', [
 			'label'     => esc_html__( 'Color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-description: {{VALUE}};' ],
 		] );
 
@@ -324,7 +324,7 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 		$this->add_control( 'btn_bg', [
 			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-btn-bg: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn_text', [
@@ -336,7 +336,7 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 		$this->add_control( 'btn_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#6E4F2D',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-btn-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn_text_hover', [
@@ -364,13 +364,13 @@ class Widget_Cta_Banner_V2 extends Widget_Base {
 		$this->add_control( 'btn2_text', [
 			'label'     => esc_html__( 'Text / border color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#6E4F2D',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-btn2-text: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn2_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#6E4F2D',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-ctab-btn2-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn2_text_hover', [

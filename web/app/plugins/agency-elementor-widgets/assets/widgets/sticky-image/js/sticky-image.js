@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════════════════════
-   Sticky Image (Notched) — agency-sticky-image
+   Sticky Image — agency-sticky-image
    Two jobs:
    1. Fixed mode: Elementor often wraps widgets in containers that have a CSS
       `transform` (entrance animations, motion effects), which makes

@@ -1,5 +1,5 @@
 /**
- * Welcome V2 — Notched
+ * Welcome V2
  * Two-column intro band: eyebrow + Teko heading (left), body + signature +
  * CTA buttons (right). Full-bleed dark-green background owned by the widget.
  */
@@ -31,22 +31,22 @@
 /* Scoped to .aew-welc so they don't leak into other widgets. Source of truth
    is design-system.md. Update there first; copy here second. */
 .aew-welc {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards:   var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent:  var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
 }
 
 /* ── Outer block (full-bleed) ────────────────────────────────────────────── */
 /* Design-system width model: X gutter on the outer block; inner caps at 1440. */
 .aew-welc {
-  background: var(--aew-welc-bg, var(--notched-secondary-accent));
+  background: var(--aew-welc-bg, var(--aew-secondary-accent));
   width: 100%;
   position: relative;
   padding-left: 40px;
@@ -82,7 +82,7 @@
 .aew-welc__eyebrow {
   margin: 0 0 8px;
   padding: 0;
-  color: var(--aew-welc-eyebrow, var(--notched-cta));
+  color: var(--aew-welc-eyebrow, var(--aew-cta));
   /* Subhead / eyebrow font per design system: Playfair Display Bold. */
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 700;
@@ -98,7 +98,7 @@
 .aew-welc .aew-welc__heading {
   margin: 0;
   padding: 0;
-  color: var(--aew-welc-heading, var(--notched-cta));
+  color: var(--aew-welc-heading, var(--aew-cta));
   font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 80px;
@@ -127,7 +127,7 @@
 .aew-welc__signature {
   margin: 28px 0 0;
   padding: 0;
-  color: var(--aew-welc-signature, var(--notched-cta));
+  color: var(--aew-welc-signature, var(--aew-cta));
   font-family: 'Dancing Script', 'Brush Script MT', cursive;
   font-weight: 700;
   font-size: 34px;
@@ -154,8 +154,8 @@
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  background-color: var(--aew-welc-btn-bg, var(--notched-background));
-  color: var(--aew-welc-btn-text, var(--notched-cta-hover));
+  background-color: var(--aew-welc-btn-bg, var(--aew-background));
+  color: var(--aew-welc-btn-text, var(--aew-cta-hover));
   font-family: var(--aew-teko);
   font-weight: 600;
   font-size: 20px;
@@ -170,7 +170,7 @@
 
 .aew-welc__btn:hover,
 .aew-welc__btn:focus-visible {
-  background-color: var(--aew-welc-btn-bg-hover, var(--notched-cta));
+  background-color: var(--aew-welc-btn-bg-hover, var(--aew-cta));
   color: var(--aew-welc-btn-text-hover, #FFFFFF);
 }
 

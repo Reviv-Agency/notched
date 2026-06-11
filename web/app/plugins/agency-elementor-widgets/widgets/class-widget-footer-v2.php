@@ -1,6 +1,6 @@
 <?php
 /**
- * Footer V2 — Notched brand.
+ * Footer V2 — [Company] brand.
  *
  * Matches Wix original: forest hero band, dark green body with
  * logo + MENU + QUICK LINKS + ADDRESS/CONTACT columns, bottom bar
@@ -23,10 +23,10 @@ class Widget_Footer_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'footer-v2';
 
 	public function get_name(): string      { return 'agency-footer-v2'; }
-	public function get_title(): string     { return esc_html__( 'Footer V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Footer V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-footer'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'footer', 'notched', 'menu', 'contact' ]; }
+	public function get_keywords(): array   { return [ 'footer', 'menu', 'contact' ]; }
 
 	public function get_style_depends(): array  { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 	public function get_script_depends(): array { return [ Widget_Assets::handle( self::ASSET_SLUG ) ]; }
@@ -195,7 +195,7 @@ class Widget_Footer_V2 extends Widget_Base {
 		$this->add_control( 'email_address', [
 			'label'   => 'Email',
 			'type'    => Controls_Manager::TEXT,
-			'default' => 'hello@notched.com',
+			'default' => 'hello@example.com',
 		] );
 		$this->end_controls_section();
 	}
@@ -205,7 +205,7 @@ class Widget_Footer_V2 extends Widget_Base {
 		$this->add_control( 'copyright', [
 			'label'   => 'Copyright text',
 			'type'    => Controls_Manager::TEXT,
-			'default' => '© ' . gmdate( 'Y' ) . ' Notched Timber. All rights reserved.',
+			'default' => '© ' . gmdate( 'Y' ) . ' [Company] Timber. All rights reserved.',
 		] );
 		$rep = new Repeater();
 		$rep->add_control( 'label', [ 'label' => 'Label', 'type' => Controls_Manager::TEXT, 'default' => 'Link' ] );
@@ -231,7 +231,7 @@ class Widget_Footer_V2 extends Widget_Base {
 		$this->add_control( 'body_bg', [
 			'label'   => 'Background',
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#093328',
+			'default' => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fov2-body-bg: {{VALUE}};' ],
 		] );
 		$this->add_responsive_control( 'body_max_w', [
@@ -275,7 +275,7 @@ class Widget_Footer_V2 extends Widget_Base {
 		$this->add_control( 'heading_color', [
 			'label'   => 'Color',
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#CDB797',
+			'default' => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fov2-heading: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -297,13 +297,13 @@ class Widget_Footer_V2 extends Widget_Base {
 		$this->add_control( 'link_color', [
 			'label'   => 'Color',
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#CDB797',
+			'default' => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fov2-link: {{VALUE}};' ],
 		] );
 		$this->add_control( 'link_color_hover', [
 			'label'   => 'Hover color',
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#876137',
+			'default' => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fov2-link-hover: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -325,7 +325,7 @@ class Widget_Footer_V2 extends Widget_Base {
 		$this->add_control( 'address_color', [
 			'label'   => 'Color',
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#CDB797',
+			'default' => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fov2-address: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -346,7 +346,7 @@ class Widget_Footer_V2 extends Widget_Base {
 		$this->add_control( 'bottom_text_color', [
 			'label'   => 'Text color',
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#CDB797',
+			'default' => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-fov2-bottom-text: {{VALUE}};' ],
 		] );
 		$this->add_control( 'bottom_divider_color', [

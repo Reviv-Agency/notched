@@ -1,5 +1,5 @@
 /**
- * Comments V2 — Notched.
+ * Comments V2
  * Native WP comments (list + form) inside a brand card.
  */
 
@@ -17,11 +17,11 @@
 }
 
 .aew-cmv2 {
-  --notched-cards: #FFFFFF; --notched-background: #F6F0EC; --notched-lines: #BFC0BF;
-  --notched-misc-accent: #3B413F; --notched-secondary-bg: #2A4F41;
-  --notched-text: #141C19; --notched-cta: #876137; --notched-cta-hover: #6E4F2D;
+  --aew-cards: var(--e-global-color-aew-cards, #FFFFFF); --aew-background: var(--e-global-color-aew-background, #F4F4F4); --aew-lines: var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent: var(--e-global-color-aew-misc-accent, #666666); --aew-secondary-bg: var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-text: var(--e-global-color-aew-text, #1A1A1A); --aew-cta: var(--e-global-color-aew-cta, #444444); --aew-cta-hover: var(--e-global-color-aew-cta-hover, #2B2B2B);
   width: 100%;
-  background-color: var(--aew-cmv2-bg, var(--notched-background));
+  background-color: var(--aew-cmv2-bg, var(--aew-background));
   /* Design-system width model: X gutter on the outer block; inner caps at 1440. */
   padding-left: 40px; padding-right: 40px;
 }
@@ -31,15 +31,15 @@
 
 .aew-cmv2__card {
   max-width: 760px; margin: 0 auto; padding: 36px 48px;
-  background-color: var(--aew-cmv2-card-bg, var(--notched-cards));
-  border: 1px solid var(--aew-cmv2-card-border, var(--notched-lines));
+  background-color: var(--aew-cmv2-card-bg, var(--aew-cards));
+  border: 1px solid var(--aew-cmv2-card-border, var(--aew-lines));
   border-radius: 24px;
 }
 
 .aew-cmv2 .aew-cmv2__heading {
   margin: 0 0 20px;
   font-family: "Teko", sans-serif; font-weight: 600; font-size: 28px; line-height: 100%;
-  color: var(--aew-cmv2-heading, var(--notched-text));
+  color: var(--aew-cmv2-heading, var(--aew-text));
 }
 
 /* ── Comment list (native) ───────────────────────────────────────────────── */
@@ -52,8 +52,8 @@
 
 .aew-cmv2 .comment-body {
   padding: 28px 36px;
-  background-color: var(--notched-background);
-  border: 1px solid var(--aew-cmv2-field-border, var(--notched-lines));
+  background-color: var(--aew-background);
+  border: 1px solid var(--aew-cmv2-field-border, var(--aew-lines));
   border-radius: 16px;
 }
 
@@ -76,7 +76,7 @@
 }
 .aew-cmv2 .comment-author .fn {
   font-weight: 700; font-style: normal; font-size: 15px;
-  color: var(--aew-cmv2-text, var(--notched-text));
+  color: var(--aew-cmv2-text, var(--aew-text));
 }
 .aew-cmv2 .comment-author .fn a { color: inherit; text-decoration: none; }
 /* "says:" is redundant noise — hide it for a cleaner header. */
@@ -85,16 +85,16 @@
 .aew-cmv2 .comment-metadata {
   margin-left: auto;
   font-family: "Lato", sans-serif; font-size: 12px;
-  color: var(--notched-misc-accent);
+  color: var(--aew-misc-accent);
 }
-.aew-cmv2 .comment-metadata a { color: var(--notched-misc-accent); text-decoration: none; }
-.aew-cmv2 .comment-metadata a:hover { color: var(--notched-cta); }
+.aew-cmv2 .comment-metadata a { color: var(--aew-misc-accent); text-decoration: none; }
+.aew-cmv2 .comment-metadata a:hover { color: var(--aew-cta); }
 .aew-cmv2 .comment-metadata .edit-link { margin-left: 10px; }
-.aew-cmv2 .comment-metadata .edit-link a { color: var(--notched-cta); }
+.aew-cmv2 .comment-metadata .edit-link a { color: var(--aew-cta); }
 
 .aew-cmv2 .comment-content {
   font-family: "Lato", sans-serif; font-size: 15px; line-height: 1.55;
-  color: var(--aew-cmv2-text, var(--notched-text));
+  color: var(--aew-cmv2-text, var(--aew-text));
 }
 .aew-cmv2 .comment-content p { margin: 0 0 0.6em; }
 .aew-cmv2 .comment-content p:last-child { margin-bottom: 0; }
@@ -104,10 +104,10 @@
   display: inline-flex; align-items: center;
   font-family: "Teko", sans-serif; font-size: 16px; font-weight: 600;
   letter-spacing: 0.04em; text-transform: uppercase;
-  color: var(--notched-cta); text-decoration: none;
+  color: var(--aew-cta); text-decoration: none;
   transition: color 0.15s ease;
 }
-.aew-cmv2 .reply a:hover { color: var(--notched-cta-hover); }
+.aew-cmv2 .reply a:hover { color: var(--aew-cta-hover); }
 
 /* ── Comment form ────────────────────────────────────────────────────────── */
 /* The form id is #commentform; its class is aew-cmv2__form (default
@@ -123,14 +123,14 @@
 .aew-cmv2 .aew-cmv2__textarea,
 .aew-cmv2 #commentform textarea {
   width: 100%; padding: 14px 16px;
-  font-family: "Lato", sans-serif; font-size: 15px; color: var(--aew-cmv2-text, var(--notched-text));
-  background-color: var(--notched-cards);
-  border: 1px solid var(--aew-cmv2-field-border, var(--notched-lines));
+  font-family: "Lato", sans-serif; font-size: 15px; color: var(--aew-cmv2-text, var(--aew-text));
+  background-color: var(--aew-cards);
+  border: 1px solid var(--aew-cmv2-field-border, var(--aew-lines));
   border-radius: 12px; outline: none;
   transition: border-color 0.15s ease;
 }
 .aew-cmv2 #commentform input:focus,
-.aew-cmv2 #commentform textarea:focus { border-color: var(--notched-cta); }
+.aew-cmv2 #commentform textarea:focus { border-color: var(--aew-cta); }
 .aew-cmv2 .aew-cmv2__textarea { resize: vertical; min-height: 100px; }
 
 /* Name/Email fields (shown to logged-out visitors). */
@@ -140,7 +140,7 @@
 .aew-cmv2 .comment-form-cookies-consent label,
 .aew-cmv2 .comment-notes,
 .aew-cmv2 .logged-in-as {
-  font-family: "Lato", sans-serif; font-size: 13px; color: var(--notched-misc-accent);
+  font-family: "Lato", sans-serif; font-size: 13px; color: var(--aew-misc-accent);
   display: block; margin-bottom: 4px;
 }
 .aew-cmv2 .comment-form-cookies-consent { flex-direction: row; align-items: center; gap: 8px; }
@@ -153,24 +153,24 @@
   padding: 16px 28px 13px;
   font-family: "Teko", sans-serif; font-weight: 600; font-size: 18px; line-height: 85%;
   text-transform: uppercase; letter-spacing: 0.02em;
-  color: #FFFFFF; background-color: var(--aew-cmv2-btn-bg, var(--notched-cta));
+  color: #FFFFFF; background-color: var(--aew-cmv2-btn-bg, var(--aew-cta));
   border: 0; border-radius: 8px; cursor: pointer;
   transition: background-color 0.18s ease;
 }
 .aew-cmv2 .aew-cmv2__submit:hover,
 .aew-cmv2 .form-submit .submit:hover,
-.aew-cmv2 #commentform .submit:hover { background-color: var(--aew-cmv2-btn-bg-hover, var(--notched-cta-hover)); }
+.aew-cmv2 #commentform .submit:hover { background-color: var(--aew-cmv2-btn-bg-hover, var(--aew-cta-hover)); }
 
-.aew-cmv2__note { margin: 12px 0 0; font-family: "Lato", sans-serif; font-size: 13px; font-style: italic; color: var(--notched-misc-accent); }
+.aew-cmv2__note { margin: 12px 0 0; font-family: "Lato", sans-serif; font-size: 13px; font-style: italic; color: var(--aew-misc-accent); }
 
 /* AJAX submit status line. */
 .aew-cmv2 .aew-cmv2__status {
   margin: 12px 0 0;
   font-family: "Lato", sans-serif; font-size: 14px;
-  color: var(--notched-misc-accent);
+  color: var(--aew-misc-accent);
 }
 .aew-cmv2 .aew-cmv2__status[hidden] { display: none; }
-.aew-cmv2 .aew-cmv2__status--ok { color: var(--notched-secondary-bg); font-weight: 700; }
+.aew-cmv2 .aew-cmv2__status--ok { color: var(--aew-secondary-bg); font-weight: 700; }
 .aew-cmv2 .aew-cmv2__status--error { color: #B23B36; }
 
 /* Freshly-injected comment fades in. */
@@ -189,9 +189,9 @@
 #comments.aew-cmv2__card .pingback .comment-body {
   display: block;                       /* theme forces flex-column */
   border-block-end: 0;                  /* drop the theme's divider line */
-  border: 1px solid var(--aew-cmv2-field-border, var(--notched-lines));
+  border: 1px solid var(--aew-cmv2-field-border, var(--aew-lines));
   border-radius: 16px;
-  background-color: var(--notched-background);
+  background-color: var(--aew-background);
   padding: 50px 36px;                   /* 50px top/bottom as requested */
 }
 

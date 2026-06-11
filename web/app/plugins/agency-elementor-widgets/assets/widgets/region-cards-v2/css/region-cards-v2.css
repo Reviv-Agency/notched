@@ -1,5 +1,5 @@
 /**
- * Region Cards V2 — Notched
+ * Region Cards V2
  * Row of image panels, each with a floating copy card (heading + paragraph +
  * CTA) overlaid on the background image.
  * Desktop = N-up grid, card centered over the image with an adjustable inset.
@@ -30,22 +30,22 @@
 /* Scoped to .aew-rgcv2 so they don't leak into other widgets. Source of truth
    is design-system.md. Update there first; copy here second. */
 .aew-rgcv2 {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards:   var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent:  var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
 }
 
 /* ── Outer block (full-bleed background) ─────────────────────────────────── */
 .aew-rgcv2 {
   width: 100%;
-  background-color: var(--notched-background);
+  background-color: var(--aew-background);
 }
 
 .aew-rgcv2 *,
@@ -125,7 +125,7 @@
   margin: 0 0 var(--aew-rgcv2-inset, 40px);
   padding: 48px 40px;
   text-align: center;
-  background-color: var(--aew-rgcv2-card-bg, var(--notched-background));
+  background-color: var(--aew-rgcv2-card-bg, var(--aew-background));
   border-radius: 24px;
 }
 
@@ -140,14 +140,14 @@
   line-height: 85%;
   text-transform: uppercase;
   letter-spacing: 0.01em;
-  color: var(--aew-rgcv2-title, var(--notched-secondary-bg));
+  color: var(--aew-rgcv2-title, var(--aew-secondary-bg));
 }
 
 /* Optional two-colour heading: the accent substring is wrapped in this span and
    takes the second colour. Inherits all type styles from the title. (0,2,0)
    beats the kit so the colour holds. */
 .aew-rgcv2 .aew-rgcv2__title-accent {
-  color: var(--aew-rgcv2-title-accent, var(--notched-secondary-bg));
+  color: var(--aew-rgcv2-title-accent, var(--aew-secondary-bg));
 }
 
 /* ── Paragraph ───────────────────────────────────────────────────────────── */
@@ -157,7 +157,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 140%;
-  color: var(--aew-rgcv2-text, var(--notched-text));
+  color: var(--aew-rgcv2-text, var(--aew-text));
 }
 
 /* ── CTA button ──────────────────────────────────────────────────────────── */
@@ -175,8 +175,8 @@
   letter-spacing: 0.02em;
   text-decoration: none;
   color: var(--aew-rgcv2-btn-text, #FFFFFF);
-  background-color: var(--aew-rgcv2-btn-bg, var(--notched-cta));
-  border: 1px solid var(--aew-rgcv2-btn-bg, var(--notched-cta));
+  background-color: var(--aew-rgcv2-btn-bg, var(--aew-cta));
+  border: 1px solid var(--aew-rgcv2-btn-bg, var(--aew-cta));
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease;
@@ -184,13 +184,13 @@
 
 .aew-rgcv2__btn:hover,
 .aew-rgcv2__btn:focus-visible {
-  background-color: var(--aew-rgcv2-btn-bg-hover, var(--notched-cta-hover));
-  border-color: var(--aew-rgcv2-btn-bg-hover, var(--notched-cta-hover));
+  background-color: var(--aew-rgcv2-btn-bg-hover, var(--aew-cta-hover));
+  border-color: var(--aew-rgcv2-btn-bg-hover, var(--aew-cta-hover));
   color: var(--aew-rgcv2-btn-text-hover, var(--aew-rgcv2-btn-text, #FFFFFF));
 }
 
 .aew-rgcv2__btn:focus-visible {
-  outline: 2px solid var(--notched-secondary-bg);
+  outline: 2px solid var(--aew-secondary-bg);
   outline-offset: 2px;
 }
 

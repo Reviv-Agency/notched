@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Header V2 — Notched brand.
+ * Header V2 — [Company] brand.
  *
  * Right-side layout (matches Wix original):
  *   Account icon | Cart icon (live count) | Phone | SHOP KITS (arrow) | Hamburger
@@ -29,7 +29,7 @@ class Widget_Header_V2 extends Widget_Base
 	}
 	public function get_title(): string
 	{
-		return esc_html__('Header V2 (Notched)', 'agency-elementor-widgets');
+		return esc_html__('Header V2', 'agency-elementor-widgets');
 	}
 	public function get_icon(): string
 	{
@@ -41,7 +41,7 @@ class Widget_Header_V2 extends Widget_Base
 	}
 	public function get_keywords(): array
 	{
-		return ['header', 'navigation', 'menu', 'logo', 'notched'];
+		return ['header', 'navigation', 'menu', 'logo'];
 	}
 
 	public function get_style_depends(): array
@@ -148,7 +148,7 @@ class Widget_Header_V2 extends Widget_Base
 	private function style_bar(): void
 	{
 		$this->start_controls_section('ss_bar', ['label' => 'Bar', 'tab' => Controls_Manager::TAB_STYLE]);
-		$this->add_control('bar_bg',     ['label' => 'Background', 'type' => Controls_Manager::COLOR, 'default' => '#141C19', 'selectors' => ['{{WRAPPER}} .aew-hv2__bar' => 'background-color: {{VALUE}};']]);
+		$this->add_control('bar_bg',     ['label' => 'Background', 'type' => Controls_Manager::COLOR, 'default' => '', 'selectors' => ['{{WRAPPER}} .aew-hv2__bar' => 'background-color: {{VALUE}};']]);
 		$this->add_control('bar_height', ['label' => 'Height', 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'range' => ['px' => ['min' => 48, 'max' => 120]], 'default' => ['unit' => 'px', 'size' => 64], 'selectors' => [
 			'{{WRAPPER}} .aew-hv2__bar-inner' => 'min-height: {{SIZE}}{{UNIT}};',
 			'{{WRAPPER}} .aew-hv2'            => '--aew-hv2-bar-h: {{SIZE}}{{UNIT}};',
@@ -160,7 +160,7 @@ class Widget_Header_V2 extends Widget_Base
 	private function style_phone(): void
 	{
 		$this->start_controls_section('ss_phone', ['label' => 'Phone', 'tab' => Controls_Manager::TAB_STYLE]);
-		$this->add_control('phone_color', ['label' => 'Color', 'type' => Controls_Manager::COLOR, 'default' => '#F6F0EC', 'selectors' => ['{{WRAPPER}} .aew-hv2__phone' => 'color: {{VALUE}};']]);
+		$this->add_control('phone_color', ['label' => 'Color', 'type' => Controls_Manager::COLOR, 'default' => '', 'selectors' => ['{{WRAPPER}} .aew-hv2__phone' => 'color: {{VALUE}};']]);
 		$this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'phone_typo', 'selector' => '{{WRAPPER}} .aew-hv2__phone', 'fields_options' => ['font_family' => ['default' => 'Lato'], 'font_weight' => ['default' => '700'], 'font_size'   => ['default' => ['unit' => 'px', 'size' => 16]]]]);
 		$this->end_controls_section();
 	}
@@ -168,8 +168,8 @@ class Widget_Header_V2 extends Widget_Base
 	private function style_cta(): void
 	{
 		$this->start_controls_section('ss_cta', ['label' => 'CTA Button', 'tab' => Controls_Manager::TAB_STYLE]);
-		$this->add_control('cta_bg',       ['label' => 'Background', 'type' => Controls_Manager::COLOR, 'default' => '#6E4F2D', 'selectors' => ['{{WRAPPER}} .aew-hv2__cta' => 'background-color: {{VALUE}};']]);
-		$this->add_control('cta_bg_hover', ['label' => 'Hover background', 'type' => Controls_Manager::COLOR, 'default' => '#876137', 'selectors' => ['{{WRAPPER}} .aew-hv2__cta:hover' => 'background-color: {{VALUE}};']]);
+		$this->add_control('cta_bg',       ['label' => 'Background', 'type' => Controls_Manager::COLOR, 'default' => '', 'selectors' => ['{{WRAPPER}} .aew-hv2__cta' => 'background-color: {{VALUE}};']]);
+		$this->add_control('cta_bg_hover', ['label' => 'Hover background', 'type' => Controls_Manager::COLOR, 'default' => '', 'selectors' => ['{{WRAPPER}} .aew-hv2__cta:hover' => 'background-color: {{VALUE}};']]);
 		$this->add_control('cta_color',    ['label' => 'Text color', 'type' => Controls_Manager::COLOR, 'default' => '#FFFFFF', 'selectors' => ['{{WRAPPER}} .aew-hv2__cta' => 'color: {{VALUE}};']]);
 		$this->add_control('cta_color_hover', ['label' => 'Hover text color', 'type' => Controls_Manager::COLOR, 'default' => '#FFFFFF', 'selectors' => ['{{WRAPPER}} .aew-hv2__cta:hover' => 'color: {{VALUE}};', '{{WRAPPER}} .aew-hv2__cta:focus-visible' => 'color: {{VALUE}};']]);
 		$this->add_control('cta_radius',   ['label' => 'Border radius', 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'default' => ['unit' => 'px', 'size' => 6], 'selectors' => ['{{WRAPPER}} .aew-hv2__cta' => 'border-radius: {{SIZE}}{{UNIT}};']]);
@@ -180,7 +180,7 @@ class Widget_Header_V2 extends Widget_Base
 	private function style_icons(): void
 	{
 		$this->start_controls_section('ss_icons', ['label' => 'Icons', 'tab' => Controls_Manager::TAB_STYLE]);
-		$this->add_control('icon_color',      ['label' => 'Icon color', 'type' => Controls_Manager::COLOR, 'default' => '#F6F0EC', 'selectors' => ['{{WRAPPER}} .aew-hv2__icon' => 'color: {{VALUE}};', '{{WRAPPER}} .aew-hv2__toggle' => 'color: {{VALUE}};']]);
+		$this->add_control('icon_color',      ['label' => 'Icon color', 'type' => Controls_Manager::COLOR, 'default' => '', 'selectors' => ['{{WRAPPER}} .aew-hv2__icon' => 'color: {{VALUE}};', '{{WRAPPER}} .aew-hv2__toggle' => 'color: {{VALUE}};']]);
 		$this->add_control('icon_size',       ['label' => 'Icon size', 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'default' => ['unit' => 'px', 'size' => 22], 'selectors' => ['{{WRAPPER}} .aew-hv2__icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};']]);
 		$this->end_controls_section();
 	}
@@ -188,9 +188,9 @@ class Widget_Header_V2 extends Widget_Base
 	private function style_drawer(): void
 	{
 		$this->start_controls_section('ss_drawer', ['label' => 'Drawer', 'tab' => Controls_Manager::TAB_STYLE]);
-		$this->add_control('drawer_bg',          ['label' => 'Background', 'type' => Controls_Manager::COLOR, 'default' => '#141C19', 'selectors' => ['{{WRAPPER}} .aew-hv2__drawer' => 'background-color: {{VALUE}};']]);
-		$this->add_control('drawer_parent_color', ['label' => 'Parent link color', 'type' => Controls_Manager::COLOR, 'default' => '#F6F0EC', 'selectors' => ['{{WRAPPER}} .aew-hv2__drawer-list .is-parent > a' => 'color: {{VALUE}};']]);
-		$this->add_control('drawer_child_color',  ['label' => 'Child link color', 'type' => Controls_Manager::COLOR, 'default' => '#BFC0BF', 'selectors' => ['{{WRAPPER}} .aew-hv2__drawer-list .is-child > a' => 'color: {{VALUE}};']]);
+		$this->add_control('drawer_bg',          ['label' => 'Background', 'type' => Controls_Manager::COLOR, 'default' => '', 'selectors' => ['{{WRAPPER}} .aew-hv2__drawer' => 'background-color: {{VALUE}};']]);
+		$this->add_control('drawer_parent_color', ['label' => 'Parent link color', 'type' => Controls_Manager::COLOR, 'default' => '', 'selectors' => ['{{WRAPPER}} .aew-hv2__drawer-list .is-parent > a' => 'color: {{VALUE}};']]);
+		$this->add_control('drawer_child_color',  ['label' => 'Child link color', 'type' => Controls_Manager::COLOR, 'default' => '', 'selectors' => ['{{WRAPPER}} .aew-hv2__drawer-list .is-child > a' => 'color: {{VALUE}};']]);
 		$this->end_controls_section();
 	}
 

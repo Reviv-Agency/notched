@@ -25,7 +25,7 @@ class Widget_Quote_Band extends Widget_Base {
 	private const ASSET_SLUG = 'quote-band';
 
 	public function get_name(): string { return 'agency-quote-band'; }
-	public function get_title(): string { return esc_html__( 'Quote Band (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string { return esc_html__( 'Quote Band', 'agency-elementor-widgets' ); }
 	public function get_icon(): string { return 'eicon-call-to-action'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
 	public function get_style_depends(): array { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
@@ -78,14 +78,14 @@ class Widget_Quote_Band extends Widget_Base {
 		$this->add_control( 'band_bg', [
 			'label'   => esc_html__( 'Band background', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#876137',
+			'default' => '',
 			'selectors' => [ '{{WRAPPER}} .aew-qb' => '--aew-qb-bg: {{VALUE}};' ],
 		] );
 
 		$this->add_control( 'heading_color', [
 			'label'   => esc_html__( 'Heading colour', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#F6F0EC',
+			'default' => '',
 			'selectors' => [ '{{WRAPPER}} .aew-qb' => '--aew-qb-heading: {{VALUE}};' ],
 		] );
 
@@ -97,7 +97,7 @@ class Widget_Quote_Band extends Widget_Base {
 		$this->add_control( 'btn_text_color', [
 			'label'   => esc_html__( 'Button text', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#876137',
+			'default' => '',
 			'selectors' => [ '{{WRAPPER}} .aew-qb' => '--aew-qb-btn-text: {{VALUE}};' ],
 		] );
 
@@ -118,7 +118,7 @@ class Widget_Quote_Band extends Widget_Base {
 		$this->add_control( 'btn_bg_hover', [
 			'label'   => esc_html__( 'Button background (hover)', 'agency-elementor-widgets' ),
 			'type'    => Controls_Manager::COLOR,
-			'default' => '#6E4F2D',
+			'default' => '',
 			'selectors' => [ '{{WRAPPER}} .aew-qb' => '--aew-qb-btn-bg-hover: {{VALUE}};' ],
 		] );
 

@@ -33,7 +33,7 @@
   transform: translateY(-50%);
   width: 46%;
   max-width: 600px;
-  background: var(--aew-bcard-card-bg, var(--notched-background, #F6F0EC));
+  background: var(--aew-bcard-card-bg, var(--aew-background, #F4F4F4));
   border-radius: 16px;
   padding: 56px;
   box-shadow: 0 24px 60px rgba(20, 28, 25, 0.12);
@@ -46,7 +46,7 @@
 .aew-bcard .aew-bcard__heading {
   margin: 0 0 20px;
   padding: 0;
-  color: var(--aew-bcard-heading, var(--notched-text, #141C19));
+  color: var(--aew-bcard-heading, var(--aew-text, #1A1A1A));
   font-family: var(--aew-font-heading, 'Teko', sans-serif);
   font-weight: 600;
   font-size: 48px;
@@ -56,7 +56,7 @@
 
 .aew-bcard__body {
   margin: 0 0 28px;
-  color: var(--aew-bcard-text, var(--notched-text, #141C19));
+  color: var(--aew-bcard-text, var(--aew-text, #1A1A1A));
   font-family: var(--aew-font-body, 'Lato', sans-serif);
   font-size: 16px;
   line-height: 150%;
@@ -70,8 +70,8 @@
   align-items: center;
   gap: 10px;
   padding: 16px 28px 14px;
-  background: var(--aew-bcard-btn-bg, var(--notched-cta, #876137));
-  color: var(--aew-bcard-btn-text, var(--notched-background, #F6F0EC));
+  background: var(--aew-bcard-btn-bg, var(--aew-cta, #444444));
+  color: var(--aew-bcard-btn-text, var(--aew-background, #F4F4F4));
   border-radius: 6px;
   font-family: var(--aew-font-heading, 'Teko', sans-serif);
   font-weight: 600;
@@ -82,7 +82,7 @@
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.aew-bcard__btn:hover { background: var(--notched-cta-hover, #6E4F2D); transform: translateY(-1px); }
+.aew-bcard__btn:hover { background: var(--aew-cta-hover, #2B2B2B); transform: translateY(-1px); }
 .aew-bcard__btn-arrow { flex: none; }
 
 /* ── Tablet ── */

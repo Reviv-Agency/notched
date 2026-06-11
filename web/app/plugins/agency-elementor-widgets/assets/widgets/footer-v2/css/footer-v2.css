@@ -1,5 +1,5 @@
 /**
- * Footer V2 — Notched
+ * Footer V2
  * Forest hero band + dark green body (logo + MENU + QUICK LINKS + ADDRESS/CONTACT)
  * + bottom bar (copyright + legal links).
  */
@@ -30,17 +30,17 @@
 /* Scoped to .aew-fov2 so they don't leak into other widgets. Source of truth
    is design-system.md. Update there first; copy here second. */
 .aew-fov2 {
-  --notched-cards:             #FFFFFF;
-  --notched-background:        #F6F0EC;
-  --notched-lines:             #BFC0BF;
-  --notched-misc-accent:       #3B413F;
-  --notched-secondary-cards:   #7D958D;
-  --notched-secondary-bg:      #2A4F41;
-  --notched-secondary-accent:  #093328;
-  --notched-text:              #141C19;
-  --notched-cta:               #876137;
-  --notched-cta-hover:         #6E4F2D;
-  --notched-gold-light:        #CDB797;   /* Light Gold — footer text */
+  --aew-cards:             var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:        var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:             var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-misc-accent:       var(--e-global-color-aew-misc-accent, #666666);
+  --aew-secondary-cards:   var(--e-global-color-aew-secondary-cards, #EEEEEE);
+  --aew-secondary-bg:      var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-secondary-accent:  var(--e-global-color-aew-secondary-accent, #555555);
+  --aew-text:              var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:               var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:         var(--e-global-color-aew-cta-hover, #2B2B2B);
+  --aew-gold-light:        var(--e-global-color-aew-gold-light, #BBBBBB);   /* Light Gold — footer text */
 }
 
 /* ── Outer block ─────────────────────────────────────────────────────────── */
@@ -48,10 +48,10 @@
    edge, so the X gutter lives on the INNER wrapper (not the outer block — that
    would inset the hero). Inner caps at 1440 with the design-system gutter. */
 .aew-fov2 {
-  background: var(--aew-fov2-body-bg, var(--notched-secondary-accent));
+  background: var(--aew-fov2-body-bg, var(--aew-secondary-accent));
   width: 100%;
   position: relative;
-  color: var(--notched-cta);
+  color: var(--aew-cta);
   box-sizing: border-box;
 }
 
@@ -67,7 +67,7 @@
   height: 1200px;
   overflow: hidden;
   line-height: 0;
-  background-color: var(--notched-background);
+  background-color: var(--aew-background);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: calc(var(--aew-fov2-pan, 0.5) * 100%) 75%;
@@ -154,7 +154,7 @@
 .aew-fov2 .aew-fov2__heading {
   margin: 0;
   padding: 0;
-  color: var(--aew-fov2-heading, var(--notched-gold-light));
+  color: var(--aew-fov2-heading, var(--aew-gold-light));
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 700;
   font-size: 30px;
@@ -185,7 +185,7 @@
 
 .aew-fov2__link {
   display: inline-block;
-  color: var(--aew-fov2-link, var(--notched-gold-light));
+  color: var(--aew-fov2-link, var(--aew-gold-light));
   text-decoration: none;
   font-family: var(--aew-teko);
   font-weight: 600;
@@ -198,7 +198,7 @@
 
 .aew-fov2__link:hover,
 .aew-fov2__link:focus-visible {
-  color: var(--aew-fov2-link-hover, var(--notched-cta));
+  color: var(--aew-fov2-link-hover, var(--aew-cta));
 }
 
 /* ── Address + Contact text ──────────────────────────────────────────────── */
@@ -206,7 +206,7 @@
   margin: 0;
   padding: 0;
   font-style: normal;
-  color: var(--aew-fov2-address, var(--notched-gold-light));
+  color: var(--aew-fov2-address, var(--aew-gold-light));
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -222,7 +222,7 @@
 
 .aew-fov2__phone a,
 .aew-fov2__email a {
-  color: var(--aew-fov2-link, var(--notched-gold-light));
+  color: var(--aew-fov2-link, var(--aew-gold-light));
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
@@ -236,7 +236,7 @@
 .aew-fov2__email a:hover,
 .aew-fov2__phone a:focus-visible,
 .aew-fov2__email a:focus-visible {
-  color: var(--aew-fov2-link-hover, var(--notched-cta));
+  color: var(--aew-fov2-link-hover, var(--aew-cta));
 }
 
 /* ── Bottom bar ──────────────────────────────────────────────────────────── */
@@ -257,7 +257,7 @@
 .aew-fov2__copyright {
   margin: 0;
   padding: 0;
-  color: var(--aew-fov2-bottom-text, var(--notched-gold-light));
+  color: var(--aew-fov2-bottom-text, var(--aew-gold-light));
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -274,7 +274,7 @@
 }
 
 .aew-fov2__legal a {
-  color: var(--aew-fov2-bottom-text, var(--notched-gold-light));
+  color: var(--aew-fov2-bottom-text, var(--aew-gold-light));
   text-decoration: none;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
@@ -285,7 +285,7 @@
 
 .aew-fov2__legal a:hover,
 .aew-fov2__legal a:focus-visible {
-  color: var(--notched-cta-hover);
+  color: var(--aew-cta-hover);
 }
 
 /* ── Responsive: tablet / small desktop ──────────────────────────────────── */

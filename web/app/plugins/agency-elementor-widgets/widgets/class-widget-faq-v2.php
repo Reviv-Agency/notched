@@ -1,6 +1,6 @@
 <?php
 /**
- * FAQ V2 — Notched brand.
+ * FAQ V2 — [Company] brand.
  *
  * Matches the Wix "Questions Customers Ask" layout:
  *   - Title + search box ("Looking for something?")
@@ -27,10 +27,10 @@ class Widget_Faq_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'faq-v2';
 
 	public function get_name(): string      { return 'agency-faq-v2'; }
-	public function get_title(): string     { return esc_html__( 'FAQ V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'FAQ V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-accordion'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'faq', 'questions', 'accordion', 'search', 'notched' ]; }
+	public function get_keywords(): array   { return [ 'faq', 'questions', 'accordion', 'search' ]; }
 
 	public function get_style_depends(): array  { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 	public function get_script_depends(): array { return [ Widget_Assets::handle( self::ASSET_SLUG ) ]; }
@@ -183,7 +183,7 @@ class Widget_Faq_V2 extends Widget_Base {
 		$this->add_control( 'body_bg', [
 			'label'     => 'Outer background',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'description' => 'The full-bleed band behind the FAQ panel.',
 			'selectors' => [
 				// Belt + suspenders: drive the CSS var (consumed in the stylesheet)
@@ -231,7 +231,7 @@ class Widget_Faq_V2 extends Widget_Base {
 		$this->add_control( 'title_color', [
 			'label'     => 'Color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#2A4F41',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-title: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -253,13 +253,13 @@ class Widget_Faq_V2 extends Widget_Base {
 		$this->add_control( 'search_text_color', [
 			'label'     => 'Text color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-search-text: {{VALUE}};' ],
 		] );
 		$this->add_control( 'search_border_color', [
 			'label'     => 'Underline color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#BFC0BF',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-search-border: {{VALUE}};' ],
 		] );
 		$this->end_controls_section();
@@ -270,13 +270,13 @@ class Widget_Faq_V2 extends Widget_Base {
 		$this->add_control( 'cat_active_color', [
 			'label'     => 'Active color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-cat-active: {{VALUE}};' ],
 		] );
 		$this->add_control( 'cat_color', [
 			'label'     => 'Inactive color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-cat: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -298,19 +298,19 @@ class Widget_Faq_V2 extends Widget_Base {
 		$this->add_control( 'card_bg', [
 			'label'     => 'Card background',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-card-bg: {{VALUE}};' ],
 		] );
 		$this->add_control( 'card_border_color', [
 			'label'     => 'Card border',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#BFC0BF',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-card-border: {{VALUE}};' ],
 		] );
 		$this->add_control( 'icon_color', [
 			'label'     => 'Expand/collapse icon',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-icon: {{VALUE}};' ],
 		] );
 		$this->add_responsive_control( 'card_gap', [
@@ -337,19 +337,19 @@ class Widget_Faq_V2 extends Widget_Base {
 		$this->add_control( 'question_color', [
 			'label'     => 'Question color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-question: {{VALUE}};' ],
 		] );
 		$this->add_control( 'answer_color', [
 			'label'     => 'Answer color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-answer: {{VALUE}};' ],
 		] );
 		$this->add_control( 'share_color', [
 			'label'     => 'Share icon color',
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#3B413F',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-faqv2-share: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
@@ -635,7 +635,7 @@ class Widget_Faq_V2 extends Widget_Base {
 	private function default_categories(): array {
 		return [
 			[ 'cat_label' => 'Timber Pergola Kits' ],
-			[ 'cat_label' => 'Working With Notched' ],
+			[ 'cat_label' => 'Working With [Company]' ],
 			[ 'cat_label' => 'Cost & Value' ],
 			[ 'cat_label' => 'Installation' ],
 			[ 'cat_label' => 'Design & Customization' ],
@@ -656,7 +656,7 @@ class Widget_Faq_V2 extends Widget_Base {
 			],
 			[
 				'question' => 'What timber package options are available?',
-				'answer'   => '<p>Notched offers multiple timber package options designed to create different architectural styles and structural appearances.</p>'
+				'answer'   => '<p>[Company] offers multiple timber package options designed to create different architectural styles and structural appearances.</p>'
 					. '<h3><strong>Regular Timber Package</strong></h3>'
 					. '<p>Features:</p>'
 					. '<ul><li>6x6 posts</li><li>3x10 beams</li><li>2x8 rafters</li><li>2x4 lattice</li></ul>'
@@ -673,7 +673,7 @@ class Widget_Faq_V2 extends Widget_Base {
 			],
 			[
 				'question' => 'What pergola sizes are available?',
-				'answer'   => '<p>Notched pergola kits are available in a wide range of standard footprint sizes, including:</p>'
+				'answer'   => '<p>[Company] pergola kits are available in a wide range of standard footprint sizes, including:</p>'
 					. '<ul><li>8&rsquo;x8&rsquo;</li><li>8&rsquo;x10&rsquo;</li><li>8&rsquo;x14&rsquo;</li><li>8&rsquo;x18&rsquo;</li><li>10&rsquo;x10&rsquo;</li><li>10&rsquo;x14&rsquo;</li><li>10&rsquo;x18&rsquo;</li><li>14&rsquo;x14&rsquo;</li><li>14&rsquo;x18&rsquo;</li><li>18&rsquo;x18&rsquo;</li></ul>'
 					. '<p>Additional sizes may be available depending on the pergola style and timber package selected. Custom sizes and oversized structures are also available for select projects.</p>',
 				'category' => 'Timber Pergola Kits',
@@ -689,21 +689,21 @@ class Widget_Faq_V2 extends Widget_Base {
 				'category' => 'Timber Pergola Kits',
 			],
 
-			// ── Working With Notched ──────────────────────────────────────────
+			// ── Working With [Company] ──────────────────────────────────────────
 			[
-				'question' => 'Why choose Notched over other companies?',
-				'answer'   => '<p>Notched stands out for its authentic timber craftsmanship. Unlike lightweight constructions, we use traditional joinery and premium materials to create durable, heirloom-quality structures. Plus, we collaborate with you to design a structure that perfectly complements your space.</p>',
-				'category' => 'Working With Notched',
+				'question' => 'Why choose [Company] over other companies?',
+				'answer'   => '<p>[Company] stands out for its authentic timber craftsmanship. Unlike lightweight constructions, we use traditional joinery and premium materials to create durable, heirloom-quality structures. Plus, we collaborate with you to design a structure that perfectly complements your space.</p>',
+				'category' => 'Working With [Company]',
 			],
 			[
 				'question' => 'Can I talk with someone before deciding?',
 				'answer'   => '<p>Absolutely. We encourage it. Peace of mind is a huge priority for us. A quick conversation with our team can help answer questions and give you a better sense of what&rsquo;s possible for your space.</p>',
-				'category' => 'Working With Notched',
+				'category' => 'Working With [Company]',
 			],
 			[
 				'question' => 'How do I get started?',
 				'answer'   => '<p>The easiest way is to request a quote or schedule a consultation. From there we can talk through your ideas and help you take the next step.</p>',
-				'category' => 'Working With Notched',
+				'category' => 'Working With [Company]',
 			],
 
 			// ── Design & Customization ───────────────────────────────────────
@@ -725,7 +725,7 @@ class Widget_Faq_V2 extends Widget_Base {
 
 			// ── Cost & Value ─────────────────────────────────────────────────
 			[
-				'question' => 'Why are Notched structures more expensive than pergola kits I see online?',
+				'question' => 'Why are [Company] structures more expensive than pergola kits I see online?',
 				'answer'   => '<p>Most kits online use thin lumber, metal brackets, and decorative pieces that are not built to last very long. Our structures are built from real structural timber. The posts, beams, and joinery are designed the same way traditional timber frame buildings have been built for generations. It costs more up front, but you end up with something far stronger, more beautiful, and built to last. That&rsquo;s why we back up every structure with a 25 year warranty. Though, they&rsquo;re built to last a lifetime.</p>',
 				'category' => 'Cost & Value',
 			],
@@ -766,7 +766,7 @@ class Widget_Faq_V2 extends Widget_Base {
 
 			// ── Installation ─────────────────────────────────────────────────
 			[
-				'question' => 'Can I install a Notched kit myself?',
+				'question' => 'Can I install an [Company] kit myself?',
 				'answer'   => '<p>Many of our DIY kits are designed specifically for homeowners who enjoy building projects. The parts are precision cut and the instructions are straightforward. Some of our larger structures are better suited for a contractor. If you&rsquo;re unsure, we&rsquo;re happy to help you decide what makes the most sense.</p>',
 				'category' => 'Installation, Timber Pergola Kits',
 			],
@@ -803,8 +803,8 @@ class Widget_Faq_V2 extends Widget_Base {
 				'category' => 'Materials & Durability',
 			],
 			[
-				'question' => 'What kind of maintenance do Notched structures need?',
-				'answer'   => '<p>Maintaining your Notched structure is straightforward. A quick clean and occasional re-staining, based on your local climate and sun exposure, will keep it looking great for years.</p>',
+				'question' => 'What kind of maintenance do [Company] structures need?',
+				'answer'   => '<p>Maintaining your [Company] structure is straightforward. A quick clean and occasional re-staining, based on your local climate and sun exposure, will keep it looking great for years.</p>',
 				'category' => 'Materials & Durability',
 			],
 

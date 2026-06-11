@@ -1,6 +1,6 @@
 <?php
 /**
- * Hero V2 — Notched brand.
+ * Hero V2 — [Company] brand.
  *
  * Full-bleed background video (edge to edge, no padding, no rounded corners)
  * with a centered overlay: eyebrow + large Teko headline + description +
@@ -24,10 +24,10 @@ class Widget_Hero_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'hero-v2';
 
 	public function get_name(): string      { return 'agency-hero-v2'; }
-	public function get_title(): string     { return esc_html__( 'Hero V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Hero V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-banner'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'hero', 'video', 'banner', 'notched', 'cta' ]; }
+	public function get_keywords(): array   { return [ 'hero', 'video', 'banner', 'cta' ]; }
 
 	public function get_style_depends(): array  { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 	public function get_script_depends(): array { return [ Widget_Assets::handle( self::ASSET_SLUG ) ]; }
@@ -354,7 +354,7 @@ class Widget_Hero_V2 extends Widget_Base {
 		$this->add_control( 'primary_bg', [
 			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-hev2-pri-bg: {{VALUE}};' ],
 		] );
 		$this->add_control( 'primary_color', [
@@ -366,7 +366,7 @@ class Widget_Hero_V2 extends Widget_Base {
 		$this->add_control( 'primary_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#6E4F2D',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-hev2-pri-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_control( 'primary_color_hover', [
@@ -393,7 +393,7 @@ class Widget_Hero_V2 extends Widget_Base {
 		$this->add_control( 'secondary_color_hover', [
 			'label'     => esc_html__( 'Text color (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#141C19',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-hev2-sec-text-hover: {{VALUE}};' ],
 		] );
 
@@ -494,7 +494,7 @@ class Widget_Hero_V2 extends Widget_Base {
 		/*
 		 * Emit the resolved button colours as inline CSS variables on the wrapper.
 		 * get_settings_for_display() resolves BOTH plain hex AND Elementor global
-		 * colours (e.g. `globals/colors?id=notched-cards`) down to a hex string,
+		 * colours (e.g. `globals/colors?id=aew-cards`) down to a hex string,
 		 * so whatever the user picks in the editor — custom hex or a global — lands
 		 * here. Elementor's front-end CSS generator silently drops global-bound
 		 * custom-control values, which made the live page disagree with the editor;
@@ -521,7 +521,7 @@ class Widget_Hero_V2 extends Widget_Base {
 		<?php
 		/*
 		 * The mobile/tablet hero is a CSS background-image (≤1024px, see
-		 * hero-v2.css), invisible to the preload scanner. The notched child
+		 * hero-v2.css), invisible to the preload scanner. The [Company] child
 		 * theme preloads it from wp_head (earlier discovery than a mid-body
 		 * tag) by reading mobile_image out of the page's _elementor_data —
 		 * keep that in sync if this control is ever renamed.

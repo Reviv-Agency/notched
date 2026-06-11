@@ -1,6 +1,6 @@
 <?php
 /**
- * Feature Rows V2 — Notched brand.
+ * Feature Rows V2 — [Company] brand.
  *
  * A flexible grid band built from up to 4 SEPARATE rows. Each row is its own
  * self-contained control group: a column count (2 or 3) and that many slots
@@ -34,10 +34,10 @@ class Widget_Feature_Rows_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'feature-rows-v2';
 
 	public function get_name(): string      { return 'agency-feature-rows-v2'; }
-	public function get_title(): string     { return esc_html__( 'Feature Rows V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Feature Rows V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-gallery-grid'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'feature', 'rows', 'grid', 'cards', 'media', 'text', 'notched' ]; }
+	public function get_keywords(): array   { return [ 'feature', 'rows', 'grid', 'cards', 'media', 'text' ]; }
 
 	public function get_style_depends(): array { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 
@@ -114,7 +114,7 @@ class Widget_Feature_Rows_V2 extends Widget_Base {
 		$this->add_control( 'heading', [
 			'label'     => esc_html__( 'Heading', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::TEXTAREA,
-			'default'   => esc_html__( 'What makes Notched different?', 'agency-elementor-widgets' ),
+			'default'   => esc_html__( 'What makes [Company] different?', 'agency-elementor-widgets' ),
 			'condition' => [ 'show_header' => 'yes' ],
 		] );
 
@@ -351,7 +351,7 @@ class Widget_Feature_Rows_V2 extends Widget_Base {
 		$this->add_control( 'section_bg', [
 			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-frv2-bg: {{VALUE}};' ],
 		] );
 
@@ -445,25 +445,25 @@ class Widget_Feature_Rows_V2 extends Widget_Base {
 		$this->add_control( 'header_btn_text_color', [
 			'label'     => esc_html__( 'Text color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-frv2-hbtn-text: {{VALUE}};' ],
 		] );
 		$this->add_control( 'header_btn_border', [
 			'label'     => esc_html__( 'Border color', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-frv2-hbtn-border: {{VALUE}};' ],
 		] );
 		$this->add_control( 'header_btn_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#F6F0EC',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-frv2-hbtn-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_control( 'header_btn_text_hover', [
 			'label'     => esc_html__( 'Text color (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#093328',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-frv2-hbtn-text-hover: {{VALUE}};' ],
 		] );
 
@@ -644,7 +644,7 @@ class Widget_Feature_Rows_V2 extends Widget_Base {
 		$this->add_control( 'btn_bg', [
 			'label'     => esc_html__( 'Background', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#876137',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-frv2-btn-bg: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn_text_color', [
@@ -656,7 +656,7 @@ class Widget_Feature_Rows_V2 extends Widget_Base {
 		$this->add_control( 'btn_bg_hover', [
 			'label'     => esc_html__( 'Background (hover)', 'agency-elementor-widgets' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#6E4F2D',
+			'default'   => '',
 			'selectors' => [ '{{WRAPPER}}' => '--aew-frv2-btn-bg-hover: {{VALUE}};' ],
 		] );
 		$this->add_control( 'btn_text_hover', [

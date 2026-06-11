@@ -1,6 +1,6 @@
 <?php
 /**
- * Single Post Content V2 — Notched.
+ * Single Post Content V2 — [Company].
  *
  * Renders the CURRENT post for an Elementor "Single Post" theme template:
  * author avatar + name · date · read-time, a 3-dot Share menu, the title, an
@@ -27,10 +27,10 @@ class Widget_Single_Post_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'single-post-v2';
 
 	public function get_name(): string      { return 'agency-single-post-v2'; }
-	public function get_title(): string     { return esc_html__( 'Single Post Content V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Single Post Content V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-post-content'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'single', 'post', 'content', 'blog', 'notched' ]; }
+	public function get_keywords(): array   { return [ 'single', 'post', 'content', 'blog' ]; }
 
 	public function get_style_depends(): array  { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 	public function get_script_depends(): array { return [ Widget_Assets::handle( self::ASSET_SLUG ) ]; }
@@ -87,7 +87,7 @@ class Widget_Single_Post_V2 extends Widget_Base {
 
 		$this->add_control( 'section_bg', [
 			'label' => esc_html__( 'Background', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#F6F0EC', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-bg: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-bg: {{VALUE}};' ],
 		] );
 
 		$this->end_controls_section();
@@ -102,7 +102,7 @@ class Widget_Single_Post_V2 extends Widget_Base {
 		] );
 		$this->add_control( 'card_border', [
 			'label' => esc_html__( 'Card border', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#BFC0BF', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-card-border: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-card-border: {{VALUE}};' ],
 		] );
 		$this->add_responsive_control( 'card_radius', [
 			'label' => esc_html__( 'Card corner radius', 'agency-elementor-widgets' ), 'type' => Controls_Manager::SLIDER,
@@ -119,7 +119,7 @@ class Widget_Single_Post_V2 extends Widget_Base {
 
 		$this->add_control( 'title_color', [
 			'label' => esc_html__( 'Color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#2A4F41', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-title: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-title: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name' => 'title_typo', 'selector' => '{{WRAPPER}} .aew-spv2__title',
@@ -139,11 +139,11 @@ class Widget_Single_Post_V2 extends Widget_Base {
 
 		$this->add_control( 'body_color', [
 			'label' => esc_html__( 'Color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#141C19', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-body: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-body: {{VALUE}};' ],
 		] );
 		$this->add_control( 'link_color', [
 			'label' => esc_html__( 'Link color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#876137', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-link: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-link: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name' => 'body_typo', 'selector' => '{{WRAPPER}} .aew-spv2__content',
@@ -168,11 +168,11 @@ class Widget_Single_Post_V2 extends Widget_Base {
 
 		$this->add_control( 'meta_color', [
 			'label' => esc_html__( 'Meta text color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#3B413F', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-meta: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-meta: {{VALUE}};' ],
 		] );
 		$this->add_control( 'stat_color', [
 			'label' => esc_html__( 'Stat / icon color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#3B413F', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-stat: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-stat: {{VALUE}};' ],
 		] );
 		$this->add_control( 'like_color', [
 			'label' => esc_html__( 'Liked heart color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
@@ -180,7 +180,7 @@ class Widget_Single_Post_V2 extends Widget_Base {
 		] );
 		$this->add_control( 'divider_color', [
 			'label' => esc_html__( 'Divider color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#BFC0BF', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-divider: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-spv2-divider: {{VALUE}};' ],
 		] );
 
 		$this->end_controls_section();

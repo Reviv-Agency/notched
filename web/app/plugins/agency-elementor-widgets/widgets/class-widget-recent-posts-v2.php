@@ -1,6 +1,6 @@
 <?php
 /**
- * Recent Posts V2 — Notched ("Recent Posts" / related posts row).
+ * Recent Posts V2 — [Company] ("Recent Posts" / related posts row).
  *
  * A "Recent Posts  ·  See All" header above a compact grid of post cards
  * (image on top, title + views/comments/like beneath). On a single post it
@@ -26,10 +26,10 @@ class Widget_Recent_Posts_V2 extends Widget_Base {
 	private const ASSET_SLUG = 'recent-posts-v2';
 
 	public function get_name(): string      { return 'agency-recent-posts-v2'; }
-	public function get_title(): string     { return esc_html__( 'Recent Posts V2 (Notched)', 'agency-elementor-widgets' ); }
+	public function get_title(): string     { return esc_html__( 'Recent Posts V2', 'agency-elementor-widgets' ); }
 	public function get_icon(): string      { return 'eicon-posts-grid'; }
 	public function get_categories(): array { return [ 'agency-widgets' ]; }
-	public function get_keywords(): array   { return [ 'recent', 'related', 'posts', 'blog', 'notched' ]; }
+	public function get_keywords(): array   { return [ 'recent', 'related', 'posts', 'blog' ]; }
 
 	public function get_style_depends(): array  { return [ 'aew-tokens', Widget_Assets::handle( self::ASSET_SLUG ) ]; }
 	public function get_script_depends(): array { return [ Widget_Assets::handle( self::ASSET_SLUG ) ]; }
@@ -88,7 +88,7 @@ class Widget_Recent_Posts_V2 extends Widget_Base {
 
 		$this->add_control( 'section_bg', [
 			'label' => esc_html__( 'Background', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#F6F0EC', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-bg: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-bg: {{VALUE}};' ],
 		] );
 		$this->add_responsive_control( 'grid_gap', [
 			'label' => esc_html__( 'Gap between cards', 'agency-elementor-widgets' ), 'type' => Controls_Manager::SLIDER,
@@ -105,11 +105,11 @@ class Widget_Recent_Posts_V2 extends Widget_Base {
 
 		$this->add_control( 'heading_color', [
 			'label' => esc_html__( 'Heading color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#141C19', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-heading: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-heading: {{VALUE}};' ],
 		] );
 		$this->add_control( 'see_all_color', [
 			'label' => esc_html__( '"See All" color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#876137', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-see-all: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-see-all: {{VALUE}};' ],
 		] );
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name' => 'heading_typo', 'selector' => '{{WRAPPER}} .aew-rpv2__heading',
@@ -132,15 +132,15 @@ class Widget_Recent_Posts_V2 extends Widget_Base {
 		] );
 		$this->add_control( 'card_border', [
 			'label' => esc_html__( 'Card border', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#BFC0BF', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-card-border: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-card-border: {{VALUE}};' ],
 		] );
 		$this->add_control( 'title_color', [
 			'label' => esc_html__( 'Title color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#141C19', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-title: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-title: {{VALUE}};' ],
 		] );
 		$this->add_control( 'stat_color', [
 			'label' => esc_html__( 'Stat color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
-			'default' => '#3B413F', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-stat: {{VALUE}};' ],
+			'default' => '', 'selectors' => [ '{{WRAPPER}}' => '--aew-rpv2-stat: {{VALUE}};' ],
 		] );
 		$this->add_control( 'like_color', [
 			'label' => esc_html__( 'Liked heart color', 'agency-elementor-widgets' ), 'type' => Controls_Manager::COLOR,
