@@ -89,7 +89,15 @@
 			t.classList.toggle('is-active', i === pswp.getCurrentIndex());
 		});
 		var cur = strip.children[pswp.getCurrentIndex()];
-		if (cur && cur.scrollIntoView) { cur.scrollIntoView({ inline: 'center', block: 'nearest' }); }
+		// Scroll ONLY the strip. scrollIntoView() also scrolls every scrollable
+		// ancestor — including PhotoSwipe's overflow:hidden wrappers and the page —
+		// which dragged the whole lightbox sideways on the first/last slides.
+		if (cur) {
+			strip.scrollTo({
+				left: cur.offsetLeft - (strip.clientWidth - cur.offsetWidth) / 2,
+				behavior: 'smooth'
+			});
+		}
 	}
 
 	function attach(pswp) {
