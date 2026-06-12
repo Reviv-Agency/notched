@@ -81,7 +81,15 @@
 	}
 
 	function attach(pswp) {
-		pswp.listen('afterInit', function () { buildStrip(pswp); });
+		pswp.listen('afterInit', function () {
+			buildStrip(pswp);
+			// Re-measure once the overlay is actually laid out — a viewport size
+			// captured before .pswp is pinned to the viewport leaves neighbour
+			// slides translated ~0px, i.e. visible stacked under the current one.
+			setTimeout(function () {
+				try { pswp.updateSize(true); } catch (e) { /* no-op */ }
+			}, 60);
+		});
 		pswp.listen('afterChange', function () { syncStrip(pswp); });
 		// rebuild if items load lazily
 		pswp.listen('imageLoadComplete', function () { syncStrip(pswp); });

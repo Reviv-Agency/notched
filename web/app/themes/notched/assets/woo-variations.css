@@ -240,6 +240,20 @@ table.variations .label label {
 .woocommerce-product-gallery__image,
 .woocommerce-product-gallery__image a { cursor: zoom-in; }
 
+/* ── Lightbox root: pin to the viewport ─────────────────────────────────────
+   Stock PhotoSwipe v4 ships .pswp as position:absolute sized against the
+   document and positioned via an inline `top` at open time. That mismeasures
+   here (overlay not covering the viewport; neighbour slides visible stacked
+   under the current image while swiping). Fixed positioning sizes it to the
+   real viewport regardless of scroll position; !important beats the inline top. */
+body > .pswp {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
 /* ── Lightbox thumbnail strip (injected into PhotoSwipe by woo-gallery.js) ──── */
 .pswp .aew-pswp-strip {
   position: absolute;
