@@ -119,6 +119,11 @@ html .e-con:has(.elementor-widget-agency-feature-band-v2) {
   box-sizing: border-box;
 }
 
+/* Product pages: the copy-only band reads better narrower still. */
+body.single-product .aew-fbv2__grid {
+  max-width: 60%;
+}
+
 /* ── Content box (the copy half of the card) ──────────────────────────────── */
 /* Copy keeps its 42% flex share when a side photo is present (photo ≈58%),
    but is no longer hard-capped — copy-only bands span the full card. */
@@ -304,11 +309,12 @@ html .e-con:has(.elementor-widget-agency-feature-band-v2) {
 /* ── Responsive: mobile (≤768px) — stack box then photo ──────────────────── */
 @media (max-width: 768px) {
   .aew-fbv2__inner { padding: 40px 16px; }
-  .aew-fbv2__grid {
+  .aew-fbv2__grid,
+  body.single-product .aew-fbv2__grid {
     flex-direction: column;
     align-items: stretch;
     gap: 24px;
-    max-width: 100%; /* the 75% desktop cap is too narrow on phones */
+    max-width: 100%; /* the 60/75% desktop caps are too narrow on phones */
   }
   .aew-fbv2__box { max-width: none; width: 100%; }
   .aew-fbv2 .aew-fbv2__heading { font-size: 40px; }
