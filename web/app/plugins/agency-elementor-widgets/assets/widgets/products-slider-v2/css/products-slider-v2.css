@@ -303,8 +303,11 @@
   background-color: transparent;
   overflow: visible;                 /* do NOT clip — the track owns the scroll */
   --prsv2-gap: 24px;
-  /* inset from the viewport edge to the 1440 content rail */
-  --prsv2-rail: calc((100vw - min(1440px, 100vw)) / 2);
+  /* Inset from the viewport edge to the content rail, INCLUDING the body
+     gutter (40px / 16px mobile) so the block lines up with every other
+     section. The padding lives inside the full-width scroller, so scrolled
+     cards travel through it to the viewport edge — never clipped at the rail. */
+  --prsv2-rail: calc((100vw - min(1440px, 100vw)) / 2 + var(--prsv2-pad));
 }
 /* Heading sits at the content rail (matches the first card). */
 .aew-prsv2--related .aew-prsv2__inner {
@@ -323,7 +326,7 @@
    Re-declare --prsv2-rail HERE (the base .aew-prsv2__track sets its own value with
    +40px pad which would otherwise win over the section's inherited value). */
 .aew-prsv2--related .aew-prsv2__track {
-  --prsv2-rail: calc((100vw - min(1440px, 100vw)) / 2);
+  --prsv2-rail: calc((100vw - min(1440px, 100vw)) / 2 + var(--prsv2-pad));
   margin-inline: 0;
   padding-left: var(--prsv2-rail);
   padding-right: var(--prsv2-rail);
