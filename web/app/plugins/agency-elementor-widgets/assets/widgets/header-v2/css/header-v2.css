@@ -29,6 +29,7 @@
   --aew-text: var(--e-global-color-aew-text, #1A1A1A);
   --aew-cta: var(--e-global-color-aew-cta, #444444);
   --aew-cta-hover: var(--e-global-color-aew-cta-hover, #2B2B2B);
+  --aew-gold-light: var(--e-global-color-aew-gold-light, #CDB797);
 }
 
 .aew-hv2 {
@@ -509,13 +510,15 @@ button.aew-hv2__drawer-item-row {
   appearance: none;
 }
 
-/* Parent label */
+/* Parent label — main tabs: Teko SemiBold all caps; hover = light gold. */
 .aew-hv2__drawer-label {
   display: block;
-  font-family: "Lato", sans-serif;
-  font-weight: 800;
-  font-size: 1.4rem;
-  line-height: 1.2;
+  font-family: var(--aew-teko, "Teko", sans-serif);
+  font-weight: 600;
+  font-size: 1.7rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   color: var(--aew-background);
   text-decoration: none;
   padding: 10px 0 8px;
@@ -523,14 +526,14 @@ button.aew-hv2__drawer-item-row {
   transition: color 0.18s ease;
 }
 .aew-hv2__drawer-label:hover {
-  color: var(--aew-cta-hover);
+  color: var(--aew-gold-light, #CDB797);
 }
 
 .aew-hv2__drawer-toggle:hover {
   opacity: 0.8;
 }
 .aew-hv2__drawer-toggle:hover .aew-hv2__drawer-label {
-  color: var(--aew-cta-hover);
+  color: var(--aew-gold-light, #CDB797);
 }
 .aew-hv2__drawer-toggle[aria-expanded="true"] .aew-hv2__drawer-chevron {
   transform: rotate(180deg);
@@ -564,14 +567,14 @@ button.aew-hv2__drawer-item-row {
   font-weight: 800;
   font-size: 1.4rem;
   line-height: 1.4;
-  color: var(--aew-background);
+  color: var(--aew-lines, #BFC0BF); /* secondary tabs sit quieter than the main tabs */
   text-decoration: none;
   display: block;
   padding: 5px 24px;
   transition: color 0.18s ease;
 }
 .aew-hv2__drawer-submenu a:hover {
-  color: var(--aew-cta-hover);
+  color: var(--aew-gold-light, #CDB797); /* same hover as the main tabs */
 }
 
 /* ── Mobile (≤768px) ─────────────────────────────────────────────────────── */

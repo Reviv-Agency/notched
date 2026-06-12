@@ -398,8 +398,11 @@
 
 /* ── Quick View band ─────────────────────────────────────────────────────────
    Sits over the bottom of the image. Hidden (slid down + faded) by default;
-   slides up + fades in when the card is hovered. */
+   slides up + fades in when the card is hovered.
+   2026-06: disabled site-wide — it only linked to the product page, which the
+   whole card already does. Re-enable only if it becomes a real popup view. */
 .aew-prsv2__quick {
+  display: none !important;
   position: absolute;
   left: 0;
   right: 0;
@@ -452,7 +455,9 @@
   font-weight: 700;
   font-size: 18px;
   color: var(--aew-prsv2-price, var(--aew-cta));
-  margin-top: 4px;
+  /* The card's 16px flex gap sits between title and price; pull the price back
+     up so the pair reads as one unit (≈6px effective gap). */
+  margin-top: -10px;
   display: block;
 }
 

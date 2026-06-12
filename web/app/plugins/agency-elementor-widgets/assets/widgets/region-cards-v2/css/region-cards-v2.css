@@ -73,7 +73,7 @@
 
 /* ── Panel = image + overlaid card ───────────────────────────────────────── */
 .aew-rgcv2__panel {
-  --aew-rgcv2-inset: 40px;
+  --aew-rgcv2-inset: 5%;
   position: relative;
   display: flex;
   /* Card is anchored to the BOTTOM of the image, centered horizontally, with a
@@ -160,12 +160,14 @@
   color: var(--aew-rgcv2-text, var(--aew-text));
 }
 
-/* ── CTA button ──────────────────────────────────────────────────────────── */
+/* ── CTA button — spans the full card width ──────────────────────────────── */
 .aew-rgcv2__btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  align-self: center;
+  align-self: stretch;
+  width: 100%;
+  box-sizing: border-box;
   padding: 20px 24px 16px;
   font-family: "Teko", sans-serif;
   font-weight: 600;

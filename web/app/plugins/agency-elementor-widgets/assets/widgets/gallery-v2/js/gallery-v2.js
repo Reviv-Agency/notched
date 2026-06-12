@@ -1,4 +1,4 @@
-/* Gallery V2 — auto-reveal hidden grid items on scroll (infinite scroll). */
+/* Gallery V2 — reveal hidden grid items in batches via a Load More button. */
 (function () {
 	'use strict';
 
@@ -9,7 +9,7 @@
 		el.dataset.aewGalv2Init = '1';
 
 		var grid = el.querySelector('.aew-galv2__grid');
-		var sentinel = el.querySelector('.aew-galv2__sentinel');
+		var moreBtn = el.querySelector('[data-aew-galv2-more]');
 		if (!grid) {
 			return;
 		}
@@ -23,10 +23,10 @@
 			return el.querySelectorAll('.aew-galv2__item--hidden');
 		}
 
-		function revealAll() {
-			var hidden = hiddenItems();
-			for (var i = 0; i < hidden.length; i++) {
-				hidden[i].classList.remove('aew-galv2__item--hidden');
+		function hideButton() {
+			var wrap = el.querySelector('.aew-galv2__more-wrap');
+			if (wrap) {
+				wrap.hidden = true;
 			}
 		}
 
@@ -41,27 +41,20 @@
 
 		// Nothing to reveal.
 		if (hiddenItems().length === 0) {
+			hideButton();
 			return;
 		}
 
-		// No sentinel or no observer support: reveal everything up front.
-		if (!sentinel || typeof window.IntersectionObserver === 'undefined') {
-			revealAll();
+		if (!moreBtn) {
 			return;
 		}
 
-		var observer = new IntersectionObserver(function (entries) {
-			for (var k = 0; k < entries.length; k++) {
-				if (entries[k].isIntersecting) {
-					var remaining = revealNextBatch();
-					if (remaining === 0) {
-						observer.disconnect();
-					}
-				}
+		moreBtn.addEventListener('click', function () {
+			var remaining = revealNextBatch();
+			if (remaining === 0) {
+				hideButton();
 			}
-		}, { root: null, rootMargin: '200px 0px', threshold: 0 });
-
-		observer.observe(sentinel);
+		});
 	}
 
 	function boot() {

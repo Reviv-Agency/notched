@@ -337,3 +337,16 @@ add_filter('woocommerce_output_related_products_args', function ($args) {
     $args['columns']        = 8; // prevent WC from chunking into rows; our slider lays them out
     return $args;
 });
+
+/*
+ * Contractor Kits are quote-only: never show a price for them, anywhere on the
+ * site (product page, sliders, related cards, shop archives). DIY Kits keep
+ * their prices. Sale/launch decision 2026-06.
+ */
+function notched_is_quote_only($product_id): bool
+{
+    return has_term('contractor-kits', 'product_cat', $product_id);
+}
+add_filter('woocommerce_get_price_html', function ($html, $product) {
+    return notched_is_quote_only($product->get_id()) ? '' : $html;
+}, 10, 2);

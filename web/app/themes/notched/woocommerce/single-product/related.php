@@ -29,9 +29,10 @@ foreach ( $related_products as $related_product ) {
 	$img_id = $related_product->get_image_id();
 	$img    = $img_id ? wp_get_attachment_image_url( $img_id, 'large' ) : ( function_exists( 'wc_placeholder_img_src' ) ? wc_placeholder_img_src( 'large' ) : '' );
 
-	// price: variable products show their "from" price; format like the widget ("$7,093")
+	// price: variable products show their "from" price; format like the widget ("$7,093").
+	// Contractor Kits are quote-only — no price on their cards.
 	$price_raw = $related_product->get_price();
-	$price     = ( '' !== $price_raw && null !== $price_raw )
+	$price     = ( '' !== $price_raw && null !== $price_raw && ! ( function_exists( 'notched_is_quote_only' ) && notched_is_quote_only( $related_product->get_id() ) ) )
 		? '$' . number_format( (float) $price_raw, 0 )
 		: '';
 

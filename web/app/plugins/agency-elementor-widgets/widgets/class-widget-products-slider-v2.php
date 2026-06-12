@@ -847,11 +847,13 @@ class Widget_Products_Slider_V2 extends Widget_Base {
 			}
 			$img_id = $product->get_image_id();
 			$img    = $img_id ? wp_get_attachment_image_url( $img_id, 'large' ) : wc_placeholder_img_src( 'large' );
-			$out[]  = [
+			// Contractor Kits are quote-only — no price on their cards anywhere.
+			$quote_only = has_term( 'contractor-kits', 'product_cat', $id );
+			$out[]      = [
 				'title' => $product->get_name(),
 				'url'   => get_permalink( $id ),
 				'img'   => $img ? $img : '',
-				'price' => $this->format_price( $product->get_price() ),
+				'price' => $quote_only ? '' : $this->format_price( $product->get_price() ),
 				'badge' => $this->product_badge( $id ),
 			];
 		}

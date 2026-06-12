@@ -112,18 +112,20 @@ html .e-con:has(.elementor-widget-agency-feature-band-v2) {
   background: var(--aew-fbv2-card-bg, #FFFFFF);
   border-radius: var(--aew-fbv2-card-radius, 24px);
   padding: var(--aew-fbv2-card-pad, 16px);
-  max-width: var(--aew-fbv2-card-maxw, 1200px);
+  /* 2026-06: card narrowed to 75% of the rail on all pages (was 1200px) —
+     the full-width card read too wide on product pages. */
+  max-width: var(--aew-fbv2-card-maxw, 75%);
   margin: 0 auto;
   box-sizing: border-box;
 }
 
 /* ── Content box (the copy half of the card) ──────────────────────────────── */
-/* Copy ~42% of the card; the photo takes the remainder (≈58%), matching the
-   reference where the photo is the wider half. */
+/* Copy keeps its 42% flex share when a side photo is present (photo ≈58%),
+   but is no longer hard-capped — copy-only bands span the full card. */
 .aew-fbv2__box {
   position: relative;
   flex: 0 0 var(--aew-fbv2-copy-width, 42%);
-  max-width: var(--aew-fbv2-copy-width, 42%);
+  max-width: 100%;
   width: 100%;
   background: var(--aew-fbv2-box-bg, transparent);
   border-radius: 0;
@@ -133,6 +135,12 @@ html .e-con:has(.elementor-widget-agency-feature-band-v2) {
   flex-direction: column;
   justify-content: center;
   gap: 24px;
+}
+
+/* Copy-only band (no side photo): let the copy take the whole card. */
+.aew-fbv2__grid > .aew-fbv2__box:only-child {
+  flex: 1 1 100%;
+  max-width: 100%;
 }
 
 /* ── Eyebrow (Playfair Display Bold 20px / 100%) ─────────────────────────── */
@@ -300,6 +308,7 @@ html .e-con:has(.elementor-widget-agency-feature-band-v2) {
     flex-direction: column;
     align-items: stretch;
     gap: 24px;
+    max-width: 100%; /* the 75% desktop cap is too narrow on phones */
   }
   .aew-fbv2__box { max-width: none; width: 100%; }
   .aew-fbv2 .aew-fbv2__heading { font-size: 40px; }

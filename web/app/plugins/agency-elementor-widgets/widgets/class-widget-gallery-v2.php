@@ -291,7 +291,7 @@ class Widget_Gallery_V2 extends Widget_Base {
 	}
 
 	/**
-	 * CONTENT tab — infinite-scroll loading knobs.
+	 * CONTENT tab — load-more loading knobs.
 	 *
 	 * @return void
 	 */
@@ -314,10 +314,19 @@ class Widget_Gallery_V2 extends Widget_Base {
 		$this->add_control(
 			'batch_size',
 			[
-				'label'   => esc_html__( 'Images revealed per scroll', 'agency-elementor-widgets' ),
+				'label'   => esc_html__( 'Images revealed per click', 'agency-elementor-widgets' ),
 				'type'    => Controls_Manager::NUMBER,
 				'min'     => 1,
 				'default' => 6,
+			]
+		);
+
+		$this->add_control(
+			'load_more_text',
+			[
+				'label'   => esc_html__( 'Load more button text', 'agency-elementor-widgets' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => esc_html__( 'LOAD MORE', 'agency-elementor-widgets' ),
 			]
 		);
 
@@ -510,7 +519,17 @@ class Widget_Gallery_V2 extends Widget_Base {
 				</ul>
 
 				<?php if ( $has_more ) : ?>
-					<div class="aew-galv2__sentinel" aria-hidden="true"></div>
+					<?php
+					$more_text = trim( (string) ( $s['load_more_text'] ?? '' ) );
+					if ( '' === $more_text ) {
+						$more_text = esc_html__( 'LOAD MORE', 'agency-elementor-widgets' );
+					}
+					?>
+					<div class="aew-galv2__more-wrap">
+						<button type="button" class="aew-galv2__more" data-aew-galv2-more>
+							<?php echo esc_html( $more_text ); ?>
+						</button>
+					</div>
 				<?php endif; ?>
 			</div>
 		</section>
