@@ -343,9 +343,11 @@ add_filter('woocommerce_output_related_products_args', function ($args) {
  * site (product page, sliders, related cards, shop archives). DIY Kits keep
  * their prices. Sale/launch decision 2026-06.
  */
-function notched_is_quote_only($product_id): bool
+function notched_is_quote_only(int $product_id): bool
 {
-    return has_term('contractor-kits', 'product_cat', $product_id);
+    // Variations carry no category terms — check their parent product.
+    $parent = (int) wp_get_post_parent_id($product_id);
+    return has_term('contractor-kits', 'product_cat', $parent ?: $product_id);
 }
 add_filter('woocommerce_get_price_html', function ($html, $product) {
     return notched_is_quote_only($product->get_id()) ? '' : $html;
