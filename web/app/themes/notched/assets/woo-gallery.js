@@ -14,8 +14,19 @@
 	'use strict';
 
 	/* ── 1) Whole-image click opens the lightbox ─────────────────────────────── */
+	/* The gallery links (and the zoom trigger) point at .jpg files, so Elementor
+	   Pro's global lightbox would ALSO bind to them and open its own swiper on
+	   top of WooCommerce's PhotoSwipe. Opt every gallery link out of it. */
+	function muteElementorLightbox(gallery) {
+		gallery.querySelectorAll('a').forEach(function (a) {
+			a.setAttribute('data-elementor-open-lightbox', 'no');
+		});
+	}
+
 	function wireGallery(gallery) {
-		if (!gallery || gallery.dataset.aewGalleryWired === '1') { return; }
+		if (!gallery) { return; }
+		muteElementorLightbox(gallery); // re-run every boot — WC rebuilds slides on variation change
+		if (gallery.dataset.aewGalleryWired === '1') { return; }
 		gallery.dataset.aewGalleryWired = '1';
 		gallery.addEventListener('click', function (e) {
 			var link = e.target.closest('.woocommerce-product-gallery__image a');
@@ -25,6 +36,7 @@
 			if (trigger) {
 				e.preventDefault();
 				e.stopPropagation();
+				trigger.setAttribute('data-elementor-open-lightbox', 'no');
 				trigger.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
 			}
 		}, true);
@@ -83,12 +95,18 @@
 	function attach(pswp) {
 		pswp.listen('afterInit', function () {
 			buildStrip(pswp);
+			// Lock the page behind the lightbox — wheel/trackpad overscroll on the
+			// first/last slide otherwise scrolls the whole site underneath.
+			document.documentElement.classList.add('aew-pswp-open');
 			// Re-measure once the overlay is actually laid out — a viewport size
 			// captured before .pswp is pinned to the viewport leaves neighbour
 			// slides translated ~0px, i.e. visible stacked under the current one.
 			setTimeout(function () {
 				try { pswp.updateSize(true); } catch (e) { /* no-op */ }
 			}, 60);
+		});
+		pswp.listen('destroy', function () {
+			document.documentElement.classList.remove('aew-pswp-open');
 		});
 		pswp.listen('afterChange', function () { syncStrip(pswp); });
 		// rebuild if items load lazily

@@ -252,6 +252,15 @@ body > .pswp {
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  overscroll-behavior: contain;
+}
+
+/* Page scroll is locked while the lightbox is open (class set by woo-gallery.js)
+   so wheel/trackpad overscroll on the first/last slide can't move the site. */
+html.aew-pswp-open,
+html.aew-pswp-open body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
 }
 
 /* ── Lightbox thumbnail strip (injected into PhotoSwipe by woo-gallery.js) ──── */
