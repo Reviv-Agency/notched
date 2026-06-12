@@ -1,0 +1,189 @@
+/**
+ * Show Cards V2
+ * Responsive grid of poster cards — poster image + title + "date | venue" line,
+ * whole card optionally links to the show page.
+ * Desktop = N-up grid (default 4); tablet = 2; mobile = 1.
+ */
+
+/* Strip Elementor container padding + force full-bleed so the section band
+   spans edge-to-edge (the inner wrapper re-applies the max-width). */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-show-cards-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-show-cards-v2),
+.e-con:has(.elementor-widget-agency-show-cards-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+.elementor-section:has(.elementor-widget-agency-show-cards-v2),
+.elementor-section:has(.elementor-widget-agency-show-cards-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-show-cards-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Brand tokens (brand-free: read aew-* globals, neutral-grey fallback) ──── */
+/* Scoped to .aew-shcv2 so they don't leak into other widgets. The active site's
+   <site>-colors mu-plugin seeds the aew-* globals; the greys only show if no
+   colour plugin is present. Source of truth is design-system.md. */
+.aew-shcv2 {
+  --aew-cards:            var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:       var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:           var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-secondary-bg:    var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-text:            var(--e-global-color-aew-text, #1A1A1A);
+}
+
+/* ── Outer block (full-bleed background) ─────────────────────────────────── */
+.aew-shcv2 {
+  width: 100%;
+  background-color: var(--aew-shcv2-section-bg, var(--aew-background));
+  padding-left: 40px;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.aew-shcv2 *,
+.aew-shcv2 *::before,
+.aew-shcv2 *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper (max-width + Y padding) ───────────────────────────────── */
+.aew-shcv2__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 64px 0;          /* desktop section Y 64px */
+}
+
+/* ── Optional section header ─────────────────────────────────────────────── */
+.aew-shcv2__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.aew-shcv2__eyebrow {
+  margin: 0 0 12px;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--aew-shcv2-eyebrow, var(--aew-secondary-bg));
+}
+
+/* Wrapper-class prefix → (0,2,0) beats the kit's .elementor-kit-N h1..h6 (0,1,1). */
+.aew-shcv2 .aew-shcv2__heading {
+  margin: 0;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 85%;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--aew-shcv2-heading, var(--aew-secondary-bg));
+}
+
+/* ── Grid ────────────────────────────────────────────────────────────────── */
+.aew-shcv2__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.aew-shcv2__card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--aew-shcv2-card-bg, var(--aew-cards));
+  border-radius: 24px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aew-shcv2__card--link {
+  cursor: pointer;
+}
+
+.aew-shcv2__card--link:hover,
+.aew-shcv2__card--link:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+.aew-shcv2__card--link:focus-visible {
+  outline: 2px solid var(--aew-secondary-bg);
+  outline-offset: 3px;
+}
+
+/* ── Poster image ────────────────────────────────────────────────────────── */
+.aew-shcv2__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: var(--aew-lines);
+}
+
+.aew-shcv2__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Card body ───────────────────────────────────────────────────────────── */
+.aew-shcv2__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 4px 4px;
+}
+
+/* (0,2,0) beats the kit heading colour rule. */
+.aew-shcv2 .aew-shcv2__title {
+  margin: 0;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 85%;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--aew-shcv2-title, var(--aew-secondary-bg));
+}
+
+.aew-shcv2__meta {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  color: var(--aew-shcv2-meta, var(--aew-text));
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-shcv2 .aew-shcv2__heading { font-size: 48px; }
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-shcv2 { padding-left: 16px; padding-right: 16px; }
+  .aew-shcv2__inner { padding: 32px 0; }   /* mobile section Y 32px */
+
+  .aew-shcv2__header { margin-bottom: 24px; }
+  .aew-shcv2 .aew-shcv2__heading { font-size: 40px; }
+  .aew-shcv2__eyebrow { font-size: 20px; }
+
+  .aew-shcv2 .aew-shcv2__title { font-size: 24px; }
+  .aew-shcv2__meta { font-size: 14px; }
+}

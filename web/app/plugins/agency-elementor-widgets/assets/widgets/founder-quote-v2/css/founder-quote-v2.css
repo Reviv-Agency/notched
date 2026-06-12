@@ -1,0 +1,211 @@
+/**
+ * Founder Quote V2
+ * Portrait on one side; large quote + attribution name + role + two CTA buttons
+ * on the other. Desktop = 2-col (portrait left or right); mobile = stacked,
+ * portrait on top.
+ */
+
+/* Strip Elementor container padding + force full-bleed so the section band
+   spans edge-to-edge (the inner wrapper re-applies the max-width). */
+.elementor-column
+  > .elementor-element-populated:has(.elementor-widget-agency-founder-quote-v2),
+.e-con:has(> .e-con-inner > .elementor-widget-agency-founder-quote-v2),
+.e-con:has(.elementor-widget-agency-founder-quote-v2) {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: 0 !important;
+}
+
+.elementor-section:has(.elementor-widget-agency-founder-quote-v2),
+.elementor-section:has(.elementor-widget-agency-founder-quote-v2) > .elementor-container,
+.e-con:has(.elementor-widget-agency-founder-quote-v2) {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ── Brand tokens (brand-free: read aew-* globals, neutral-grey fallback) ──── */
+.aew-fqv2 {
+  --aew-cards:            var(--e-global-color-aew-cards, #FFFFFF);
+  --aew-background:       var(--e-global-color-aew-background, #F4F4F4);
+  --aew-lines:           var(--e-global-color-aew-lines, #DDDDDD);
+  --aew-secondary-bg:    var(--e-global-color-aew-secondary-bg, #333333);
+  --aew-text:            var(--e-global-color-aew-text, #1A1A1A);
+  --aew-cta:             var(--e-global-color-aew-cta, #444444);
+  --aew-cta-hover:       var(--e-global-color-aew-cta-hover, #2B2B2B);
+}
+
+/* ── Outer block (full-bleed background) ─────────────────────────────────── */
+.aew-fqv2 {
+  width: 100%;
+  background-color: var(--aew-fqv2-section-bg, var(--aew-background));
+  padding-left: 40px;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.aew-fqv2 *,
+.aew-fqv2 *::before,
+.aew-fqv2 *::after {
+  box-sizing: border-box;
+}
+
+/* ── Inner wrapper (max-width + Y padding) ───────────────────────────────── */
+.aew-fqv2__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 64px 0;          /* desktop section Y 64px */
+}
+
+/* ── Grid (portrait + content) ───────────────────────────────────────────── */
+.aew-fqv2__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 64px;
+  align-items: center;
+}
+
+/* Portrait on the right: swap the visual order, keep DOM order for a11y. */
+.aew-fqv2__grid--img-right .aew-fqv2__media   { order: 2; }
+.aew-fqv2__grid--img-right .aew-fqv2__content { order: 1; }
+
+/* ── Portrait ────────────────────────────────────────────────────────────── */
+.aew-fqv2__media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 24px;
+  background-color: var(--aew-lines);
+}
+
+.aew-fqv2__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Content column ──────────────────────────────────────────────────────── */
+.aew-fqv2__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.aew-fqv2__quote {
+  margin: 0 0 24px;
+  padding: 0;
+  border: 0;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 36px;
+  line-height: 125%;
+  color: var(--aew-fqv2-quote, var(--aew-secondary-bg));
+}
+
+/* (0,2,0) beats the kit's .elementor-kit-N h1..h6 — though name is a <p>, keep
+   the wrapper prefix for consistency with the title pattern. */
+.aew-fqv2 .aew-fqv2__name {
+  margin: 0 0 4px;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--aew-fqv2-name, var(--aew-secondary-bg));
+}
+
+.aew-fqv2__role {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  color: var(--aew-fqv2-role, var(--aew-text));
+}
+
+/* ── Actions (two CTA buttons) ───────────────────────────────────────────── */
+.aew-fqv2__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.aew-fqv2__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 24px 16px;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 85%;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.aew-fqv2__btn--primary {
+  color: var(--aew-fqv2-btn-text, #FFFFFF);
+  background-color: var(--aew-fqv2-btn-bg, var(--aew-cta));
+  border-color: var(--aew-fqv2-btn-bg, var(--aew-cta));
+}
+
+.aew-fqv2__btn--primary:hover,
+.aew-fqv2__btn--primary:focus-visible {
+  background-color: var(--aew-fqv2-btn-bg-hover, var(--aew-cta-hover));
+  border-color: var(--aew-fqv2-btn-bg-hover, var(--aew-cta-hover));
+}
+
+.aew-fqv2__btn--secondary {
+  color: var(--aew-fqv2-btn2, var(--aew-cta));
+  background-color: transparent;
+  border-color: var(--aew-fqv2-btn2, var(--aew-cta));
+}
+
+.aew-fqv2__btn--secondary:hover,
+.aew-fqv2__btn--secondary:focus-visible {
+  color: var(--aew-fqv2-btn-text, #FFFFFF);
+  background-color: var(--aew-fqv2-btn2, var(--aew-cta));
+}
+
+.aew-fqv2__btn:focus-visible {
+  outline: 2px solid var(--aew-secondary-bg);
+  outline-offset: 2px;
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aew-fqv2__grid { gap: 40px; }
+  .aew-fqv2__quote { font-size: 30px; }
+}
+
+/* ── Mobile (stacked, portrait on top) ───────────────────────────────────── */
+@media (max-width: 768px) {
+  .aew-fqv2 { padding-left: 16px; padding-right: 16px; }
+  .aew-fqv2__inner { padding: 32px 0; }     /* mobile section Y 32px */
+
+  .aew-fqv2__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  /* Portrait always on top when stacked, regardless of desktop side. */
+  .aew-fqv2__grid .aew-fqv2__media   { order: 0; }
+  .aew-fqv2__grid .aew-fqv2__content { order: 0; }
+
+  .aew-fqv2__quote { font-size: 24px; margin-bottom: 16px; }
+  .aew-fqv2 .aew-fqv2__name { font-size: 24px; }
+  .aew-fqv2__role { font-size: 14px; }
+
+  .aew-fqv2__actions { margin-top: 24px; }
+
+  .aew-fqv2__btn { font-size: 16px; padding: 18px 24px 16px; }
+}

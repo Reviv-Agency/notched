@@ -194,7 +194,7 @@ body.admin-bar .aew-hv2__bar {
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  background: var(--aew-hv2-cta-bg, #2B2B2B);
+  background: var(--aew-hv2-cta-bg, var(--aew-cta-hover));
   color: var(--aew-cards);
   border-radius: 6px;
   border: 0;

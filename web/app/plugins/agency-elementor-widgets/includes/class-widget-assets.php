@@ -435,6 +435,22 @@ final class Widget_Assets {
 				'style_deps' => [ 'aew-tokens' ],
 			]
 		);
+
+		self::register_widget(
+			'show-cards-v2',
+			[
+				'style'      => 'css/show-cards-v2.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
+
+		self::register_widget(
+			'founder-quote-v2',
+			[
+				'style'      => 'css/founder-quote-v2.css',
+				'style_deps' => [ 'aew-tokens' ],
+			]
+		);
 	}
 
 	/**

@@ -167,7 +167,7 @@
 
 .aew-media-cta__button:hover,
 .aew-media-cta__button:focus-visible {
-	background-color: var(--aew-media-cta-btn-bg-hover, #2B2B2B);
+	background-color: var(--aew-media-cta-btn-bg-hover, var(--aew-cta-hover));
 	color: var(--aew-media-cta-btn-text-hover, #ffffff);
 	text-decoration: none;
 }
