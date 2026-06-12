@@ -85,13 +85,13 @@
   text-transform: uppercase;
 }
 
-/* ── Grid of columns: 4 → 2 → 1 ──────────────────────────────────────────── */
+/* ── Grid of columns: N (item count, set by render) → 2 → 1 ──────────────── */
 .aew-bnv2__grid {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(var(--aew-bnv2-cols, 4), 1fr);
   gap: 40px;
 }
 

@@ -251,7 +251,11 @@ class Widget_Benefits_V2 extends Widget_Base {
 				'item_text_color'    => '--aew-bnv2-text',
 			]
 		);
-		$style_attr = '' !== $color_vars ? ' style="' . esc_attr( $color_vars ) . '"' : '';
+		// Desktop column count follows the item count (3 items → 3 columns, no
+		// empty 4th slot). Tablet/mobile keep their fixed 2/1 media-query grids.
+		$cols        = max( 1, min( 4, count( is_array( $items ) ? $items : [] ) ) );
+		$color_vars .= '--aew-bnv2-cols:' . $cols . ';';
+		$style_attr  = ' style="' . esc_attr( $color_vars ) . '"';
 		?>
 		<section class="aew-bnv2" data-aew-benefits-v2<?php echo $style_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- value escaped via esc_attr above ?>>
 			<div class="aew-bnv2__inner">
